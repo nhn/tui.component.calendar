@@ -1,14 +1,10 @@
 /**
  * 캘린더 유틸성 함수들
  *
- * @module ne.component.CalendarUtil
+ * @module ne.component.Calendar.CalendarUtil
  * @author FE개발팀 이제인
  */
-
-window.ne = window.ne || {};
-ne.component = ne.component || {};
-
-ne.component.CalendarUtil = {/** @lends ne.component.CalendarUtil */
+ne.component.Calendar.CalendarUtil = {/** @lends ne.component.Calendar.CalendarUtil */
     /**
      * 날짜 해시(년, 월, 일) 값을 만들어 리턴한다
      *
@@ -42,7 +38,7 @@ ne.component.CalendarUtil = {/** @lends ne.component.CalendarUtil */
      * @returns {{year: *, month: *, date: *}}
      */
     getToday: function() {
-        var today = this._today || ne.component.CalendarUtil.getDateHashTable(new Date());
+        var today = this._today || ne.component.Calendar.CalendarUtil.getDateHashTable(new Date());
         return {
             year: today.year,
             month: today.month,
@@ -94,7 +90,7 @@ ne.component.CalendarUtil = {/** @lends ne.component.CalendarUtil */
      * @param {Number} date.date 일
      * @return {Number} 유닉스타임 정보
      * @example
-     * ne.component.CalendarUtil.getTime({year:2010, month:5, date:12}); // 1273590000000
+     * ne.component.Calendar.CalendarUtil.getTime({year:2010, month:5, date:12}); // 1273590000000
      **/
     getTime: function(date) {
         return this.getDateObject(date).getTime();
@@ -143,8 +139,8 @@ ne.component.CalendarUtil = {/** @lends ne.component.CalendarUtil */
      * @param {Object} htDate 날짜 객체
      * @return {Date} Date 객체 인스턴스 자신
      * @example
-     * ne.component.CalendarUtil.getDateObject({year:2010, month:5, date:12});
-     * ne.component.CalendarUtil.getDateObject(2010, 5, 12); //연,월,일
+     * ne.component.Calendar.CalendarUtil.getDateObject({year:2010, month:5, date:12});
+     * ne.component.Calendar.CalendarUtil.getDateObject(2010, 5, 12); //연,월,일
      **/
     getDateObject: function(date) {
         if (arguments.length == 3) {
@@ -166,8 +162,8 @@ ne.component.CalendarUtil = {/** @lends ne.component.CalendarUtil */
      * @return {Number} dateObj.month 월
      * @return {Number} dateObj.date 일
      * @example
-     * ne.component.CalendarUtil.getRelativeDate(1, 0, 0, {year:2000, month:1, date:1}); // {year:2001, month:1, date:1}
-     * ne.component.CalendarUtil.getRelativeDate(0, 0, -1, {year:2010, month:1, date:1}); // {year:2009, month:12, date:31}
+     * ne.component.Calendar.CalendarUtil.getRelativeDate(1, 0, 0, {year:2000, month:1, date:1}); // {year:2001, month:1, date:1}
+     * ne.component.Calendar.CalendarUtil.getRelativeDate(0, 0, -1, {year:2010, month:1, date:1}); // {year:2009, month:12, date:31}
      **/
     getRelativeDate: function(year, month, date, dateObj) {
         var beforeDate = new Date(dateObj.year, dateObj.month, dateObj.date),
@@ -182,21 +178,3 @@ ne.component.CalendarUtil = {/** @lends ne.component.CalendarUtil */
         return this.getDateHashTable(new Date(dateObj.year + year, dateObj.month + month - 1, dateObj.date + date));
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

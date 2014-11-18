@@ -1,21 +1,27 @@
 describe('캘린더를 생성하고 기능을 테스트.', function() {
-    var calendar1 = new ne.Component.Calendar($('.test1')),
-        calendar2 = new ne.Component.Calendar({
-            classPrefix: 'cal-',
-            year: 1983,
-            month: 5,
-            date: 12,
-            todayFormat: 'yyyy\/ mm\/ dd (D)',
-            titleFormat: 'yyyy\/mm',
-            yearTitleFormat: 'yy',
-            monthTitleFormat: 'mm',
-            monthTitle: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            isDrawOnload: false
-        }, $('.test2'));
 
+
+    jasmine.getFixtures().fixturesPath = "base";
+
+    beforeEach(function() {
+        loadFixtures("test/fixture/calendar.html");
+    });
+    var calendar1, calendar2;
     // 생성 확인
     it('캘린더가 생성 되었는지 확인', function() {
+            calendar1 = new ne.component.Calendar($('#layer'));
+            calendar2 = new ne.component.Calendar({
+                year: 1983,
+                month: 5,
+                date: 12,
+                todayFormat: 'yyyy\/ mm\/ dd (D)',
+                titleFormat: 'yyyy\/mm',
+                yearTitleFormat: 'yyyy',
+                monthTitleFormat: 'mm',
+                monthTitle: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                isDrawOnload: false
+            }, $('#layer2'));
         expect(calendar1).toBeDefined();
         expect(calendar2).toBeDefined();
     });
@@ -41,48 +47,35 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
             dayTitles = calendar2._option['dayTitles'],
             isDrawOnload = calendar2._option['isDrawOnload'];
 
-        expect(classPrefix).toBe('cal-');
         expect(titleFormat).toBe('yyyy\/mm');
-        expect(yearTitleFormat).toBe('yy');
+        expect(yearTitleFormat).toBe('yyyy');
         expect(monthTitleFormat).toBe('mm');
         expect(dayTitles[0]).toBe('Sun');
         expect(isDrawOnload).toBe(false);
     });
 
-    describe('정적 함수인 getDateHashTable을 테스트한다.', function() {
-        var date = new Date();
-        var date19840415 = new Date(1984, 3, 15, 00, 00);
-        it('날짜해시가 제대로 생성되었는지 확인', function() {
-            // 현재시간(로컬)
-            hashDate = ne.Component.CalendarUtil.getDateHashTable(date);
-            expect(hashDate.year).toBe(date.getFullYear());
-            expect(hashDate.month).toBe(date.getMonth() + 1);
-            expect(hashDate.date).toBe(date.getDate());
-            // 특정 날짜(1984-04-15)
-            hashDate = ne.Component.CalendarUtil.getDateHashTable(date19840415);
-            expect(hashDate.year).toBe(1984);
-            expect(hashDate.month).toBe(4);
-            expect(hashDate.date).toBe(15);
-        });
+    it('_setCalendarTitle 달력 타이틀 포맷', function() {
+        calendar2._setCalendarTitle(2014,5);
+        expect(calendar2.$titleYear.html()).toBe('2014');
+        expect(calendar2.$titleMonth.html()).toBe('05');
     });
-
-    describe('static 함수 getToday와, setToday가 제대로 동작하는가?', function() {
-        var today = ne.Component.CalendarUtil.getToday();
-        var newDate = new Date();
-        it('getToday, 설정된 today값이 없으면 오늘날짜 리턴한다, ', function() {
-            expect(today.year).toBe(newDate.getFullYear());
-            expect(today.month).toBe(newDate.getMonth() + 1);
-            expect(today.date).toBe(newDate.getDate());
+    it('draw & custom Event 이벤트.', function() {
+        var date = {};
+        calendar2.on('beforeDraw', function(d) {
+            date.year = d.year;
+            date.month = d.month;
         });
+        calendar2.fire('beforeDraw', {year: 2014, month: 4});
+        expect(date.year).toBe(2014);
+        expect(date.month).toBe(4);
 
-        ne.Component.CalendarUtil.setToday(1984, 4, 15);
-        var today2 = ne.Component.CalendarUtil.getToday();
-        it('setToday로 날짜 설정 후, 제대로 동작했는지 테스트 한다.', function() {
-            expect(today2.year).toBe(1984);
-            expect(today2.month).toBe(4);
-            expect(today2.date).toBe(15);
-        });
+        calendar2.draw(1984, 4, false);
+        expect(date.year).toBe(1984);
+        expect(date.month).toBe(4);
+
+        //상대값
+        calendar2.draw(10, 1, true);
+        expect(date.year).toBe(1994);
+        expect(date.month).toBe(5);
     });
-
-    describe('')
 });
