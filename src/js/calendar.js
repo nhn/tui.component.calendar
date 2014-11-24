@@ -76,7 +76,7 @@ if (!ne.component) {
 				bDrawOnload : true //로딩과 동시에 바로 그릴것인지 여부
 			});
  **/
-ne.component.Calendar = ne.defineClass({
+ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.prototype */{
     init: function(option, element) {
         /**
          * 옵션을 저장한다
@@ -109,7 +109,7 @@ ne.component.Calendar = ne.defineClass({
 
         var hasOption = arguments.length > 1;
         if (hasOption) {
-            this._option = ne.extend(defaultOption, option);
+            this._option = ne.util.extend(defaultOption, option);
             this._element = element;
         } else {
             this._option = defaultOption;
@@ -226,11 +226,11 @@ ne.component.Calendar = ne.defineClass({
         var classPrefix = this._option['classPrefix'],
             date = this.getDate(),
             shownDate = this._getShownDate();
-        if (shownDate && ne.isDefined(isRelative) && isRelative) {
+        if (shownDate && ne.util.isExisty(isRelative) && isRelative) {
             var relativeDate = ne.component.Calendar.CalendarUtil.getRelativeDate(year, month, 0, shownDate);
             year = relativeDate.year;
             month = relativeDate.month;
-        } else if (!ne.isDefined(year) && !ne.isDefined(month) && !ne.isDefined(isRelative)) {
+        } else if (!ne.util.isExisty(year) && !ne.util.isExisty(month) && !ne.util.isExisty(isRelative)) {
             year = date.year;
             month = date.month;
         } else {
@@ -255,7 +255,7 @@ ne.component.Calendar = ne.defineClass({
 				});
          **/
 
-        var isFired = this.fire('beforeDraw', { year: year, month: month }),
+        var isFired = this.invoke('beforeDraw', { year: year, month: month }),
             hasTodayElement = this.$today.length > 0;
         if (!isFired) {
             return;
@@ -540,4 +540,4 @@ ne.component.Calendar = ne.defineClass({
         $today.text(title);
     }
 });
-ne.CustomEvents.mixin(ne.component.Calendar);
+ne.util.CustomEvents.mixin(ne.component.Calendar);
