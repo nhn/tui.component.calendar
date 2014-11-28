@@ -83,13 +83,12 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
          * 옵션을 저장한다
          * @member
          */
-        this._option;
+        this._option = option;
         /**
          * 루트 엘리먼트를 저장한다
          * @member
          */
-        this._element;
-
+        this._element = element;
         /**
          * 커스텀이벤트를 저장한다.
          * @member
@@ -109,8 +108,8 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             pickerClass: 'picker-selectable'
         };
 
-        var hasOption = arguments.length > 1;
-        if (hasOption) {
+        // 갱신
+        if (arguments.length > 1) {
             this._option = ne.util.extend(defaultOption, option);
             this._element = element;
         } else {
@@ -122,15 +121,8 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             year = option['year'],
             month = option['month'],
             date = option['date'],
+            today = this._setToday(year, month, date),
             key;
-
-        // 기본 데이터가 없으면 오늘 날짜를 세팅한다.
-        if (year && month && date) {
-            this.setDate(year, month, date);
-        } else {
-            var today = ne.component.Calendar.CalendarUtil.getToday();
-            this.setDate(today.year, today.month, today.date);
-        }
 
         // 오늘 날짜의 년, 월, 일이 옵션에 존재하지 않으면 복사해 넣는다.
         for (key in today) {
@@ -146,6 +138,24 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         if (option['isDrawOnload']) {
             this.draw();
         }
+    },
+    /**
+     * 오늘날짜를 세팅한다.
+     * @param {String} year 연도
+     * @param {String} month 월
+     * @param {String} date 날짜
+     * @private
+     */
+    _setToday: function(year, month, date) {
+        var today;
+        // 기본 데이터가 없으면 오늘 날짜를 세팅한다.
+        if (year && month && date) {
+            this.setDate(year, month, date);
+        } else {
+            today = ne.component.Calendar.CalendarUtil.getToday();
+            this.setDate(today.year, today.month, today.date);
+        }
+        return today;
     },
     /**
      * 엘리먼트를 필드에 할당한다.
@@ -175,7 +185,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
 
     },
     /**
-     * 달력, 전년 전달 다음달 다음년도로 이동하는 이벤트를 건다..
+     * 달력, 전년 전달 다음달 다음년도로 이동하는 이벤트를 건다.
      *
      * @private
      */
@@ -201,11 +211,11 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      *
      * @param {Number} yearDist 연도 이동 값
      * @param {Number} monthDist 월 이동 값
-     * @param {Event} clickEvent 클릭 이벤트 객체
+     * @param {Event} event 클릭 이벤트 객체
      * @private
      */
-    _onButtonHandle: function(yearDist, monthDist, clickEvent) {
-        clickEvent.preventDefault();
+    _onButtonHandle: function(yearDist, monthDist, event) {
+        event.preventDefault();
         this.draw(yearDist, monthDist, true);
     },
     /**
@@ -223,9 +233,11 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      * calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그린다.
      **/
     draw: function(year, month, isRelative) {
+
         var classPrefix = this._option['classPrefix'],
             date = this.getDate(),
             shownDate = this._getShownDate();
+
         if (shownDate && ne.util.isExisty(isRelative) && isRelative) {
             var relativeDate = ne.component.Calendar.CalendarUtil.getRelativeDate(year, month, 0, shownDate);
             year = relativeDate.year;
