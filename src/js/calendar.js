@@ -233,7 +233,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      **/
     draw: function(year, month, isRelative) {
 
-        var classPrefix = this._option['classPrefix'],
+        var classPrefix = this._option.classPrefix,
             date = this.getDate(),
             shownDate = this._getShownDate(),
             util = ne.component.Calendar.CalendarUtil;
@@ -291,8 +291,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             tempYear,
             tempMonth,
             param,
-            indexOfLastDate,
-            pickerClass = this._option['pickerClass'];
+            indexOfLastDate;
 
         // weeks 분리
         this._setWeeks(year, month);
