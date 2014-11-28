@@ -1,5 +1,5 @@
 {
-    "name": "Component-Calendar and Date Picker",
+    "name": "Component-Calendar",
     "version": "0.0.1",
     "description": "캘린더 컴포넌트와 컴포넌트 피커개발, 차후 분리",
     "private": true,
