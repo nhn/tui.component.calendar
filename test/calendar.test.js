@@ -66,27 +66,29 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
             month: 5
         };
         calendar2.on('beforeDraw', function(d) {
-            if(d.year > 2000) {
-                return;
+            if (d.year > 2000) {
+                return false;
             }
+            //console.log(d);
             date.year = d.year;
             date.month = d.month;
         });
         calendar2.fire('beforeDraw', {year: 2014, month: 4});
-        // 2000 보다 크기 때문에 변하지 않는다.
+        // 2000 보다 크기 때문에 변하지 않는다. date값 그대로
         expect(date.year).toBe(1993);
         expect(date.month).toBe(5);
 
+        //현재 캘린더 설정 날자는 1983, 5
         calendar2.draw(0, 4, true);
         expect(date.year).toBe(1983);
         expect(date.month).toBe(9);
 
         calendar2.draw(-1, null, true);
         expect(date.year).toBe(1982);
-        expect(date.month).toBe(5);
+        expect(date.month).toBe(9);
 
         calendar2.draw(null, 12);
-        expect(date.year).toBe(1983);
+        expect(date.year).toBe(1982);
         expect(date.month).toBe(12);
     });
 });

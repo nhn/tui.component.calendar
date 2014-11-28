@@ -691,7 +691,7 @@
          *
          * 이벤트를 취소할 수 있게 해 주는 기능에서 사용한다.
          * @param {string} type
-         * @param {object} data
+         * @param {*...} data
          * @returns {*}
          * @example
          * // 확대 기능을 지원하는 컴포넌트 내부 코드라 가정
@@ -713,14 +713,14 @@
          */
         invoke: function(type, data) {
             if (!this.hasListener(type)) {
-                return this;
+                return true;
             }
 
-            var event = ne.util.extend({}, data, {type: type, target: this}),
+            var args = Array.prototype.slice.call(arguments, 1),
                 events = this._events;
 
             if (!events) {
-                return;
+                return true;
             }
 
             var typeIndex = events[type + '_idx'],
@@ -731,15 +731,19 @@
                 listeners = events[type].slice();
 
                 ne.util.forEach(listeners, function(listener) {
-                    result = result && !!listener.fn.call(this, event);
+                    if (listener.fn.apply(this, args) === false) {
+                        result = false;
+                    }
                 }, this);
             }
 
             ne.util.forEachOwnProperties(typeIndex, function(eventItem) {
-                result = result && !!eventItem.fn.call(eventItem.ctx, event);
+                if (eventItem.fn.apply(eventItem.ctx, args) === false) {
+                    result = false;
+                }
             });
 
-            return ne.util.isBoolean(result) ? result : false;
+            return result;
         },
 
         /**
@@ -756,7 +760,7 @@
          * });
          */
         fire: function(type, data) {
-            this.invoke(type, data);
+            this.invoke.apply(this, arguments);
             return this;
         },
 
@@ -807,8 +811,8 @@
             var that = this;
 
             if (ne.util.isObject(types)) {
-                ne.util.forEachOwnProperties(types, function(type) {
-                    this.once(type, types[type], fn);
+                ne.util.forEachOwnProperties(types, function(handler, type) {
+                    this.once(type, handler, fn);
                 }, this);
 
                 return;
@@ -849,6 +853,7 @@
     ne.util.CustomEvents = CustomEvents;
 
 })(window.ne);
+
 /**
  * @fileoverview 객체나 배열을 다루기위한 펑션들이 정의 되어있는 모듈
  * @author FE개발팀
@@ -1059,3 +1064,45 @@
     ne.util.reduce = reduce;
 
 })(window.ne);
+/**
+ * @fileoverview 함수관련 메서드 모음
+ * @author FE개발팀
+ */
+
+(function(ne) {
+    'use strict';
+    /* istanbul ignore if */
+    if (!ne) {
+        ne = window.ne = {};
+    }
+    if (!ne.util) {
+        ne.util = window.ne.util = {};
+    }
+
+    /**
+     * 커링 메서드
+     * @param {function()} fn
+     * @param {*} obj - this로 사용될 객체
+     * @return {function()}
+     */
+    function bind(fn, obj) {
+        var slice = Array.prototype.slice;
+
+        if (fn.bind) {
+            return fn.bind.apply(fn, slice.call(arguments, 1));
+        }
+
+        /* istanbul ignore next */
+        var args = slice.call(arguments, 2);
+
+        /* istanbul ignore next */
+        return function() {
+            /* istanbul ignore next */
+            return fn.apply(obj, args.length ? args.concat(slice.call(arguments)) : arguments);
+        };
+    }
+
+    ne.util.bind = bind;
+
+})(window.ne);
+

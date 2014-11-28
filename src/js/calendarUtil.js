@@ -174,7 +174,9 @@ ne.component.Calendar.CalendarUtil = {/** @lends ne.component.Calendar.CalendarU
         if (isEndDate) {
             dateObj.date = endDays[dateObj.month + month];
         }
+        var date = new Date(dateObj.year + year, dateObj.month + month - 1, dateObj.date + date),
+            hash = this.getDateHashTable(date);
 
-        return this.getDateHashTable(new Date(dateObj.year + year, dateObj.month + month - 1, dateObj.date + date));
+        return hash;
     }
 };

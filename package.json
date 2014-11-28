@@ -1,7 +1,7 @@
 {
-    "name": "FIXME",
+    "name": "Component-Calendar and Date Picker",
     "version": "0.0.1",
-    "description": "FIXME",
+    "description": "캘린더 컴포넌트와 컴포넌트 피커개발, 차후 분리",
     "private": true,
     "devDependencies": {
         "grunt": "^0.4.5",

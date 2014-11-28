@@ -1,4 +1,4 @@
-/* istanbul ignore if */
+ /* istanbul ignore if */
 if (!ne) {
     window.ne = ne = {};
 }
@@ -11,6 +11,7 @@ if (!ne.component) {
  * @fileoverview 캘린더 컴포넌트
  * (pug.Calendar 에서 분리)
  * @author 이제인(jein.yi@nhnent.com)
+ * @dependency jquery.1.11.1.js, common.js
  */
 
 
@@ -104,7 +105,8 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             monthTitleFormat: 'm',
             monthTitles: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
             dayTitles: ['일', '월', '화', '수', '목', '금', '토'],
-            isDrawOnload: true
+            isDrawOnload: true,
+            pickerClass: 'picker-selectable'
         };
 
         var hasOption = arguments.length > 1;
@@ -177,35 +179,34 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      *
      * @private
      */
-    _attachEvent: function(){
-        if (this.$btnPrevYear.length > 0) {
-            this.$btnPrevYear.click($.proxy(function(clickEvent) {
-                clickEvent.preventDefault();
-                this.draw(-1, 0, true);
-            }, this));
+    _attachEvent: function() {
+        if (ne.util.isNotEmpty(this.$btnPrevYear)) {
+            this.$btnPrevYear.click($.proxy(this._onButtonHandle, this, -1, 0));
         }
 
-        if (this.$btnPrevMonth.length > 0) {
-            this.$btnPrevMonth.click($.proxy(function(clickEvent) {
-                clickEvent.preventDefault();
-                this.draw(0, -1, true);
-            }, this));
+        if (ne.util.isNotEmpty(this.$btnPrevMonth)) {
+            this.$btnPrevMonth.click($.proxy(this._onButtonHandle, this, 0, -1));
         }
 
-        if (this.$btnNextMonth.length > 0) {
-            this.$btnNextMonth.click($.proxy(function(clickEvent) {
-                clickEvent.preventDefault();
-                this.draw(0, 1, true);
-            }, this));
+        if (ne.util.isNotEmpty(this.$btnNextMonth)) {
+            this.$btnNextMonth.click($.proxy(this._onButtonHandle, this, 0, 1));
         }
 
-        if (this.$btnNextYear.length > 0) {
-            this.$btnNextYear.click($.proxy(function(clickEvent) {
-                clickEvent.preventDefault();
-                this.draw(1, 0, true);
-            }, this));
+        if (ne.util.isNotEmpty(this.$btnNextYear)) {
+            this.$btnNextYear.click($.proxy(this._onButtonHandle, this, 1, 0));
         }
-
+    },
+    /**
+     * 달력 버튼을 누를때의 핸들러
+     *
+     * @param {Number} yearDist 연도 이동 값
+     * @param {Number} monthDist 월 이동 값
+     * @param {Event} clickEvent 클릭 이벤트 객체
+     * @private
+     */
+    _onButtonHandle: function(yearDist, monthDist, clickEvent) {
+        clickEvent.preventDefault();
+        this.draw(yearDist, monthDist, true);
     },
     /**
      * Calendar를 그린다.
@@ -222,7 +223,6 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      * calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그린다.
      **/
     draw: function(year, month, isRelative) {
-
         var classPrefix = this._option['classPrefix'],
             date = this.getDate(),
             shownDate = this._getShownDate();
@@ -269,12 +269,9 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
 
         var today = this.getDate(),
             firstDay = ne.component.Calendar.CalendarUtil.getFirstDay(year, month),
-            lastDay = ne.component.Calendar.CalendarUtil.getLastDay(year, month),
-            lastDate = ne.component.Calendar.CalendarUtil.getLastDate(year, month),
             day = 0,
             datePrevMonth = ne.component.Calendar.CalendarUtil.getRelativeDate(0, -1, 0, {year: year, month: month, date: 1}),
             dateNextMonth = ne.component.Calendar.CalendarUtil.getRelativeDate(0, 1, 0, {year: year, month: month, date: 1}),
-            prevMonthLastDate = ne.component.Calendar.CalendarUtil.getLastDate(datePrevMonth.year, datePrevMonth.month),
             dates = [],
             isPrevMonth,
             isNextMonth,
@@ -283,33 +280,19 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             tempMonth,
             param,
             indexOfLastDate,
-            $elWeek,
-            i,
-            weeks = ne.component.Calendar.CalendarUtil.getWeeks(year, month);
+            pickerClass = this._option['pickerClass'];
 
-        for (i = 0; i < weeks; i++) {
-            $elWeek = this.$weekTemplate.clone(true);
-            $elWeek.appendTo(this.$weekAppendTarget);
-            this._weekElements.push($elWeek);
-        }
+        // weeks 분리
+        this._setWeeks(year, month);
 
         this._$dateElement = $('.' + classPrefix + 'date', this.$weekAppendTarget);
         this._$dateContainerElement = $('.' + classPrefix + 'week > *', this.$weekAppendTarget);
 
-        if (firstDay > 0) {
-            for (i = prevMonthLastDate - firstDay; i < prevMonthLastDate; i++) {
-                dates.push(i + 1);
-            }
-        }
-        for (i = 1; i < lastDate + 1; i++) {
-            dates.push(i);
-        }
-        indexOfLastDate = dates.length - 1;
+        // 데이터를 채우고 마지막날 데이터의 인덱스를 받아온다.
+        indexOfLastDate = this._fillDates(year, month, dates);
 
-        for (i = 1; i < 7 - lastDay; i++) {
-            dates.push(i);
-        }
-
+        var i;
+        // 채워진 데이터를 그린다
         for (i = 0; i < dates.length; i++) {
             isPrevMonth = false;
             isNextMonth = false;
@@ -332,13 +315,11 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
                 tempMonth = month;
             }
 
-            if (day === 0) {
-                $dateContainer.addClass(classPrefix + 'sun');
-            }
-            if (day == 6) {
-                $dateContainer.addClass(classPrefix + 'sat');
-            }
-            if (tempYear == today.year && (tempMonth * 1) == today.month && dates[i] == today.date) {
+            // 주말 표시
+            this._setWeekend(day, $dateContainer, classPrefix);
+
+            // 오늘 날짜 표시
+            if (tempYear === today.year && (tempMonth * 1) === today.month && dates[i] === today.date) {
                 $dateContainer.addClass(classPrefix + 'today');
             }
 
@@ -352,6 +333,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
                 isNextMonth: isNextMonth,
                 html: dates[i]
             };
+
             $(param.$date).html(param.html.toString());
 
             this._metaDatas.push({
@@ -398,6 +380,69 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
          calendar.on('afterDraw', function(oCustomEvent){ ... });
          **/
         this.fire('afterDraw', { year: year, month: month });
+    },
+    /**
+     * 한주 템플릿을 만든다.
+     * @param {Number} year
+     * @param {Number} month
+     * @private
+     */
+    _setWeeks: function(year, month) {
+        var $elWeek,
+            weeks = ne.component.Calendar.CalendarUtil.getWeeks(year, month);
+        for (i = 0; i < weeks; i++) {
+            $elWeek = this.$weekTemplate.clone(true);
+            $elWeek.appendTo(this.$weekAppendTarget);
+            this._weekElements.push($elWeek);
+        }
+    },
+    /**
+     * 그려질 데이터들
+     * @param {Number} dates 그려질 날짜데이
+     * @private
+     */
+    _fillDates: function(year, month, dates) {
+        var firstDay = ne.component.Calendar.CalendarUtil.getFirstDay(year, month),
+            lastDay = ne.component.Calendar.CalendarUtil.getLastDay(year, month),
+            lastDate = ne.component.Calendar.CalendarUtil.getLastDate(year, month),
+            datePrevMonth = ne.component.Calendar.CalendarUtil.getRelativeDate(0, -1, 0, {year: year, month: month, date: 1}),
+            prevMonthLastDate = ne.component.Calendar.CalendarUtil.getLastDate(datePrevMonth.year, datePrevMonth.month),
+            indexOfLastDate;
+
+        var i;
+
+        if (firstDay > 0) {
+            for (i = prevMonthLastDate - firstDay; i < prevMonthLastDate; i++) {
+                dates.push(i + 1);
+            }
+        }
+        for (i = 1; i < lastDate + 1; i++) {
+            dates.push(i);
+        }
+
+        indexOfLastDate = dates.length - 1;
+
+        for (i = 1; i < 7 - lastDay; i++) {
+            dates.push(i);
+        }
+
+        return indexOfLastDate;
+    },
+    /**
+     * 주말설정
+     *
+     * @param {Number} day 날짜
+     * @param {Object} dateContainer 날짜컨테이너 제이쿼리 엘리먼트 오브젝트
+     * @param {String} classPrefix 클래스 프리픽스
+     * @private
+     */
+    _setWeekend: function(day, dateContainer, classPrefix) {
+        if (day === 0) {
+            dateContainer.addClass(classPrefix + 'sun');
+        }
+        if (day == 6) {
+            dateContainer.addClass(classPrefix + 'sat');
+        }
     },
     /**
      * 날짜데이터를 돌려준다
@@ -478,14 +523,14 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
                 M: this._option['monthTitles'][month - 1]
             };
 
-        if (this.$title.length > 0) {
+        if (ne.util.isNotEmpty(this.$title)) {
             title = titleFormat.replace(/yyyy|y|mm|m|M/g, function callback(matchedString) {
                 return replaceMap[matchedString] || '';
             });
             $title.text(title);
         }
 
-        if (this.$titleYear.length > 0) {
+        if (ne.util.isNotEmpty(this.$titleYear)) {
             $title = this.$titleYear;
             titleFormat = this._option['yearTitleFormat'];
             title = titleFormat.replace(/yyyy|y/g, function callback(matchedString) {
@@ -494,7 +539,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             $title.text(title);
         }
 
-        if (this.$titleMonth.length > 0) {
+        if (ne.util.isNotEmpty(this.$titleMonth)) {
             $title = this.$titleMonth;
             titleFormat = this._option['monthTitleFormat'];
             title = titleFormat.replace(/mm|m|M/g, function callback(matchedString) {
@@ -538,6 +583,12 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             return replaceMap[matchedString];
         });
         $today.text(title);
+    },
+    /**
+     * 루트 엘리먼트를 돌려준다.
+     */
+    getElement: function() {
+        return this._element;
     }
 });
 ne.util.CustomEvents.mixin(ne.component.Calendar);
