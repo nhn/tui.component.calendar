@@ -116,11 +116,11 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             this._option = defaultOption;
             this._element = option;
         }
+        option = this._option;
 
-        var option = this._option,
-            year = option['year'],
-            month = option['month'],
-            date = option['date'],
+        var year = option.year,
+            month = option.month,
+            date = option.date,
             today = this._setToday(year, month, date),
             key;
 
@@ -133,9 +133,9 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
 
         this._assignHTMLElements();
         this._attachEvent();
-        this.setDate(option['year'], option['month'], option['date']);
+        this.setDate(option.year, option.month, option.date);
 
-        if (option['isDrawOnload']) {
+        if (option.isDrawOnload) {
             this.draw();
         }
     },
@@ -164,7 +164,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      */
     _assignHTMLElements: function() {
 
-        var classPrefix = this._option['classPrefix'],
+        var classPrefix = this._option.classPrefix,
             $element = this._element,
             $weekTemplate;
 
@@ -172,7 +172,6 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         this.$btnPrevMonth = $('.' + classPrefix + 'btn-prev-mon', $element);
         this.$btnNextMonth = $('.' + classPrefix + 'btn-next-mon', $element);
         this.$btnNextYear = $('.' + classPrefix + 'btn-next-year', $element);
-        this.$bottom = $('.' + classPrefix + 'bottom', $element);
         this.$today = $('.' + classPrefix + 'today', $element);
 
         this.$title = $('.' + classPrefix + 'title', $element);
@@ -236,10 +235,11 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
 
         var classPrefix = this._option['classPrefix'],
             date = this.getDate(),
-            shownDate = this._getShownDate();
+            shownDate = this._getShownDate(),
+            util = ne.component.Calendar.CalendarUtil;
 
         if (shownDate && ne.util.isExisty(isRelative) && isRelative) {
-            var relativeDate = ne.component.Calendar.CalendarUtil.getRelativeDate(year, month, 0, shownDate);
+            var relativeDate = util.getRelativeDate(year, month, 0, shownDate);
             year = relativeDate.year;
             month = relativeDate.month;
         } else if (!ne.util.isExisty(year) && !ne.util.isExisty(month) && !ne.util.isExisty(isRelative)) {
@@ -276,14 +276,14 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         this._setCalendarToday(hasTodayElement);
         this._setCalendarTitle(year, month);
 
-        this._clear(ne.component.Calendar.CalendarUtil.getWeeks(year, month));
+        this._clear(util.getWeeks(year, month));
         this._setShownDate(year, month);
 
         var today = this.getDate(),
-            firstDay = ne.component.Calendar.CalendarUtil.getFirstDay(year, month),
+            firstDay = util.getFirstDay(year, month),
             day = 0,
-            datePrevMonth = ne.component.Calendar.CalendarUtil.getRelativeDate(0, -1, 0, {year: year, month: month, date: 1}),
-            dateNextMonth = ne.component.Calendar.CalendarUtil.getRelativeDate(0, 1, 0, {year: year, month: month, date: 1}),
+            datePrevMonth = util.getRelativeDate(0, -1, 0, {year: year, month: month, date: 1}),
+            dateNextMonth = util.getRelativeDate(0, 1, 0, {year: year, month: month, date: 1}),
             dates = [],
             isPrevMonth,
             isNextMonth,
@@ -395,8 +395,8 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
     },
     /**
      * 한주 템플릿을 만든다.
-     * @param {Number} year
-     * @param {Number} month
+     * @param {Number} year 해당 연도
+     * @param {Number} month 해당 월
      * @private
      */
     _setWeeks: function(year, month) {
@@ -410,15 +410,20 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
     },
     /**
      * 그려질 데이터들
+     *
+     * @param {String} year 그려질 연도
+     * @param {String} month 그려질 달
      * @param {Number} dates 그려질 날짜데이
      * @private
      */
     _fillDates: function(year, month, dates) {
-        var firstDay = ne.component.Calendar.CalendarUtil.getFirstDay(year, month),
-            lastDay = ne.component.Calendar.CalendarUtil.getLastDay(year, month),
-            lastDate = ne.component.Calendar.CalendarUtil.getLastDate(year, month),
-            datePrevMonth = ne.component.Calendar.CalendarUtil.getRelativeDate(0, -1, 0, {year: year, month: month, date: 1}),
-            prevMonthLastDate = ne.component.Calendar.CalendarUtil.getLastDate(datePrevMonth.year, datePrevMonth.month),
+
+        var util = ne.component.Calendar.CalendarUtil,
+            firstDay = util.getFirstDay(year, month),
+            lastDay = util.getLastDay(year, month),
+            lastDate = util.getLastDate(year, month),
+            datePrevMonth = util.getRelativeDate(0, -1, 0, {year: year, month: month, date: 1}),
+            prevMonthLastDate = util.getLastDate(datePrevMonth.year, datePrevMonth.month),
             indexOfLastDate;
 
         var i;
@@ -473,9 +478,9 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      **/
     setDate: function(year, month, date) {
         this._date = {
-            year : year,
-            month : (month * 1),
-            date : (date * 1)
+            year: year,
+            month: month,
+            date: date
         };
     },
     /**
@@ -487,16 +492,16 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      */
     _setShownDate: function(year, month) {
         this._shownDate = {
-            year : year,
-            month : (month * 1),
-            date : 1
+            year: year,
+            month: month,
+            date: 1
         };
     },
     /**
      * 현재 달력에 표시된 날짜를 가져온다.
      *
      * @private
-     * @returns {{year: Number, month: Number, date: Number}|*}
+     * @returns {Object}
      */
     _getShownDate: function() {
         return this._shownDate || this.getDate();
@@ -516,84 +521,117 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      *
      * @private
      * @param {Number} year 연도 값 (ex. 2008)
-     * @param {Number} month 월 값 (1 ~ 12)
+     * @param {(Number|String)} month 월 값 (1 ~ 12)
      **/
     _setCalendarTitle: function(year, month) {
 
         if (month < 10) {
-            month = ('0' + (month * 1)).toString();
+            month = '0' + Number(month);
         }
 
-        var $title = this.$title,
-            titleFormat = this._option['titleFormat'],
-            title,
-            replaceMap = {
-                yyyy: year,
-                y: (year).toString().substr(2, 2),
-                mm: month,
-                m: (month * 1),
-                M: this._option['monthTitles'][month - 1]
-            };
+        var option = this._option,
+            $title,
+            titleFormat = option.titleFormat,
+            replaceMap = this._getReplaceMap(year, month),
+            reg;
 
-        if (ne.util.isNotEmpty(this.$title)) {
-            title = titleFormat.replace(/yyyy|y|mm|m|M/g, function callback(matchedString) {
-                return replaceMap[matchedString] || '';
-            });
-            $title.text(title);
+        $title = this.$title;
+        if (ne.util.isNotEmpty($title)) {
+            reg = /yyyy|yy|mm|m|M/g;
+            this._setTitleText($title, titleFormat, replaceMap, reg);
         }
 
-        if (ne.util.isNotEmpty(this.$titleYear)) {
-            $title = this.$titleYear;
-            titleFormat = this._option['yearTitleFormat'];
-            title = titleFormat.replace(/yyyy|y/g, function callback(matchedString) {
-                return replaceMap[matchedString] || '';
-            });
-            $title.text(title);
+        $title = this.$titleYear;
+        if (ne.util.isNotEmpty($title)) {
+            reg = /yyyy|yy/g;
+            this._setTitleText($title, option.yearTitleFormat, replaceMap, reg);
         }
 
-        if (ne.util.isNotEmpty(this.$titleMonth)) {
-            $title = this.$titleMonth;
-            titleFormat = this._option['monthTitleFormat'];
-            title = titleFormat.replace(/mm|m|M/g, function callback(matchedString) {
-                return replaceMap[matchedString] || '';
-            });
-            $title.text(title);
+        $title = this.$titleMonth;
+        if (ne.util.isNotEmpty($title)) {
+            reg = /mm|m|M/g;
+            this._setTitleText($title, option.monthTitleFormat, replaceMap, reg);
         }
 
 
     },
     /**
-     * 오늘날짜 앨리먼트 여부에 따라 오늘날짜를 그리는 데이터를 만들어 그린다.
+     * 캘린더의 타이틀을 갱신한다.
      *
-     * @param {Boolean} hasTodayElement 오늘날짜 표시 엘레먼트 존재여부
+     * @param {JQueryObject} $element 갱신될 엘리먼트
+     * @param {String} form 변경될 날짜 형식
+     * @param {Object} map 정규식에 맞춰서 매칭되는 값을 가진 객체
+     * @param {RegExp} reg 변경할 폼을 치환할 정규식
      * @private
      */
-    _setCalendarToday: function(isExistTodayElement){
+    _setTitleText: function($element, form, map, reg) {
+        var title = this._getConvertedTitle(form, map, reg);
+        $element.text(title);
+    },
+    /**
+     * 폼 변환할 날짜의 맵을 구한다.
+     * @param {String} year 연도
+     * @param {String} month 월
+     * @param {String} [date] 일
+     * @returns {Object}
+     * @private
+     */
+    _getReplaceMap: function(year, month, date) {
+
+        var option = this._option,
+            yearsub = (year.toString()).substr(2, 2),
+            monthLabel = option.monthTitles[month - 1],
+            labelkey = new Date(year, month - 1, date || 1).getDay(),
+            dayLabel = option.dayTitles[labelkey];
+
+        return {
+            yyyy: year,
+            yy: yearsub,
+            mm: month,
+            m: Number(month),
+            M: monthLabel,
+            dd: date,
+            d: Number(date),
+            D: dayLabel
+        };
+    },
+    /**
+     * 텍스트를 변환하여 돌려준다.
+     * @param {String} str 변환할 텍스트
+     * @param {Object} map 변환키와 벨류 셋
+     * @param {RegExp} reg 변환할 정규식
+     * @returns {String} 변환된 문자열
+     * @private
+     */
+    _getConvertedTitle: function(str, map, reg) {
+        str = str.replace(reg, function callback(matchedString) {
+            return map[matchedString];
+        });
+        return str;
+    },
+    /**
+     * 오늘날짜 앨리먼트 여부에 따라 오늘날짜를 그리는 데이터를 만들어 그린다.
+     *
+     * @param {Boolean} isExistTodayElement 오늘날짜 표시 엘레먼트 존재여부
+     * @private
+     */
+    _setCalendarToday: function(isExistTodayElement) {
+
         if (!isExistTodayElement) {
             return;
         }
 
         var $today = this.$today,
             option = this._option,
-            todayFormat = option['todayFormat'],
+            todayFormat = option.todayFormat,
             title,
             today = this.getDate(),
             year = today.year,
             month = today.month,
             date = today.date,
-            replaceMap = {
-                yyyy: year,
-                y: (year).toString().substr(2, 2),
-                mm: month,
-                m: (month * 1),
-                M: option['monthTitles'][month - 1],
-                dd: date,
-                d: (date * 1),
-                D: option['dayTitles'][new Date(year, month - 1, date).getDay()]
-            };
-        title = todayFormat.replace(/yyyy|y|mm|m|M|dd|d|D/g, function callback(matchedString) {
-            return replaceMap[matchedString];
-        });
+            replaceMap = this._getReplaceMap(year, month, date);
+
+        title = this._getConvertedTitle(todayFormat, replaceMap, /yyyy|y|mm|m|M|dd|d|D/g);
         $today.text(title);
     },
     /**
@@ -603,4 +641,5 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         return this._element;
     }
 });
+
 ne.util.CustomEvents.mixin(ne.component.Calendar);
