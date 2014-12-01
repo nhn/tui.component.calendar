@@ -82,18 +82,21 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         /**
          * 옵션을 저장한다
          * @member
+         * @private
          */
         this._option = option;
         /**
          * 루트 엘리먼트를 저장한다
          * @member
+         * @private
          */
         this._element = element;
         /**
          * 커스텀이벤트를 저장한다.
          * @member
+         * @private
          */
-        this._eventHandler = {};
+        this._events = {};
 
         // 기본값 세팅
         var defaultOption = {
@@ -486,6 +489,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      * @param {Number} year 연도
      * @param {Number} month 원
      * @param {Number} date 일
+     * @private
      */
     _setShownDate: function(year, month) {
         this._shownDate = {
