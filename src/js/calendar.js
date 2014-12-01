@@ -454,8 +454,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
     _setWeekend: function(day, dateContainer, classPrefix) {
         if (day === 0) {
             dateContainer.addClass(classPrefix + 'sun');
-        }
-        if (day === 6) {
+        } else if (day === 6) {
             dateContainer.addClass(classPrefix + 'sat');
         }
     },
