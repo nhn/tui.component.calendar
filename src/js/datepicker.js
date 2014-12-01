@@ -133,7 +133,6 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     },
     /**
      * 달력의 위치를 조정하고, 달력을 펼친다.
-     * @todo range 를 설정한다.
      *
      */
     open: function() {
@@ -424,7 +423,6 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     _annexToSelectableRange: function() {
         this._calendar.on('draw', ne.util.bind(function(data) {
             if (!this.checkRestrict(data)) {
-                // @todo jquery코드를 걷어낼 때 수정되어야 하는 부분
                 data.$dateContainer.addClass(this._selectableClass);
             }
         }, this));
