@@ -87,7 +87,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
          * @private
          */
         this._endEdge = this._isRestrict ? this._getDateObject(option.endDate) : null;
-        this.setElementEvent();
+        this._bindElementEvent();
 
         // 기본 데이터가 있으면 input에 띄워준다.
         if (!option._date) {
@@ -98,7 +98,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     /**
      * 인풋 엘리먼트에 클릭시 이벤트 바인딩
      */
-    setElementEvent: function() {
+    _bindElementEvent: function() {
         // 데이트 피커 엘리먼트에 이벤트 바인딩.
         $(this._element).on('click', ne.util.bind(this._onClickPicker, this));
         $(this._element).on('keydown', ne.util.bind(this._onKeydownPicker, this));
@@ -107,7 +107,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
      * 레이어가 펼쳐지면 다른 곳을 클릭할 때 달력을 닫히도록 한다.
      * @private
      */
-    _setCloseLayerEvent: function() {
+    _bindCloseLayerEvent: function() {
         var layer = ne.util.bind(function(e) {
             if (!$.contains(this._$calendarElement[0], e.target)) {
                 $(document).off('click', layer);
@@ -143,17 +143,17 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
 
         var date = this.getDate();
         this._arrangeLayer();
-        this._onToCalendar();
+        this._bindToCalendar();
 
         // 선택영역 제한이 있는지 확인후 선택불가능한 부분을 설정한다.
         if (this._isRestrict) {
-            this._annexToSelectableRange();
+            this._bindDrawEventForSelectableRange();
         }
 
         // 달력 레이어를 뺀 위치에서 마우스 클릭시 달력닫힘
-        this._setCloseLayerEvent();
+        this._bindCloseLayerEvent();
         // 달력 커스텀이벤트
-        this._addCalendarCustomEvent();
+        this._bindCalendarCustomEvent();
 
         this._calendar.draw(date.year, date.month, false);
         this._$calendarElement.show();
@@ -165,8 +165,8 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
      * 달력 레이어를 닫는다.
      */
     close: function() {
-        this.unbindClick();
-        this._removeCalendarEvent();
+        this._unbindClick();
+        this._unbindCalendarEvent();
         this._$calendarElement.hide();
     },
     /**
@@ -211,7 +211,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
      *
      * @private
      */
-    _onToCalendar: function() {
+    _bindToCalendar: function() {
         this._calendar.on('afterDraw', ne.util.bind(function(data) {
             this.setDate(data.year, data.month, data.date);
         }, this));
@@ -250,12 +250,12 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
      * @param {String} form
      */
     setForm: function(form) {
-        this._dateForm = form;
+        this._dateForm = form || this._dateForm;
     },
     /**
      * 달력에 이벤트를 붙인다.
      */
-    bindClick: function() {
+    _bindClick: function() {
         if (!ne.util.isFunction(this._binder)) {
             this._binder = ne.util.bind(this._onClickCalendar, this);
         }
@@ -269,7 +269,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     /**
      * 달력 이벤트를 제거한다
      */
-    unbindClick: function() {
+    _unbindClick: function() {
         var $week = this._$calendarElement;
         if (this._isRestrict) {
             $week.find('.' + this._selectableClass).off('click');
@@ -309,7 +309,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     },
     /**
      * 유효한 날짜 폼인지 확인한다.
-     * @param value
+     * @param {{Number|String}} value
      * @returns {Object}
      * @private
      */
@@ -320,7 +320,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
 
         if (reg.test(value)) {
             date = this._extractDate(value);
-            if (!this.checkRestrict(date)) {
+            if (!this._checkRestrict(date)) {
                 return date;
             }
         }
@@ -410,7 +410,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
      * @param {Object} datehash 비교할 날짜데이터
      * @returns {boolean}
      */
-    checkRestrict: function(datehash) {
+    _checkRestrict: function(datehash) {
 
         var start = this._startEdge,
             end = this._endEdge,
@@ -421,9 +421,9 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     /**
      * 선택 가능한 영역에 클래스를 입힌다.
      */
-    _annexToSelectableRange: function() {
+    _bindDrawEventForSelectableRange: function() {
         this._calendar.on('draw', ne.util.bind(function(data) {
-            if (!this.checkRestrict(data)) {
+            if (!this._checkRestrict(data)) {
                 data.$dateContainer.addClass(this._selectableClass);
             }
         }, this));
@@ -432,19 +432,19 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
      * 달력이 갱신될때 이벤트를 건다.
      * @private
      */
-    _addCalendarCustomEvent: function() {
+    _bindCalendarCustomEvent: function() {
         this._calendar.on('beforeDraw', ne.util.bind(function() {
-            this.unbindClick();
+            this._unbindClick();
         }, this));
         this._calendar.on('afterDraw', ne.util.bind(function() {
-            this.bindClick();
+            this._bindClick();
         }, this));
     },
     /**
      * 달력이 닫힐때 이벤트 제거
      * @private
      */
-    _removeCalendarEvent: function() {
+    _unbindCalendarEvent: function() {
         this._calendar.off();
     }
 });
