@@ -99,6 +99,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     },
     /**
      * 인풋 엘리먼트에 클릭시 이벤트 바인딩
+     * @private
      */
     _bindElementEvent: function() {
         // 데이트 피커 엘리먼트에 이벤트 바인딩.
