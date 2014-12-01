@@ -576,14 +576,14 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
     _getReplaceMap: function(year, month, date) {
 
         var option = this._option,
-            yearsub = (year.toString()).substr(2, 2),
+            yearSub = (year.toString()).substr(2, 2),
             monthLabel = option.monthTitles[month - 1],
             labelkey = new Date(year, month - 1, date || 1).getDay(),
             dayLabel = option.dayTitles[labelkey];
 
         return {
             yyyy: year,
-            yy: yearsub,
+            yy: yearSub,
             mm: month,
             m: Number(month),
             M: monthLabel,

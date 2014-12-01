@@ -28,7 +28,7 @@ if (!ne.component) {
  *      @param {String} [option.selectableClass] 선택가능한 날짜에 입힐 클래스 이름 생락시 'selectableClass'
  *      @param {Object} [option.startDate] 선택가능한 날짜 시작일
  *      @param {Object} [option.endDate] 선택가능한 날짜 종료일
- * @param {ne.component.Calendar} DatePicker컴포넌트와 연결될 캘린더 컴포넌트
+ * @param {ne.component.Calendar} calendar DatePicker 컴포넌트와 연결될 캘린더 컴포넌트
  * */
 ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.prototype */{
     init: function(option, calendar) {
