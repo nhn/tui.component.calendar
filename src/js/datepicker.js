@@ -36,6 +36,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
         /**
          * 인풋 엘리먼트
          * @type {HTMLElement}
+         * @private
          */
         this._element = option.element;
         /**
@@ -55,6 +56,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
          * 달력 엘리먼트
          *
          * @type {HTMLElement}
+         * @private
          */
         this._$calendarElement = calendar.getElement();
         /**
