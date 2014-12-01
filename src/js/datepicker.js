@@ -241,9 +241,9 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
      */
     setDate: function(year, month, date) {
         this._date = this._date || {};
-        this._date.year = year ? year : this._date.year;
-        this._date.month = month ? month : this._date.month;
-        this._date.date = date ? date : this._date.date;
+        this._date.year = year || this._date.year;
+        this._date.month = month || this._date.month;
+        this._date.date = date || this._date.date;
     },
     /**
      * 날짜 폼을 변경한다.

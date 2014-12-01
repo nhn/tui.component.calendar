@@ -603,7 +603,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      * @private
      */
     _getConvertedTitle: function(str, map, reg) {
-        str = str.replace(reg, function callback(matchedString) {
+        str = str.replace(reg, function(matchedString) {
             return map[matchedString];
         });
         return str;
