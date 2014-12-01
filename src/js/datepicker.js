@@ -177,7 +177,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     _arrangeLayer: function() {
 
         var element = this._$calendarElement,
-            bound = this.getBoundingClientRect();
+            bound = this._getBoundingClientRect();
 
         element.css({
             position: 'absolute',
@@ -190,8 +190,9 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
      * 앨리먼트의 BoundingClientRect를 구한다.
      * @param {HTMLElement} element
      * @returns {Object}
+     * @private
      */
-    getBoundingClientRect: function(element) {
+    _getBoundingClientRect: function(element) {
         element = element || this._element;
 
         var bound = element.getBoundingClientRect(),
@@ -254,6 +255,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     },
     /**
      * 달력에 이벤트를 붙인다.
+     * @private
      */
     _bindClick: function() {
         if (!ne.util.isFunction(this._binder)) {
@@ -268,6 +270,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     },
     /**
      * 달력 이벤트를 제거한다
+     * @private
      */
     _unbindClick: function() {
         var $week = this._$calendarElement;
@@ -309,7 +312,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     },
     /**
      * 유효한 날짜 폼인지 확인한다.
-     * @param {{Number|String}} value
+     * @param {(Number|String)} value
      * @returns {Object}
      * @private
      */
@@ -409,6 +412,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
      * 선택 불가능한 날짜인지 확인한다.
      * @param {Object} datehash 비교할 날짜데이터
      * @returns {boolean}
+     * @private
      */
     _checkRestrict: function(datehash) {
 
@@ -420,6 +424,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     },
     /**
      * 선택 가능한 영역에 클래스를 입힌다.
+     * @private
      */
     _bindDrawEventForSelectableRange: function() {
         this._calendar.on('draw', ne.util.bind(function(data) {

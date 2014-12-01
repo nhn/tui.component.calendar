@@ -112,13 +112,13 @@ describe('데이터 피커를 테스트한다.', function() {
             expect(element.value).toBe(str);
         });
 
-        it('_arrangeLayer use getBoundingClientRect', function() {
+        it('_arrangeLayer use _getBoundingClientRect', function() {
             var bound, calbound;
 
-            bound = picker.getBoundingClientRect();
+            bound = picker._getBoundingClientRect();
             picker._$calendarElement.show();
             picker._arrangeLayer();
-            calbound = picker.getBoundingClientRect(picker._$calendarElement[0]);
+            calbound = picker._getBoundingClientRect(picker._$calendarElement[0]);
 
             var isIE7 = navigator.userAgent.indexOf('MSIE') !== -1 && navigator.userAgent.indexOf('7.0') !== -1;
 
