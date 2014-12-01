@@ -423,9 +423,8 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             lastDate = util.getLastDate(year, month),
             datePrevMonth = util.getRelativeDate(0, -1, 0, {year: year, month: month, date: 1}),
             prevMonthLastDate = util.getLastDate(datePrevMonth.year, datePrevMonth.month),
-            indexOfLastDate;
-
-        var i;
+            indexOfLastDate,
+            i;
 
         if (firstDay > 0) {
             for (i = prevMonthLastDate - firstDay; i < prevMonthLastDate; i++) {
