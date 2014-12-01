@@ -621,14 +621,10 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         }
 
         var $today = this.$today,
-            option = this._option,
-            todayFormat = option.todayFormat,
+            todayFormat = this._option.todayFormat,
             title,
             today = this.getDate(),
-            year = today.year,
-            month = today.month,
-            date = today.date,
-            replaceMap = this._getReplaceMap(year, month, date);
+            replaceMap = this._getReplaceMap(today.year, today.month, today.date);
 
         title = this._getConvertedTitle(todayFormat, replaceMap, /yyyy|y|mm|m|M|dd|d|D/g);
         $today.text(title);

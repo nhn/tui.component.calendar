@@ -194,13 +194,14 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
     getBoundingClientRect: function(element) {
         element = element || this._element;
 
-        var bound = element.getBoundingClientRect();
+        var bound = element.getBoundingClientRect(),
+            ceil = Math.ceil;
 
         bound = {
-            left: Math.ceil(bound.left),
-            top: Math.ceil(bound.top),
-            bottom: Math.ceil(bound.bottom),
-            right: Math.ceil(bound.right)
+            left: ceil(bound.left),
+            top: ceil(bound.top),
+            bottom: ceil(bound.bottom),
+            right: ceil(bound.right)
         };
 
         return bound;
