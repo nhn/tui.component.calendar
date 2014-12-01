@@ -48,6 +48,39 @@ describe('데이터 피커를 테스트한다.', function() {
             expect(luckyday.date).toBe(28);
         });
 
+        it('setDate _not valid date, set run with nothing', function() {
+            var beforeYear = picker.getDate().year,
+            beforeMonth = picker.getDate().month,
+            beforeDate = picker.getDate().date;
+            picker.setDate();
+            var notday = picker.getDate();
+            expect(notday.year).toBe(beforeYear);
+            expect(notday.month).toBe(beforeMonth);
+            expect(notday.date).toBe(beforeDate);
+        });
+
+        it('setDate _not valid date, set run with year and month', function() {
+            var beforeYear = picker.getDate().year,
+                beforeMonth = picker.getDate().month,
+                beforeDate = picker.getDate().date;
+            picker.setDate(1919, 7);
+            var notday = picker.getDate();
+            expect(notday.year).not.toBe(beforeYear);
+            expect(notday.month).not.toBe(beforeMonth);
+            expect(notday.date).toBe(beforeDate);
+        });
+
+        it('setDate _not valid date, set run with year', function() {
+            var beforeYear = picker.getDate().year,
+                beforeMonth = picker.getDate().month,
+                beforeDate = picker.getDate().date;
+            picker.setDate(1920);
+            var notday = picker.getDate();
+            expect(notday.year).not.toBe(beforeYear);
+            expect(notday.month).toBe(beforeMonth);
+            expect(notday.date).toBe(beforeDate);
+        });
+
         it('_formed "yy-mm-dd" get 2014/11/28', function() {
             picker.setDate(2014, 11, 28);
             picker.setForm('yy/mm/dd');
@@ -204,7 +237,7 @@ describe('데이터 피커를 테스트한다.', function() {
             expect(date2.getMonth()).toBe(8);
             expect(date2.getDate()).toBe(10);
         });
-        it('checkRestrict, check date is available to select', function() {
+        it('_checkRestrict, check date is available to select', function() {
             var date1 = {
                     year: 2014,
                     month: 11,
@@ -216,14 +249,14 @@ describe('데이터 피커를 테스트한다.', function() {
                     date: 30
                 },
                 restric, availd;
-            availd = picker2.checkRestrict(date1);
-            restric = picker2.checkRestrict(date2);
+            availd = picker2._checkRestrict(date1);
+            restric = picker2._checkRestrict(date2);
             expect(restric).toBeTruthy();
             expect(availd).toBeFalsy();
         });
-        it('_annexToSelectableRange 선택 불가능한 영역을 입힌다.', function() {
+        it('_bindDrawEventForSelectableRange 선택 불가능한 영역을 입힌다.', function() {
             var unselectableClass = 'unselectableClass';
-            picker2._annexToSelectableRange();
+            picker2._bindDrawEventForSelectableRange();
             calendar.draw(2014, 11);
             var unselectableList = picker2._$calendarElement.find('.selectableClass');
             // 10/30~11/10(12)
