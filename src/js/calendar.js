@@ -128,11 +128,10 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             key;
 
         // 오늘 날짜의 년, 월, 일이 옵션에 존재하지 않으면 복사해 넣는다.
-        for (key in today) {
-            if (!option[key]) {
-                option[key] = today[key];
-            }
-        }
+        ne.util.forEach(today, function(grade, key) {
+            option[key] = grade;
+        });
+
 
         this._assignHTMLElements();
         this._attachEvent();
@@ -147,6 +146,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      * @param {String} year 연도
      * @param {String} month 월
      * @param {String} date 날짜
+     * @return {Object}
      * @private
      */
     _setToday: function(year, month, date) {
@@ -305,9 +305,8 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         // 데이터를 채우고 마지막날 데이터의 인덱스를 받아온다.
         indexOfLastDate = this._fillDates(year, month, dates);
 
-        var i;
         // 채워진 데이터를 그린다
-        for (i = 0; i < dates.length; i++) {
+        ne.util.forEach(dates, function(date, i) {
             isPrevMonth = false;
             isNextMonth = false;
             $dateContainer = $(this._$dateContainerElement[i]);
@@ -333,7 +332,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             this._setWeekend(day, $dateContainer, classPrefix);
 
             // 오늘 날짜 표시
-            if (tempYear === today.year && (tempMonth * 1) === today.month && dates[i] === today.date) {
+            if (tempYear === today.year && (tempMonth * 1) === today.month && date === today.date) {
                 $dateContainer.addClass(classPrefix + 'today');
             }
 
@@ -342,10 +341,10 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
                 $dateContainer: $dateContainer,
                 year: tempYear,
                 month: tempMonth,
-                date: dates[i],
+                date: date,
                 isPrevMonth: isPrevMonth,
                 isNextMonth: isNextMonth,
-                html: dates[i]
+                html: date
             };
 
             $(param.$date).html(param.html.toString());
@@ -353,7 +352,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             this._metaDatas.push({
                 year: tempYear,
                 month: tempMonth,
-                date: dates[i]
+                date: date
             });
 
             day = (day + 1) % 7;
@@ -382,7 +381,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
                     });
              **/
             this.fire('draw', param);
-        }
+        }, this);
         /**
          달력을 모두 그린 후에 발생
 
@@ -403,7 +402,8 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      */
     _setWeeks: function(year, month) {
         var $elWeek,
-            weeks = ne.component.Calendar.CalendarUtil.getWeeks(year, month);
+            weeks = ne.component.Calendar.CalendarUtil.getWeeks(year, month),
+            i;
         for (i = 0; i < weeks; i++) {
             $elWeek = this.$weekTemplate.clone(true);
             $elWeek.appendTo(this.$weekAppendTarget);
