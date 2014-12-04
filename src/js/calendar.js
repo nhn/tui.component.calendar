@@ -332,7 +332,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             this._setWeekend(day, $dateContainer, classPrefix);
 
             // 오늘 날짜 표시
-            if (tempYear === today.year && (tempMonth * 1) === today.month && date === today.date) {
+            if (tempYear === today.year && parseInt(tempMonth) === today.month && date === today.date) {
                 $dateContainer.addClass(classPrefix + 'today');
             }
 
