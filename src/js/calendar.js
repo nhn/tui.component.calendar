@@ -124,14 +124,12 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         var year = option.year,
             month = option.month,
             date = option.date,
-            today = this._setToday(year, month, date),
-            key;
+            today = this._setToday(year, month, date);
 
         // 오늘 날짜의 년, 월, 일이 옵션에 존재하지 않으면 복사해 넣는다.
         ne.util.forEach(today, function(grade, key) {
             option[key] = grade;
         });
-
 
         this._assignHTMLElements();
         this._attachEvent();
@@ -155,7 +153,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         if (year && month && date) {
             this.setDate(year, month, date);
         } else {
-            today = ne.component.Calendar.CalendarUtil.getToday();
+            today = ne.component.Calendar.Util.getToday();
             this.setDate(today.year, today.month, today.date);
         }
         return today;
@@ -239,8 +237,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         var classPrefix = this._option.classPrefix,
             date = this.getDate(),
             shownDate = this._getShownDate(),
-            util = ne.component.Calendar.CalendarUtil;
-
+            util = ne.component.Calendar.Util;
         if (shownDate && ne.util.isExisty(isRelative) && isRelative) {
             var relativeDate = util.getRelativeDate(year, month, 0, shownDate);
             year = relativeDate.year;
@@ -270,9 +267,9 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
 				});
          **/
 
-        var isFired = this.invoke('beforeDraw', { year: year, month: month }),
+        var isComplete = this.invoke('beforeDraw', { year: year, month: month }),
             hasTodayElement = this.$today.length > 0;
-        if (!isFired) {
+        if (!isComplete) {
             return;
         }
 
@@ -297,6 +294,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             indexOfLastDate;
 
         // weeks 분리
+
         this._setWeeks(year, month);
 
         this._$dateElement = $('.' + classPrefix + 'date', this.$weekAppendTarget);
@@ -332,7 +330,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             this._setWeekend(day, $dateContainer, classPrefix);
 
             // 오늘 날짜 표시
-            if (tempYear === today.year && parseInt(tempMonth) === today.month && date === today.date) {
+            if ((tempYear === today.year) && (parseInt(tempMonth) === today.month) && (date === today.date)) {
                 $dateContainer.addClass(classPrefix + 'today');
             }
 
@@ -402,7 +400,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      */
     _setWeeks: function(year, month) {
         var $elWeek,
-            weeks = ne.component.Calendar.CalendarUtil.getWeeks(year, month),
+            weeks = ne.component.Calendar.Util.getWeeks(year, month),
             i;
         for (i = 0; i < weeks; i++) {
             $elWeek = this.$weekTemplate.clone(true);
@@ -420,7 +418,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      */
     _fillDates: function(year, month, dates) {
 
-        var util = ne.component.Calendar.CalendarUtil,
+        var util = ne.component.Calendar.Util,
             firstDay = util.getFirstDay(year, month),
             lastDay = util.getLastDay(year, month),
             lastDate = util.getLastDate(year, month),
@@ -525,7 +523,6 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      * @param {(Number|String)} month 월 값 (1 ~ 12)
      **/
     _setCalendarTitle: function(year, month) {
-
         if (month < 10) {
             month = '0' + Number(month);
         }
