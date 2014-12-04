@@ -415,7 +415,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
      *
      * @param {String} year 그려질 연도
      * @param {String} month 그려질 달
-     * @param {Number} dates 그려질 날짜데이
+     * @param {Array} dates 그려질 날짜 데이터
      * @private
      */
     _fillDates: function(year, month, dates) {
