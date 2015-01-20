@@ -21,6 +21,10 @@ if (!ne.component) {
  *
  * @param {Object} option DatePicker 옵션값
  *      @param {HTMLElement} option.element DatePicker의 input 창
+ *      @param {object} option.data
+ *        @param {object} option.data.year 연도
+ *        @param {object} option.data.month 월
+ *        @param {object} option.data.date 일
  *      @param {String} [option.dateForm] input 창에 표시될 날짜 형식
  *      @param {Object} [option.dateForm] 초기 입력 날짜값
  *      @param {String} [option.defaultCentury] yy 형식일때 자동으로 붙여지는 값 [19|20]
@@ -92,7 +96,7 @@ ne.component.DatePicker = ne.util.defineClass(/**@lends ne.component.DatePicker.
         this._bindElementEvent();
 
         // 기본 데이터가 있으면 input에 띄워준다.
-        if (!option._date) {
+        if (option.date) {
             this.insertDate(option.date);
         }
 
