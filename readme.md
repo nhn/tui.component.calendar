@@ -1,5 +1,8 @@
-## 개발 날짜
+## 개발날짜
 2014-11-17
+
+## 최종업데이트
+2015-01.20
 
 ## 담당자
 FE 개발팀 이제인 <jein.yi@nhnent.com>
@@ -18,13 +21,13 @@ FE 개발팀 이제인 <jein.yi@nhnent.com>
 - 날짜 입력 폼에 맞춘 표시기능(yyyy-mm-dd, yy-m-d)
 
 ## 샘플 페이지
-http://fetech.nhnent.com/svnrun/fetech/components/Calendar/sample/
+https://github.nhnent.com/pages/FE/Component-Calendar/sample/
 
 ## 다운로드
-http://fetech.nhnent.com/svnrun/fetech/components/Calendar/dist/
+https://github.nhnent.com/FE/Component-Calendar/tree/dist
 
 ## API 문서
-http://fetech.nhnent.com/svnrun/fetech/components/Calendar/doc/index.html
+https://github.nhnent.com/pages/FE/Component-Calendar/
 
 
 
