@@ -25,8 +25,7 @@ Component-Calendar
 ## History
 | Version | Description | Date | Developer |
 | ---- | ---- | ---- | ---- |
-| v0.1 | 데이트피커 추가 | 2015.01 | FE 개발팀 이제인 <jein.yi@nhnent.com> |
-| v0.1 | 최초개발 | 2014.11 | FE 개발팀 이제인 <jein.yi@nhnent.com> |
+| 1.0.0 | 최초개발 | 2014.11 | FE 개발팀 이제인 <jein.yi@nhnent.com> |
 
 
 
