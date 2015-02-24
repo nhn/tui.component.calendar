@@ -14,13 +14,13 @@ Component-Calendar
 
 
 ## Documentation
-* **API** - <https://github.nhnent.com/pages/FE/Component-Calendar/>
-* **Sample** - <https://github.nhnent.com/pages/FE/Component-Calendar/sample/>
+* **API** - <https://github.nhnent.com/pages/fe/Component-Calendar/>
+* **Sample** - <https://github.nhnent.com/pages/fe/Component-Calendar/sample/>
 * **CI** - <http://fe.nhnent.com:8080/jenkins/job/Component-Calendar/>
 
 ## Download/Install
-* Bower: `bower install "git+http://3c672057a1ac16c4e6f1baaba73e24d5270ef453:x-oauth-basic@github.nhnent.com/FE/Component-Calendar.git#version"`
-* Download: <https://github.nhnent.com/FE/Component-Calendar/tree/dist>
+* Bower: `bower install "git+http://3c672057a1ac16c4e6f1baaba73e24d5270ef453:x-oauth-basic@github.nhnent.com/fe/Component-Calendar.git#version"`
+* Download: <https://github.nhnent.com/fe/Component-Calendar/tree/dist>
 
 ## History
 | Version | Description | Date | Developer |
