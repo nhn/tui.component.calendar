@@ -8,7 +8,8 @@
     <title>기본달력</title>
 </head>
 <body>
-<div id="layer" class="layer" style="display:block;"> <!-- 기준 엘리먼트 -->
+<input id="datePick" type="text" />
+<div id="layer" class="layer" style="display:none;"> <!-- 기준 엘리먼트 -->
     <div>
         <a href="#" class="rollover calendar-btn-prev-year">이전년</a> <!-- 이전년 버튼 (생략가능) -->
         <a href="#" class="rollover calendar-btn-prev-mon">이전달</a> <!-- 이전달 버튼 (생략가능) -->
@@ -39,19 +40,25 @@
     <div calss="calendar-bottom">
         <p>오늘 <em class="calendar-today"></em></p>
     </div>
+
 </div>
 <script>
     var cal = new ne.component.Calendar($('#layer'));
-    cal.on('draw', function(darwEvent){
-        if(darwEvent.date == 10){
-            darwEvent.$date.html('<b>' + darwEvent.html + '</b>');
-        }
-    });
+    picker = new ne.component.DatePicker({
+        dateForm: 'yyyy-mm-dd',
+        date: {
+            year: 1984,
+            month: 4,
+            date: 15
+        },
+        element: document.getElementById('datePick')
+    }, cal);
 </script>
 <h3 class="sourceopen">소스</h3>
 <div class="code-layer">
 <xmp>
 <!-- 마크업 예제 -->
+<input id="datePick" type="text" />
 <div id="layer" class="layer" style="display:block;"> <!-- 기준 엘리먼트 -->
     <div>
         <a href="#" class="rollover calendar-btn-prev-year">이전년</a> <!-- 이전년 버튼 (생략가능) -->
@@ -88,11 +95,15 @@
 
 // 실행
 var cal = new ne.component.Calendar($('#layer'));
-cal.on('draw', function(darwEvent){
-    if(darwEvent.date == 10){
-        darwEvent.$date.html('<b>' + darwEvent.html + '</b>');
-    }
-});
+picker = new ne.component.DatePicker({
+    dateForm: 'yyyy-mm-dd',
+    date: {
+        year: 1984,
+        month: 4,
+        date: 15
+    },
+    element: document.getElementById('datePick')
+}, cal);
 </xmp>
 </div>
 </body>
