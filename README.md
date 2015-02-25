@@ -15,7 +15,6 @@ Calendar
 
 ## Documentation
 * **API** - https://github.nhnent.com/pages/fe/component-calendar/
-* **Sample** - https://github.nhnent.com/pages/fe/component-calendar/sample/
 * **CI** - http://fe.nhnent.com:8080/jenkins/job/component-calendar/
 
 ## Download/Install
