@@ -21,9 +21,9 @@ Calendar
 ## Download/Install
 * Bower: `bower install "git+http://3c672057a1ac16c4e6f1baaba73e24d5270ef453:x-oauth-basic@github.nhnent.com/fe/component-calendar.git#version"`
 * Download: https://github.nhnent.com/fe/component-calendar
-  * Component.calendar.js : FE common code snippets이 포함된 소스
+  * Component.calendar.js : FE common code snippets이 포함소스
   * Component.calendar.min.js
-  * Component.calendar.core.js : FE common code snippets이 포함되지 않은 소스(별도의 FE common code snippets이 필요하다)
+  * Component.calendar.core.js : FE common code snippets 미포함 소스(별도의 FE common code snippets이 필요)
   * Component.calendar.core.min.js
 
 ## History
