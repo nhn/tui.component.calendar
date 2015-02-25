@@ -21,10 +21,10 @@ Calendar
 ## Download/Install
 * Bower: `bower install "git+http://3c672057a1ac16c4e6f1baaba73e24d5270ef453:x-oauth-basic@github.nhnent.com/fe/component-calendar.git#version"`
 * Download: https://github.nhnent.com/fe/component-calendar
- ** Component.calendar.js
- ** Component.calendar.min.js
- ** Component.calendar.core.js
- ** Component.calendar.core.min.js
+  * Component.calendar.js
+  * Component.calendar.min.js
+  * Component.calendar.core.js
+  * Component.calendar.core.min.js
 
 ## History
 | Version | Description | Date | Developer |
