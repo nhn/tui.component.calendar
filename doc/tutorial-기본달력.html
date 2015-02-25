@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Index</title>
+    <title>JSDoc: Tutorial: 기본달력</title>
     <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
     <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
@@ -22,284 +22,33 @@
 
     <div class="body">
         <div id="navigation" class="navigation"><h3>Samples</h3><ul class="list samples"><li class="item"><a href="tutorial-기본달력.html">기본달력</a></li><li class="item"><a href="tutorial-데이트피커.html">데이트피커</a></li></ul><h3>Modules</h3><ul><li class="item" id="ne.component.Calendar.module:Util"><span class="icon blue static">static</span><span class="title"><a href="ne.component.Calendar.module_Util.html">Util</a></span><ul class="sublist methods ne.component.Calendar.module:Util"><span class="subtitle">Methods</span><li><a href="ne.component.Calendar.module_Util.html#.getDateObject">getDateObject</a></li><li><a href="ne.component.Calendar.module_Util.html#.getFirstDay">getFirstDay</a></li><li><a href="ne.component.Calendar.module_Util.html#.getLastDate">getLastDate</a></li><li><a href="ne.component.Calendar.module_Util.html#.getLastDay">getLastDay</a></li><li><a href="ne.component.Calendar.module_Util.html#.getRelativeDate">getRelativeDate</a></li><li><a href="ne.component.Calendar.module_Util.html#.getTime">getTime</a></li><li><a href="ne.component.Calendar.module_Util.html#.getToday">getToday</a></li><li><a href="ne.component.Calendar.module_Util.html#.getWeeks">getWeeks</a></li><li><a href="ne.component.Calendar.module_Util.html#.setToday">setToday</a></li><li><a href="ne.component.Calendar.module_Util.html#~getDateHashTable">getDateHashTable</a></li></ul></li></ul><h3>Classes</h3><ul class="list classes"><li class="item" id="ne.component.Calendar"><span class="title"><span class="p-item">ne.component.</span><a href="ne.component.Calendar.html">Calendar</a></span><span class="icon blue static">static</span><ul class="sublist members ne.component.Calendar"></ul><ul class="sublist division ne.component.Calendar"><li></li></ul><ul class="sublist methods ne.component.Calendar"><span class="subtitle">Methods</span><li><a href="ne.component.Calendar.html#draw">draw</a></li><li><a href="ne.component.Calendar.html#getDate">getDate</a></li><li><a href="ne.component.Calendar.html#getElement">getElement</a></li><li><a href="ne.component.Calendar.html#setDate">setDate</a></li></ul></li><li class="item" id="ne.component.DatePicker"><span class="title"><span class="p-item">ne.component.</span><a href="ne.component.DatePicker.html">DatePicker</a></span><span class="icon blue static">static</span><ul class="sublist members ne.component.DatePicker"></ul><ul class="sublist division ne.component.DatePicker"><li></li></ul><ul class="sublist methods ne.component.DatePicker"><span class="subtitle">Methods</span><li><a href="ne.component.DatePicker.html#close">close</a></li><li><a href="ne.component.DatePicker.html#getDate">getDate</a></li><li><a href="ne.component.DatePicker.html#insertDate">insertDate</a></li><li><a href="ne.component.DatePicker.html#open">open</a></li><li><a href="ne.component.DatePicker.html#setDate">setDate</a></li><li><a href="ne.component.DatePicker.html#setForm">setForm</a></li></ul></li></ul></div>
-        <div id="main" class="main">
-
-
-
-    
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-    <section>
-        <article><div class="readme"><h1>Calendar</h1><p>캘린더 컴포넌트<br>
-년/월/일 데이터를 캘린터 형태의 UI로 보여주는 컴포넌트입니다.<br>
-데이트피커를 통해 캘린더에서 특정 날짜를 선택할 수 있습니다.</p>
-<h2>Feature</h2><ul>
-<li>특정 달의 년/월/일 데이터를 캘린더 형태의 UI로 제공</li>
-<li>이전 해, 다음 해, 이전 달, 다음 달로 이동을 지원</li>
-<li>캘린더 상의 특정 날짜 선택 가능</li>
-<li>직접 입력하여 특정 날짜 선택 가능 </li>
-<li>날짜 포맷(yyyy-mm-dd, yy-m-d)에 맞춰 날짜 출력 가능</li>
-<li>이동시 커스텀 이벤트를 지원</li>
-</ul>
-<h2>Documentation</h2><ul>
-<li><strong>API</strong> - <https://github.nhnent.com/pages/fe/component-calendar/></li>
-<li><strong>Sample</strong> - <https://github.nhnent.com/pages/fe/component-calendar/sample/></li>
-<li><strong>CI</strong> - <http://fe.nhnent.com:8080/jenkins/job/component-calendar/></li>
-</ul>
-<h2>Download/Install</h2><ul>
-<li>Bower: <code>bower install &quot;git+http://3c672057a1ac16c4e6f1baaba73e24d5270ef453:x-oauth-basic@github.nhnent.com/fe/component-calendar.git#version&quot;</code></li>
-<li>Download: <https://github.nhnent.com/fe/component-calendar/></li>
-</ul>
-<h2>History</h2><table>
-<thead>
-<tr>
-<th>Version</th>
-<th>Description</th>
-<th>Date</th>
-<th>Developer</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0.0.1</td>
-<td>최초개발</td>
-<td>2014.11</td>
-<td>FE 개발팀 이제인 <a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x6a;&#101;&#105;&#110;&#x2e;&#121;&#105;&#x40;&#110;&#104;&#x6e;&#101;&#110;&#x74;&#46;&#99;&#111;&#x6d;">&#x6a;&#101;&#105;&#110;&#x2e;&#121;&#105;&#x40;&#110;&#104;&#x6e;&#101;&#110;&#x74;&#46;&#99;&#111;&#x6d;</a></td>
-</tr>
-</tbody>
-</table></div></article>
-    </section>
-
-
-
-
-
-
-
-
-
-<section>
-
+        <div id="main" class="main"><section>
 <header>
     
-        <h2>
-        
-        calendar.js
-        
-        
-        </h2>
-        
-    
+
+    <h2>기본달력</h2>
 </header>
 
 <article>
-    
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>캘린더 컴포넌트
-(pug.Calendar 에서 분리)</p></div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>이제인(jein.yi@nhnent.com)</li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-        <dd class="tag-source"><ul class="dummy"><li>
-            <a href="calendar.js.html">calendar.js</a>, <a href="calendar.js.html#line10">line 10</a>
-        </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-        
-    
-    </div>
-    
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
+	
+    <iframe id="exampleFrame" width="500" height="700" frameborder="0" src=tutorials/기본달력.html onload="autoResize()"></iframe>
 </article>
+<script>
+function autoResize() {
+    var ef = document.getElementById('exampleFrame'),
+    doc;
 
-</section>
+    if(ef.contentDocument) {
+        doc = ef.contentDocument;
+    } else {
+        doc = ef.contentWindow.document;
+    }
+    ef.width = document.getElementById('main').clientWidth - 40;
+    ef.height = doc.body.clientHeight + 40;
+}
+</script>
 
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-        
-        datepicker.js
-        
-        
-        </h2>
-        
-    
-</header>
-
-<article>
-    
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>날짜를 선택하는 기능을 구현한다. 특정 범위를 받으면, 그 날짜만 선택 가능하다.</p></div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>FE개발팀(이제인 jein.yi@nhnent.com)</li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-        <dd class="tag-source"><ul class="dummy"><li>
-            <a href="datepicker.js.html">datepicker.js</a>, <a href="datepicker.js.html#line1">line 1</a>
-        </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-        
-    
-    </div>
-    
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-</div>
+</section></div>
         <div class="clearfix"></div>
     </div>
 
