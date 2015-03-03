@@ -32,7 +32,7 @@ body {font-size:12px; font-family:malgun gothic, verdana, consolas;}
 #layer table .calendar-sun a:visited,
 #layer table .calendar-sun a:hover,
 #layer table .calendar-sun a:active{color:#e82828 !important;}
-#layer table .calendar-today{background: #a0eab8;color:#ffffff;}
+#layer table .calendar-today{background: #bcea81;color:#ffffff;}
 #layer table .calendar-today a{font-weight:bold;text-decoration:none;color:#fff}
 #layer table .calendar-today a:hover,
 #layer table .calendar-today a:visited,
