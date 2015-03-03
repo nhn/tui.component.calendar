@@ -12,6 +12,12 @@ Calendar
 * 날짜 포맷(yyyy-mm-dd, yy-m-d)에 맞춰 날짜 출력 가능
 * 이동시 커스텀 이벤트를 지원
 
+## Sample Image
+* 일반 달력<br>
+![alt tag](https://github.nhnent.com/pages/fe/component-calendar/calendar.png)<br><br>
+* 데이트 피커<br>
+![alt tag](https://github.nhnent.com/pages/fe/component-calendar/picker.png)
+
 
 ## Documentation
 * **API** - https://github.nhnent.com/pages/fe/component-calendar/
