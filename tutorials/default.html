@@ -9,19 +9,19 @@
 </head>
 <body>
 <div id="layer" class="layer" style="display:block;"> <!-- 기준 엘리먼트 -->
-    <div>
-        <a href="#" class="rollover calendar-btn-prev-year">이전년</a> <!-- 이전년 버튼 (생략가능) -->
+    <div class="calendar-header">
+        <a href="#" class="rollover calendar-btn-prev-year">이전해</a> <!-- 이전년 버튼 (생략가능) -->
         <a href="#" class="rollover calendar-btn-prev-mon">이전달</a> <!-- 이전달 버튼 (생략가능) -->
         <strong class="calendar-title"></strong> <!-- 달력의 타이틀 (생략가능) -->
         <!--<strong class="calendar-title-year"></strong> &lt;!&ndash; 달력의 타이틀 (생략가능) &ndash;&gt;-->
         <!--<strong class="calendar-title-month"></strong> &lt;!&ndash; 달력의 타이틀 (생략가능) &ndash;&gt;-->
         <a href="#" class="rollover calendar-btn-next-mon">다음달</a> <!-- 다음달 버튼 (생략가능) -->
-        <a href="#" class="rollover calendar-btn-next-year">다음년</a> <!-- 다음년 버튼 (생략가능) -->
+        <a href="#" class="rollover calendar-btn-next-year">다음해</a> <!-- 다음년 버튼 (생략가능) -->
     </div>
     <table cellspacing="0" cellpadding="0">
         <thead>
         <tr>
-            <th class="sun">S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th class="sat">S</th>
+            <th class="sun">Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fa</th><th class="sat">Sa</th>
         </tr>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@
         </tr>
         </tbody>
     </table>
-    <div calss="calendar-bottom">
+    <div class="calendar-bottom">
         <p>오늘 <em class="calendar-today"></em></p>
     </div>
 </div>
