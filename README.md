@@ -9,8 +9,8 @@ Calendar
 * 이전 해, 다음 해, 이전 달, 다음 달로 이동을 지원
 * 캘린더 상의 특정 날짜 선택 가능
 * 직접 입력하여 특정 날짜 선택 가능 
-* 날짜 포맷(yyyy-mm-dd, yy-m-d)에 맞춰 날짜 출력 가능
-* 이동시 커스텀 이벤트를 지원
+* 날짜 포맷(yyyy-mm-dd, yy-m-d 등등)에 맞춰 날짜 출력 가능
+* 년, 월 이동시 커스텀 이벤트를 지원
 
 ## Sample Image
 * 일반 달력<br>
@@ -21,8 +21,8 @@ Calendar
 
 ## Documentation
 * **API** - https://github.nhnent.com/pages/fe/component-calendar/
-* **CI** - http://fe.nhnent.com:8080/jenkins/job/component-calendar/
 * **Samples** - https://github.nhnent.com/pages/fe/component-calendar/tutorial-default.html
+* **CI** - http://fe.nhnent.com:8080/jenkins/job/component-calendar/
 
 ## Download/Install
 * Bower: `bower install "git+http://3c672057a1ac16c4e6f1baaba73e24d5270ef453:x-oauth-basic@github.nhnent.com/fe/component-calendar.git#version"`
