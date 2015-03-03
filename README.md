@@ -21,8 +21,8 @@ Calendar
 
 ## Documentation
 * **API** - https://github.nhnent.com/pages/fe/component-calendar/
-* **CI** - http://fe.nhnent.com:8080/jenkins/job/component-calendar/
 * **Samples** - https://github.nhnent.com/pages/fe/component-calendar/tutorial-default.html
+* **CI** - http://fe.nhnent.com:8080/jenkins/job/component-calendar/
 
 ## Download/Install
 * Bower: `bower install "git+http://3c672057a1ac16c4e6f1baaba73e24d5270ef453:x-oauth-basic@github.nhnent.com/fe/component-calendar.git#version"`
