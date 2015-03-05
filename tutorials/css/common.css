@@ -1,4 +1,4 @@
-body {font-size:12px; font-family:malgun gothic, verdana, consolas;}
+body {font-size:12px; font-family:malgun gothic, verdana, consolas;min-width:1000px;}
 .layer { display:none; }
 .layer-show { display:block; }
 #layer {position:relative; width:230px;background:#ffffff;border:1px solid #eaeaea;padding-bottom:0;}
