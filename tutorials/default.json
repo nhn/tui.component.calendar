@@ -1,0 +1,8 @@
+{
+  "default": {
+    "title": "기본달력"
+  },
+  "datepicker": {
+    "title": "데이트피커"
+  }
+}
