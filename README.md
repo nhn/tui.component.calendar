@@ -20,8 +20,8 @@ Calendar
 
 
 ## Documentation
-* **API** - https://github.nhnent.com/pages/fe/component-calendar/
-* **Samples** - https://github.nhnent.com/pages/fe/component-calendar/tutorial-default.html
+* **API** - https://github.nhnent.com/pages/fe/component-calendar/1.0.0/
+* **Samples** - https://github.nhnent.com/pages/fe/component-calendar/1.0.0/tutorial-default.html
 * **CI** - http://fe.nhnent.com:8080/jenkins/job/component-calendar/
 
 ## Dependency
