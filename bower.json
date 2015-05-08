@@ -5,6 +5,7 @@
         "FE개발팀 이제인<jein.yi@nhnent.com>"
     ],
     "license": "MIT",
+    "main": "calendar.js",
     "ignore": [
         "**/.*",
         ".*",
