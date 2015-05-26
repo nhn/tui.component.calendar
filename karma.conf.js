@@ -35,10 +35,9 @@ module.exports = function(config) {
          ]
          */
         files: [
-            'bower_components/jquery/jquery.js',
+            'bower_components/jquery/dist/jquery.min.js',
             'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
             'src/common/*.js',
-            'src/js/datepicker.js',
             'src/js/calendar.js',
             'src/js/calendarUtil.js',
             'test/*.js',
