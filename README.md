@@ -43,7 +43,7 @@ Calendar
 
 ## History
 | Version | Description | Date | Developer |
-| ---- | ---- | ---- | ---- |
+| 1.0.1 | 데이트 피커 분리(제외) | 2015.05 | FE 개발팀 이민규 <minkyu.yi@nhnent.com> |
 | <a href="https://github.nhnent.com/pages/fe/component-calendar/1.0.0/">1.0.0</a> | 배포 | 2015.03 | FE 개발팀 이제인 <jein.yi@nhnent.com> |
 | 0.1.0 | 최초개발 | 2014.11 | FE 개발팀 이제인 <jein.yi@nhnent.com> |
 
