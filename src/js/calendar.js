@@ -10,8 +10,9 @@ if (!ne.component) {
 /**
  * @fileoverview 캘린더 컴포넌트
  * (pug.Calendar 에서 분리)
+ * @author NHN ENTERTAINMENT FE 개발팀(e0242@nhnent.com)
  * @author 이제인(jein.yi@nhnent.com)
- * @dependency jquery.1.11.1.js, common.js
+ * @dependency jquery.1.8.3.js, code-snippet.js
  */
 
 

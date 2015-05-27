@@ -23,8 +23,8 @@ Calendar
 * **CI** - http://fe.nhnent.com:8080/jenkins/job/component-calendar/
 
 ## Dependency
-* code-snippet : https://github.nhnent.com/fe/share-code-snippet
-* jquery1.11.1 이상
+* [code-snippet](https://github.nhnent.com/fe/share-code-snippet) 1.0.0 이상
+* jquery 1.8.3 이상
 
 ## Test environment
 * browser : 

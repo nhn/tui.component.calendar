@@ -28,5 +28,5 @@
     "scripts": {
          "doc": "./node_modules/.bin/jsdoc -c conf.json"
     },
-    "author": "FE"
+    "author": "NHN ENTERTAINMENT - FE 개발팀"
 }
