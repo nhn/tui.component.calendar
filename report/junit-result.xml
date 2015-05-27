@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<testsuites>
+  <testsuite name="PhantomJS 1.9.8 (Mac OS X)" package="" timestamp="2015-05-27T00:57:41" id="0" hostname="Mac-mini.local" tests="9" errors="0" failures="0" time="0.028">
+    <properties>
+      <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.8 Safari/534.34"/>
+    </properties>
+    <testcase name="캘린더가 생성 되었는지 확인" time="0.015" classname="PhantomJS 1.9.8 (Mac OS X).캘린더를 생성하고 기능을 테스트_"/>
+    <testcase name="옵션 확인" time="0.003" classname="PhantomJS 1.9.8 (Mac OS X).캘린더를 생성하고 기능을 테스트_"/>
+    <testcase name="_setCalendarTitle 달력 타이틀 포맷" time="0.002" classname="PhantomJS 1.9.8 (Mac OS X).캘린더를 생성하고 기능을 테스트_"/>
+    <testcase name="custom Event 이벤트를 붙이고, draw를 통해 호출되는지 확인" time="0.007" classname="PhantomJS 1.9.8 (Mac OS X).캘린더를 생성하고 기능을 테스트_"/>
+    <testcase name="날짜해시가 제대로 생성되었는지 확인" time="0" classname="PhantomJS 1.9.8 (Mac OS X).정적 함수들 테스트  ne_component_Calendar_Util_"/>
+    <testcase name="getToday, 설정된 today값이 없으면 오늘날짜 리턴한다, " time="0" classname="PhantomJS 1.9.8 (Mac OS X).정적 함수들 테스트  ne_component_Calendar_Util_"/>
+    <testcase name="setToday로 날짜 설정 후, 제대로 동작했는지 테스트 한다." time="0.001" classname="PhantomJS 1.9.8 (Mac OS X).정적 함수들 테스트  ne_component_Calendar_Util_"/>
+    <testcase name="getTime, getDataObject" time="0" classname="PhantomJS 1.9.8 (Mac OS X).정적 함수들 테스트  ne_component_Calendar_Util_"/>
+    <testcase name="getRelativeDate" time="0" classname="PhantomJS 1.9.8 (Mac OS X).정적 함수들 테스트  ne_component_Calendar_Util_"/>
+    <system-out><![CDATA[
+]]></system-out>
+    <system-err/>
+  </testsuite>
+</testsuites>

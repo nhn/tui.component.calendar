@@ -1,0 +1,1962 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/calendar.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../prettify.css">
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">js/calendar.js</span></h1>
+    <h2>
+        Statements: <span class="metric">96.77% <small>(150 / 155)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">81.82% <small>(54 / 66)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">91.3% <small>(21 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">96.77% <small>(150 / 155)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric">1 statement, 1 branch</span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">js/</a> &#187; calendar.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-yes">243</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">215</span>
+<span class="cline-any cline-yes">215</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">215</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">273</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-yes">234</span>
+<span class="cline-any cline-yes">39</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">26</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24</span>
+<span class="cline-any cline-yes">24</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">31</span>
+<span class="cline-any cline-yes">60</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">31</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"> /* istanbul ignore if */
+<span class="skip-if-branch" title="if path not taken" >I</span>if (!ne) {
+<span class="cstat-skip" title="statement not covered" >    window.ne = ne = {};</span>
+}
+/* istanbul ignore if */
+<span class="missing-if-branch" title="else path not taken" >E</span>if (!ne.component) {
+    ne.component = {};
+}
+&nbsp;
+/**
+ * @fileoverview 캘린더 컴포넌트
+ * (pug.Calendar 에서 분리)
+ * @author 이제인(jein.yi@nhnent.com)
+ * @dependency jquery.1.11.1.js, common.js
+ */
+&nbsp;
+&nbsp;
+/**
+ * 캘린더 컴포넌트 클래스
+ *
+ @constructor
+ @param {Object} [options] 초기화 옵션 설정을 위한 객체.
+ @param {String} [options.classPrefix="calendar-"] 초기 HTML/CSS구조에서 필요한 className 앞에 붙는 prefix를 정의
+ @param {Number} [options.year=현재년] 초기에 표시될 달력의 연도
+ @param {Number} [options.month=현재월] 초기에 표시될 달력의 달
+ @param {Number} [options.date=현재일] 초기에 표시될 달력의 일
+ @param {String} [options.titleFormat="yyyy-mm"] className이 '[prefix]title' 인 엘리먼트를 찾아서 해당 형식대로 날짜를 출력한다. 다음의 형식을 사용할 수 있다.
+ &lt;table&gt;
+ &lt;tbody&gt;&lt;tr&gt;
+ &lt;th&gt;표시형식&lt;/th&gt;
+ &lt;th&gt;설명&lt;/th&gt;
+ &lt;th&gt;결과&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;yyyy&lt;/td&gt;
+ &lt;td&gt;4자리 연도&lt;/td&gt;
+ &lt;td&gt;2010&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;yy&lt;/td&gt;
+ &lt;td&gt;2자리 연도&lt;/td&gt;
+ &lt;td&gt;10&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;mm&lt;/td&gt;
+ &lt;td&gt;2자리 월&lt;/td&gt;
+ &lt;td&gt;09&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;m&lt;/td&gt;
+ &lt;td&gt;1자리 월&lt;/td&gt;
+ &lt;td&gt;9&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;M&lt;/td&gt;
+ &lt;td&gt;monthTitles 옵션 값으로 표시&lt;/td&gt;
+ &lt;td&gt;SEP&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;&lt;/table&gt;
+ @param {String} [options.todayFormat="yyyy년 mm월 dd일 (D)"] className이 '[prefix]today' 인 엘리먼트를 찾아서 해당 형식대로 날짜를 출력한다.
+ @param {String} [options.yearTitleFormat="yyyy"] className이 '[prefix]year' 인 엘리먼트를 찾아서 해당 형식대로 연도를 출력한다. option의 titleFormat에서 사용할 수 있는 형식에서 연도 표시 형식을 사용할 수 있다.
+ @param {String} [options.monthTitleFormat="m"] className이 '[prefix]month' 인 엘리먼트를 찾아서 해당 형식대로 월을 출력한다. option의 titleFormat에서 사용할 수 있는 형식에서 월 표시 형식을 사용할 수 있다.
+ @param {Array} [options.monthTitles=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]] 각 월의 이름을 설정할 수 있다. 1월부터 순서대로 배열로 정의한다. option의 titleFormat 표시형식에서 M을 사용하면 여기서 설정된 이름으로 표시할 수 있다.
+ @param {Array} [options.dayTitles=["일","월","화","수","목","금","토"]] 각 요일의 이름을 설정할 수 있다. 일요일부터 순서대로 배열로 정의한다. option의 todayFormat 표시형식에서 D을 사용하면 여기서 설정된 이름으로 표시할 수 있다.
+ @param {Boolean} [options.isDrawOnload=true] 달력을 로딩과 동시에 바로 표시할 것인지 여부
+ @param {jQueryObject} $element 달력 출력을 위한 기준 엘리먼트 (jQuery객체 랩핑된 엘리먼트)
+ @example
+ var calendar = new ne.component.Calendar({
+				sClassPrefix : "calendar-",
+				nYear : 1983,
+				nMonth : 5,
+				nDate : 12,
+				sTitleFormat : "yyyy-mm", //설정될 title의 형식
+				sYearTitleFormat : "yyyy", //설정될 연 title의 형식
+				sMonthTitleFormat : "m", //설정될 월 title의 형식
+				monthTitle : ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], //월의 이름을 설정 "title" 세팅시 적용
+				bDrawOnload : true //로딩과 동시에 바로 그릴것인지 여부
+			});
+ **/
+ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.prototype */{
+    init: function(option, element) {
+        /**
+         * 옵션을 저장한다
+         * @member
+         * @private
+         */
+        this._option = option;
+        /**
+         * 루트 엘리먼트를 저장한다
+         * @member
+         * @private
+         */
+        this._element = element;
+        /**
+         * 커스텀이벤트를 저장한다.
+         * @member
+         * @private
+         */
+        this._events = {};
+&nbsp;
+        // 기본값 세팅
+        var defaultOption = {
+            classPrefix: 'calendar-',
+            titleFormat: 'yyyy-mm',
+            todayFormat: 'yyyy년 mm월 dd일 (D)',
+            yearTitleFormat: 'yyyy',
+            monthTitleFormat: 'm',
+            monthTitles: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+            dayTitles: ['일', '월', '화', '수', '목', '금', '토'],
+            isDrawOnload: true,
+            pickerClass: 'picker-selectable'
+        };
+&nbsp;
+        // 갱신
+        if (arguments.length &gt; 1) {
+            this._option = ne.util.extend(defaultOption, option);
+            this._element = element;
+        } else {
+            this._option = defaultOption;
+            this._element = option;
+        }
+        option = this._option;
+&nbsp;
+        var year = option.year,
+            month = option.month,
+            date = option.date,
+            today = this._setToday(year, month, date);
+&nbsp;
+        // 오늘 날짜의 년, 월, 일이 옵션에 존재하지 않으면 복사해 넣는다.
+        ne.util.forEach(today, function(grade, key) {
+            option[key] = grade;
+        });
+&nbsp;
+        this._assignHTMLElements();
+        this._attachEvent();
+        this.setDate(option.year, option.month, option.date);
+&nbsp;
+        if (option.isDrawOnload) {
+            this.draw();
+        }
+    },
+    /**
+     * 오늘날짜를 세팅한다.
+     * @param {String} year 연도
+     * @param {String} month 월
+     * @param {String} date 날짜
+     * @return {Object}
+     * @private
+     */
+    _setToday: function(year, month, date) {
+        var today;
+        // 기본 데이터가 없으면 오늘 날짜를 세팅한다.
+        if (year &amp;&amp; month &amp;&amp; date) {
+            this.setDate(year, month, date);
+        } else {
+            today = ne.component.Calendar.Util.getToday();
+            this.setDate(today.year, today.month, today.date);
+        }
+        return today;
+    },
+    /**
+     * 엘리먼트를 필드에 할당한다.
+     *
+     * @private
+     */
+    _assignHTMLElements: function() {
+&nbsp;
+        var classPrefix = this._option.classPrefix,
+            $element = this._element,
+            $weekTemplate;
+&nbsp;
+        this.$btnPrevYear = $('.' + classPrefix + 'btn-prev-year', $element);
+        this.$btnPrevMonth = $('.' + classPrefix + 'btn-prev-mon', $element);
+        this.$btnNextMonth = $('.' + classPrefix + 'btn-next-mon', $element);
+        this.$btnNextYear = $('.' + classPrefix + 'btn-next-year', $element);
+        this.$today = $('.' + classPrefix + 'today', $element);
+&nbsp;
+        this.$title = $('.' + classPrefix + 'title', $element);
+        this.$titleYear = $('.' + classPrefix + 'title-year', $element);
+        this.$titleMonth = $('.' + classPrefix + 'title-month', $element);
+&nbsp;
+        $weekTemplate = $('.' + classPrefix + 'week', $element);
+        this.$weekTemplate = $weekTemplate.clone(true);
+        this.$weekAppendTarget = $weekTemplate.parent();
+&nbsp;
+    },
+    /**
+     * 달력, 전년 전달 다음달 다음년도로 이동하는 이벤트를 건다.
+     *
+     * @private
+     */
+    _attachEvent: function() {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (ne.util.isNotEmpty(this.$btnPrevYear)) {
+            this.$btnPrevYear.click($.proxy(this._onButtonHandle, this, -1, 0));
+        }
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (ne.util.isNotEmpty(this.$btnPrevMonth)) {
+            this.$btnPrevMonth.click($.proxy(this._onButtonHandle, this, 0, -1));
+        }
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (ne.util.isNotEmpty(this.$btnNextMonth)) {
+            this.$btnNextMonth.click($.proxy(this._onButtonHandle, this, 0, 1));
+        }
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (ne.util.isNotEmpty(this.$btnNextYear)) {
+            this.$btnNextYear.click($.proxy(this._onButtonHandle, this, 1, 0));
+        }
+    },
+    /**
+     * 달력 버튼을 누를때의 핸들러
+     *
+     * @param {Number} yearDist 연도 이동 값
+     * @param {Number} monthDist 월 이동 값
+     * @param {Event} event 클릭 이벤트 객체
+     * @private
+     */
+    _onButtonHandle: <span class="fstat-no" title="function not covered" >function(yearDist, monthDist, event) {</span>
+<span class="cstat-no" title="statement not covered" >        event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >        this.draw(yearDist, monthDist, true);</span>
+    },
+    /**
+     * Calendar를 그린다.
+     *
+     * @param {Number} year 연도 값 (ex. 2008)
+     * @param {Number} month 월 값 (1 ~ 12)
+     * @param {Boolean} [isRelative] 연도와 월 값이 상대 값인지 여부
+     * @example
+     * calendar.draw(); //현재 설정된 날짜의 달력을 그린다.
+     * calendar.draw(2008, 12); //2008년 12월 달력을 그린다.
+     * calendar.draw(null, 12); //현재 표시된 달력의 12월을 그린다.
+     * calendar.draw(2010, null); //2010년 현재 표시된 달력의 월을 그린다.
+     * calendar.draw(0, 1, true); //현재 표시된 달력의 다음 달을 그린다.
+     * calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그린다.
+     **/
+    draw: function(year, month, isRelative) {
+&nbsp;
+        var classPrefix = this._option.classPrefix,
+            date = this.getDate(),
+            shownDate = this._getShownDate(),
+            util = ne.component.Calendar.Util;
+        if (shownDate &amp;&amp; ne.util.isExisty(isRelative) &amp;&amp; isRelative) {
+            var relativeDate = util.getRelativeDate(year, month, 0, shownDate);
+            year = relativeDate.year;
+            month = relativeDate.month;
+        } else if (!ne.util.isExisty(year) &amp;&amp; !ne.util.isExisty(month) &amp;&amp; !ne.util.isExisty(isRelative)) {
+            year = date.year;
+            month = date.month;
+        } else {
+            year = year || shownDate.year;
+            month = month || <span class="branch-1 cbranch-no" title="branch not covered" >shownDate.month;</span>
+        }
+&nbsp;
+        /**
+         달력을 그리기 전에 발생하는 커스텀 이벤트
+&nbsp;
+         @param {String} type 커스텀 이벤트명
+         @param {Number} year 그려질 달력의 연도
+         @param {Number} month 그려질 달력의 월
+         @param {Function} stop 레이어 보여주는 것을 중단하는 메서드
+         @example
+         // beforeDraw 커스텀 이벤트 핸들링
+         calendar.on('beforeDraw', function(drawEvent){ ... });
+&nbsp;
+         // 달력이 보여지지 않도록 처리
+         calendar.on('beforeShow', function(drawEvent){
+					drawEvent.stop();
+				});
+         **/
+&nbsp;
+        var isComplete = this.invoke('beforeDraw', { year: year, month: month }),
+            hasTodayElement = this.$today.length &gt; 0;
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!isComplete) {
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+        this._setCalendarToday(hasTodayElement);
+        this._setCalendarTitle(year, month);
+&nbsp;
+        this._clear(util.getWeeks(year, month));
+        this._setShownDate(year, month);
+&nbsp;
+        var today = this.getDate(),
+            firstDay = util.getFirstDay(year, month),
+            day = 0,
+            datePrevMonth = util.getRelativeDate(0, -1, 0, {year: year, month: month, date: 1}),
+            dateNextMonth = util.getRelativeDate(0, 1, 0, {year: year, month: month, date: 1}),
+            dates = [],
+            isPrevMonth,
+            isNextMonth,
+            $dateContainer,
+            tempYear,
+            tempMonth,
+            param,
+            indexOfLastDate;
+&nbsp;
+        // weeks 분리
+&nbsp;
+        this._setWeeks(year, month);
+&nbsp;
+        this._$dateElement = $('.' + classPrefix + 'date', this.$weekAppendTarget);
+        this._$dateContainerElement = $('.' + classPrefix + 'week &gt; *', this.$weekAppendTarget);
+&nbsp;
+        // 데이터를 채우고 마지막날 데이터의 인덱스를 받아온다.
+        indexOfLastDate = this._fillDates(year, month, dates);
+&nbsp;
+        // 채워진 데이터를 그린다
+        ne.util.forEach(dates, function(date, i) {
+            isPrevMonth = false;
+            isNextMonth = false;
+            $dateContainer = $(this._$dateContainerElement[i]);
+            tempYear = year;
+            tempMonth = month;
+&nbsp;
+            if (i &lt; firstDay) {
+                isPrevMonth = true;
+                $dateContainer.addClass(classPrefix + 'prev-mon');
+                tempYear = datePrevMonth.year;
+                tempMonth = datePrevMonth.month;
+            } else if (i &gt; indexOfLastDate) {
+                isNextMonth = true;
+                $dateContainer.addClass(classPrefix + 'next-mon');
+                tempYear = dateNextMonth.year;
+                tempMonth = dateNextMonth.month;
+            } else {
+                tempYear = year;
+                tempMonth = month;
+            }
+&nbsp;
+            // 주말 표시
+            this._setWeekend(day, $dateContainer, classPrefix);
+&nbsp;
+            // 오늘 날짜 표시
+            if ((tempYear === today.year) &amp;&amp; (parseInt(tempMonth) === today.month) &amp;&amp; (date === today.date)) {
+                $dateContainer.addClass(classPrefix + 'today');
+            }
+&nbsp;
+            param = {
+                $date: $(this._$dateElement.get(i)),
+                $dateContainer: $dateContainer,
+                year: tempYear,
+                month: tempMonth,
+                date: date,
+                isPrevMonth: isPrevMonth,
+                isNextMonth: isNextMonth,
+                html: date
+            };
+&nbsp;
+            $(param.$date).html(param.html.toString());
+&nbsp;
+            this._metaDatas.push({
+                year: tempYear,
+                month: tempMonth,
+                date: date
+            });
+&nbsp;
+            day = (day + 1) % 7;
+&nbsp;
+            /**
+             달력을 그리면서 일이 표시될 때마다 발생
+&nbsp;
+             @param {String} type 커스텀 이벤트명
+             @param {Boolean} isPrevMonth 그려질 날이 이전달의 날인지 여부
+             @param {Boolean} isNextMonth 그려질 날이 다음달의 날인지 여부
+             @param {jQueryObject} $date 날이 쓰여질 대상 엘리먼트
+             @param {jQueryObject} $dateContainer className이 [prefix]week로 설정된 엘리먼트의 자식 엘리먼트, elDate와 같을 수 있음
+             @param {Number} date 그려질 날의 일
+             @param {Number} month 그려질 날의 월
+             @param {Number} year 그려질 날의 연
+             @param {String} html 대상 엘리먼트에 쓰여질 HTML
+             @example
+             // draw 커스텀 이벤트 핸들링
+             calendar.on('draw', function(drawEvent){ ... });
+&nbsp;
+             // 10일에만 진하게 표시하기 예제
+             calendar.on('draw', function(darwEvent){
+                        if(darwEvent.date == 10){
+                            darwEvent.$date.html('&lt;b&gt;' + oCustomEvent.sHTML + '&lt;/b&gt;');
+                        }
+                    });
+             **/
+            this.fire('draw', param);
+        }, this);
+        /**
+         달력을 모두 그린 후에 발생
+&nbsp;
+         @param {String} sType 커스텀 이벤트명
+         @param {Number} nYear 그려진 달력의 연도
+         @param {Number} nMonth 그려진 달력의 월
+         @example
+         // afterDraw 커스텀 이벤트 핸들링
+         calendar.on('afterDraw', function(oCustomEvent){ ... });
+         **/
+        this.fire('afterDraw', { year: year, month: month });
+    },
+    /**
+     * 한주 템플릿을 만든다.
+     * @param {Number} year 해당 연도
+     * @param {Number} month 해당 월
+     * @private
+     */
+    _setWeeks: function(year, month) {
+        var $elWeek,
+            weeks = ne.component.Calendar.Util.getWeeks(year, month),
+            i;
+        for (i = 0; i &lt; weeks; i++) {
+            $elWeek = this.$weekTemplate.clone(true);
+            $elWeek.appendTo(this.$weekAppendTarget);
+            this._weekElements.push($elWeek);
+        }
+    },
+    /**
+     * 그려질 데이터들
+     *
+     * @param {String} year 그려질 연도
+     * @param {String} month 그려질 달
+     * @param {Array} dates 그려질 날짜 데이터
+     * @private
+     */
+    _fillDates: function(year, month, dates) {
+&nbsp;
+        var util = ne.component.Calendar.Util,
+            firstDay = util.getFirstDay(year, month),
+            lastDay = util.getLastDay(year, month),
+            lastDate = util.getLastDate(year, month),
+            datePrevMonth = util.getRelativeDate(0, -1, 0, {year: year, month: month, date: 1}),
+            prevMonthLastDate = util.getLastDate(datePrevMonth.year, datePrevMonth.month),
+            indexOfLastDate,
+            i;
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (firstDay &gt; 0) {
+            for (i = prevMonthLastDate - firstDay; i &lt; prevMonthLastDate; i++) {
+                dates.push(i + 1);
+            }
+        }
+        for (i = 1; i &lt; lastDate + 1; i++) {
+            dates.push(i);
+        }
+&nbsp;
+        indexOfLastDate = dates.length - 1;
+&nbsp;
+        for (i = 1; i &lt; 7 - lastDay; i++) {
+            dates.push(i);
+        }
+&nbsp;
+        return indexOfLastDate;
+    },
+    /**
+     * 주말설정
+     *
+     * @param {Number} day 날짜
+     * @param {Object} dateContainer 날짜컨테이너 제이쿼리 엘리먼트 오브젝트
+     * @param {String} classPrefix 클래스 프리픽스
+     * @private
+     */
+    _setWeekend: function(day, dateContainer, classPrefix) {
+        if (day === 0) {
+            dateContainer.addClass(classPrefix + 'sun');
+        } else if (day === 6) {
+            dateContainer.addClass(classPrefix + 'sat');
+        }
+    },
+    /**
+     * 날짜데이터를 돌려준다
+     *
+     * @returns {Object}
+     */
+    getDate: function() {
+        return this._date;
+    },
+    /**
+     * 현재 달력의 날짜를 설정한다.
+     *
+     * @param {Number} year 연도 값 (ex. 2008)
+     * @param {Number} month 월 값 (1 ~ 12)
+     * @param {Number} date 일 값 (1 ~ 31)
+     **/
+    setDate: function(year, month, date) {
+        this._date = {
+            year: year,
+            month: month,
+            date: date
+        };
+    },
+    /**
+     * 현재 달력에 표시된 날짜를 설정한다.
+     *
+     * @param {Number} year 연도
+     * @param {Number} month 원
+     * @param {Number} date 일
+     * @private
+     */
+    _setShownDate: function(year, month) {
+        this._shownDate = {
+            year: year,
+            month: month,
+            date: 1
+        };
+    },
+    /**
+     * 현재 달력에 표시된 날짜를 가져온다.
+     *
+     * @private
+     * @returns {Object}
+     */
+    _getShownDate: function() {
+        return this._shownDate || this.getDate();
+    },
+    /**
+     * 달력을 지운다
+     *
+     * @private
+     */
+    _clear: function() {
+        this._metaDatas = [];
+        this._weekElements = [];
+        this.$weekAppendTarget.empty();
+    },
+    /**
+     * 현재 달력의 타이틀 영역을 옵션의 타이틀 포멧에 맞게 그린다.
+     *
+     * @private
+     * @param {Number} year 연도 값 (ex. 2008)
+     * @param {(Number|String)} month 월 값 (1 ~ 12)
+     **/
+    _setCalendarTitle: function(year, month) {
+        if (month &lt; 10) {
+            month = '0' + Number(month);
+        }
+&nbsp;
+        var option = this._option,
+            $title,
+            titleFormat = option.titleFormat,
+            replaceMap = this._getReplaceMap(year, month),
+            reg;
+&nbsp;
+        $title = this.$title;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (ne.util.isNotEmpty($title)) {
+            reg = /yyyy|yy|mm|m|M/g;
+            this._setTitleText($title, titleFormat, replaceMap, reg);
+        }
+&nbsp;
+        $title = this.$titleYear;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (ne.util.isNotEmpty($title)) {
+            reg = /yyyy|yy/g;
+            this._setTitleText($title, option.yearTitleFormat, replaceMap, reg);
+        }
+&nbsp;
+        $title = this.$titleMonth;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (ne.util.isNotEmpty($title)) {
+            reg = /mm|m|M/g;
+            this._setTitleText($title, option.monthTitleFormat, replaceMap, reg);
+        }
+&nbsp;
+&nbsp;
+    },
+    /**
+     * 캘린더의 타이틀을 갱신한다.
+     *
+     * @param {JQueryObject} $element 갱신될 엘리먼트
+     * @param {String} form 변경될 날짜 형식
+     * @param {Object} map 정규식에 맞춰서 매칭되는 값을 가진 객체
+     * @param {RegExp} reg 변경할 폼을 치환할 정규식
+     * @private
+     */
+    _setTitleText: function($element, form, map, reg) {
+        var title = this._getConvertedTitle(form, map, reg);
+        $element.text(title);
+    },
+    /**
+     * 폼 변환할 날짜의 맵을 구한다.
+     * @param {String} year 연도
+     * @param {String} month 월
+     * @param {String} [date] 일
+     * @returns {Object}
+     * @private
+     */
+    _getReplaceMap: function(year, month, date) {
+&nbsp;
+        var option = this._option,
+            yearSub = (year.toString()).substr(2, 2),
+            monthLabel = option.monthTitles[month - 1],
+            labelkey = new Date(year, month - 1, date || 1).getDay(),
+            dayLabel = option.dayTitles[labelkey];
+&nbsp;
+        return {
+            yyyy: year,
+            yy: yearSub,
+            mm: month,
+            m: Number(month),
+            M: monthLabel,
+            dd: date,
+            d: Number(date),
+            D: dayLabel
+        };
+    },
+    /**
+     * 텍스트를 변환하여 돌려준다.
+     * @param {String} str 변환할 텍스트
+     * @param {Object} map 변환키와 벨류 셋
+     * @param {RegExp} reg 변환할 정규식
+     * @returns {String} 변환된 문자열
+     * @private
+     */
+    _getConvertedTitle: function(str, map, reg) {
+        str = str.replace(reg, function(matchedString) {
+            return map[matchedString];
+        });
+        return str;
+    },
+    /**
+     * 오늘날짜 앨리먼트 여부에 따라 오늘날짜를 그리는 데이터를 만들어 그린다.
+     *
+     * @param {Boolean} isExistTodayElement 오늘날짜 표시 엘레먼트 존재여부
+     * @private
+     */
+    _setCalendarToday: function(isExistTodayElement) {
+&nbsp;
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!isExistTodayElement) {
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+        var $today = this.$today,
+            todayFormat = this._option.todayFormat,
+            title,
+            today = this.getDate(),
+            replaceMap = this._getReplaceMap(today.year, today.month, today.date);
+&nbsp;
+        title = this._getConvertedTitle(todayFormat, replaceMap, /yyyy|y|mm|m|M|dd|d|D/g);
+        $today.text(title);
+    },
+    /**
+     * 루트 엘리먼트를 돌려준다.
+     */
+    getElement: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >        return this._element;</span>
+    }
+});
+&nbsp;
+ne.util.CustomEvents.mixin(ne.component.Calendar);
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed May 27 2015 09:57:41 GMT+0900 (KST)</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
