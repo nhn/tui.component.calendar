@@ -1,32 +1,73 @@
 {
-    "name": "Component-Calendar",
-    "version": "1.0.0",
-    "description": "캘린더 컴포넌트",
-    "private": true,
-    "devDependencies": {
-        "fedoc-template": "git+http://14bfd38a036366f7ca90355d202038126127bd01:x-oauth-basic@github.nhnent.com/fe/Share-FEDocTemplate.git",
-        "grunt": "^0.4.5",
-        "grunt-contrib-concat": "^0.5.0",
-        "grunt-contrib-copy": "^0.6.0",
-        "grunt-contrib-cssmin": "^0.10.0",
-        "grunt-contrib-requirejs": "^0.4.4",
-        "grunt-contrib-uglify": "^0.6.0",
-        "grunt-contrib-watch": "^0.6.1",
-        "grunt-template": "^0.2.3",
-        "grunt-zip": "^0.16.0",
-        "jasmine-jquery": "^2.0.5",
-        "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git",
-        "karma": "^0.12.33",
-        "karma-coverage": "^0.2.6",
-        "karma-jasmine": "~0.2.0",
-        "karma-junit-reporter": "^0.2.2",
-        "karma-phantomjs-launcher": "^0.1.4",
-        "karma-requirejs": "^0.2.2",
-        "karma-webdriver-launcher": "git+https://github.com/everedifice/karma-webdriver-launcher.git",
-        "requirejs": "^2.1.14"
+  "name": "component-calendar",
+  "version": "1.0.0",
+  "description": "캘린더 컴포넌트<br>년/월/일 데이터를 캘린터 형태의 UI로 보여주는 컴포넌트입니다.<br>",
+  "featureList": [
+    "특정 달의 년/월/일 데이터를 캘린더 형태의 UI로 제공",
+    "이전 해, 다음 해, 이전 달, 다음 달로 이동을 지원",
+    "캘린더 상의 특정 날짜 선택 가능",
+    "직접 입력하여 특정 날짜 선택 가능",
+    "날짜 포맷(yyyy-mm-dd, yy-m-d 등등)에 맞춰 날짜 출력 가능",
+    "년, 월 이동시 커스텀 이벤트를 지원"
+  ],
+  "tutorial": "캘린더",
+  "samplePage": "sample1.html",
+  "test": {
+    "PC": [
+      "IE7~11",
+      "Chrome",
+      "Firefox"
+    ]
+  },
+  "dependency": [
+    "jquery#~1.8.3",
+    "ne-code-snippet#~1.0.2"
+  ],
+  "private": true,
+  "devDependencies": {
+    "fedoc-template": "git+http://14bfd38a036366f7ca90355d202038126127bd01:x-oauth-basic@github.nhnent.com/fe/Share-FEDocTemplate.git",
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-copy": "^0.6.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-requirejs": "^0.4.4",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-template": "^0.2.3",
+    "grunt-zip": "^0.16.0",
+    "jasmine-jquery": "^2.0.5",
+    "jsdoc": "git+https://github.com/jsdoc3/jsdoc.git",
+    "karma": "^0.12.33",
+    "karma-coverage": "^0.2.6",
+    "karma-jasmine": "~0.2.0",
+    "karma-junit-reporter": "^0.2.2",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-requirejs": "^0.2.2",
+    "karma-webdriver-launcher": "git+https://github.com/everedifice/karma-webdriver-launcher.git",
+    "readme-builder": "git+https://github.com/jein-yi/readme-builder.git",
+    "requirejs": "^2.1.14"
+  },
+  "scripts": {
+    "doc": "./node_modules/.bin/jsdoc -c conf.json"
+  },
+  "author": "NHN Ent. - FE 개발팀",
+  "history": {
+    "1.0.1": {
+      "content": "데이트 피커 분리(제외)",
+      "date": "2015.05",
+      "author": "이민규 <minkyu.yi@nhnent.com>",
+      "hasAPI": true
     },
-    "scripts": {
-         "doc": "./node_modules/.bin/jsdoc -c conf.json"
+    "1.0.0": {
+      "content": "배포",
+      "date": "2015.03",
+      "author": "이제인 <jein.yi@nhnent.com>",
+      "hasAPI": true
     },
-    "author": "NHN ENTERTAINMENT - FE 개발팀"
+    "0.1.0": {
+      "content": "최초개발",
+      "date": "2014.11",
+      "author": "이제인 <jein.yi@nhnent.com>"
+    }
+  }
 }
