@@ -12,7 +12,7 @@ Calendar
 
 ## Documentation
 * **API** : https://github.nhnent.com/pages/fe/component-calendar/1.0.1
-* **Tutorial** : https://github.nhnent.com/fe/component-calendar/wiki/캘린더-컴포넌트-적용방법
+* **Tutorial** : https://github.nhnent.com/fe/component-calendar/wiki/달력-컴포넌트-적용방법
 * **Sample** - https://github.nhnent.com/pages/fe/component-calendar/1.0.1/tutorial-sample1.html
 * **CI** : http://fe.nhnent.com:8080/jenkins/job/component-calendar/
 

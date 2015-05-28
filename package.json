@@ -10,7 +10,7 @@
     "날짜 포맷(yyyy-mm-dd, yy-m-d 등등)에 맞춰 날짜 출력 가능",
     "년, 월 이동시 커스텀 이벤트를 지원"
   ],
-  "tutorial": "캘린더",
+  "tutorial": "달력",
   "samplePage": "sample1.html",
   "test": {
     "PC": [
