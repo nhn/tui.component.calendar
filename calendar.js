@@ -1,13 +1,8 @@
-/*!Component-Calendar v1.0.0 | NHN Entertainment*/
+ git /*!component-calendar v1.0.0 | NHN Entertainment*/
 (function() {
  /* istanbul ignore if */
-if (!ne) {
-    window.ne = ne = {};
-}
-/* istanbul ignore if */
-if (!ne.component) {
-    ne.component = {};
-}
+
+ ne.util.defineNamespace('ne.component');
 
 /**
  * @fileoverview 캘린더 컴포넌트
