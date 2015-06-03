@@ -7,7 +7,8 @@
  * (pug.Calendar 에서 분리)
  * @author NHN ENTERTAINMENT FE 개발팀(e0242@nhnent.com)
  * @author 이제인(jein.yi@nhnent.com)
- * @dependency jquery.1.8.3.js, code-snippet.js
+ * @author FE개발팀 이민규 (minkyu.yi@nhnent.com) - 2015, 6, 3
+ * @dependency jquery ~1.8.3, ne-code-snippet ~1.0.2
  */
 
 
@@ -59,7 +60,7 @@
  @param {Array} [options.monthTitles=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]] 각 월의 이름을 설정할 수 있다. 1월부터 순서대로 배열로 정의한다. option의 titleFormat 표시형식에서 M을 사용하면 여기서 설정된 이름으로 표시할 수 있다.
  @param {Array} [options.dayTitles=["일","월","화","수","목","금","토"]] 각 요일의 이름을 설정할 수 있다. 일요일부터 순서대로 배열로 정의한다. option의 todayFormat 표시형식에서 D을 사용하면 여기서 설정된 이름으로 표시할 수 있다.
  @param {Boolean} [options.isDrawOnload=true] 달력을 로딩과 동시에 바로 표시할 것인지 여부
- @param {jQueryObject} $element 달력 출력을 위한 기준 엘리먼트 (jQuery객체 랩핑된 엘리먼트)
+ @param {jQuery} $element 달력 출력을 위한 기준 엘리먼트 (jQuery객체 랩핑된 엘리먼트)
  @example
  var calendar = new ne.component.Calendar({
 				sClassPrefix : "calendar-",
@@ -75,24 +76,18 @@
  **/
 ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.prototype */{
     init: function(option, element) {
+
         /**
          * 옵션을 저장한다
-         * @member
          * @private
          */
         this._option = option;
+
         /**
          * 루트 엘리먼트를 저장한다
-         * @member
          * @private
          */
         this._element = element;
-        /**
-         * 커스텀이벤트를 저장한다.
-         * @member
-         * @private
-         */
-        this._events = {};
 
         // 기본값 세팅
         var defaultOption = {
@@ -135,6 +130,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             this.draw();
         }
     },
+
     /**
      * 오늘날짜를 세팅한다.
      * @param {String} year 연도
@@ -154,6 +150,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         }
         return today;
     },
+
     /**
      * 엘리먼트를 필드에 할당한다.
      *
@@ -180,6 +177,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         this.$weekAppendTarget = $weekTemplate.parent();
 
     },
+
     /**
      * 달력, 전년 전달 다음달 다음년도로 이동하는 이벤트를 건다.
      *
@@ -202,6 +200,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             this.$btnNextYear.click($.proxy(this._onButtonHandle, this, 1, 0));
         }
     },
+
     /**
      * 달력 버튼을 누를때의 핸들러
      *
@@ -214,6 +213,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         event.preventDefault();
         this.draw(yearDist, monthDist, true);
     },
+
     /**
      * Calendar를 그린다.
      *
@@ -388,6 +388,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
          **/
         this.fire('afterDraw', { year: year, month: month });
     },
+
     /**
      * 한주 템플릿을 만든다.
      * @param {Number} year 해당 연도
@@ -404,6 +405,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             this._weekElements.push($elWeek);
         }
     },
+
     /**
      * 그려질 데이터들
      *
@@ -440,6 +442,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
 
         return indexOfLastDate;
     },
+
     /**
      * 주말설정
      *
@@ -455,6 +458,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             dateContainer.addClass(classPrefix + 'sat');
         }
     },
+
     /**
      * 날짜데이터를 돌려준다
      *
@@ -463,6 +467,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
     getDate: function() {
         return this._date;
     },
+
     /**
      * 현재 달력의 날짜를 설정한다.
      *
@@ -477,6 +482,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             date: date
         };
     },
+
     /**
      * 현재 달력에 표시된 날짜를 설정한다.
      *
@@ -492,6 +498,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             date: 1
         };
     },
+
     /**
      * 현재 달력에 표시된 날짜를 가져온다.
      *
@@ -501,6 +508,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
     _getShownDate: function() {
         return this._shownDate || this.getDate();
     },
+
     /**
      * 달력을 지운다
      *
@@ -511,6 +519,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         this._weekElements = [];
         this.$weekAppendTarget.empty();
     },
+
     /**
      * 현재 달력의 타이틀 영역을 옵션의 타이틀 포멧에 맞게 그린다.
      *
@@ -546,9 +555,8 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             reg = /mm|m|M/g;
             this._setTitleText($title, option.monthTitleFormat, replaceMap, reg);
         }
-
-
     },
+
     /**
      * 캘린더의 타이틀을 갱신한다.
      *
@@ -562,6 +570,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         var title = this._getConvertedTitle(form, map, reg);
         $element.text(title);
     },
+
     /**
      * 폼 변환할 날짜의 맵을 구한다.
      * @param {String} year 연도
@@ -589,6 +598,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
             D: dayLabel
         };
     },
+
     /**
      * 텍스트를 변환하여 돌려준다.
      * @param {String} str 변환할 텍스트
@@ -603,9 +613,9 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         });
         return str;
     },
+
     /**
      * 오늘날짜 앨리먼트 여부에 따라 오늘날짜를 그리는 데이터를 만들어 그린다.
-     *
      * @param {Boolean} isExistTodayElement 오늘날짜 표시 엘레먼트 존재여부
      * @private
      */
@@ -624,6 +634,7 @@ ne.component.Calendar = ne.util.defineClass(/** @lends ne.component.Calendar.pro
         title = this._getConvertedTitle(todayFormat, replaceMap, /yyyy|y|mm|m|M|dd|d|D/g);
         $today.text(title);
     },
+
     /**
      * 루트 엘리먼트를 돌려준다.
      */
