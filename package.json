@@ -48,7 +48,7 @@
     "requirejs": "^2.1.14"
   },
   "scripts": {
-    "doc": "./node_modules/.bin/jsdoc -c conf.json"
+    "doc": "./node_modules/.bin/jsdoc -c conf.json -t ./node_modules/fedoc-template/"
   },
   "author": "NHN Ent. - FE 개발팀",
   "history": {

@@ -14,85 +14,53 @@ util.defineNamespace('ne.component');
 /**
  * 캘린더 컴포넌트 클래스
  *
- @constructor
- @param {HTMLElement} option.el 캘린더 엘리먼트
- @param {Object} [option] 초기화 옵션 설정을 위한 객체.
- @param {string} [option.classPrefix="calendar-"] 초기 HTML/CSS구조에서 필요한 className 앞에 붙는 prefix를 정의
- @param {number} [option.year=현재년] 초기에 표시될 달력의 연도
- @param {number} [option.month=현재월] 초기에 표시될 달력의 달
- @param {number} [option.date=현재일] 초기에 표시될 달력의 일
- @param {string} [option.titleFormat="yyyy-mm"] className이 '[prefix]title' 인 엘리먼트를 찾아서 해당 형식대로 날짜를 출력한다. 다음의 형식을 사용할 수 있다.
- <table>
- <tbody><tr>
- <th>표시형식</th>
- <th>설명</th>
- <th>결과</th>
- </tr>
- <tr>
- <td>yyyy</td>
- <td>4자리 연도</td>
- <td>2010</td>
- </tr>
- <tr>
- <td>yy</td>
- <td>2자리 연도</td>
- <td>10</td>
- </tr>
- <tr>
- <td>mm</td>
- <td>2자리 월</td>
- <td>09</td>
- </tr>
- <tr>
- <td>m</td>
- <td>1자리 월</td>
- <td>9</td>
- </tr>
- <tr>
- <td>M</td>
- <td>monthTitles 옵션 값으로 표시</td>
- <td>SEP</td>
- </tr>
- </tbody></table>
- @param {string} [option.todayFormat="yyyy년 mm월 dd일 (D)"] className이 '[prefix]today' 인 엘리먼트를 찾아서 해당 형식대로 날짜를 출력한다.
- @param {string} [option.yearTitleFormat="yyyy"] className이 '[prefix]year' 인 엘리먼트를 찾아서 해당 형식대로 연도를 출력한다. option의 titleFormat에서 사용할 수 있는 형식에서 연도 표시 형식을 사용할 수 있다.
- @param {string} [option.monthTitleFormat="m"] className이 '[prefix]month' 인 엘리먼트를 찾아서 해당 형식대로 월을 출력한다. option의 titleFormat에서 사용할 수 있는 형식에서 월 표시 형식을 사용할 수 있다.
- @param {Array} [option.monthTitles=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]] 각 월의 이름을 설정할 수 있다. 1월부터 순서대로 배열로 정의한다. option의 titleFormat 표시형식에서 M을 사용하면 여기서 설정된 이름으로 표시할 수 있다.
- @param {Array} [option.dayTitles=["일","월","화","수","목","금","토"]] 각 요일의 이름을 설정할 수 있다. 일요일부터 순서대로 배열로 정의한다. option의 todayFormat 표시형식에서 D을 사용하면 여기서 설정된 이름으로 표시할 수 있다.
- @param {Boolean} [option.drawOnload=true] 달력을 로딩과 동시에 바로 표시할 것인지 여부
- @example
- var calendar = new ne.component.Calendar({
-                el: document.getElementById('layer'),
-				classPrefix : "calendar-",
-				year : 1983,
-				month : 5,
-				date : 12,
-				titleFormat : "yyyy-mm", //설정될 title의 형식
-				todayFormat : "yyyy년 mm월 dd일 (D)" // 설정된 오늘의 날짜 형식
-				yearTitleFormat : "yyyy", //설정될 연 title의 형식
-				monthTitleFormat : "m", //설정될 월 title의 형식
-				monthTitles : ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], //월의 이름을 설정 "title" 세팅시 적용
-				drawOnload : true //로딩과 동시에 바로 그릴것인지 여부
-			});
+ *   @constructor
+ *   @param {Object} [option] 초기화 옵션 설정을 위한 객체.
+ *       @param {HTMLElement} option.el 캘린더 엘리먼트
+ *       @param {string} [option.classPrefix="calendar-"] 초기 HTML/CSS구조에서 필요한 className 앞에 붙는 prefix를 정의
+ *       @param {number} [option.year=현재년] 초기에 표시될 달력의 연도
+ *       @param {number} [option.month=현재월] 초기에 표시될 달력의 달
+ *       @param {number} [option.date=현재일] 초기에 표시될 달력의 일
+ *       @param {string} [option.titleFormat="yyyy-mm"] className이 '[prefix]title' 인 엘리먼트를 찾아서 해당 형식대로 날짜를 출력한다. 다음의 형식을 사용할 수 있다.<table><tr><th>표시형식</th><th>설명</th><th>결과</th></tr><tr><td>yyyy</td><td>4자리 연도</td><td>2010</td></tr><tr><td>yy</td><td>2자리 연도</td><td>10</td></tr><tr><td>mm</td><td>2자리 월</td><td>09</td></tr><tr><td>m</td><td>1자리 월</td><td>9</td></tr><tr><td>M</td><td>monthTitles 옵션 값으로 표시</td><td>SEP</td></tr></table>
+ *       @param {string} [option.todayFormat = "yyyy년 mm월 dd일 (D)"] className이 '[prefix]today' 인 엘리먼트를 찾아서 해당 형식대로 날짜를 출력한다.
+ *       @param {string} [option.yearTitleFormat = "yyyy"] className이 '[prefix]year' 인 엘리먼트를 찾아서 해당 형식대로 연도를 출력한다. option의 titleFormat에서 사용할 수 있는 형식에서 연도 표시 형식을 사용할 수 있다.
+ *       @param {string} [option.monthTitleFormat = "m"] className이 '[prefix]month' 인 엘리먼트를 찾아서 해당 형식대로 월을 출력한다. option의 titleFormat에서 사용할 수 있는 형식에서 월 표시 형식을 사용할 수 있다.
+ *       @param {Array} [option.monthTitles = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]] 각 월의 이름을 설정할 수 있다. 1월부터 순서대로 배열로 정의한다. option의 titleFormat 표시형식에서 M을 사용하면 여기서 설정된 이름으로 표시할 수 있다.
+ *       @param {Array} [option.dayTitles = ["일","월","화","수","목","금","토"]] <br>각 요일의 이름을 설정할 수 있다. 일요일부터 순서대로 배열로 정의한다. option의 todayFormat 표시형식에서 D을 사용하면 여기서 설정된 이름으로 표시할 수 있다.
+ *       @param {Boolean} [option.drawOnload = true] 달력을 로딩과 동시에 바로 표시할 것인지 여부
+ *   @example
+ *   var calendar = new ne.component.Calendar({
+ *                  el: document.getElementById('layer'),
+ *                   classPrefix : "calendar-",
+ *                  year : 1983,
+ *                   month : 5,
+ *                   date : 12,
+ *                   titleFormat : "yyyy-mm", //설정될 title의 형식
+ *                   todayFormat : "yyyy년 mm월 dd일 (D)" // 설정된 오늘의 날짜 형식
+ *                   yearTitleFormat : "yyyy", //설정될 연 title의 형식
+ *                   monthTitleFormat : "m", //설정될 월 title의 형식
+ *                   monthTitles : ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], //월의 이름을 설정 "title" 세팅시 적용
+ *                   drawOnload : true //로딩과 동시에 바로 그릴것인지 여부
+ *               });
  **/
 ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.prototype */ {
     init: function(option) {
         /**
          * 옵션을 저장한다
          * @private
-         * @type {
+         * @see {
          *  {
-         *    classPrefix: string,
-         *    year: number
-         *    month: number
-         *    date: number
-         *    titleFormat: string,
-         *    todayFormat: string,
-         *    yearTitleFormat: string,
-         *    monthTitleFormat: string,
-         *    monthTitles: Array,
-         *    dayTitles: Array,
-         *    drawOnload: boolean
+         *     classPrefix: string,
+         *     year: number
+         *     month: number
+         *     date: number
+         *     titleFormat: string,
+         *     todayFormat: string,
+         *     yearTitleFormat: string,
+         *     monthTitleFormat: string,
+         *     monthTitles: Array,
+         *     dayTitles: Array,
+         *     drawOnload: boolean
          *  }
          * }
          */
@@ -121,7 +89,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
 
         /**======================================
          * jQuery - HTMLElement
-         * @type {jQuery}
          *======================================*/
 
         /** Button-prev year */

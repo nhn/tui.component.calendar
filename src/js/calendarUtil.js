@@ -1,7 +1,6 @@
 /**
  * 캘린더 유틸성 함수들
  *
- * @module ne.component.Calendar.Util
  * @author NHN ENTERTAINMENT FE 개발팀(e0242@nhnent.com)
  * @author FE개발팀 이제인
  * @author FE개발팀 이민규 (minkyu.yi@nhnent.com) - 2015, 6, 3
@@ -13,13 +12,14 @@
 ne.util.defineNamespace('ne.component.Calendar');
 
 /**
- * Calendar Util을 모아둔 Object
+ * Calendar Util 함수들을 모아둔 Object
  * @static
- * @type {Object}
+ * @module
  */
 ne.component.Calendar.Util = {
     /**
      * 날짜 해시(년, 월, 일) 값을 만들어 리턴한다
+     * @function getDateHashTable
      * @param {Date|number} year 날짜 객체 또는 년도
      * @param {number} month 월
      * @param {number} date 일
@@ -50,6 +50,7 @@ ne.component.Calendar.Util = {
     /**
      * 컨퍼넌트에 저장된 현재날짜를 돌려준다
      * 현재 날짜가 없을 시, 로컬시간 기준으로 새로 생성하여 돌려준다.
+     * @function getToday
      * @returns {{year: *, month: *, date: *}} 날짜 해시
      */
     getToday: function() {
@@ -58,6 +59,7 @@ ne.component.Calendar.Util = {
 
     /**
      * 해당 연월의 주의 수를 구한다.
+     * @function getWeeks
      * @param {number} year 년
      * @param {number} month 월
      * @return {number} 주 (4~6)
@@ -71,6 +73,7 @@ ne.component.Calendar.Util = {
 
     /**
      * 연월일을 포함한 날짜 해시에서 유닉스타임을 구한다.
+     * @function getTime
      * @param {Object} date 날짜 정보가 담긴 객체
      * @param {number} date.year 년
      * @param {number} date.month 월
@@ -85,6 +88,7 @@ ne.component.Calendar.Util = {
 
     /**
      * 해당 연월의 첫번째 날짜의 요일을 구한다.
+     * @function getFirstDay
      * @param {number} year 년
      * @param {number} month 월
      * @return {number} 요일 (0~6)
@@ -95,6 +99,7 @@ ne.component.Calendar.Util = {
 
     /**
      * 해당 연월의 마지막 날짜의 요일을 구한다.
+     * @function getLastDay
      * @param {number} year 년
      * @param {number} month 월
      * @return {number} 요일 (0~6)
@@ -105,6 +110,7 @@ ne.component.Calendar.Util = {
 
     /**
      * 해당 연월의 마지막 날짜를 구한다.
+     * @function
      * @param {number} year 년
      * @param {number} month 월
      * @return {number} 날짜 (1~31)
@@ -115,6 +121,7 @@ ne.component.Calendar.Util = {
 
     /**
      * Date 객체를 구한다.
+     * @function getDateObject
      * @param {Object} date 날짜 객체
      * @return {Date} Date 인스턴스
      * @example
@@ -130,6 +137,7 @@ ne.component.Calendar.Util = {
 
     /**
      * 연월일을 포함한 기준 날짜 해시에서 상대적인 날짜 해시를 구한다.
+     * @function getRelativeDate
      * @param {number} year 상대적인 연도 (+/-로 정의)
      * @param {number} month 상대적인 월 (+/-로 정의)
      * @param {number} date 상대적인 일 (+/-로 정의)
