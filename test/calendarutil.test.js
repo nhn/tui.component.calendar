@@ -29,12 +29,12 @@ describe('정적 함수들 테스트  ne.component.Calendar.Util.', function() {
         expect(today.date).toBe(newDate.getDate());
     });
 
-    it('setToday로 날짜 설정 후, 제대로 동작했는지 테스트 한다.', function() {
-        ne.component.Calendar.Util.setToday(1984, 4, 15);
-        var today2 = ne.component.Calendar.Util.getToday();
-        expect(today2.year).toBe(1984);
-        expect(today2.month).toBe(4);
-        expect(today2.date).toBe(15);
+    it('getToday는 오늘날짜 해시를 반환한다.', function() {
+        var dateObj = new Date();
+        var todayHash = ne.component.Calendar.Util.getToday();
+        expect(todayHash.year).toBe(dateObj.getFullYear());
+        expect(todayHash.month).toBe(dateObj.getMonth()+1);
+        expect(todayHash.date).toBe(dateObj.getDate());
     });
 
     it('getTime, getDataObject', function() {

@@ -7,8 +7,11 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
     var calendar1, calendar2;
     beforeEach(function() {
         loadFixtures("test/fixture/calendar.html");
-        calendar1 = new ne.component.Calendar($('#layer'));
+        calendar1 = new ne.component.Calendar({
+            el: $('#layer')
+        });
         calendar2 = new ne.component.Calendar({
+            el: $('#layer2'),
             year: 1983,
             month: 5,
             date: 12,
@@ -19,7 +22,7 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
             monthTitle: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
             dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
             isDrawOnload: false
-        }, $('#layer2'));
+        });
     });
     // 생성 확인
     it('캘린더가 생성 되었는지 확인', function() {
@@ -56,7 +59,9 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
     });
 
     it('_setCalendarTitle 달력 타이틀 포맷', function() {
-        calendar2._setCalendarTitle(2014,5);
+        calendar2._setCalendarTitle(2014, 5);
+        //console.log(calendar2.$titleYear);
+        //console.log(calendar2.$titleMonth);
         expect(calendar2.$titleYear.html()).toBe('2014');
         expect(calendar2.$titleMonth.html()).toBe('05');
     });
@@ -85,10 +90,8 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
 
         calendar2.draw(-1, null, true);
         expect(date.year).toBe(1982);
-        expect(date.month).toBe(9);
 
         calendar2.draw(null, 12);
-        expect(date.year).toBe(1982);
         expect(date.month).toBe(12);
     });
 });

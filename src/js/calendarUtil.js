@@ -10,7 +10,7 @@
 
 'use strict';
 
-ne.util.defineNamespace('ne.component.Calendar.Util');
+ne.util.defineNamespace('ne.component.Calendar');
 
 /**
  * Calendar Util을 모아둔 Object
@@ -20,24 +20,31 @@ ne.util.defineNamespace('ne.component.Calendar.Util');
 ne.component.Calendar.Util = {
     /**
      * 날짜 해시(년, 월, 일) 값을 만들어 리턴한다
-     * @param {Date|number} date 날짜해시를 뽑아날 날짜 데이터
+     * @param {Date|number} year 날짜 객체 또는 년도
+     * @param {number} month 월
+     * @param {number} date 일
      * @returns {{year: *, month: *, date: *}} 날짜 해시
      */
-    getDateHashTable: function(date) {
+    getDateHashTable: function(year, month, date) {
+        var nDate,
+            resultDate = {};
+
         if (arguments.length === 3) {
-            return {
-                year: arguments[0],
-                month: arguments[1],
-                date: arguments[2]
-            };
+            resultDate.year = year;
+            resultDate.month = month;
+            resultDate.date = date;
         } else {
-            date = date || new Date();
-            return {
-                year: date.getFullYear(),
-                month: date.getMonth() + 1,
-                date: date.getDate()
-            };
+            if (arguments.length === 1) {
+                nDate = year;
+            } else {
+                nDate = new Date();
+            }
+            resultDate.year = nDate.getFullYear();
+            resultDate.month = nDate.getMonth() + 1;
+            resultDate.date = nDate.getDate();
         }
+
+        return resultDate;
     },
 
     /**
@@ -46,29 +53,7 @@ ne.component.Calendar.Util = {
      * @returns {{year: *, month: *, date: *}} 날짜 해시
      */
     getToday: function() {
-        var today = this._today || ne.component.Calendar.Util.getDateHashTable(new Date());
-        return {
-            year: today.year,
-            month: today.month,
-            date: today.date
-        };
-    },
-
-    /**
-     * today값을 설정한다.
-     * @param {string} year 년도
-     * @param {string} month 월
-     * @param {string} date 일
-     * @return {ne.component.Calendar.Util} this
-     */
-    setToday: function(year, month, date) {
-        if (!this._today) {
-            this._today = {};
-        }
-        this._today.year = year;
-        this._today.month = month;
-        this._today.date = date;
-        return this;
+       return ne.component.Calendar.Util.getDateHashTable(new Date());
     },
 
     /**
