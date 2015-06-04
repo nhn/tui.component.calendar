@@ -35,14 +35,14 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
             yearTitleFormat = calendar1._option['yearTitleFormat'],
             monthTitleFormat = calendar1._option['monthTitleFormat'],
             dayTitles = calendar1._option['dayTitles'],
-            isDrawOnload = calendar1._option['isDrawOnload'];
+            drawOnload = calendar1._option['drawOnload'];
 
         expect(classPrefix).toBe('calendar-');
         expect(titleFormat).toBe('yyyy-mm');
         expect(yearTitleFormat).toBe('yyyy');
         expect(monthTitleFormat).toBe('m');
         expect(dayTitles[0]).toBe('일');
-        expect(isDrawOnload).toBe(true);
+        expect(drawOnload).toBe(true);
 
         var classPrefix = calendar2._option['classPrefix'],
             titleFormat = calendar2._option['titleFormat'],
@@ -93,5 +93,27 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
 
         calendar2.draw(null, 12);
         expect(date.month).toBe(12);
+    });
+
+    it('현재 표현되는 달력의 날짜를 확인한다.', function() {
+        var beforeShownDate,
+            afterShownDate;
+
+        calendar1.draw(2015, 1);
+
+
+        beforeShownDate = calendar1.getShownDate();
+        // 다음 달로 이동
+        calendar1.draw(0, 1, true);
+        afterShownDate = calendar1.getShownDate();
+        expect(afterShownDate.year).toEqual(beforeShownDate.year);
+        expect(afterShownDate.month).toEqual(beforeShownDate.month + 1);
+
+        beforeShownDate = calendar1.getShownDate();
+        // 다음 년도로 이동
+        calendar1.draw(1, 0, true);
+        afterShownDate = calendar1.getShownDate();
+        expect(afterShownDate.year).toEqual(beforeShownDate.year + 1);
+        expect(afterShownDate.month).toEqual(beforeShownDate.month);
     });
 });

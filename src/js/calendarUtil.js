@@ -160,7 +160,7 @@ ne.component.Calendar.Util = {
         }
 
         newDate = new Date(dateObj.year + year, dateObj.month + month - 1, dateObj.date + date);
-        hash = this.getDateHashTable(newDate);
+        hash = ne.component.Calendar.Util.getDateHashTable(newDate);
 
         return hash;
     }
