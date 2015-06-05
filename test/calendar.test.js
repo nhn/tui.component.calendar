@@ -1,10 +1,12 @@
-describe('캘린더를 생성하고 기능을 테스트.', function() {
+'use strict';
 
+describe('캘린더를 생성하고 기능을 테스트.', function() {
+    var calendar1,
+        calendar2,
+        calendar3;
 
     jasmine.getFixtures().fixturesPath = "base";
 
-
-    var calendar1, calendar2;
     beforeEach(function() {
         loadFixtures("test/fixture/calendar.html");
         calendar1 = new ne.component.Calendar({
@@ -20,51 +22,76 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
             yearTitleFormat: 'yyyy',
             monthTitleFormat: 'mm',
             monthTitle: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            isDrawOnload: false
+            dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
         });
+
+        calendar3 = new ne.component.Calendar($('#layer3'));
     });
     // 생성 확인
     it('캘린더가 생성 되었는지 확인', function() {
         expect(calendar1).toBeDefined();
         expect(calendar2).toBeDefined();
+        expect(calendar3).toBeDefined();
     });
-    it('옵션 확인', function() {
-        var classPrefix = calendar1._option['classPrefix'],
-            titleFormat = calendar1._option['titleFormat'],
-            yearTitleFormat = calendar1._option['yearTitleFormat'],
-            monthTitleFormat = calendar1._option['monthTitleFormat'],
-            dayTitles = calendar1._option['dayTitles'],
-            drawOnload = calendar1._option['drawOnload'];
+
+    it('calendar-header, calendar-body, calendar-footer 확인', function() {
+        var $header = calendar1.$header,
+            $body = calendar1.$body,
+            $footer = calendar1.$footer;
+
+        expect($header).toBeDefined();
+        expect($body).toBeDefined();
+        expect($footer).toBeDefined();
+
+        $header = calendar2.$header;
+        $body = calendar2.$body;
+        $footer = calendar2.$footer;
+
+        expect($header).toBeDefined();
+        expect($body).toBeDefined();
+        expect($footer).toBeDefined();
+
+        $header = calendar3.$header;
+        $body = calendar3.$body;
+        $footer = calendar3.$footer;
+
+        expect($header).toBeDefined();
+        expect($body).toBeDefined();
+        expect($footer).toBeDefined();
+    });
+
+    it('옵션 확인 - calendar1', function() {
+        var classPrefix = calendar1._option.classPrefix,
+            titleFormat = calendar1._option.titleFormat,
+            yearTitleFormat = calendar1._option.yearTitleFormat,
+            monthTitleFormat = calendar1._option.monthTitleFormat,
+            dayTitles = calendar1._option.dayTitles;
 
         expect(classPrefix).toBe('calendar-');
         expect(titleFormat).toBe('yyyy-mm');
         expect(yearTitleFormat).toBe('yyyy');
         expect(monthTitleFormat).toBe('m');
         expect(dayTitles[0]).toBe('일');
-        expect(drawOnload).toBe(true);
+    });
 
-        var classPrefix = calendar2._option['classPrefix'],
-            titleFormat = calendar2._option['titleFormat'],
-            yearTitleFormat = calendar2._option['yearTitleFormat'],
-            monthTitleFormat = calendar2._option['monthTitleFormat'],
-            dayTitles = calendar2._option['dayTitles'],
-            isDrawOnload = calendar2._option['isDrawOnload'];
+    it('옵션 확인 - calendar2', function() {
+        var titleFormat = calendar2._option.titleFormat,
+            yearTitleFormat = calendar2._option.yearTitleFormat,
+            monthTitleFormat = calendar2._option.monthTitleFormat,
+            dayTitles = calendar2._option.dayTitles;
 
         expect(titleFormat).toBe('yyyy\/mm');
         expect(yearTitleFormat).toBe('yyyy');
         expect(monthTitleFormat).toBe('mm');
         expect(dayTitles[0]).toBe('Sun');
-        expect(isDrawOnload).toBe(false);
     });
 
     it('_setCalendarTitle 달력 타이틀 포맷', function() {
         calendar2._setCalendarTitle(2014, 5);
-        //console.log(calendar2.$titleYear);
-        //console.log(calendar2.$titleMonth);
         expect(calendar2.$titleYear.html()).toBe('2014');
         expect(calendar2.$titleMonth.html()).toBe('05');
     });
+
     it('custom Event 이벤트를 붙이고, draw를 통해 호출되는지 확인', function() {
         var date = {
             year: 1993,
@@ -100,7 +127,6 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
             afterShownDate;
 
         calendar1.draw(2015, 1);
-
 
         beforeShownDate = calendar1.getShownDate();
         // 다음 달로 이동
