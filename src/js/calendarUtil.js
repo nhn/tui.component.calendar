@@ -19,6 +19,8 @@ ne.util.defineNamespace('ne.component.Calendar');
 ne.component.Calendar.Util = {
     /**
      * 날짜 해시(년, 월, 일) 값을 만들어 리턴한다
+     *      매개변수가 1개인 경우는 year 값을 넘긴것이 아니라
+     *      Date 객체를 넘긴것으로 판단한다.
      * @function getDateHashTable
      * @param {Date|number} year 날짜 객체 또는 년도
      * @param {number} month 월
@@ -35,7 +37,7 @@ ne.component.Calendar.Util = {
             resultDate.date = date;
         } else {
             if (arguments.length === 1) {
-                nDate = year;
+                nDate = arguments[0];
             } else {
                 nDate = new Date();
             }

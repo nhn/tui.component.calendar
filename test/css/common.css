@@ -1,8 +1,6 @@
-.layer { display:; }
-.layer-show { display:block; }
 .layer {position:absolute; width:195px;padding-bottom:9px;border:1px solid #777;background:#ffffff;}
 .layer div{margin-bottom:10px;padding:7px 0 9px 0px;text-align:center;background:#f6f6f6; vertical-align:top;}
-.layer div button {border: 0 none; cursor: pointer; margin 0; padding:0;}
+.layer div button {border: 0 none; cursor:pointer; margin:0; padding:0;}
 .layer div button span {display:none;}
 .layer div .calendar-btn-prev-year{position:absolute;top:7px;left:5px;width:20px;height:18px;font:11px dotum; white-space:nowrap; letter-spacing:-1px;}
 .layer div .calendar-btn-prev-mon{position:absolute;top:7px;left:38px;width:20px;height:18px;font:11px dotum; white-space:nowrap; letter-spacing:-1px;}
