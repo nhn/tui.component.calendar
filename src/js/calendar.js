@@ -296,8 +296,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      */
     _assignHeader: function($element, classSelector, classPrefix) {
         var $header = $element.find(classSelector + 'header');
-
-
+        
         if ($header.length === 0) {
             $header = $(_CALENDAR_HEADER.replace(_DEFAULT_CLASS_PREFIX_REGEXP, classPrefix));
             $element.append($header);
@@ -420,69 +419,13 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * Calendar를 그린다.
-     * @param {number} [year] 연도 값 (ex. 2008)
-     * @param {number} [month] 월 값 (1 ~ 12)
-     * @param {Boolean} [isRelative] 연도와 월 값이 상대 값인지 여부
-     * @example
-     * calendar.draw(); //현재 설정된 날짜의 달력을 그린다.
-     * calendar.draw(2008, 12); //2008년 12월 달력을 그린다.
-     * calendar.draw(null, 12); //현재 표시된 달력의 12월을 그린다.
-     * calendar.draw(2010, null); //2010년 현재 표시된 달력의 월을 그린다.
-     * calendar.draw(0, 1, true); //현재 표시된 달력의 다음 달을 그린다.
-     * calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그린다.
-     **/
-    draw: function(year, month, isRelative) {
-        var dateForDrawing = this._getDateForDrawing(year, month, isRelative),
-            isReadyForDrawing = this.invoke('beforeDraw', dateForDrawing),
-            isNecessaryForDrawing,
-            classPrefix;
-
-        //beforeDraw
-        if (!isReadyForDrawing) {
-            return;
-        }
-
-        year = dateForDrawing.year;
-        month = dateForDrawing.month;
-        isNecessaryForDrawing = this._isNecessaryForDrawing(year, month);
-
-        //draw
-        if (isNecessaryForDrawing) {
-            classPrefix = this._option.classPrefix;
-            this._clear();
-            this._setCalendarText(dateForDrawing);
-
-            // weeks
-            this._setWeeks(year, month);
-            this._$dateElement = $('.' + classPrefix + 'date', this.$weekAppendTarget);
-            this._$dateContainerElement = $('.' + classPrefix + 'week > *', this.$weekAppendTarget);
-
-            // dates
-            this._drawDates(dateForDrawing, classPrefix);
-            this._setShownDate(year, month);
-        }
-        this.$element.show();
-
-        /**
-         * afterDraw
-         * @param {string} sType 커스텀 이벤트명
-         * @param {number} nYear 그려진 달력의 연도
-         * @param {number} nMonth 그려진 달력의 월
-         * @example
-         * calendar.on('afterDraw', function(oCustomEvent){ ... });
-         **/
-        this.fire('afterDraw', dateForDrawing);
-    },
-
-    /**
      * 캘린더를 다시 그려야 하는지 판단.
      * @param {number} year 년도
      * @param {number} month 월
      * @returns {boolean} reflow 여부
      * @private
      */
-    _isNecessaryForDrawing: function(year, month) {
+    _isNecessaryForReDrawing: function(year, month) {
         var shownDate = this._shownDate;
 
         return (shownDate.year !== year || shownDate.month !== month);
@@ -663,27 +606,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 날짜 해시 반환
-     * @returns {{year: number, month: number, date: number}} 날짜 해시
-     */
-    getDate: function() {
-        return util.extend({}, this._date);
-    },
-
-    /**
-     * 현재 달력의 날짜를 설정한다.
-     * @param {number} [year] 연도 값 (ex. 2008)
-     * @param {number} [month] 월 값 (1 ~ 12)
-     * @param {number} [date] 일 값 (1 ~ 31)
-     **/
-    setDate: function(year, month, date) {
-        var _date = this._date;
-        _date.year = util.isNumber(year) ? year : _date.year;
-        _date.month = util.isNumber(month) ? month : _date.month;
-        _date.date = util.isNumber(date) ? date : _date.date;
-    },
-
-    /**
      * 현재 달력에 표시된 날짜를 설정한다.
      * @param {number} year 연도
      * @param {number} month 원
@@ -692,17 +614,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     _setShownDate: function(year, month) {
         this._shownDate.year = year || this._date.year;
         this._shownDate.month = month || this._date.month;
-    },
-
-    /**
-     * 현재 달력이 그려진 년도와 월을 반환한다.
-     * @returns {{year: number, month: month}} 현재 달력이 그려진 년도와 월
-     */
-    getShownDate: function() {
-        return {
-            year: this._shownDate.year,
-            month: this._shownDate.month
-        };
     },
 
     /**
@@ -832,6 +743,94 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         replaceMap = this._getReplaceMap(year, month, date);
         title = this._getConvertedTitle(todayFormat, replaceMap, /yyyy|yy|mm|m|M|dd|d|D/g);
         $today.text(title);
+    },
+
+    /**
+     * Calendar를 그린다.
+     * @param {number} [year] 연도 값 (ex. 2008)
+     * @param {number} [month] 월 값 (1 ~ 12)
+     * @param {Boolean} [isRelative] 연도와 월 값이 상대 값인지 여부
+     * @example
+     * calendar.draw(); //현재 설정된 날짜의 달력을 그린다.
+     * calendar.draw(2008, 12); //2008년 12월 달력을 그린다.
+     * calendar.draw(null, 12); //현재 표시된 달력의 12월을 그린다.
+     * calendar.draw(2010, null); //2010년 현재 표시된 달력의 월을 그린다.
+     * calendar.draw(0, 1, true); //현재 표시된 달력의 다음 달을 그린다.
+     * calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그린다.
+     **/
+    draw: function(year, month, isRelative) {
+        var dateForDrawing = this._getDateForDrawing(year, month, isRelative),
+            isReadyForDrawing = this.invoke('beforeDraw', dateForDrawing),
+            isNecessaryForReDrawing,
+            classPrefix;
+
+        //beforeDraw
+        if (!isReadyForDrawing) {
+            return;
+        }
+
+        year = dateForDrawing.year;
+        month = dateForDrawing.month;
+        isNecessaryForReDrawing = this._isNecessaryForReDrawing(year, month);
+
+        //draw
+        if (isNecessaryForReDrawing) {
+            classPrefix = this._option.classPrefix;
+            this._clear();
+            this._setCalendarText(dateForDrawing);
+
+            // weeks
+            this._setWeeks(year, month);
+            this._$dateElement = $('.' + classPrefix + 'date', this.$weekAppendTarget);
+            this._$dateContainerElement = $('.' + classPrefix + 'week > *', this.$weekAppendTarget);
+
+            // dates
+            this._drawDates(dateForDrawing, classPrefix);
+            this._setShownDate(year, month);
+        }
+        this.$element.show();
+
+        /**
+         * afterDraw
+         * @param {string} sType 커스텀 이벤트명
+         * @param {number} nYear 그려진 달력의 연도
+         * @param {number} nMonth 그려진 달력의 월
+         * @example
+         * calendar.on('afterDraw', function(oCustomEvent){ ... });
+         **/
+        this.fire('afterDraw', dateForDrawing);
+    },
+
+    /**
+     * 날짜 해시 반환
+     * @returns {{year: number, month: number, date: number}} 날짜 해시
+     */
+    getDate: function() {
+        return util.extend({}, this._date);
+    },
+
+    /**
+     * 현재 달력의 날짜를 설정한다.
+     * @param {number} [year] 연도 값 (ex. 2008)
+     * @param {number} [month] 월 값 (1 ~ 12)
+     * @param {number} [date] 일 값 (1 ~ 31)
+     **/
+    setDate: function(year, month, date) {
+        var _date = this._date;
+        _date.year = util.isNumber(year) ? year : _date.year;
+        _date.month = util.isNumber(month) ? month : _date.month;
+        _date.date = util.isNumber(date) ? date : _date.date;
+    },
+
+    /**
+     * 현재 달력이 그려진 년도와 월을 반환한다.
+     * @returns {{year: number, month: month}} 현재 달력이 그려진 년도와 월
+     */
+    getShownDate: function() {
+        return {
+            year: this._shownDate.year,
+            month: this._shownDate.month
+        };
     }
 });
 
