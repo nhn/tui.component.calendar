@@ -93,14 +93,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         this._option = {};
 
         /**
-         * 루트 엘리먼트를 저장한다
-         *      option.el === undefined --> 옵션에 엘리먼트가 지정되어있지 않는 경우는
-         *       옵션 없이 엘리먼트 자체를 초기화 매개변수로 넘겼다고 판단한다.
-         * @private
-         */
-        this._$element = $(option.el || arguments[0]);
-
-        /**
          * 캘린더의 기준 날짜
          * 옵션 값에 지정되어 있지 않으면 오늘 날짜로 지정함
          * @type {{year: number, month: number, date: number}}
@@ -122,77 +114,112 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         this._shownDate = {date: 1};
 
         /**======================================
-         *
          * jQuery - HTMLElement
-         *
          *======================================*/
+        /**
+         * =========Root Element=========
+         *  옵션에 엘리먼트가 지정되어있지 않는 경우는,
+         *  옵션 없이 엘리먼트 자체를 초기화 매개변수로 넘겼다고 판단한다.
+         * @type {jQuery}
+         * @private
+         */
+        this.$element = $(option.el || arguments[0]);
 
         /**
-         * Header
+         * =========Header=========
          * @type {jQuery}
          */
         this.$header = null;
 
         /**
-         * Button-prev year
+         * 이전해(년) 버튼
          * @type {jQuery}
          */
         this.$btnPrevYear = null;
 
         /**
-         * Button-prev month
+         * 이전달 버튼
          * @type {jQuery}
          */
         this.$btnPrevMonth = null;
 
         /**
-         * Button-next year
+         * 다음해(년) 버튼
          * @type {jQuery}
          */
         this.$btnNextYear = null;
 
         /**
-         * Button-next month
+         * 다음달 버튼
          * @type {jQuery}
          */
         this.$btnNextMonth = null;
 
         /**
-         * Title
+         * 타이틀
          * @type {jQuery}
          */
         this.$title = null;
 
         /**
-         * Title-year
+         * 타이틀 - 년도
          * @type {jQuery}
          */
         this.$titleYear = null;
 
         /**
-         * Title-month
+         * 타이틀 - 달
          * @type {jQuery}
          */
         this.$titleMonth = null;
 
-        /**-------- Body --------*/
+        /**
+         * =========Body=========
+         * @type {jQuery}
+         */
         this.$body = null;
 
-        /** Week-template */
+        /**
+         * 일주일을 나타낼 엘리먼트 템플릿
+         * @type {jQuery}
+         */
         this.$weekTemplate = null;
 
-        /** Parent of Week-template */
+        /**
+         * 템플릿이 붙을 부모 엘리먼트
+         * @type {jQuery}
+         */
         this.$weekAppendTarget = null;
 
-        /**-------- footer --------*/
-        this.$footer = null;
-
-        /** Today */
-        this.$today = null;
+        /**
+         * 날짜(일)들을 나타내는 엘리먼트
+         * @type {jQuery}
+         * @private
+         */
+        this._$dateElement = null;
 
         /**
-         * 기본 셋팅
+         * 날짜(일)들을 감싸는 있는 엘리먼트
+         * @type {jQuery}
+         * @private
          */
+        this._$dateContainerElement = null;
+
+        /**
+         * =========Footer=========
+         * @type {jQuery}
+         */
+        this.$footer = null;
+
+        /**
+         * 오늘날짜 엘리먼트
+         * @type {jQuery}
+         */
+        this.$today = null;
+
+        /**======================================
+         * 기본값 셋팅, 초기화
+         *======================================*/
         this._setDefault(option);
     },
 
@@ -227,7 +254,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
             yearTitleFormat: 'yyyy',
             monthTitleFormat: 'm',
             monthTitles: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-            dayTitles: ['일', '월', '화', '수', '목', '금', '토'],
+            dayTitles: ['일', '월', '화', '수', '목', '금', '토']
         };
 
         // 갱신
@@ -252,7 +279,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      */
     _assignHTMLElements: function() {
         var classPrefix = this._option.classPrefix,
-            $element = this._$element,
+            $element = this.$element,
             classSelector = '.' + classPrefix;
 
         this._assignHeader($element, classSelector, classPrefix);
@@ -435,7 +462,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
             this._drawDates(dateForDrawing, classPrefix);
             this._setShownDate(year, month);
         }
-        this._$element.show();
+        this.$element.show();
 
         /**
          * afterDraw
@@ -805,14 +832,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         replaceMap = this._getReplaceMap(year, month, date);
         title = this._getConvertedTitle(todayFormat, replaceMap, /yyyy|yy|mm|m|M|dd|d|D/g);
         $today.text(title);
-    },
-
-    /**
-     * 루트 엘리먼트를 돌려준다.
-     * @returns {HTMLElement} container element
-     */
-    getElement: function() {
-        return this._$element[0];
     }
 });
 
