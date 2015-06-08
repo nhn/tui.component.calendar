@@ -128,17 +128,17 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
 
         calendar1.draw(2015, 1);
 
-        beforeShownDate = calendar1.getShownDate();
+        beforeShownDate = calendar1.getDate();
         // 다음 달로 이동
         calendar1.draw(0, 1, true);
-        afterShownDate = calendar1.getShownDate();
+        afterShownDate = calendar1.getDate();
         expect(afterShownDate.year).toEqual(beforeShownDate.year);
         expect(afterShownDate.month).toEqual(beforeShownDate.month + 1);
 
-        beforeShownDate = calendar1.getShownDate();
+        beforeShownDate = calendar1.getDate();
         // 다음 년도로 이동
         calendar1.draw(1, 0, true);
-        afterShownDate = calendar1.getShownDate();
+        afterShownDate = calendar1.getDate();
         expect(afterShownDate.year).toEqual(beforeShownDate.year + 1);
         expect(afterShownDate.month).toEqual(beforeShownDate.month);
     });

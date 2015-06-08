@@ -11,36 +11,39 @@
 
 'use strict';
 var util = ne.util,
-    _CALENDAR_HEADER = ' <div class="calendar-header">'
-            + '<a href="#" class="rollover calendar-btn-prev-year">이전해</a>'
-            + '<a href="#" class="rollover calendar-btn-prev-mon">이전달</a>'
-            + '<strong class="calendar-title"></strong>'
-            + '<a href="#" class="rollover calendar-btn-next-mon">다음달</a>'
-            + '<a href="#" class="rollover calendar-btn-next-year">다음해</a>'
-            + '</div>',
-    _CALENDAR_BODY = '<div class="calendar-body">'
-            + '<table>'
-            + '<thead>'
-            + '<tr>'
-            + '<th class="calendar-sun">Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fa</th><th class="calendar-sat">Sa</th>'
-            + '</tr>'
-            + '</thead>'
-            + '<tbody>'
-            + '<tr class="calendar-week">'
-            + '<td class="calendar-date"></td>'
-            + '<td class="calendar-date"></td>'
-            + '<td class="calendar-date"></td>'
-            + '<td class="calendar-date"></td>'
-            + '<td class="calendar-date"></td>'
-            + '<td class="calendar-date"></td>'
-            + '<td class="calendar-date"></td>'
-            + '</tr>'
-            + '</tbody>'
-            + '</table>'
-            + '</div>',
-    _CALENDAR_FOOTER = '<div class="calendar-footer">'
-            + '<p>오늘 <em class="calendar-today"></em></p>'
-            + '</div>',
+    _CALENDAR_HEADER = [
+        '<div class="calendar-header">',
+            '<a href="#" class="rollover calendar-btn-prev-year">이전해</a>',
+            '<a href="#" class="rollover calendar-btn-prev-mon">이전달</a>',
+            '<strong class="calendar-title"></strong>',
+            '<a href="#" class="rollover calendar-btn-next-mon">다음달</a>',
+            '<a href="#" class="rollover calendar-btn-next-year">다음해</a>',
+        '</div>'].join(''),
+    _CALENDAR_BODY = [
+        '<div class="calendar-body">',
+            '<table>',
+                '<thead>',
+                    '<tr>',
+                        '<th class="calendar-sun">Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fa</th><th class="calendar-sat">Sa</th>',
+                    '</tr>',
+                '</thead>',
+                '<tbody>',
+                    '<tr class="calendar-week">',
+                        '<td class="calendar-date"></td>',
+                        '<td class="calendar-date"></td>',
+                        '<td class="calendar-date"></td>',
+                        '<td class="calendar-date"></td>',
+                        '<td class="calendar-date"></td>',
+                        '<td class="calendar-date"></td>',
+                        '<td class="calendar-date"></td>',
+                    '</tr>',
+                '</tbody>',
+            '</table>',
+        '</div>'].join(''),
+    _CALENDAR_FOOTER = [
+        '<div class="calendar-footer">',
+            '<p>오늘 <em class="calendar-today"></em></p>',
+        '</div>'].join(''),
     _DEFAULT_CLASS_PREFIX_REGEXP = /calendar-/g;
 
 util.defineNamespace('ne.component');
@@ -50,9 +53,8 @@ util.defineNamespace('ne.component');
  * @param {Object} [option] 초기화 옵션 설정을 위한 객체.
  *     @param {HTMLElement} option.el 캘린더 엘리먼트
  *     @param {string} [option.classPrefix="calendar-"] 초기 HTML/CSS구조에서 필요한 className 앞에 붙는 prefix를 정의
- *     @param {number} [option.year=현재년] 초기에 표시될 달력의 연도
+ *     @param {number} [option.year=현재년] 초기에 표시될 달력의 년도
  *     @param {number} [option.month=현재월] 초기에 표시될 달력의 달
- *     @param {number} [option.date=현재일] 초기에 표시될 달력의 일
  *     @param {string} [option.titleFormat="yyyy-mm"] className이 '[prefix]title' 인 엘리먼트를 찾아서 해당 형식대로 날짜를 출력한다. 다음의 형식을 사용할 수 있다.<table><tr><th>표시형식</th><th>설명</th><th>결과</th></tr><tr><td>yyyy</td><td>4자리 연도</td><td>2010</td></tr><tr><td>yy</td><td>2자리 연도</td><td>10</td></tr><tr><td>mm</td><td>2자리 월</td><td>09</td></tr><tr><td>m</td><td>1자리 월</td><td>9</td></tr><tr><td>M</td><td>monthTitles 옵션 값으로 표시</td><td>SEP</td></tr></table>
  *     @param {string} [option.todayFormat = "yyyy년 mm월 dd일 (D)"] className이 '[prefix]today' 인 엘리먼트를 찾아서 해당 형식대로 날짜를 출력한다.
  *     @param {string} [option.yearTitleFormat = "yyyy"] className이 '[prefix]year' 인 엘리먼트를 찾아서 해당 형식대로 연도를 출력한다. option의 titleFormat에서 사용할 수 있는 형식에서 연도 표시 형식을 사용할 수 있다.
@@ -65,7 +67,6 @@ util.defineNamespace('ne.component');
  *                    classPrefix: "calendar-",
  *                    year: 1983,
  *                    month: 5,
- *                    date: 12,
  *                    titleFormat: "yyyy-mm", //설정될 title의 형식
  *                    todayFormat: "yyyy년 mm월 dd일 (D)" // 설정된 오늘의 날짜 형식
  *                    yearTitleFormat: "yyyy", //설정될 연 title의 형식
@@ -82,7 +83,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
          *     classPrefix: string,
          *     year: number
          *     month: number
-         *     date: number
          *     titleFormat: string,
          *     todayFormat: string,
          *     yearTitleFormat: string,
@@ -95,25 +95,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         this._option = {};
 
         /**
-         * 캘린더의 기준 날짜
-         * 옵션 값에 지정되어 있지 않으면 오늘 날짜로 지정함
-         * @type {{year: number, month: number, date: number}}
-         * @private
-         */
-        this._date = {};
-
-        /**
-         * 오늘 날짜
-         * @type {{year: number, month: number, date: number}}
-         * @private
-         */
-        this._today = {};
-
-        /**
          * 보여지고 있는 날짜
          * @type {{year: number, month: number}}
          */
-        this._shownDate = {date: 1};
+        this._shownDate = {year: 0, month: 1, date: 1};
 
         /**======================================
          * jQuery - HTMLElement
@@ -231,12 +216,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      * @private
      */
     _setDefault: function(option) {
-        this._setToday();
         this._setOption(option);
-        this.setDate();
         this._assignHTMLElements();
         this._attachEvent();
-        this.draw();
+        this.draw(this._option.year, this._option.month, false);
     },
 
     /**
@@ -245,12 +228,14 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      * @private
      */
     _setOption: function(option) {
-        var _op = this._option,
-            _date = this._date;
+        var instanceOption = this._option,
+            today = this.constructor.Util.getDateHashTable();
 
         // 기본값 세팅
         var defaultOption = {
             classPrefix: 'calendar-',
+            year: today.year,
+            month: today.month,
             titleFormat: 'yyyy-mm',
             todayFormat: 'yyyy년 mm월 dd일 (D)',
             yearTitleFormat: 'yyyy',
@@ -260,19 +245,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         };
 
         // 갱신
-        util.extend(_op, defaultOption, option);
-        _date.year = _op.year || this._today.year;
-        _date.month = _op.month || this._today.month;
-        _date.month = _op.month || this._today.date;
-    },
-
-    /**
-     * 오늘날짜를 세팅한다.
-     * @private
-     */
-    _setToday: function() {
-        var today = this.constructor.Util.getDateHashTable();
-        util.extend(this._today, today);
+        util.extend(instanceOption, defaultOption, option);
     },
 
     /**
@@ -298,7 +271,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      */
     _assignHeader: function($element, classSelector, classPrefix) {
         var $header = $element.find(classSelector + 'header');
-        
+
         if ($header.length === 0) {
             $header = $(_CALENDAR_HEADER.replace(_DEFAULT_CLASS_PREFIX_REGEXP, classPrefix));
             $element.append($header);
@@ -397,27 +370,28 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      * @param {number} year 년
      * @param {number} month 월
      * @param {boolean} [isRelative] 상대 값 여부
-     * @returns {{year: number, month: number, date: number}} 날짜 해시
+     * @returns {{year: number, month: number}} 날짜 해시
      * @private
      */
     _getDateForDrawing: function(year, month, isRelative) {
-        var date = this.getDate(),
+        var nDate = this.getDate(),
             relativeDate;
 
+        nDate.date = 1;
         if (!util.isNumber(year) && !util.isNumber(month)) {
-            return date;
+            return nDate;
         }
 
         if (isRelative) {
-            relativeDate = this.constructor.Util.getRelativeDate(year, month, 0, this._shownDate);
-            date.year = relativeDate.year;
-            date.month = relativeDate.month;
+            relativeDate = this.constructor.Util.getRelativeDate(year, month, 0, nDate);
+            nDate.year = relativeDate.year;
+            nDate.month = relativeDate.month;
         } else {
-            date.year = year || date.year;
-            date.month = month || date.month;
+            nDate.year = year || nDate.year;
+            nDate.month = month || nDate.month;
         }
 
-        return date;
+        return nDate;
     },
 
     /**
@@ -527,17 +501,19 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
 
     /**
      * 입력 날짜 해시가 오늘인지 판단한다.
-     * @param {{year: number, month: number, date: number}} dateHash 날짜 해시
+     * @param {number} year 년도
+     * @param {number} month 달
+     * @param {number} date 일
      * @returns {boolean} 오늘 날짜 인지 비교 결과
      * @private
      */
-    _isToday: function(dateHash) {
-        var today = this._today;
+    _isToday: function(year, month, date) {
+        var today = this.constructor.Util.getDateHashTable();
 
         return (
-            today.year === dateHash.year &&
-            today.month === dateHash.month &&
-            today.date === dateHash.date
+            today.year === year &&
+            today.month === month &&
+            today.date === date
         );
     },
 
@@ -608,17 +584,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 현재 달력에 표시된 날짜를 설정한다.
-     * @param {number} year 연도
-     * @param {number} month 원
-     * @private
-     */
-    _setShownDate: function(year, month) {
-        this._shownDate.year = year || this._date.year;
-        this._shownDate.month = month || this._date.month;
-    },
-
-    /**
      * 달력을 지운다
      * @private
      */
@@ -647,19 +612,19 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         replaceMap = this._getReplaceMap(year, month);
         if (util.isNotEmpty($title)) {
             reg = /yyyy|yy|mm|m|M/g;
-            this._setTitleText($title, titleFormat, replaceMap, reg);
+            this._setDateTextInCalendar($title, titleFormat, replaceMap, reg);
         }
 
         $title = this.$titleYear;
         if (util.isNotEmpty($title)) {
             reg = /yyyy|yy/g;
-            this._setTitleText($title, option.yearTitleFormat, replaceMap, reg);
+            this._setDateTextInCalendar($title, option.yearTitleFormat, replaceMap, reg);
         }
 
         $title = this.$titleMonth;
         if (util.isNotEmpty($title)) {
             reg = /mm|m|M/g;
-            this._setTitleText($title, option.monthTitleFormat, replaceMap, reg);
+            this._setDateTextInCalendar($title, option.monthTitleFormat, replaceMap, reg);
         }
     },
 
@@ -671,7 +636,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      * @param {RegExp} reg 변경할 폼을 치환할 정규식
      * @private
      */
-    _setTitleText: function($element, form, map, reg) {
+    _setDateTextInCalendar: function($element, form, map, reg) {
         var title = this._getConvertedTitle(form, map, reg);
         $element.text(title);
     },
@@ -729,22 +694,20 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
             year,
             month,
             date,
-            replaceMap,
-            title;
+            replaceMap;
 
         if ($today.length < 1) {
             return;
         }
 
-        today = this._today;
+        today = this.constructor.Util.getDateHashTable();
         year = today.year;
         month = (today.month < 10) ? '0' + today.month : today.month;
         date = (today.date < 10) ? '0' + today.date : today.date;
 
         todayFormat = this._option.todayFormat;
         replaceMap = this._getReplaceMap(year, month, date);
-        title = this._getConvertedTitle(todayFormat, replaceMap, /yyyy|yy|mm|m|M|dd|d|D/g);
-        $today.text(title);
+        this._setDateTextInCalendar($today, todayFormat, replaceMap, /yyyy|yy|mm|m|M|dd|d|D/g);
     },
 
     /**
@@ -763,76 +726,66 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     draw: function(year, month, isRelative) {
         var dateForDrawing = this._getDateForDrawing(year, month, isRelative),
             isReadyForDrawing = this.invoke('beforeDraw', dateForDrawing),
-            isNecessaryForReDrawing,
             classPrefix;
 
-        //beforeDraw
+        /**===============
+         * beforeDraw
+         =================*/
         if (!isReadyForDrawing) {
             return;
         }
 
+        /**===============
+         * draw
+         =================*/
         year = dateForDrawing.year;
         month = dateForDrawing.month;
-        isNecessaryForReDrawing = this._isNecessaryForReDrawing(year, month);
 
-        //draw
-        if (isNecessaryForReDrawing) {
-            classPrefix = this._option.classPrefix;
-            this._clear();
-            this._setCalendarText(dateForDrawing);
+        classPrefix = this._option.classPrefix;
+        this._clear();
+        this._setCalendarText(dateForDrawing);
 
-            // weeks
-            this._setWeeks(year, month);
-            this._$dateElement = $('.' + classPrefix + 'date', this.$weekAppendTarget);
-            this._$dateContainerElement = $('.' + classPrefix + 'week > *', this.$weekAppendTarget);
+        // weeks
+        this._setWeeks(year, month);
+        this._$dateElement = $('.' + classPrefix + 'date', this.$weekAppendTarget);
+        this._$dateContainerElement = $('.' + classPrefix + 'week > *', this.$weekAppendTarget);
 
-            // dates
-            this._drawDates(dateForDrawing, classPrefix);
-            this._setShownDate(year, month);
-        }
+        // dates
+        this.setDate(year, month);
+        this._drawDates(dateForDrawing, classPrefix);
         this.$element.show();
 
-        /**
+        /**===============
          * afterDraw
          * @param {string} sType 커스텀 이벤트명
          * @param {number} nYear 그려진 달력의 연도
          * @param {number} nMonth 그려진 달력의 월
          * @example
          * calendar.on('afterDraw', function(oCustomEvent){ ... });
-         **/
+         ================*/
         this.fire('afterDraw', dateForDrawing);
     },
 
     /**
-     * 날짜 해시 반환
-     * @returns {{year: number, month: number, date: number}} 날짜 해시
+     * 현재 달력의 년도와 월을 반환한다.
+     * @returns {{year: number, month: number}} 날짜 해시
      */
     getDate: function() {
-        return util.extend({}, this._date);
-    },
-
-    /**
-     * 현재 달력의 날짜를 설정한다.
-     * @param {number} [year] 연도 값 (ex. 2008)
-     * @param {number} [month] 월 값 (1 ~ 12)
-     * @param {number} [date] 일 값 (1 ~ 31)
-     **/
-    setDate: function(year, month, date) {
-        var _date = this._date;
-        _date.year = util.isNumber(year) ? year : _date.year;
-        _date.month = util.isNumber(month) ? month : _date.month;
-        _date.date = util.isNumber(date) ? date : _date.date;
-    },
-
-    /**
-     * 현재 달력이 그려진 년도와 월을 반환한다.
-     * @returns {{year: number, month: month}} 현재 달력이 그려진 년도와 월
-     */
-    getShownDate: function() {
         return {
             year: this._shownDate.year,
             month: this._shownDate.month
         };
+    },
+
+    /**
+     * 현재 달력의 년도와 월을 설정한다.
+     * @param {number} [year] 연도 값 (ex. 2008)
+     * @param {number} [month] 월 값 (1 ~ 12)
+     **/
+    setDate: function(year, month) {
+        var date = this._shownDate;
+        date.year = util.isNumber(year) ? year : date.year;
+        date.month = util.isNumber(month) ? month : date.month;
     }
 });
 
