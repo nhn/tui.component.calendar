@@ -150,20 +150,11 @@ ne.component.Calendar.Util = {
      *  ne.component.Calendar.Util.getRelativeDate(0, 0, -1, {year:2010, month:1, date:1}); // {year:2009, month:12, date:31}
      **/
     getRelativeDate: function(year, month, date, dateObj) {
-        var beforeDate = new Date(dateObj.year, dateObj.month, dateObj.date),
-            beforeYear = beforeDate.getFullYear(),
-            isLeapYear = !(beforeYear % 4) && !!(beforeYear % 100) || !(beforeYear % 400),
-            endDays = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-            isEndDate = (endDays[dateObj.month] === dateObj.date),
-            newDate,
-            hash;
-        if (isEndDate) {
-            dateObj.date = endDays[dateObj.month + month];
-        }
+        var nYear = (dateObj.year + year),
+            nMonth = (dateObj.month + month - 1),
+            nDate = (dateObj.date + date),
+            nDateObj = new Date(nYear, nMonth, nDate);
 
-        newDate = new Date(dateObj.year + year, dateObj.month + month - 1, dateObj.date + date);
-        hash = ne.component.Calendar.Util.getDateHashTable(newDate);
-
-        return hash;
+        return ne.component.Calendar.Util.getDateHashTable(nDateObj);
     }
 };

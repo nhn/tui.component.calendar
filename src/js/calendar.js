@@ -202,9 +202,9 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
          */
         this.$today = null;
 
-        /**======================================
+        /**
          * 기본값 셋팅, 초기화
-         *======================================*/
+         */
         this._setDefault(option);
     },
 
