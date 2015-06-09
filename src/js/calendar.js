@@ -49,7 +49,7 @@ util.defineNamespace('ne.component');
  * 캘린더 컴포넌트 클래스
  * @constructor
  * @param {Object} [option] 초기화 옵션 설정을 위한 객체.
- *     @param {HTMLElement} option.el 캘린더 엘리먼트
+ *     @param {HTMLElement} option.element 캘린더 엘리먼트
  *     @param {string} [option.classPrefix="calendar-"] 초기 HTML/CSS구조에서 필요한 className 앞에 붙는 prefix를 정의
  *     @param {number} [option.year=현재년] 초기에 표시될 달력의 년도
  *     @param {number} [option.month=현재월] 초기에 표시될 달력의 달
@@ -108,7 +108,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
          * @type {jQuery}
          * @private
          */
-        this.$element = $(option.el || arguments[0]);
+        this.$element = $(option.element || arguments[0]);
 
         /**
          * =========Header=========

@@ -10,10 +10,10 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
     beforeEach(function() {
         loadFixtures("test/fixture/calendar.html");
         calendar1 = new ne.component.Calendar({
-            el: $('#layer')
+            element: $('#layer')
         });
         calendar2 = new ne.component.Calendar({
-            el: $('#layer2'),
+            element: $('#layer2'),
             year: 1983,
             month: 5,
             date: 12,
