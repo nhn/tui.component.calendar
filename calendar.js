@@ -395,19 +395,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 캘린더를 다시 그려야 하는지 판단.
-     * @param {number} year 년도
-     * @param {number} month 월
-     * @returns {boolean} reflow 여부
-     * @private
-     */
-    _isNecessaryForReDrawing: function(year, month) {
-        var shownDate = this._shownDate;
-
-        return (shownDate.year !== year || shownDate.month !== month);
-    },
-
-    /**
      * calendar text를 그려준다.
      * @param {{year: number, month: number}} dateForDrawing 화면에 나타낼 날짜 해시
      * @private
