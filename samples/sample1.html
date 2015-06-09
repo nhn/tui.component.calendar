@@ -55,13 +55,13 @@
 <!--<script type="text/javascript" src="../src/js/calendarUtil.js"></script>-->
 <script>
     var cal1 = new ne.component.Calendar({
-        el: $("#layer2"),
+        element: $("#layer2"),
         classPrefix: 'calendar2-'
     });
     cal1.draw();
 
     var cal2 = new ne.component.Calendar({
-        el: $('#layer'),
+        element: $('#layer'),
         year: 1983,     // 달력이 보여줄 날짜-년도
         month: 5,       // 달력이 보여줄 날짜-월
         titleFormat: "yyyy-mm", //설정될 title의 형식
