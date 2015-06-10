@@ -23,7 +23,8 @@ var util = ne.util,
         defaultClassPrefixRegExp: /calendar-/g,
         titleRegExp: /yyyy|yy|mm|m|M/g,
         titleYearRegExp: /yyyy|yy/g,
-        titleMonthRegExp: /mm|m|M/g
+        titleMonthRegExp: /mm|m|M/g,
+        todayRegExp: /yyyy|yy|mm|m|M|dd|d|D/g
     };
 
 CONSTANTS.calendarHeader = [
@@ -657,7 +658,8 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
             year,
             month,
             date,
-            replaceMap;
+            replaceMap,
+            reg;
 
         if (!$today.length) {
             return;
@@ -667,10 +669,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         year = today.year;
         month = this._prependLeadingZero(today.month);
         date = this._prependLeadingZero(today.date);
-
         todayFormat = this._option.todayFormat;
         replaceMap = this._getReplaceMap(year, month, date);
-        this._setDateTextInCalendar($today, todayFormat, replaceMap, /yyyy|yy|mm|m|M|dd|d|D/g);
+        reg = CONSTANTS.todayRegExp;
+        this._setDateTextInCalendar($today, todayFormat, replaceMap, reg);
     },
 
     /**
