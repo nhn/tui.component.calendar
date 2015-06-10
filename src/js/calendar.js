@@ -11,36 +11,36 @@
 var util = ne.util,
     _CALENDAR_HEADER = [
         '<div class="calendar-header">',
-            '<a href="#" class="rollover calendar-btn-prev-year">이전해</a>',
-            '<a href="#" class="rollover calendar-btn-prev-mon">이전달</a>',
-            '<strong class="calendar-title"></strong>',
-            '<a href="#" class="rollover calendar-btn-next-mon">다음달</a>',
-            '<a href="#" class="rollover calendar-btn-next-year">다음해</a>',
+        '<a href="#" class="rollover calendar-btn-prev-year">이전해</a>',
+        '<a href="#" class="rollover calendar-btn-prev-mon">이전달</a>',
+        '<strong class="calendar-title"></strong>',
+        '<a href="#" class="rollover calendar-btn-next-mon">다음달</a>',
+        '<a href="#" class="rollover calendar-btn-next-year">다음해</a>',
         '</div>'].join(''),
     _CALENDAR_BODY = [
         '<div class="calendar-body">',
-            '<table>',
-                '<thead>',
-                    '<tr>',
-                        '<th class="calendar-sun">Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fa</th><th class="calendar-sat">Sa</th>',
-                    '</tr>',
-                '</thead>',
-                '<tbody>',
-                    '<tr class="calendar-week">',
-                        '<td class="calendar-date"></td>',
-                        '<td class="calendar-date"></td>',
-                        '<td class="calendar-date"></td>',
-                        '<td class="calendar-date"></td>',
-                        '<td class="calendar-date"></td>',
-                        '<td class="calendar-date"></td>',
-                        '<td class="calendar-date"></td>',
-                    '</tr>',
-                '</tbody>',
-            '</table>',
+        '<table>',
+        '<thead>',
+        '<tr>',
+        '<th class="calendar-sun">Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fa</th><th class="calendar-sat">Sa</th>',
+        '</tr>',
+        '</thead>',
+        '<tbody>',
+        '<tr class="calendar-week">',
+        '<td class="calendar-date"></td>',
+        '<td class="calendar-date"></td>',
+        '<td class="calendar-date"></td>',
+        '<td class="calendar-date"></td>',
+        '<td class="calendar-date"></td>',
+        '<td class="calendar-date"></td>',
+        '<td class="calendar-date"></td>',
+        '</tr>',
+        '</tbody>',
+        '</table>',
         '</div>'].join(''),
     _CALENDAR_FOOTER = [
         '<div class="calendar-footer">',
-            '<p>오늘 <em class="calendar-today"></em></p>',
+        '<p>오늘 <em class="calendar-today"></em></p>',
         '</div>'].join(''),
     _DEFAULT_CLASS_PREFIX_REGEXP = /calendar-/g;
 
@@ -496,9 +496,9 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         var today = this.constructor.Util.getDateHashTable();
 
         return (
-            today.year === year &&
-            today.month === month &&
-            today.date === date
+        today.year === year &&
+        today.month === month &&
+        today.date === date
         );
     },
 
@@ -585,7 +585,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      **/
     _setCalendarTitle: function(year, month) {
         var option = this._option,
-            $title = this.$title,
             titleFormat = option.titleFormat,
             replaceMap,
             reg;
@@ -593,37 +592,34 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         if (month < 10) {
             month = '0' + Number(month);
         }
-
         replaceMap = this._getReplaceMap(year, month);
-        if (util.isNotEmpty($title)) {
-            reg = /yyyy|yy|mm|m|M/g;
-            this._setDateTextInCalendar($title, titleFormat, replaceMap, reg);
-        }
 
-        $title = this.$titleYear;
-        if (util.isNotEmpty($title)) {
-            reg = /yyyy|yy/g;
-            this._setDateTextInCalendar($title, option.yearTitleFormat, replaceMap, reg);
-        }
+        reg = /yyyy|yy|mm|m|M/g;
+        this._setDateTextInCalendar(this.$title, titleFormat, replaceMap, reg);
 
-        $title = this.$titleMonth;
-        if (util.isNotEmpty($title)) {
-            reg = /mm|m|M/g;
-            this._setDateTextInCalendar($title, option.monthTitleFormat, replaceMap, reg);
-        }
+        reg = /yyyy|yy/g;
+        this._setDateTextInCalendar(this.$titleYear, option.yearTitleFormat, replaceMap, reg);
+
+        reg = /mm|m|M/g;
+        this._setDateTextInCalendar(this.$titleMonth, option.monthTitleFormat, replaceMap, reg);
     },
 
     /**
      * 캘린더의 타이틀을 갱신한다.
-     * @param {jQuery} $element 갱신될 엘리먼트
+     * @param {jQuery|HTMLElement} element 갱신될 엘리먼트
      * @param {string} form 변경될 날짜 형식
      * @param {Object} map 정규식에 맞춰서 매칭되는 값을 가진 객체
      * @param {RegExp} reg 변경할 폼을 치환할 정규식
      * @private
      */
-    _setDateTextInCalendar: function($element, form, map, reg) {
-        var title = this._getConvertedTitle(form, map, reg);
-        $element.text(title);
+    _setDateTextInCalendar: function(element, form, map, reg) {
+        var title,
+            $el = $(element);
+
+        if ($el.length > 0) {
+            title = this._getConvertedTitle(form, map, reg);
+            $el.text(title);
+        }
     },
 
     /**
@@ -742,11 +738,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
 
         /**===============
          * afterDraw
-         * @param {string} sType 커스텀 이벤트명
-         * @param {number} nYear 그려진 달력의 연도
-         * @param {number} nMonth 그려진 달력의 월
-         * @example
-         * calendar.on('afterDraw', function(oCustomEvent){ ... });
          ================*/
         this.fire('afterDraw', dateForDrawing);
     },
