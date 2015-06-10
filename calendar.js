@@ -1,4 +1,4 @@
-/*!component-calendar v1.0.2 | NHN Entertainment*/
+/*!component-calendar v1.1.0 | NHN Entertainment*/
 (function() {
 /**
  * @fileoverview 캘린더 컴포넌트
