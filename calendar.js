@@ -15,8 +15,8 @@ var util = ne.util,
         relativeMonthValueKey: 'relativeMonthValue',
         btnPrevYear: 'btn-prev-year',
         btnPrevMonth: 'btn-prev-month',
-        btnNextYear: 'btn-next-Year',
-        btnNextMonth: 'btn-next-Month',
+        btnNextYear: 'btn-next-year',
+        btnNextMonth: 'btn-next-month',
         calendarHeader: null,
         calendarBody: null,
         calendarFooter: null,
@@ -32,8 +32,8 @@ CONSTANTS.calendarHeader = [
         '<a href="#" class="rollover calendar-' + CONSTANTS.btnPrevYear + '">이전해</a>',
         '<a href="#" class="rollover calendar-' + CONSTANTS.btnPrevMonth + '">이전달</a>',
         '<strong class="calendar-title"></strong>',
-        '<a href="#" class="rollover calendar-' + CONSTANTS.btnNextYear + '">다음달</a>',
-        '<a href="#" class="rollover calendar-' + CONSTANTS.btnNextMonth + '">다음해</a>',
+        '<a href="#" class="rollover calendar-' + CONSTANTS.btnNextMonth + '">다음달</a>',
+        '<a href="#" class="rollover calendar-' + CONSTANTS.btnNextYear + '">다음해</a>',
     '</div>'].join('');
 
 CONSTANTS.calendarBody = [
@@ -281,7 +281,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         this.$titleYear = $header.find(classSelector + 'title-year');
         this.$titleMonth = $header.find(classSelector + 'title-month');
         this.$header = $header;
-        this._attachEvent();
+        this._attachEventToRolloverBtn();
     },
 
     /**
@@ -337,7 +337,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      * 달력, 전년 전달 다음달 다음년도로 이동하는 이벤트를 건다.
      * @private
      */
-    _attachEvent: function() {
+    _attachEventToRolloverBtn: function() {
         var btns = this.$header.find('.rollover');
 
         btns.on('click', util.bind(function() {
