@@ -10,44 +10,56 @@
 'use strict';
 var util = ne.util,
     CONSTANTS = {
-        calendarHeader: [
-            '<div class="calendar-header">',
-                '<a href="#" class="rollover calendar-btn-prev-year">이전해</a>',
-                '<a href="#" class="rollover calendar-btn-prev-mon">이전달</a>',
-                '<strong class="calendar-title"></strong>',
-                '<a href="#" class="rollover calendar-btn-next-mon">다음달</a>',
-                '<a href="#" class="rollover calendar-btn-next-year">다음해</a>',
-            '</div>'].join(''),
-        calendarBody: [
-            '<div class="calendar-body">',
-                '<table>',
-                    '<thead>',
-                        '<tr>',
-                            '<th class="calendar-sun">Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fa</th><th class="calendar-sat">Sa</th>',
-                        '</tr>',
-                    '</thead>',
-                    '<tbody>',
-                        '<tr class="calendar-week">',
-                            '<td class="calendar-date"></td>',
-                            '<td class="calendar-date"></td>',
-                            '<td class="calendar-date"></td>',
-                            '<td class="calendar-date"></td>',
-                            '<td class="calendar-date"></td>',
-                            '<td class="calendar-date"></td>',
-                            '<td class="calendar-date"></td>',
-                        '</tr>',
-                    '</tbody>',
-                '</table>',
-            '</div>'].join(''),
-       calendarFooter: [
-           '<div class="calendar-footer">',
-               '<p>오늘 <em class="calendar-today"></em></p>',
-           '</div>'].join(''),
+        relativeMonthValueKey: 'relativeMonthValue',
+        btnPrevYear: 'btn-prev-year',
+        btnPrevMonth: 'btn-prev-month',
+        btnNextYear: 'btn-next-Year',
+        btnNextMonth: 'btn-next-Month',
+        calendarHeader: null,
+        calendarBody: null,
+        calendarFooter: null,
         defaultClassPrefixRegExp: /calendar-/g,
         titleRegExp: /yyyy|yy|mm|m|M/g,
         titleYearRegExp: /yyyy|yy/g,
         titleMonthRegExp: /mm|m|M/g
     };
+
+CONSTANTS.calendarHeader = [
+    '<div class="calendar-header">',
+        '<a href="#" class="rollover calendar-' + CONSTANTS.btnPrevYear + '">이전해</a>',
+        '<a href="#" class="rollover calendar-' + CONSTANTS.btnPrevMonth + '">이전달</a>',
+        '<strong class="calendar-title"></strong>',
+        '<a href="#" class="rollover calendar-' + CONSTANTS.btnNextYear + '">다음달</a>',
+        '<a href="#" class="rollover calendar-' + CONSTANTS.btnNextMonth + '">다음해</a>',
+    '</div>'].join('');
+
+CONSTANTS.calendarBody = [
+    '<div class="calendar-body">',
+        '<table>',
+            '<thead>',
+                '<tr>',
+                   '<th class="calendar-sun">Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fa</th><th class="calendar-sat">Sa</th>',
+                '</tr>',
+            '</thead>',
+            '<tbody>',
+                '<tr class="calendar-week">',
+                    '<td class="calendar-date"></td>',
+                    '<td class="calendar-date"></td>',
+                    '<td class="calendar-date"></td>',
+                    '<td class="calendar-date"></td>',
+                    '<td class="calendar-date"></td>',
+                    '<td class="calendar-date"></td>',
+                    '<td class="calendar-date"></td>',
+                '</tr>',
+            '</tbody>',
+        '</table>',
+    '</div>'].join('');
+
+CONSTANTS.calendarFooter = [
+    '<div class="calendar-footer">',
+        '<p>오늘 <em class="calendar-today"></em></p>',
+    '</div>'].join('');
+
 
 util.defineNamespace('ne.component');
 /**
@@ -245,7 +257,8 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     _assignHeader: function($element, classSelector, classPrefix) {
         var $header = $element.find(classSelector + 'header'),
             headerTemplate,
-            defaultClassPrefixRegExp;
+            defaultClassPrefixRegExp,
+            key = CONSTANTS.relativeMonthValueKey;
 
         if (!$header.length) {
             headerTemplate = CONSTANTS.calendarHeader;
@@ -255,10 +268,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
             $element.append($header);
         }
         // button
-        $header.find(classSelector + 'btn-prev-year').data('relativeMonthValue', -12);
-        $header.find(classSelector + 'btn-prev-mon').data('relativeMonthValue', -1);
-        $header.find(classSelector + 'btn-next-mon').data('relativeMonthValue', 1);
-        $header.find(classSelector + 'btn-next-year').data('relativeMonthValue', 12);
+        $header.find(classSelector + CONSTANTS.btnPrevYear).data(key, -12);
+        $header.find(classSelector + CONSTANTS.btnPrevMonth).data(key, -1);
+        $header.find(classSelector + CONSTANTS.btnNextYear).data(key, 12);
+        $header.find(classSelector + CONSTANTS.btnNextMonth).data(key, 1);
 
         // title text
         this.$title = $header.find(classSelector + 'title');
@@ -325,7 +338,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         var btns = this.$header.find('.rollover');
 
         btns.on('click', util.bind(function() {
-            var relativeMonthValue = $(event.target).data('relativeMonthValue');
+            var relativeMonthValue = $(event.target).data(CONSTANTS.relativeMonthValueKey);
             this.draw(0, relativeMonthValue, true);
             event.preventDefault();
         }, this));
