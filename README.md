@@ -11,9 +11,9 @@ Calendar
 * 년, 월 이동시 커스텀 이벤트를 지원
 
 ## Documentation
-* **API** : https://github.nhnent.com/pages/fe/component-calendar/1.0.1
+* **API** : https://github.nhnent.com/pages/fe/component-calendar/1.1.0
 * **Tutorial** : https://github.nhnent.com/fe/component-calendar/wiki/달력-컴포넌트-적용방법
-* **Sample** - https://github.nhnent.com/pages/fe/component-calendar/1.0.1/tutorial-sample1.html
+* **Sample** - https://github.nhnent.com/pages/fe/component-calendar/1.1.0/tutorial-sample1.html
 * **CI** : http://fe.nhnent.com:8080/jenkins/job/component-calendar/
 
 
@@ -38,6 +38,7 @@ Calendar
 ## History
 | Version | Description | Date | Developer |
 | ---- | ---- | ---- | ---- |
+| <a href="https://github.nhnent.com/pages/fe/component-calendar/1.1.0">1.1.0</a> | 템플릿 적용 | 2015.06 | FE개발팀 이민규 <minkyu.yi@nhnent.com> |
 | <a href="https://github.nhnent.com/pages/fe/component-calendar/1.0.1">1.0.1</a> | 데이트 피커 분리(제외) | 2015.05 | FE개발팀 이민규 <minkyu.yi@nhnent.com> |
-| <a href="https://github.nhnent.com/pages/fe/component-calendar/1.0.1">1.0.0</a> | 배포 | 2015.03 | FE개발팀 이제인 <jein.yi@nhnent.com> |
+| 1.0.0 | 배포 | 2015.03 | FE개발팀 이제인 <jein.yi@nhnent.com> |
 | 0.1.0 | 최초개발 | 2014.11 | FE개발팀 이제인 <jein.yi@nhnent.com> |

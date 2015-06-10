@@ -55,25 +55,24 @@
 <!--<script type="text/javascript" src="../src/js/calendarUtil.js"></script>-->
 <script>
     var cal1 = new ne.component.Calendar({
-        el: $("#layer2"),
+        element: $("#layer2"),
         classPrefix: 'calendar2-'
     });
     cal1.draw();
 
     var cal2 = new ne.component.Calendar({
-        el: $('#layer'),
+        element: $('#layer'),
         year: 1983,     // 달력이 보여줄 날짜-년도
         month: 5,       // 달력이 보여줄 날짜-월
-        date: 12,
         titleFormat: "yyyy-mm", //설정될 title의 형식
         todayFormat: "yyyy - mm - dd (D)", // 설정된 오늘의 날짜 형식
         monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], //월의 이름을 설정 "title" 세팅시 적용
         dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] // 요일 문자값
     });
     // 커스텀 이벤트 등록
-    cal2.on('draw', function(darwEvent){
-        if(darwEvent.date == 10){
-            darwEvent.$date.html('<b>' + darwEvent.html + '</b>');
+    cal2.on('draw', function(drawEvent){
+        if (drawEvent.date == 10){
+            drawEvent.$date.html('<b>' + drawEvent.html + '</b>');
         }
     });
     cal2.draw();

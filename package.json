@@ -1,6 +1,6 @@
 {
   "name": "component-calendar",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "캘린더 컴포넌트<br>년/월/일 데이터를 캘린터 형태의 UI로 제공한다.<br>",
   "featureList": [
     "특정 달의 년/월/일 데이터를 캘린더 형태의 UI로 제공",
@@ -52,6 +52,12 @@
   },
   "author": "NHN Ent. - FE 개발팀",
   "history": {
+    "1.1.0": {
+      "content": "템플릿 적용",
+      "date": "2015.06",
+      "author": "이민규 <minkyu.yi@nhnent.com>",
+      "hasAPI": true
+    },
     "1.0.1": {
       "content": "데이트 피커 분리(제외)",
       "date": "2015.05",
@@ -61,8 +67,7 @@
     "1.0.0": {
       "content": "배포",
       "date": "2015.03",
-      "author": "이제인 <jein.yi@nhnent.com>",
-      "hasAPI": true
+      "author": "이제인 <jein.yi@nhnent.com>"
     },
     "0.1.0": {
       "content": "최초개발",

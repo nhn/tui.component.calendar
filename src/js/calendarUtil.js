@@ -19,32 +19,36 @@ ne.util.defineNamespace('ne.component.Calendar');
 ne.component.Calendar.Util = {
     /**
      * 날짜 해시(년, 월, 일) 값을 만들어 리턴한다
+     *  매개변수가 3개인 경우
+     *      각 매개변수를 year, month, date 값으로 판단한다.
+     *  매개변수가 1개인 경우
+     *      year 값을 넘긴것이 아니라,
+     *      Date 객체를 넘긴것으로 판단한다.
+     *  매개변수가 0개인 경우
+     *      오늘 날짜를 리턴한다.
+     *
      * @function getDateHashTable
-     * @param {Date|number} year 날짜 객체 또는 년도
-     * @param {number} month 월
-     * @param {number} date 일
+     * @param {Date|number} [year] 날짜 객체 또는 년도
+     * @param {number} [month] 월
+     * @param {number} [date] 일
      * @returns {{year: *, month: *, date: *}} 날짜 해시
      */
     getDateHashTable: function(year, month, date) {
-        var nDate,
-            resultDate = {};
+        var nDate;
 
-        if (arguments.length === 3) {
-            resultDate.year = year;
-            resultDate.month = month;
-            resultDate.date = date;
-        } else {
-            if (arguments.length === 1) {
-                nDate = year;
-            } else {
-                nDate = new Date();
-            }
-            resultDate.year = nDate.getFullYear();
-            resultDate.month = nDate.getMonth() + 1;
-            resultDate.date = nDate.getDate();
+        if (arguments.length < 3) {
+            nDate = arguments[0] || new Date();
+
+            year = nDate.getFullYear();
+            month = nDate.getMonth() + 1;
+            date = nDate.getDate();
         }
 
-        return resultDate;
+        return {
+            year: year,
+            month: month,
+            date: date
+        };
     },
 
     /**
@@ -54,7 +58,7 @@ ne.component.Calendar.Util = {
      * @returns {{year: *, month: *, date: *}} 날짜 해시
      */
     getToday: function() {
-       return ne.component.Calendar.Util.getDateHashTable(new Date());
+       return ne.component.Calendar.Util.getDateHashTable();
     },
 
     /**
@@ -148,20 +152,11 @@ ne.component.Calendar.Util = {
      *  ne.component.Calendar.Util.getRelativeDate(0, 0, -1, {year:2010, month:1, date:1}); // {year:2009, month:12, date:31}
      **/
     getRelativeDate: function(year, month, date, dateObj) {
-        var beforeDate = new Date(dateObj.year, dateObj.month, dateObj.date),
-            beforeYear = beforeDate.getFullYear(),
-            isLeapYear = !(beforeYear % 4) && !!(beforeYear % 100) || !(beforeYear % 400),
-            endDays = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-            isEndDate = (endDays[dateObj.month] === dateObj.date),
-            newDate,
-            hash;
-        if (isEndDate) {
-            dateObj.date = endDays[dateObj.month + month];
-        }
+        var nYear = (dateObj.year + year),
+            nMonth = (dateObj.month + month - 1),
+            nDate = (dateObj.date + date),
+            nDateObj = new Date(nYear, nMonth, nDate);
 
-        newDate = new Date(dateObj.year + year, dateObj.month + month - 1, dateObj.date + date);
-        hash = ne.component.Calendar.Util.getDateHashTable(newDate);
-
-        return hash;
+        return ne.component.Calendar.Util.getDateHashTable(nDateObj);
     }
 };
