@@ -11,40 +11,45 @@
 
 'use strict';
 var util = ne.util,
-    _CALENDAR_HEADER = [
-        '<div class="calendar-header">',
-        '<a href="#" class="rollover calendar-btn-prev-year">이전해</a>',
-        '<a href="#" class="rollover calendar-btn-prev-mon">이전달</a>',
-        '<strong class="calendar-title"></strong>',
-        '<a href="#" class="rollover calendar-btn-next-mon">다음달</a>',
-        '<a href="#" class="rollover calendar-btn-next-year">다음해</a>',
-        '</div>'].join(''),
-    _CALENDAR_BODY = [
-        '<div class="calendar-body">',
-        '<table>',
-        '<thead>',
-        '<tr>',
-        '<th class="calendar-sun">Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fa</th><th class="calendar-sat">Sa</th>',
-        '</tr>',
-        '</thead>',
-        '<tbody>',
-        '<tr class="calendar-week">',
-        '<td class="calendar-date"></td>',
-        '<td class="calendar-date"></td>',
-        '<td class="calendar-date"></td>',
-        '<td class="calendar-date"></td>',
-        '<td class="calendar-date"></td>',
-        '<td class="calendar-date"></td>',
-        '<td class="calendar-date"></td>',
-        '</tr>',
-        '</tbody>',
-        '</table>',
-        '</div>'].join(''),
-    _CALENDAR_FOOTER = [
-        '<div class="calendar-footer">',
-        '<p>오늘 <em class="calendar-today"></em></p>',
-        '</div>'].join(''),
-    _DEFAULT_CLASS_PREFIX_REGEXP = /calendar-/g;
+    CONSTANTS = {
+        calendarHeader: [
+            '<div class="calendar-header">',
+                '<a href="#" class="rollover calendar-btn-prev-year">이전해</a>',
+                '<a href="#" class="rollover calendar-btn-prev-mon">이전달</a>',
+                '<strong class="calendar-title"></strong>',
+                '<a href="#" class="rollover calendar-btn-next-mon">다음달</a>',
+                '<a href="#" class="rollover calendar-btn-next-year">다음해</a>',
+            '</div>'].join(''),
+        calendarBody: [
+            '<div class="calendar-body">',
+                '<table>',
+                    '<thead>',
+                        '<tr>',
+                            '<th class="calendar-sun">Su</th><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fa</th><th class="calendar-sat">Sa</th>',
+                        '</tr>',
+                    '</thead>',
+                    '<tbody>',
+                        '<tr class="calendar-week">',
+                            '<td class="calendar-date"></td>',
+                            '<td class="calendar-date"></td>',
+                            '<td class="calendar-date"></td>',
+                            '<td class="calendar-date"></td>',
+                            '<td class="calendar-date"></td>',
+                            '<td class="calendar-date"></td>',
+                            '<td class="calendar-date"></td>',
+                        '</tr>',
+                    '</tbody>',
+                '</table>',
+            '</div>'].join(''),
+       calendarFooter: [
+           '<div class="calendar-footer">',
+               '<p>오늘 <em class="calendar-today"></em></p>',
+           '</div>'].join(''),
+        defaultClassPrefixRegExp: /calendar-/g,
+        titleRegExp: /yyyy|yy|mm|m|M/g,
+        titleYearRegExp: /yyyy|yy/g,
+        titleMonthRegExp: /mm|m|M/g
+    };
 
 util.defineNamespace('ne.component');
 /**
@@ -119,30 +124,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         this.$header = null;
 
         /**
-         * 이전해(년) 버튼
-         * @type {jQuery}
-         */
-        this.$btnPrevYear = null;
-
-        /**
-         * 이전달 버튼
-         * @type {jQuery}
-         */
-        this.$btnPrevMonth = null;
-
-        /**
-         * 다음해(년) 버튼
-         * @type {jQuery}
-         */
-        this.$btnNextYear = null;
-
-        /**
-         * 다음달 버튼
-         * @type {jQuery}
-         */
-        this.$btnNextMonth = null;
-
-        /**
          * 타이틀
          * @type {jQuery}
          */
@@ -204,9 +185,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
          */
         this.$today = null;
 
-        /**
-         * 기본값 셋팅, 초기화
-         */
+        /** 기본값 셋팅, 초기화 */
         this._setDefault(option);
     },
 
@@ -218,7 +197,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     _setDefault: function(option) {
         this._setOption(option);
         this._assignHTMLElements();
-        this._attachEvent();
         this.draw(this._option.year, this._option.month, false);
     },
 
@@ -231,7 +209,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         var instanceOption = this._option,
             today = this.constructor.Util.getDateHashTable();
 
-        // 기본값 세팅
         var defaultOption = {
             classPrefix: 'calendar-',
             year: today.year,
@@ -243,8 +220,6 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
             monthTitles: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
             dayTitles: ['일', '월', '화', '수', '목', '금', '토']
         };
-
-        // 갱신
         util.extend(instanceOption, defaultOption, option);
     },
 
@@ -270,25 +245,29 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      * @private
      */
     _assignHeader: function($element, classSelector, classPrefix) {
-        var $header = $element.find(classSelector + 'header');
+        var $header = $element.find(classSelector + 'header'),
+            headerTemplate,
+            defaultClassPrefixRegExp;
 
-        if ($header.length === 0) {
-            $header = $(_CALENDAR_HEADER.replace(_DEFAULT_CLASS_PREFIX_REGEXP, classPrefix));
+        if (!$header.length) {
+            headerTemplate = CONSTANTS.calendarHeader;
+            defaultClassPrefixRegExp = CONSTANTS.defaultClassPrefixRegExp;
+
+            $header = $(headerTemplate.replace(defaultClassPrefixRegExp, classPrefix));
             $element.append($header);
         }
-
         // button
-        this.$btnPrevYear = $header.find(classSelector + 'btn-prev-year');
-        this.$btnPrevMonth = $header.find(classSelector + 'btn-prev-mon');
-        this.$btnNextMonth = $header.find(classSelector + 'btn-next-mon');
-        this.$btnNextYear = $header.find(classSelector + 'btn-next-year');
+        $header.find(classSelector + 'btn-prev-year').data('relativeMonthValue', -12);
+        $header.find(classSelector + 'btn-prev-mon').data('relativeMonthValue', -1);
+        $header.find(classSelector + 'btn-next-mon').data('relativeMonthValue', 1);
+        $header.find(classSelector + 'btn-next-year').data('relativeMonthValue', 12);
 
         // title text
         this.$title = $header.find(classSelector + 'title');
         this.$titleYear = $header.find(classSelector + 'title-year');
         this.$titleMonth = $header.find(classSelector + 'title-month');
-
         this.$header = $header;
+        this._attachEvent();
     },
 
     /**
@@ -300,17 +279,20 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      */
     _assignBody: function($element, classSelector, classPrefix) {
         var $body = $element.find(classSelector + 'body'),
-            $weekTemplate;
+            $weekTemplate,
+            bodyTemplate,
+            defaultClassPrefixRegExp;
 
-        if ($body.length === 0) {
-            $body = $(_CALENDAR_BODY.replace(_DEFAULT_CLASS_PREFIX_REGEXP, classPrefix));
+        if (!$body.length) {
+            bodyTemplate = CONSTANTS.calendarBody;
+            defaultClassPrefixRegExp = CONSTANTS.defaultClassPrefixRegExp;
+
+            $body = $(bodyTemplate.replace(defaultClassPrefixRegExp, classPrefix));
             $element.append($body);
         }
-
         $weekTemplate = $body.find(classSelector + 'week');
         this.$weekTemplate = $weekTemplate.clone(true);
         this.$weekAppendTarget = $weekTemplate.parent();
-
         this.$body = $body;
     },
 
@@ -322,14 +304,18 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      * @private
      */
     _assignFooter: function($element, classSelector, classPrefix) {
-        var $footer = $element.find(classSelector + 'footer');
+        var $footer = $element.find(classSelector + 'footer'),
+            footerTemplate,
+            defaultClassPrefixRegExp;
 
-        if ($footer.length === 0) {
-            $footer = $(_CALENDAR_FOOTER.replace(_DEFAULT_CLASS_PREFIX_REGEXP, classPrefix));
+        if (!$footer.length) {
+            footerTemplate = CONSTANTS.calendarFooter;
+            defaultClassPrefixRegExp = CONSTANTS.defaultClassPrefixRegExp;
+
+            $footer = $(footerTemplate.replace(defaultClassPrefixRegExp, classPrefix));
             $element.append($footer);
         }
         this.$today = $footer.find(classSelector + 'today');
-
         this.$footer = $footer;
     },
 
@@ -338,31 +324,13 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
      * @private
      */
     _attachEvent: function() {
-        if (util.isNotEmpty(this.$btnPrevYear)) {
-            this.$btnPrevYear.click($.proxy(this._onButtonHandle, this, -1, 0));
-        }
-        if (util.isNotEmpty(this.$btnNextYear)) {
-            this.$btnNextYear.click($.proxy(this._onButtonHandle, this, 1, 0));
-        }
+        var btns = this.$header.find('.rollover');
 
-        if (util.isNotEmpty(this.$btnPrevMonth)) {
-            this.$btnPrevMonth.click($.proxy(this._onButtonHandle, this, 0, -1));
-        }
-        if (util.isNotEmpty(this.$btnNextMonth)) {
-            this.$btnNextMonth.click($.proxy(this._onButtonHandle, this, 0, 1));
-        }
-    },
-
-    /**
-     * 달력 버튼을 누를때의 핸들러
-     * @param {number} yearDist 연도 이동 값
-     * @param {number} monthDist 월 이동 값
-     * @param {Event} event 클릭 이벤트 객체
-     * @private
-     */
-    _onButtonHandle: function(yearDist, monthDist, event) {
-        event.preventDefault();
-        this.draw(yearDist, monthDist, true);
+        btns.on('click', util.bind(function() {
+            var relativeMonthValue = $(event.target).data('relativeMonthValue');
+            this.draw(0, relativeMonthValue, true);
+            event.preventDefault();
+        }, this));
     },
 
     /**
@@ -498,9 +466,9 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         var today = this.constructor.Util.getDateHashTable();
 
         return (
-        today.year === year &&
-        today.month === month &&
-        today.date === date
+            today.year === year &&
+            today.month === month &&
+            today.date === date
         );
     },
 
@@ -591,18 +559,16 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
             replaceMap,
             reg;
 
-        if (month < 10) {
-            month = '0' + Number(month);
-        }
+        month = this._prependLeadingZero(month);
         replaceMap = this._getReplaceMap(year, month);
 
-        reg = /yyyy|yy|mm|m|M/g;
+        reg = CONSTANTS.titleRegExp;
         this._setDateTextInCalendar(this.$title, titleFormat, replaceMap, reg);
 
-        reg = /yyyy|yy/g;
+        reg = CONSTANTS.titleYearRegExp;
         this._setDateTextInCalendar(this.$titleYear, option.yearTitleFormat, replaceMap, reg);
 
-        reg = /mm|m|M/g;
+        reg = CONSTANTS.titleMonthRegExp;
         this._setDateTextInCalendar(this.$titleMonth, option.monthTitleFormat, replaceMap, reg);
     },
 
@@ -618,10 +584,11 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         var title,
             $el = $(element);
 
-        if ($el.length > 0) {
-            title = this._getConvertedTitle(form, map, reg);
-            $el.text(title);
+        if (!$el.length) {
+            return;
         }
+        title = this._getConvertedTitle(form, map, reg);
+        $el.text(title);
     },
 
     /**
@@ -679,18 +646,37 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
             date,
             replaceMap;
 
-        if ($today.length < 1) {
+        if (!$today.length) {
             return;
         }
 
         today = this.constructor.Util.getDateHashTable();
         year = today.year;
-        month = (today.month < 10) ? '0' + today.month : today.month;
-        date = (today.date < 10) ? '0' + today.date : today.date;
+        month = this._prependLeadingZero(today.month);
+        date = this._prependLeadingZero(today.date);
 
         todayFormat = this._option.todayFormat;
         replaceMap = this._getReplaceMap(year, month, date);
         this._setDateTextInCalendar($today, todayFormat, replaceMap, /yyyy|yy|mm|m|M|dd|d|D/g);
+    },
+
+    /**
+     * 0~99 숫자를 2자릿수 표현으로 만든 문자열을 반환한다.
+     * @param {number} number 숫자
+     * @returns {string} 결과 문자열
+     * @private
+     * @example
+     *  this._prependLeadingZero(0); //  '00'
+     *  this._prependLeadingZero(9); //  '09'
+     *  this._prependLeadingZero(12); //  '12'
+     */
+    _prependLeadingZero: function(number) {
+        var prefix = '';
+
+        if (number < 10) {
+            prefix = '0';
+        }
+        return prefix + number;
     },
 
     /**
@@ -790,34 +776,36 @@ ne.util.defineNamespace('ne.component.Calendar');
 ne.component.Calendar.Util = {
     /**
      * 날짜 해시(년, 월, 일) 값을 만들어 리턴한다
-     *      매개변수가 1개인 경우는 year 값을 넘긴것이 아니라
+     *  매개변수가 3개인 경우
+     *      각 매개변수를 year, month, date 값으로 판단한다.
+     *  매개변수가 1개인 경우
+     *      year 값을 넘긴것이 아니라,
      *      Date 객체를 넘긴것으로 판단한다.
+     *  매개변수가 0개인 경우
+     *      오늘 날짜를 리턴한다.
+     *
      * @function getDateHashTable
-     * @param {Date|number} year 날짜 객체 또는 년도
-     * @param {number} month 월
-     * @param {number} date 일
+     * @param {Date|number} [year] 날짜 객체 또는 년도
+     * @param {number} [month] 월
+     * @param {number} [date] 일
      * @returns {{year: *, month: *, date: *}} 날짜 해시
      */
     getDateHashTable: function(year, month, date) {
-        var nDate,
-            resultDate = {};
+        var nDate;
 
-        if (arguments.length === 3) {
-            resultDate.year = year;
-            resultDate.month = month;
-            resultDate.date = date;
-        } else {
-            if (arguments.length === 1) {
-                nDate = arguments[0];
-            } else {
-                nDate = new Date();
-            }
-            resultDate.year = nDate.getFullYear();
-            resultDate.month = nDate.getMonth() + 1;
-            resultDate.date = nDate.getDate();
+        if (arguments.length < 3) {
+            nDate = arguments[0] || new Date();
+
+            year = nDate.getFullYear();
+            month = nDate.getMonth() + 1;
+            date = nDate.getDate();
         }
 
-        return resultDate;
+        return {
+            year: year,
+            month: month,
+            date: date
+        };
     },
 
     /**
@@ -827,7 +815,7 @@ ne.component.Calendar.Util = {
      * @returns {{year: *, month: *, date: *}} 날짜 해시
      */
     getToday: function() {
-       return ne.component.Calendar.Util.getDateHashTable(new Date());
+       return ne.component.Calendar.Util.getDateHashTable();
     },
 
     /**

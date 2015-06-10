@@ -19,34 +19,36 @@ ne.util.defineNamespace('ne.component.Calendar');
 ne.component.Calendar.Util = {
     /**
      * 날짜 해시(년, 월, 일) 값을 만들어 리턴한다
-     *      매개변수가 1개인 경우는 year 값을 넘긴것이 아니라
+     *  매개변수가 3개인 경우
+     *      각 매개변수를 year, month, date 값으로 판단한다.
+     *  매개변수가 1개인 경우
+     *      year 값을 넘긴것이 아니라,
      *      Date 객체를 넘긴것으로 판단한다.
+     *  매개변수가 0개인 경우
+     *      오늘 날짜를 리턴한다.
+     *
      * @function getDateHashTable
-     * @param {Date|number} year 날짜 객체 또는 년도
-     * @param {number} month 월
-     * @param {number} date 일
+     * @param {Date|number} [year] 날짜 객체 또는 년도
+     * @param {number} [month] 월
+     * @param {number} [date] 일
      * @returns {{year: *, month: *, date: *}} 날짜 해시
      */
     getDateHashTable: function(year, month, date) {
-        var nDate,
-            resultDate = {};
+        var nDate;
 
-        if (arguments.length === 3) {
-            resultDate.year = year;
-            resultDate.month = month;
-            resultDate.date = date;
-        } else {
-            if (arguments.length === 1) {
-                nDate = arguments[0];
-            } else {
-                nDate = new Date();
-            }
-            resultDate.year = nDate.getFullYear();
-            resultDate.month = nDate.getMonth() + 1;
-            resultDate.date = nDate.getDate();
+        if (arguments.length < 3) {
+            nDate = arguments[0] || new Date();
+
+            year = nDate.getFullYear();
+            month = nDate.getMonth() + 1;
+            date = nDate.getDate();
         }
 
-        return resultDate;
+        return {
+            year: year,
+            month: month,
+            date: date
+        };
     },
 
     /**
@@ -56,7 +58,7 @@ ne.component.Calendar.Util = {
      * @returns {{year: *, month: *, date: *}} 날짜 해시
      */
     getToday: function() {
-       return ne.component.Calendar.Util.getDateHashTable(new Date());
+       return ne.component.Calendar.Util.getDateHashTable();
     },
 
     /**
