@@ -11,10 +11,10 @@
 var util = ne.util,
     CONSTANTS = {
         relativeMonthValueKey: 'relativeMonthValue',
-        btnPrevYear: 'btn-prev-year',
-        btnPrevMonth: 'btn-prev-month',
-        btnNextYear: 'btn-next-year',
-        btnNextMonth: 'btn-next-month',
+        prevYear: 'prev-year',
+        prevMonth: 'prev-month',
+        nextYear: 'next-year',
+        nextMonth: 'next-month',
         calendarHeader: null,
         calendarBody: null,
         calendarFooter: null,
@@ -27,11 +27,11 @@ var util = ne.util,
 
 CONSTANTS.calendarHeader = [
     '<div class="calendar-header">',
-        '<a href="#" class="rollover calendar-' + CONSTANTS.btnPrevYear + '">이전해</a>',
-        '<a href="#" class="rollover calendar-' + CONSTANTS.btnPrevMonth + '">이전달</a>',
-        '<strong class="calendar-title"></strong>',
-        '<a href="#" class="rollover calendar-' + CONSTANTS.btnNextMonth + '">다음달</a>',
-        '<a href="#" class="rollover calendar-' + CONSTANTS.btnNextYear + '">다음해</a>',
+    '<a href="#" class="rollover calendar-btn-' + CONSTANTS.prevYear + '">이전해</a>',
+    '<a href="#" class="rollover calendar-btn-' + CONSTANTS.prevMonth + '">이전달</a>',
+    '<strong class="calendar-title"></strong>',
+    '<a href="#" class="rollover calendar-btn-' + CONSTANTS.nextMonth + '">다음달</a>',
+    '<a href="#" class="rollover calendar-btn-' + CONSTANTS.nextYear + '">다음해</a>',
     '</div>'].join('');
 
 CONSTANTS.calendarBody = [
@@ -269,10 +269,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
             $element.append($header);
         }
         // button
-        $header.find(classSelector + CONSTANTS.btnPrevYear).data(key, -12);
-        $header.find(classSelector + CONSTANTS.btnPrevMonth).data(key, -1);
-        $header.find(classSelector + CONSTANTS.btnNextYear).data(key, 12);
-        $header.find(classSelector + CONSTANTS.btnNextMonth).data(key, 1);
+        $header.find(classSelector + CONSTANTS.prevYear).data(key, -12);
+        $header.find(classSelector + CONSTANTS.prevMonth).data(key, -1);
+        $header.find(classSelector + CONSTANTS.nextYear).data(key, 12);
+        $header.find(classSelector + CONSTANTS.nextMonth).data(key, 1);
 
         // title text
         this.$title = $header.find(classSelector + 'title');
@@ -415,12 +415,12 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
 
             if (i < firstDay) {
                 isPrevMonth = true;
-                $dateContainer.addClass(classPrefix + 'prev-mon');
+                $dateContainer.addClass(classPrefix + CONSTANTS.prevMonth);
                 tempYear = datePrevMonth.year;
                 tempMonth = datePrevMonth.month;
             } else if (i > indexOfLastDate) {
                 isNextMonth = true;
-                $dateContainer.addClass(classPrefix + 'next-mon');
+                $dateContainer.addClass(classPrefix + CONSTANTS.nextMonth);
                 tempYear = dateNextMonth.year;
                 tempMonth = dateNextMonth.month;
             }
