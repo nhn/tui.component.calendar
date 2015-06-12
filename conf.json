@@ -12,7 +12,7 @@
     "default": {
       "outputSourceFiles" : true
     },
-    "applicationName": "AutoComplete",
+    "applicationName": "fe-component-calendar",
     "disqus": "",
     "googleAnalytics": "",
     "openGraph": {

@@ -38,7 +38,8 @@ module.exports = function(grunt) {
         uglify: {
             normal: {
                 files: {
-                    '<%= name %>.min.js' : '<%= name %>.js'
+                    '<%= name %>.min.js': '<%= name %>.js',
+                    'samples/js/<%= name %>.min.js': '<%= name %>.js'
                 },
                 options: {
                     banner: '/*!<%= pkg.name %> v<%=pkg.version%> | NHN Entertainment*/',
@@ -51,7 +52,8 @@ module.exports = function(grunt) {
         copy: {
             main: {
                 files: [
-                    {expand: true, flatten: true, src: ['src/css/*'], dest: '<%= distFolder %>/', filter: 'isFile'}
+                    {expand: true, flatten: true, src: ['src/css/*'], dest: '<%= distFolder %>/', filter: 'isFile'},
+                    {expand: true, flatten: true, src: ['src/common/*.js'], dest: 'samples/js/', filter: 'isFile'}
                 ]
             }
         },
