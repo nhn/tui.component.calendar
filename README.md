@@ -30,9 +30,9 @@ Calendar
 
 ## Download/Install
 * Bower:
-   * 최신버전 : `bower install "git+http://70327b4564c7a80eb61724056876b960290946dd:x-oauth-basic@github.nhnent.com/fe/component-calendar.git#master"`
-   * 특정버전 : `bower install "git+http://70327b4564c7a80eb61724056876b960290946dd:x-oauth-basic@github.nhnent.com/fe/component-calendar.git[#tag]"`
-* Download: https://github.nhnent.com/fe/component-calendar
+   * 최신버전 : `bower install ne-component-calendar#master"`
+   * 특정버전 : `bower install ne-component-calendar[#tag]"`
+* Download: https://github.com/nhnent/fe.component-calendar
 
 ## History
 | Version | Description | Date | Developer |
