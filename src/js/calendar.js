@@ -265,7 +265,8 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         var $header = $element.find(classSelector + 'header'),
             headerTemplate,
             defaultClassPrefixRegExp,
-            key = CONSTANTS.relativeMonthValueKey;
+            key = CONSTANTS.relativeMonthValueKey,
+            btnClassName = 'btn-';
 
         if (!$header.length) {
             headerTemplate = CONSTANTS.calendarHeader;
@@ -275,10 +276,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
             $element.append($header);
         }
         // button
-        $header.find(classSelector + CONSTANTS.prevYear).data(key, -12);
-        $header.find(classSelector + CONSTANTS.prevMonth).data(key, -1);
-        $header.find(classSelector + CONSTANTS.nextYear).data(key, 12);
-        $header.find(classSelector + CONSTANTS.nextMonth).data(key, 1);
+        $header.find(classSelector + btnClassName + CONSTANTS.prevYear).data(key, -12);
+        $header.find(classSelector + btnClassName + CONSTANTS.prevMonth).data(key, -1);
+        $header.find(classSelector + btnClassName + CONSTANTS.nextYear).data(key, 12);
+        $header.find(classSelector + btnClassName + CONSTANTS.nextMonth).data(key, 1);
 
         // title text
         this.$title = $header.find(classSelector + 'title');

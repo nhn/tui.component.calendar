@@ -37,7 +37,7 @@ body {font-size:12px; font-family:malgun gothic, verdana, consolas;min-width:700
 .layer table .calendar-today a:active{background:#6595db;color:#fff}
 .layer .calendar-bottom {background:none; border-top:1px solid #eee; }
 .layer .calendar-bottom .calendar-today {color:#6d6d6d}
-.layer table .calendar-prev-month, #layer table .calendar-next-mon {color:#ccc;}
+.layer table .calendar-prev-month, .layer table .calendar-next-month {color:#ccc;}
 .layer table .calendar-prev-month .calendar-date,
 .layer table .calendar-next-month .calendar-date {display:none}
 .layer table .calendar-next-month.calendar-sat,
