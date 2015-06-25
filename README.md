@@ -38,3 +38,7 @@ Calendar
 | <a href="https://nhnent.github.io/fe.component-calendar/1.0.1">1.0.1</a> | 데이트 피커 분리(제외) | 2015.05 | FE개발팀 이민규 <minkyu.yi@nhnent.com> |
 | 1.0.0 | 배포 | 2015.03 | FE개발팀 이제인 <jein.yi@nhnent.com> |
 | 0.1.0 | 최초개발 | 2014.11 | FE개발팀 이제인 <jein.yi@nhnent.com> |
+
+<br>
+## License
+[MIT 라이선스](LICENSE)로 자유롭게 사용할 수 있습니다.

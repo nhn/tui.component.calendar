@@ -2,6 +2,10 @@
   "name": "component-calendar",
   "version": "1.1.0",
   "description": "캘린더 컴포넌트<br>년/월/일 데이터를 캘린터 형태의 UI로 제공한다.<br>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nhnent/fe.component-calendar.git"
+  },
   "featureList": [
     "특정 달의 년/월/일 데이터를 캘린더 형태의 UI로 제공",
     "이전 해, 다음 해, 이전 달, 다음 달로 이동을 지원",
@@ -24,7 +28,9 @@
     "ne-code-snippet#~1.0.2"
   ],
   "private": true,
+  "license": "MIT",
   "devDependencies": {
+    "fedoc-template": "git+http://14bfd38a036366f7ca90355d202038126127bd01:x-oauth-basic@github.nhnent.com/fe/share-fedoc-template.git#snippet",
     "grunt": "^0.4.5",
     "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-copy": "^0.6.0",
