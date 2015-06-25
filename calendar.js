@@ -172,6 +172,12 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
          */
         this.$weekAppendTarget = null;
 
+        /**-------- footer --------*/
+        this.$footer = null;
+
+        /** Today */
+        this.$today = null;
+
         /**
          * 날짜(일)들을 나타내는 엘리먼트
          * @type {jQuery}

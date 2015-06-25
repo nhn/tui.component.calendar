@@ -15,8 +15,6 @@ Calendar
 * **Tutorial** : https://github.com/nhnent/fe.component-calendar/wiki/달력-컴포넌트-적용방법
 * **Sample** - https://nhnent.github.io/fe.component-calendar/1.1.0/tutorial-sample1.html
 
-
-
 ## Dependency
 * jquery: ~1.8.3
 * ne-code-snippet: ~1.0.2
@@ -27,10 +25,9 @@ Calendar
     * Chrome
     * Firefox
 
-
 ## Download/Install
 * Bower:
-   * 최신버전 : `bower install ne-component-calendar#master"`
+   * 최신버전 : `bower install ne-component-calendar"`
    * 특정버전 : `bower install ne-component-calendar[#tag]"`
 * Download: https://github.com/nhnent/fe.component-calendar
 

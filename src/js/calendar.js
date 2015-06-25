@@ -79,7 +79,7 @@ util.defineNamespace('ne.component');
  *     @param {Array} [option.dayTitles = ["일","월","화","수","목","금","토"]] <br>각 요일의 이름을 설정할 수 있다. 일요일부터 순서대로 배열로 정의한다. option의 todayFormat 표시형식에서 D을 사용하면 여기서 설정된 이름으로 표시할 수 있다.
  * @example
  * var calendar = new ne.component.Calendar({
- *                    el: document.getElementById('layer'),
+ *                    element: '#layer',
  *                    classPrefix: "calendar-",
  *                    year: 1983,
  *                    month: 5,
@@ -169,6 +169,12 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
          * @type {jQuery}
          */
         this.$weekAppendTarget = null;
+
+        /**-------- footer --------*/
+        this.$footer = null;
+
+        /** Today */
+        this.$today = null;
 
         /**
          * 날짜(일)들을 나타내는 엘리먼트
@@ -373,6 +379,19 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         }
 
         return nDate;
+    },
+
+    /**
+     * 캘린더를 다시 그려야 하는지 판단.
+     * @param {number} year 년도
+     * @param {number} month 월
+     * @returns {boolean} reflow 여부
+     * @private
+     */
+    _isNecessaryForDrawing: function(year, month) {
+        var shownDate = this._shownDate;
+
+        return (shownDate.year !== year || shownDate.month !== month);
     },
 
     /**
