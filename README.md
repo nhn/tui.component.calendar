@@ -11,9 +11,9 @@ Calendar
 * 년, 월 이동시 커스텀 이벤트를 지원
 
 ## Documentation
-* **API** : https://nhnent.github.io/fe.component-calendar/lastest
+* **API** : https://nhnent.github.io/fe.component-calendar/latest
 * **Tutorial** : https://github.com/nhnent/fe.component-calendar/wiki/달력-컴포넌트-적용방법
-* **Sample** - https://nhnent.github.io/fe.component-calendar/1.1.0/tutorial-sample1.html
+* **Sample** - https://nhnent.github.io/fe.component-calendar/latest/tutorial-sample1.html
 
 ## Dependency
 * jquery: ~1.8.3
