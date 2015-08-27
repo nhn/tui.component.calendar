@@ -35,11 +35,11 @@ module.exports = function(config) {
          ]
          */
         files: [
-            'bower_components/jquery/jquery.min.js',
+            'lib/jquery/jquery.min.js',
             'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
-            'src/common/*.js',
+            'lib/ne-code-snippet/code-snippet.js',
             'src/js/calendar.js',
-            'src/js/calendarUtil.js',
+            'src/js/utils.js',
             'test/*.js',
             {
                 pattern: 'test/fixture/**/*.html',
