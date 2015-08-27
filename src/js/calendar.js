@@ -1,13 +1,12 @@
 /**
- * @fileoverview 캘린더 컴포넌트
- * (pug.Calendar 에서 분리)
- * @author NHN ENTERTAINMENT FE 개발팀(e0242@nhnent.com)
- * @author 이제인(jein.yi@nhnent.com)
- * @author FE개발팀 이민규 (minkyu.yi@nhnent.com) - 2015, 6, 3
+ * @fileoverview Calendar component(from Pug component)
+ * @author NHN Ent. FE dev team. <dl_javascript@nhnent.com>
  * @dependency jquery ~1.8.3, ne-code-snippet ~1.0.2
  */
 
 'use strict';
+var utils = require('./utils');
+
 var util = ne.util,
     CONSTANTS = {
         relativeMonthValueKey: 'relativeMonthValue',
@@ -62,39 +61,38 @@ CONSTANTS.calendarFooter = [
     '</div>'].join('');
 
 
-util.defineNamespace('ne.component');
 /**
- * 캘린더 컴포넌트 클래스
+ * Calendar component class
  * @constructor
- * @param {Object} [option] 초기화 옵션 설정을 위한 객체.
- *     @param {HTMLElement} option.element 캘린더 엘리먼트
- *     @param {string} [option.classPrefix="calendar-"] 초기 HTML/CSS구조에서 필요한 className 앞에 붙는 prefix를 정의
- *     @param {number} [option.year=현재년] 초기에 표시될 달력의 년도
- *     @param {number} [option.month=현재월] 초기에 표시될 달력의 달
- *     @param {string} [option.titleFormat="yyyy-mm"] className이 '[prefix]title' 인 엘리먼트를 찾아서 해당 형식대로 날짜를 출력한다. 다음의 형식을 사용할 수 있다.<table><tr><th>표시형식</th><th>설명</th><th>결과</th></tr><tr><td>yyyy</td><td>4자리 연도</td><td>2010</td></tr><tr><td>yy</td><td>2자리 연도</td><td>10</td></tr><tr><td>mm</td><td>2자리 월</td><td>09</td></tr><tr><td>m</td><td>1자리 월</td><td>9</td></tr><tr><td>M</td><td>monthTitles 옵션 값으로 표시</td><td>SEP</td></tr></table>
- *     @param {string} [option.todayFormat = "yyyy년 mm월 dd일 (D)"] className이 '[prefix]today' 인 엘리먼트를 찾아서 해당 형식대로 날짜를 출력한다.
- *     @param {string} [option.yearTitleFormat = "yyyy"] className이 '[prefix]year' 인 엘리먼트를 찾아서 해당 형식대로 연도를 출력한다. option의 titleFormat에서 사용할 수 있는 형식에서 연도 표시 형식을 사용할 수 있다.
- *     @param {string} [option.monthTitleFormat = "m"] className이 '[prefix]month' 인 엘리먼트를 찾아서 해당 형식대로 월을 출력한다. option의 titleFormat에서 사용할 수 있는 형식에서 월 표시 형식을 사용할 수 있다.
- *     @param {Array} [option.monthTitles = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]] 각 월의 이름을 설정할 수 있다. 1월부터 순서대로 배열로 정의한다. option의 titleFormat 표시형식에서 M을 사용하면 여기서 설정된 이름으로 표시할 수 있다.
- *     @param {Array} [option.dayTitles = ["일","월","화","수","목","금","토"]] <br>각 요일의 이름을 설정할 수 있다. 일요일부터 순서대로 배열로 정의한다. option의 todayFormat 표시형식에서 D을 사용하면 여기서 설정된 이름으로 표시할 수 있다.
+ * @param {Object} [option] A options for initialize
+ *     @param {HTMLElement} option.element A root element
+ *     @param {string} [option.classPrefix="calendar-"] A prefix class for markup structure
+ *     @param {number} [option.year=this year] A year for initialize
+ *     @param {number} [option.month=this month] A month for initialize
+ *     @param {string} [option.titleFormat="yyyy-mm"] A title format. This component find title element by className '[prefix]title'
+ *     @param {string} [option.todayFormat = "yyyy Year mm Month dd Day (D)"] A today format. This component find today element by className '[prefix]today'
+ *     @param {string} [option.yearTitleFormat = "yyyy"] A year title formant. This component find year title element by className '[prefix]year'
+ *     @param {string} [option.monthTitleFormat = "m"] A month title format. This component find month title element by className이 '[prefix]month'
+ *     @param {Array} [option.monthTitles = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]] A label of each month.
+ *     @param {Array} [option.dayTitles = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]] A label for day. If you set the other option todayFormat 'D', you can use this name. 
  * @example
  * var calendar = new ne.component.Calendar({
  *                    element: '#layer',
  *                    classPrefix: "calendar-",
  *                    year: 1983,
  *                    month: 5,
- *                    titleFormat: "yyyy-mm", //설정될 title의 형식
- *                    todayFormat: "yyyy년 mm월 dd일 (D)" // 설정된 오늘의 날짜 형식
- *                    yearTitleFormat: "yyyy", //설정될 연 title의 형식
- *                    monthTitleFormat: "m", //설정될 월 title의 형식
- *                    monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], //월의 이름을 설정 "title" 세팅시 적용
- *                    dayTitles: ['일', '월', '화', '수', '목', '금', '토'] // 요일들
+ *                    titleFormat: "yyyy-mm", // title
+ *                    todayFormat: "yyyy / mm / dd (D)" // today
+ *                    yearTitleFormat: "yyyy", // year title
+ *                    monthTitleFormat: "m", // month title
+ *                    monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], 
+ *                    dayTitles: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] // 요일들
  *             });
  **/
-ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.prototype */ {
+var Calendar = util.defineClass( /** @lends ne.component.Calendar.prototype */ {
     init: function(option) {
         /**
-         * 옵션을 저장한다
+         * Set options
          * option: {
          *     classPrefix: string,
          *     year: number
@@ -111,7 +109,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         this._option = {};
 
         /**
-         * 보여지고 있는 날짜
+         * A day that is shown
          * @type {{year: number, month: number}}
          */
         this._shownDate = {year: 0, month: 1, date: 1};
@@ -121,8 +119,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
          *======================================*/
         /**
          * =========Root Element=========
-         *  옵션에 엘리먼트가 지정되어있지 않는 경우는,
-         *  옵션 없이 엘리먼트 자체를 초기화 매개변수로 넘겼다고 판단한다.
+         * If options do not include element, this component jedge initialize element without options
          * @type {jQuery}
          * @private
          */
@@ -135,19 +132,19 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         this.$header = null;
 
         /**
-         * 타이틀
+         * A tilte
          * @type {jQuery}
          */
         this.$title = null;
 
         /**
-         * 타이틀 - 년도
+         * A year title
          * @type {jQuery}
          */
         this.$titleYear = null;
 
         /**
-         * 타이틀 - 달
+         * A month title
          * @type {jQuery}
          */
         this.$titleMonth = null;
@@ -159,13 +156,13 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         this.$body = null;
 
         /**
-         * 일주일을 나타낼 엘리먼트 템플릿
+         * A template of week
          * @type {jQuery}
          */
         this.$weekTemplate = null;
 
         /**
-         * 템플릿이 붙을 부모 엘리먼트
+         * A week parent element 
          * @type {jQuery}
          */
         this.$weekAppendTarget = null;
@@ -177,14 +174,14 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         this.$today = null;
 
         /**
-         * 날짜(일)들을 나타내는 엘리먼트
+         * A date element
          * @type {jQuery}
          * @private
          */
         this._$dateElement = null;
 
         /**
-         * 날짜(일)들을 감싸는 있는 엘리먼트
+         * A date wrapper element
          * @type {jQuery}
          * @private
          */
@@ -197,18 +194,18 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         this.$footer = null;
 
         /**
-         * 오늘날짜 엘리먼트
+         * Today element
          * @type {jQuery}
          */
         this.$today = null;
 
-        /** 기본값 셋팅, 초기화 */
+        /** Set default options */
         this._setDefault(option);
     },
 
     /**
-     * 초기화를 진행한다.
-     * @param {Object} [option] 옵션 값
+     * Set defulat opitons
+     * @param {Object} [option] A options to initialzie component
      * @private
      */
     _setDefault: function(option) {
@@ -218,30 +215,30 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 옵션값을 저장한다.
-     * @param {Object} [option] 옵션 값
+     * Save options
+     * @param {Object} [option] A options to initialize component
      * @private
      */
     _setOption: function(option) {
         var instanceOption = this._option,
-            today = this.constructor.Util.getDateHashTable();
+            today = utils.getDateHashTable();
 
         var defaultOption = {
             classPrefix: 'calendar-',
             year: today.year,
             month: today.month,
             titleFormat: 'yyyy-mm',
-            todayFormat: 'yyyy년 mm월 dd일 (D)',
+            todayFormat: 'yyyy/mm/dd (D)',
             yearTitleFormat: 'yyyy',
             monthTitleFormat: 'm',
             monthTitles: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-            dayTitles: ['일', '월', '화', '수', '목', '금', '토']
+            dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
         };
         util.extend(instanceOption, defaultOption, option);
     },
 
     /**
-     * 엘리먼트를 필드에 할당한다.
+     * Set element to filed
      * @private
      */
     _assignHTMLElements: function() {
@@ -255,10 +252,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 해더 엘리먼트들을 등록한다.
-     * @param {jQuery} $element 루트 엘리먼트 jquery 객체
-     * @param {string} classSelector 셀렉터
-     * @param {string} classPrefix 클래스 prefix
+     * Register header element.
+     * @param {jQuery} $element The root element of component
+     * @param {string} classSelector A class selector
+     * @param {string} classPrefix A prefix for class
      * @private
      */
     _assignHeader: function($element, classSelector, classPrefix) {
@@ -290,10 +287,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 바디 엘리먼트들을 등록한다.
-     * @param {jQuery} $element 루트 엘리먼트 jquery 객체
-     * @param {string} classSelector 셀렉터
-     * @param {string} classPrefix 클래스 prefix
+     * Register body element
+     * @param {jQuery} $element The root elment of component
+     * @param {string} classSelector A selector 
+     * @param {string} classPrefix A prefix for class
      * @private
      */
     _assignBody: function($element, classSelector, classPrefix) {
@@ -316,10 +313,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 푸터 엘리먼트들을 등록한다.
-     * @param {jQuery} $element 루트 엘리먼트 jquery 객체
-     * @param {string} classSelector 셀렉터
-     * @param {string} classPrefix 클래스 prefix
+     * Register footer element
+     * @param {jQuery} $element The root element of component
+     * @param {string} classSelector A selector
+     * @param {string} classPrefix A prefix for class
      * @private
      */
     _assignFooter: function($element, classSelector, classPrefix) {
@@ -339,7 +336,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 달력, 전년 전달 다음달 다음년도로 이동하는 이벤트를 건다.
+     * Set navigation event
      * @private
      */
     _attachEventToRolloverBtn: function() {
@@ -353,11 +350,11 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 캘린더를 그리기 위한 년/월 날짜 해시를 얻는다
-     * @param {number} year 년
-     * @param {number} month 월
-     * @param {boolean} [isRelative] 상대 값 여부
-     * @returns {{year: number, month: number}} 날짜 해시
+     * Get Hash data to drow calendar
+     * @param {number} year A year
+     * @param {number} month A month
+     * @param {boolean} [isRelative]  Whether is related other value or not
+     * @returns {{year: number, month: number}} A date hash
      * @private
      */
     _getDateForDrawing: function(year, month, isRelative) {
@@ -370,7 +367,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
         }
 
         if (isRelative) {
-            relativeDate = this.constructor.Util.getRelativeDate(year, month, 0, nDate);
+            relativeDate = utils.getRelativeDate(year, month, 0, nDate);
             nDate.year = relativeDate.year;
             nDate.month = relativeDate.month;
         } else {
@@ -382,10 +379,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 캘린더를 다시 그려야 하는지 판단.
-     * @param {number} year 년도
-     * @param {number} month 월
-     * @returns {boolean} reflow 여부
+     * Judge to redraw calendar
+     * @param {number} year A year
+     * @param {number} month A month
+     * @returns {boolean} reflow 
      * @private
      */
     _isNecessaryForDrawing: function(year, month) {
@@ -395,8 +392,8 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * calendar text를 그려준다.
-     * @param {{year: number, month: number}} dateForDrawing 화면에 나타낼 날짜 해시
+     * Draw calendar text
+     * @param {{year: number, month: number}} dateForDrawing Tha hash that show up on calendar 
      * @private
      */
     _setCalendarText: function(dateForDrawing) {
@@ -408,23 +405,21 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 캘린더의 월을 기준으로 날짜들을 만든다.
-     * @param {{year: number, month: number}} dateForDrawing 그릴 년-월
-     * @param {string} classPrefix 클래스 prefix
+     * Draw dates by month.
+     * @param {{year: number, month: number}} dateForDrawing A date to draw
+     * @param {string} classPrefix A class prefix
      * @private
      */
     _drawDates: function(dateForDrawing, classPrefix) {
-        var calUtil = this.constructor.Util,
-            year = dateForDrawing.year,
+        var year = dateForDrawing.year,
             month = dateForDrawing.month,
             dayInWeek = 0,
-            datePrevMonth = calUtil.getRelativeDate(0, -1, 0, dateForDrawing),
-            dateNextMonth = calUtil.getRelativeDate(0, 1, 0, dateForDrawing),
+            datePrevMonth = utils.getRelativeDate(0, -1, 0, dateForDrawing),
+            dateNextMonth = utils.getRelativeDate(0, 1, 0, dateForDrawing),
             dates = [],
-            firstDay = calUtil.getFirstDay(year, month),
-            indexOfLastDate = this._fillDates(year, month, dates); // 데이터를 채우고 마지막날 데이터의 인덱스를 받아온다.
+            firstDay = utils.getFirstDay(year, month),
+            indexOfLastDate = this._fillDates(year, month, dates);
 
-        // 채워진 데이터를 그린다
         util.forEach(dates, function(date, i) {
             var isPrevMonth = false,
                 isNextMonth = false,
@@ -445,10 +440,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
                 tempMonth = dateNextMonth.month;
             }
 
-            // 주말 표시
+            // Weekend
             this._setWeekend(dayInWeek, $dateContainer, classPrefix);
 
-            // 오늘 날짜 표시
+            // Today
             if (this._isToday(tempYear, tempMonth, date)) {
                 $dateContainer.addClass(classPrefix + 'today');
             }
@@ -467,18 +462,18 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
             dayInWeek = (dayInWeek + 1) % 7;
 
             /**
-             * 달력을 그리면서 일이 표시될 때마다 발생
-             * @param {string} type 커스텀 이벤트명
-             * @param {boolean} isPrevMonth 그려질 날이 이전달의 날인지 여부
-             * @param {boolean} isNextMonth 그려질 날이 다음달의 날인지 여부
-             * @param {jQuery} $date 날이 쓰여질 대상 엘리먼트
-             * @param {jQuery} $dateContainer className이 [prefix]week로 설정된 엘리먼트의 자식 엘리먼트, elDate와 같을 수 있음
-             * @param {number} date 그려질 날의 일
-             * @param {number} month 그려질 날의 월
-             * @param {number} year 그려질 날의 연
-             * @param {string} html 대상 엘리먼트에 쓰여질 HTML
+             * Fire draw event when calendar draw each date.
+             * @param {string} type A name of custom event
+             * @param {boolean} isPrevMonth Whether the draw day is last month or not
+             * @param {boolean} isNextMonth Wehter the draw day is next month or not
+             * @param {jQuery} $date The element have date html
+             * @param {jQuery} $dateContainer Child element that has className [prefix]week. It is possible this element equel elDate.
+             * @param {number} date A draw date
+             * @param {number} month A draw month
+             * @param {number} year A draw year
+             * @param {string} html A html string
              * @example
-             * // draw 커스텀 이벤트 핸들링
+             * // draw custom even thandle
              * calendar.on('draw', function(drawEvent){ ... });
              **/
             this.fire('draw', eventData);
@@ -487,15 +482,15 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
 
 
     /**
-     * 입력 날짜 해시가 오늘인지 판단한다.
-     * @param {number} year 년도
-     * @param {number} month 달
-     * @param {number} date 일
-     * @returns {boolean} 오늘 날짜 인지 비교 결과
+     * Jedge the input date is today.
+     * @param {number} year A year
+     * @param {number} month A month
+     * @param {number} date A date
+     * @returns {boolean} 
      * @private
      */
     _isToday: function(year, month, date) {
-        var today = this.constructor.Util.getDateHashTable();
+        var today = utils.getDateHashTable();
 
         return (
             today.year === year &&
@@ -505,14 +500,14 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 한주 템플릿을 만든다.
-     * @param {number} year 해당 연도
-     * @param {number} month 해당 월
+     * Make one week tempate.
+     * @param {number} year  A year
+     * @param {number} month A month
      * @private
      */
     _setWeeks: function(year, month) {
         var $elWeek,
-            weeks = this.constructor.Util.getWeeks(year, month),
+            weeks = utils.getWeeks(year, month),
             i;
         for (i = 0; i < weeks; i += 1) {
             $elWeek = this.$weekTemplate.clone(true);
@@ -522,20 +517,19 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 그려질 데이터들을 dates 배열에 저장
-     * @param {string} year 그려질 연도
-     * @param {string} month 그려질 달
-     * @param {Array} dates 그려질 날짜 데이터
+     * Save draw dates to array
+     * @param {string} year A draw year
+     * @param {string} month A draw month
+     * @param {Array} dates A draw date
      * @return {number} index of last date
      * @private
      */
     _fillDates: function(year, month, dates) {
-        var calUtil = this.constructor.Util,
-            firstDay = calUtil.getFirstDay(year, month),
-            lastDay = calUtil.getLastDay(year, month),
-            lastDate = calUtil.getLastDate(year, month),
-            datePrevMonth = calUtil.getRelativeDate(0, -1, 0, {year: year, month: month, date: 1}),
-            prevMonthLastDate = calUtil.getLastDate(datePrevMonth.year, datePrevMonth.month),
+        var firstDay = utils.getFirstDay(year, month),
+            lastDay = utils.getLastDay(year, month),
+            lastDate = utils.getLastDate(year, month),
+            datePrevMonth = utils.getRelativeDate(0, -1, 0, {year: year, month: month, date: 1}),
+            prevMonthLastDate = utils.getLastDate(datePrevMonth.year, datePrevMonth.month),
             indexOfLastDate,
             i;
 
@@ -556,10 +550,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 주말설정
-     * @param {number} day 날짜
-     * @param {jQuery} $dateContainer 날짜컨테이너 제이쿼리 엘리먼트 오브젝트
-     * @param {string} classPrefix 클래스 프리픽스
+     * Set weekend
+     * @param {number} day A date
+     * @param {jQuery} $dateContainer A container element for date
+     * @param {string} classPrefix A prefix of class
      * @private
      */
     _setWeekend: function(day, $dateContainer, classPrefix) {
@@ -571,7 +565,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 달력을 지운다
+     * Clear calendar
      * @private
      */
     _clear: function() {
@@ -580,9 +574,9 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 현재 달력의 타이틀 영역을 옵션의 타이틀 포멧에 맞게 그린다.
-     * @param {number} year 연도 값 (ex. 2008)
-     * @param {(number|string)} month 월 값 (1 ~ 12)
+     * Draw title with format option.
+     * @param {number} year A value of year (ex. 2008)
+     * @param {(number|string)} month A month (1 ~ 12)
      * @private
      **/
     _setCalendarTitle: function(year, month) {
@@ -605,11 +599,11 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 캘린더의 타이틀을 갱신한다.
-     * @param {jQuery|HTMLElement} element 갱신될 엘리먼트
-     * @param {string} form 변경될 날짜 형식
-     * @param {Object} map 정규식에 맞춰서 매칭되는 값을 가진 객체
-     * @param {RegExp} reg 변경할 폼을 치환할 정규식
+     * Update title
+     * @param {jQuery|HTMLElement} element A update element
+     * @param {string} form A update form
+     * @param {Object} map A object that has value matched regExp
+     * @param {RegExp} reg A regExp to chagne form
      * @private
      */
     _setDateTextInCalendar: function(element, form, map, reg) {
@@ -624,10 +618,10 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 폼 변환할 날짜의 맵을 구한다.
-     * @param {string|number} year 연도
-     * @param {string|number} month 월
-     * @param {string|number} [date] 일
+     * Get map data for form
+     * @param {string|number} year A year
+     * @param {string|number} month A month
+     * @param {string|number} [date] A day
      * @returns {Object} ReplaceMap
      * @private
      */
@@ -651,11 +645,11 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 텍스트를 변환하여 돌려준다.
-     * @param {string} str 변환할 텍스트
-     * @param {Object} map 변환키와 벨류 셋
-     * @param {RegExp} reg 변환할 정규식
-     * @returns {string} 변환된 문자열
+     * Chage text and return.
+     * @param {string} str A text to chagne
+     * @param {Object} map A chagne key, value set
+     * @param {RegExp} reg A regExp to chagne 
+     * @returns {string}
      * @private
      */
     _getConvertedTitle: function(str, map, reg) {
@@ -666,7 +660,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 오늘날짜 앨리먼트 여부에 따라 오늘날짜를 그리는 데이터를 만들어 그린다.
+     * Set today
      * @private
      */
     _setCalendarToday: function() {
@@ -683,7 +677,7 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
             return;
         }
 
-        today = this.constructor.Util.getDateHashTable();
+        today = utils.getDateHashTable();
         year = today.year;
         month = this._prependLeadingZero(today.month);
         date = this._prependLeadingZero(today.date);
@@ -694,9 +688,9 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 0~99 숫자를 2자릿수 표현으로 만든 문자열을 반환한다.
-     * @param {number} number 숫자
-     * @returns {string} 결과 문자열
+     * Chagne number 0~9 to '00~09'
+     * @param {number} number number
+     * @returns {string}
      * @private
      * @example
      *  this._prependLeadingZero(0); //  '00'
@@ -713,17 +707,17 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * Calendar를 그린다.
-     * @param {number} [year] 연도 값 (ex. 2008)
-     * @param {number} [month] 월 값 (1 ~ 12)
-     * @param {Boolean} [isRelative] 연도와 월 값이 상대 값인지 여부
+     * Draw calendar
+     * @param {number} [year] A year (ex. 2008)
+     * @param {number} [month] A month (1 ~ 12)
+     * @param {Boolean} [isRelative]  A year and month is related
      * @example
-     * calendar.draw(); //현재 설정된 날짜의 달력을 그린다.
-     * calendar.draw(2008, 12); //2008년 12월 달력을 그린다.
-     * calendar.draw(null, 12); //현재 표시된 달력의 12월을 그린다.
-     * calendar.draw(2010, null); //2010년 현재 표시된 달력의 월을 그린다.
-     * calendar.draw(0, 1, true); //현재 표시된 달력의 다음 달을 그린다.
-     * calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그린다.
+     * calendar.draw(); // Draw with now date.
+     * calendar.draw(2008, 12); // Draw 2008/12
+     * calendar.draw(null, 12); // Draw current year/12
+     * calendar.draw(2010, null); // Draw 2010/current month
+     * calendar.draw(0, 1, true); // Draw next month
+     * calendar.draw(-1, null, true); // Draw prev year
      **/
     draw: function(year, month, isRelative) {
         var dateForDrawing = this._getDateForDrawing(year, month, isRelative),
@@ -764,8 +758,8 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 현재 달력의 년도와 월을 반환한다.
-     * @returns {{year: number, month: number}} 날짜 해시
+     * Return current year and month(just shown).
+     * @returns {{year: number, month: number}}
      */
     getDate: function() {
         return {
@@ -775,9 +769,9 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     },
 
     /**
-     * 현재 달력의 년도와 월을 설정한다.
-     * @param {number} [year] 연도 값 (ex. 2008)
-     * @param {number} [month] 월 값 (1 ~ 12)
+     * Set date
+     * @param {number} [year] A year (ex. 2008)
+     * @param {number} [month] A month (1 ~ 12)
      **/
     setDate: function(year, month) {
         var date = this._shownDate;
@@ -786,4 +780,5 @@ ne.component.Calendar = util.defineClass( /** @lends ne.component.Calendar.proto
     }
 });
 
-ne.util.CustomEvents.mixin(ne.component.Calendar);
+util.CustomEvents.mixin(Calendar);
+module.exports = Calendar;
