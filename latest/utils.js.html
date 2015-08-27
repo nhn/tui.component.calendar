@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utils.js</title>
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-fe2.css">
+</head>
+<body>
+
+<div id="wrap">
+
+    <div class="header">
+
+        <div class="container-fluid">
+            <h3><a href="index.html">API Documentation</a> <small>FE개발팀</small></h3>
+        </div>
+
+    </div>
+
+    <div class="body">
+        <div id="navigation" class="navigation"><h3>Samples</h3><ul class="list samples"><li class="item"><a href="tutorial-sample1.html">기본 예제</a></li></ul><h3>Modules</h3><ul class="list modules"><li class="item" id="module:utils"><span class="icon blue static">static</span><span class="title"><a href="module-utils.html">utils</a></span><ul class="sublist methods module:utils"><span class="subtitle">Methods</span><li><a href="module-utils.html#~getDateHashTable">getDateHashTable</a></li><li><a href="module-utils.html#~getDateObject">getDateObject</a></li><li><a href="module-utils.html#~getFirstDay">getFirstDay</a></li><li><a href="module-utils.html#~getLastDay">getLastDay</a></li><li><a href="module-utils.html#~getRelativeDate">getRelativeDate</a></li><li><a href="module-utils.html#~getTime">getTime</a></li><li><a href="module-utils.html#~getToday">getToday</a></li><li><a href="module-utils.html#~getWeeks">getWeeks</a></li></ul></li></ul><h3>Classes</h3><ul class="list classes"><li class="item" id="Calendar"><span class="title"><a href="Calendar.html">Calendar</a></span></li></ul></div>
+        <div id="main" class="main">
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileoverview Utils for calendar component
+ * @author NHN Net. FE dev team. &lt;dl_javascript@nhnent.com>
+ * @dependency ne-code-snippet ~1.0.2
+ */
+
+'use strict';
+
+/**
+ * Utils of calendar
+ * @static
+ * @module
+ */
+var utils = {
+    /**
+     * Return date hash by parameter.
+     *  if there are 3 parameter, the parameter is corgnized Date object
+     *  if there are no parameter, return today's hash date
+     * @function getDateHashTable
+     * @param {Date|number} [year] A date instance or year
+     * @param {number} [month] A month
+     * @param {number} [date] A date
+     * @returns {{year: *, month: *, date: *}} 
+     */
+    getDateHashTable: function(year, month, date) {
+        var nDate;
+
+        if (arguments.length &lt; 3) {
+            nDate = arguments[0] || new Date();
+
+            year = nDate.getFullYear();
+            month = nDate.getMonth() + 1;
+            date = nDate.getDate();
+        }
+
+        return {
+            year: year,
+            month: month,
+            date: date
+        };
+    },
+
+    /**
+     * Return today that saved on component or create new date.
+     * @function getToday
+     * @returns {{year: *, month: *, date: *}}
+     */
+    getToday: function() {
+       return utils.getDateHashTable();
+    },
+
+    /**
+     * Get weeks count by paramenter
+     * @function getWeeks
+     * @param {number} year A year
+     * @param {number} month A month
+     * @return {number} 주 (4~6)
+     **/
+    getWeeks: function(year, month) {
+        var firstDay = this.getFirstDay(year, month),
+            lastDate = this.getLastDate(year, month);
+
+        return Math.ceil((firstDay + lastDate) / 7);
+    },
+
+    /**
+     * Get unix time from date hash
+     * @function getTime
+     * @param {Object} date A date hash
+     * @param {number} date.year A year
+     * @param {number} date.month A month
+     * @param {number} date.date A date
+     * @return {number} 
+     * @example
+     * utils.getTime({year:2010, month:5, date:12}); // 1273590000000
+     **/
+    getTime: function(date) {
+        return this.getDateObject(date).getTime();
+    },
+
+    /**
+     * Get which day is first by parameters that include year and month information.
+     * @function getFirstDay
+     * @param {number} year A year
+     * @param {number} month A month
+     * @return {number} (0~6)
+     **/
+    getFirstDay: function(year, month) {
+        return new Date(year, month - 1, 1).getDay();
+    },
+
+    /**
+     * Get which day is last by parameters that include year and month information.
+     * @function getLastDay
+     * @param {number} year A year
+     * @param {number} month A month
+     * @return {number} (0~6)
+     **/
+    getLastDay: function(year, month) {
+        return new Date(year, month, 0).getDay();
+    },
+
+    /**
+     * Get last date by parameters that include year and month information.
+     * @function
+     * @param {number} year A year
+     * @param {number} month A month
+     * @return {number} (1~31)
+     **/
+    getLastDate: function(year, month) {
+        return new Date(year, month, 0).getDate();
+    },
+
+    /**
+     * Get date instance.
+     * @function getDateObject
+     * @param {Object} date A date hash
+     * @return {Date} Date  
+     * @example
+     *  utils.getDateObject({year:2010, month:5, date:12});
+     *  utils.getDateObject(2010, 5, 12); //year,month,date
+     **/
+    getDateObject: function(date) {
+        if (arguments.length === 3) {
+            return new Date(arguments[0], arguments[1] - 1, arguments[2]);
+        }
+        return new Date(date.year, date.month - 1, date.date);
+    },
+
+    /**
+     * Get related date hash with parameters that include date information.
+     * @function getRelativeDate
+     * @param {number} year A related value for year(you can use +/-)
+     * @param {number} month A related value for month (you can use +/-)
+     * @param {number} date A related value for day (you can use +/-)
+     * @param {Object} dateObj standard date hash
+     * @return {Object} dateObj 
+     * @example
+     *  utils.getRelativeDate(1, 0, 0, {year:2000, month:1, date:1}); // {year:2001, month:1, date:1}
+     *  utils.getRelativeDate(0, 0, -1, {year:2010, month:1, date:1}); // {year:2009, month:12, date:31}
+     **/
+    getRelativeDate: function(year, month, date, dateObj) {
+        var nYear = (dateObj.year + year),
+            nMonth = (dateObj.month + month - 1),
+            nDate = (dateObj.date + date),
+            nDateObj = new Date(nYear, nMonth, nDate);
+
+        return utils.getDateHashTable(nDateObj);
+    }
+};
+
+module.exports = utils;
+</code></pre>
+        </article>
+    </section>
+
+
+
+</div>
+        <div class="clearfix"></div>
+    </div>
+
+</div>
+<script>
+(function() {
+// 영역 height 설정
+var height = (window.innerHeight || document.documentElement.clientHeight || document.getElementByTagName('body')[0].clientHeight) - 50;
+var navigation = document.getElementById('navigation');
+var main = document.getElementById('main');
+navigation.style.height = height + 'px';
+main.style.height = height + 'px';
+
+// IE 7,8을 위한 getElementsByClassName 구현
+var getElementsByClassName = function(className, parentElement) {
+	if(document.getElementsByClassName) {
+		return (parentElement || document).getElementsByClassName(className);
+	}
+
+    var regEx = new RegExp('(^| )'+className+'( |$)');
+	var nodes = new Array();
+    var elements = (parentElement || document.body).getElementsByTagName("*");
+    for(var i = 0, len = elements.length; i < len ; i++) {
+        if(regEx.test(elements[i].className)) {
+			nodes.push(elements[i]);
+		}
+	}
+	elements = null;
+    return nodes;
+}
+
+// url 파싱후 해당 카테고리만 display:block 처리
+var url = location.href;
+var path = url.lastIndexOf('/');
+var fileName = url.substring(path+1);
+var fullName = fileName.split('.');
+fullName.length -= 1;
+fullName = fullName.join('.');
+fullName = fullName.split('-');
+fullName = fullName[fullName.length - 1];
+var lnbList = getElementsByClassName(fullName);
+if(lnbList.length && lnbList.length > 0) {
+    for(var i = 0, len = lnbList.length; i < len; i++) {
+        lnbList[i].className += ' selected';
+    }
+}
+
+var title = document.getElementById(fullName);
+if(title) {
+    title.className += ' selected';
+    title.innerHTML = '<span class="arrow">▶</span>' + title.innerHTML;
+
+    var static = getElementsByClassName('static', title);
+    if(static) {
+        static[0].className += ' selected';
+    }
+}
+})();
+</script>
+<script type="text/javascript" src="scripts/prettify/prettify.js"></script>
+<script type="text/javascript" src="scripts/prettify/lang-css.js"></script>
+<script type="text/javascript">prettyPrint();</script>
+<script type="text/javascript" src="scripts/linenumber.js"></script>
+</body>
+</html>
