@@ -8,8 +8,7 @@
 
 /**
  * Utils of calendar
- * @static
- * @module
+ * @namespace utils
  */
 var utils = {
     /**

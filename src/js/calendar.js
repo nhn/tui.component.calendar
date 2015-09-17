@@ -89,7 +89,7 @@ CONSTANTS.calendarFooter = [
  *                    dayTitles: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] // 요일들
  *             });
  **/
-var Calendar = util.defineClass( /** @lends ne.component.Calendar.prototype */ {
+var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
     init: function(option) {
         /**
          * Set options
