@@ -2,392 +2,72 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Index</title>
+    <title>Calendar API</title>
     <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
     <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-fe2.css">
+    <link type="text/css" rel="stylesheet" href="styles/layout.css">
+    <script type="text/javascript" src="scripts/prettify/prettify.js"></script>
+    <script type="text/javascript" src="scripts/prettify/lang-css.js"></script>
+    	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/code-snippet.js"></script>
+	<script type="text/javascript" src="js/toast-doc.js"></script>
+	<script type="text/javascript" src="js/list.js"></script>
+	<script type="text/javascript" src="calendar.js.html.js"></script>
+	<script type="text/javascript" src="utils.js.html.js"></script>
+	<script type="text/javascript" src="global.html.js"></script>
+	<script type="text/javascript" src="main.html.js"></script>
+	<script type="text/javascript" src="Calendar.html.js"></script>
+	<script type="text/javascript" src="utils.html.js"></script>
+
 </head>
 <body>
 
 <div id="wrap">
 
-    <div class="header">
-
-        <div class="container-fluid">
-            <h3><a href="index.html">API Documentation</a> <small>FE개발팀</small></h3>
+    <div id="left">
+        <div class="home">
+            <a href="index.html">Calendar API</a>
         </div>
-
+        <div id="search">
+            <input type="text" placeholder="Search" class="searchbox" />
+            <ul class="searchList">
+            </ul>
+        </div>
+        <div id="menu"></div>
     </div>
-
-    <div class="body">
-        <div id="navigation" class="navigation"><h3>Samples</h3><ul class="list samples"><li class="item"><a href="tutorial-sample1.html">Default example</a></li></ul><h3>Modules</h3><ul class="list modules"><li class="item" id="module:utils"><span class="icon blue static">static</span><span class="title"><a href="module-utils.html">utils</a></span><ul class="sublist methods module:utils"><span class="subtitle">Methods</span><li><a href="module-utils.html#~getDateHashTable">getDateHashTable</a></li><li><a href="module-utils.html#~getDateObject">getDateObject</a></li><li><a href="module-utils.html#~getFirstDay">getFirstDay</a></li><li><a href="module-utils.html#~getLastDay">getLastDay</a></li><li><a href="module-utils.html#~getRelativeDate">getRelativeDate</a></li><li><a href="module-utils.html#~getTime">getTime</a></li><li><a href="module-utils.html#~getToday">getToday</a></li><li><a href="module-utils.html#~getWeeks">getWeeks</a></li></ul></li></ul><h3>Classes</h3><ul class="list classes"><li class="item" id="Calendar"><span class="title"><a href="Calendar.html">Calendar</a></span></li></ul></div>
-        <div id="main" class="main">
-
-
-
-    
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-    <section>
-        <article><div class="readme"><h1>Calendar</h1><p>Calendar Component<br>
-This component display date by calendar UI.<br></p>
-<h2>Feature</h2><ul>
-<li>Show monthly date by calendar UI.</li>
-<li>Support buttons to navigate to move last year or month, next year or month</li>
-<li>Select some date that are shown</li>
-<li>Support custom event when redraw calendar</li>
-</ul>
-<h2>Documentation</h2><ul>
-<li><strong>API</strong> : https://nhnent.github.io/fe.component-calendar/latest</li>
-<li><strong>Tutorial</strong> : https://github.com/nhnent/fe.component-calendar/wiki/Calendar-Tutorial</li>
-<li><strong>Sample</strong> - https://nhnent.github.io/fe.component-calendar/latest/tutorial-sample1.html</li>
-</ul>
-<h2>Dependency</h2><ul>
-<li>jquery: ~1.8.3</li>
-<li>ne-code-snippet: ~1.0.2</li>
-</ul>
-<h2>Test environment</h2><ul>
-<li>PC<ul>
-<li>IE7~11</li>
-<li>Chrome</li>
-<li>Firefox</li>
-</ul>
-</li>
-</ul>
-<h2>Download/Install</h2><ul>
-<li>Bower:<ul>
-<li>latest : <code>bower install ne-component-calendar&quot;</code></li>
-<li>each version : <code>bower install ne-component-calendar[#tag]&quot;</code></li>
-</ul>
-</li>
-<li>Download: https://github.com/nhnent/fe.component-calendar</li>
-</ul>
-<h2>History</h2><table>
-<thead>
-<tr>
-<th>Version</th>
-<th>Description</th>
-<th>Date</th>
-<th>Developer</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://nhnent.github.io/fe.component-calendar/1.1.0">1.1.0</a></td>
-<td>Template apply</td>
-<td>2015.06</td>
-<td>NHN Ent.FE dev team. Yi minkyu<a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#109;&#105;&#x6e;&#x6b;&#x79;&#x75;&#46;&#x79;&#105;&#x40;&#x6e;&#104;&#110;&#101;&#x6e;&#x74;&#46;&#x63;&#x6f;&#109;">&#109;&#105;&#x6e;&#x6b;&#x79;&#x75;&#46;&#x79;&#105;&#x40;&#x6e;&#104;&#110;&#101;&#x6e;&#x74;&#46;&#x63;&#x6f;&#109;</a></td>
-</tr>
-<tr>
-<td><a href="https://nhnent.github.io/fe.component-calendar/1.0.1">1.0.1</a></td>
-<td>Split date picker</td>
-<td>2015.05</td>
-<td>NHN Ent. FE dev team. Yi minkyu <a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#x6d;&#x69;&#x6e;&#107;&#121;&#x75;&#46;&#121;&#105;&#64;&#x6e;&#104;&#x6e;&#101;&#110;&#116;&#46;&#99;&#x6f;&#109;">&#x6d;&#x69;&#x6e;&#107;&#121;&#x75;&#46;&#121;&#105;&#64;&#x6e;&#104;&#x6e;&#101;&#110;&#116;&#46;&#99;&#x6f;&#109;</a></td>
-</tr>
-<tr>
-<td>1.0.0</td>
-<td>Release</td>
-<td>2015.03</td>
-<td>NHN Ent. FE dev team. <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#x64;&#108;&#x5f;&#x6a;&#x61;&#x76;&#97;&#115;&#x63;&#x72;&#105;&#112;&#x74;&#64;&#110;&#x68;&#110;&#101;&#110;&#116;&#x2e;&#x63;&#x6f;&#x6d;">&#x64;&#108;&#x5f;&#x6a;&#x61;&#x76;&#97;&#115;&#x63;&#x72;&#105;&#112;&#x74;&#64;&#110;&#x68;&#110;&#101;&#110;&#116;&#x2e;&#x63;&#x6f;&#x6d;</a></td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<h2>License</h2><p><a href="LICENSE">MIT LICENSE</a></p></div></article>
-    </section>
-
-
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-        
-        calendar.js
-        
-        
-        </h2>
-        
-    
-</header>
-
-<article>
-    
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Calendar component(from Pug component)</p></div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>NHN Ent. FE dev team. &lt;dl_javascript@nhnent.com></li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-        <dd class="tag-source"><ul class="dummy"><li>
-            <a href="calendar.js.html">calendar.js</a>, <a href="calendar.js.html#line1">line 1</a>
-        </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-        
-    
-    </div>
-    
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-        
-        utils.js
-        
-        
-        </h2>
-        
-    
-</header>
-
-<article>
-    
-    <div class="container-overview">
-    
-        
-            <div class="description"><p>Utils for calendar component</p></div>
-        
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>NHN Net. FE dev team. &lt;dl_javascript@nhnent.com></li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-        <dd class="tag-source"><ul class="dummy"><li>
-            <a href="utils.js.html">utils.js</a>, <a href="utils.js.html#line1">line 1</a>
-        </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-        
-    
-    </div>
-    
-
-    
-
-    
-
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
-
-
-
-</div>
+    <div id="content" class="body">
+        <div id="pagetop"></div>
+        <div id="contentTab">
+            <ul>
+                <li class="tabmenu info on">Specification</li>
+                <li class="tabmenu code">Code</li>
+            </ul>
+        </div>
+        <div id="contentBody"></div>
+        <div id="contentCode"></div>
         <div class="clearfix"></div>
     </div>
 
 </div>
-<script>
-(function() {
-// 영역 height 설정
-var height = (window.innerHeight || document.documentElement.clientHeight || document.getElementByTagName('body')[0].clientHeight) - 50;
-var navigation = document.getElementById('navigation');
-var main = document.getElementById('main');
-navigation.style.height = height + 'px';
-main.style.height = height + 'px';
-
-// IE 7,8을 위한 getElementsByClassName 구현
-var getElementsByClassName = function(className, parentElement) {
-	if(document.getElementsByClassName) {
-		return (parentElement || document).getElementsByClassName(className);
-	}
-
-    var regEx = new RegExp('(^| )'+className+'( |$)');
-	var nodes = new Array();
-    var elements = (parentElement || document.body).getElementsByTagName("*");
-    for(var i = 0, len = elements.length; i < len ; i++) {
-        if(regEx.test(elements[i].className)) {
-			nodes.push(elements[i]);
-		}
-	}
-	elements = null;
-    return nodes;
-}
-
-// url 파싱후 해당 카테고리만 display:block 처리
-var url = location.href;
-var path = url.lastIndexOf('/');
-var fileName = url.substring(path+1);
-var fullName = fileName.split('.');
-fullName.length -= 1;
-fullName = fullName.join('.');
-fullName = fullName.split('-');
-fullName = fullName[fullName.length - 1];
-var lnbList = getElementsByClassName(fullName);
-if(lnbList.length && lnbList.length > 0) {
-    for(var i = 0, len = lnbList.length; i < len; i++) {
-        lnbList[i].className += ' selected';
+<footer class="footer">
+    NHN Entertainment. Frontend Development team.  
+</footer>
+<script type="text/javascript">
+var ui = new toast.ui.doc({
+    element: {
+        menu: $('#menu'),
+        content: $('#contentBody'),
+        code: $('#contentCode'),
+        tab: $('#contentTab'),
+        search: $('#search')
+    },
+    data: {
+        content: fedoc.content['main.html'],
+        menu: fedoc.lnb
     }
-}
+});
 
-var title = document.getElementById(fullName);
-if(title) {
-    title.className += ' selected';
-    title.innerHTML = '<span class="arrow">▶</span>' + title.innerHTML;
-
-    var static = getElementsByClassName('static', title);
-    if(static) {
-        static[0].className += ' selected';
-    }
-}
-})();
 </script>
-<script type="text/javascript" src="scripts/prettify/prettify.js"></script>
-<script type="text/javascript" src="scripts/prettify/lang-css.js"></script>
-<script type="text/javascript">prettyPrint();</script>
-<script type="text/javascript" src="scripts/linenumber.js"></script>
 </body>
 </html>
