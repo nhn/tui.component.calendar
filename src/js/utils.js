@@ -15,7 +15,7 @@ var utils = {
      * Return date hash by parameter.
      *  if there are 3 parameter, the parameter is corgnized Date object
      *  if there are no parameter, return today's hash date
-     * @function getDateHashTable
+     * @function
      * @param {Date|number} [year] A date instance or year
      * @param {number} [month] A month
      * @param {number} [date] A date
@@ -41,7 +41,7 @@ var utils = {
 
     /**
      * Return today that saved on component or create new date.
-     * @function getToday
+     * @function
      * @returns {{year: *, month: *, date: *}}
      */
     getToday: function() {
@@ -50,7 +50,7 @@ var utils = {
 
     /**
      * Get weeks count by paramenter
-     * @function getWeeks
+     * @function
      * @param {number} year A year
      * @param {number} month A month
      * @return {number} 주 (4~6)
@@ -64,7 +64,7 @@ var utils = {
 
     /**
      * Get unix time from date hash
-     * @function getTime
+     * @function
      * @param {Object} date A date hash
      * @param {number} date.year A year
      * @param {number} date.month A month
@@ -79,7 +79,7 @@ var utils = {
 
     /**
      * Get which day is first by parameters that include year and month information.
-     * @function getFirstDay
+     * @function
      * @param {number} year A year
      * @param {number} month A month
      * @return {number} (0~6)
@@ -90,7 +90,7 @@ var utils = {
 
     /**
      * Get which day is last by parameters that include year and month information.
-     * @function getLastDay
+     * @function
      * @param {number} year A year
      * @param {number} month A month
      * @return {number} (0~6)
@@ -112,7 +112,7 @@ var utils = {
 
     /**
      * Get date instance.
-     * @function getDateObject
+     * @function
      * @param {Object} date A date hash
      * @return {Date} Date  
      * @example
@@ -128,7 +128,7 @@ var utils = {
 
     /**
      * Get related date hash with parameters that include date information.
-     * @function getRelativeDate
+     * @function
      * @param {number} year A related value for year(you can use +/-)
      * @param {number} month A related value for month (you can use +/-)
      * @param {number} date A related value for day (you can use +/-)
