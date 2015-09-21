@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: calendarUtil.js</title>
+    <title>JSDoc: Source: utils.js</title>
     <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
     <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
     <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
@@ -21,7 +21,7 @@
     </div>
 
     <div class="body">
-        <div id="navigation" class="navigation"><h3>Samples</h3><ul class="list samples"><li class="item"><a href="tutorial-sample1.html">기본 예제</a></li></ul><h3>Modules</h3><ul class="list modules"><li class="item" id="module:calendarUtil"><span class="icon blue static">static</span><span class="title"><a href="module-calendarUtil.html">calendarUtil</a></span><ul class="sublist methods module:calendarUtil"><span class="subtitle">Methods</span><li><a href="module-calendarUtil.html#~getDateHashTable">getDateHashTable</a></li><li><a href="module-calendarUtil.html#~getDateObject">getDateObject</a></li><li><a href="module-calendarUtil.html#~getFirstDay">getFirstDay</a></li><li><a href="module-calendarUtil.html#~getLastDay">getLastDay</a></li><li><a href="module-calendarUtil.html#~getRelativeDate">getRelativeDate</a></li><li><a href="module-calendarUtil.html#~getTime">getTime</a></li><li><a href="module-calendarUtil.html#~getToday">getToday</a></li><li><a href="module-calendarUtil.html#~getWeeks">getWeeks</a></li></ul></li></ul><h3>Classes</h3><ul class="list classes"><li class="item" id="ne.component.Calendar"><span class="title"><span class="p-item">ne.component.</span><a href="ne.component.Calendar.html">Calendar</a></span><span class="icon blue static">static</span><ul class="sublist methods ne.component.Calendar"><span class="subtitle">Methods</span><li><a href="ne.component.Calendar.html#draw">draw</a></li><li><a href="ne.component.Calendar.html#getDate">getDate</a></li><li><a href="ne.component.Calendar.html#setDate">setDate</a></li></ul></li></ul></div>
+        <div id="navigation" class="navigation"><h3>Samples</h3><ul class="list samples"><li class="item"><a href="tutorial-sample1.html">Default example</a></li></ul><h3>Classes</h3><ul class="list classes"><li class="item" id="Calendar"><span class="title"><a href="Calendar.html">Calendar</a></span><ul class="sublist methods Calendar"><span class="subtitle">Methods</span><li><a href="Calendar.html#draw">draw</a></li><li><a href="Calendar.html#getDate">getDate</a></li><li><a href="Calendar.html#setDate">setDate</a></li></ul></li></ul><h3>Namespaces</h3><ul class="list namespaces"><li class="item" id="utils"><span class="title"><a href="utils.html">utils</a></span><ul class="sublist methods utils"><span class="subtitle">Methods</span><li><a href="utils.html#.getLastDate">getLastDate</a></li></ul></li></ul><h3>Global</h3><ul class="list globals"><li class="item" id="getDateHashTable"><span class="title"><a href="global.html#getDateHashTable">getDateHashTable</a></span></li><li class="item" id="getDateObject"><span class="title"><a href="global.html#getDateObject">getDateObject</a></span></li><li class="item" id="getFirstDay"><span class="title"><a href="global.html#getFirstDay">getFirstDay</a></span></li><li class="item" id="getLastDay"><span class="title"><a href="global.html#getLastDay">getLastDay</a></span></li><li class="item" id="getRelativeDate"><span class="title"><a href="global.html#getRelativeDate">getRelativeDate</a></span></li><li class="item" id="getTime"><span class="title"><a href="global.html#getTime">getTime</a></span></li><li class="item" id="getToday"><span class="title"><a href="global.html#getToday">getToday</a></span></li><li class="item" id="getWeeks"><span class="title"><a href="global.html#getWeeks">getWeeks</a></span></li></ul></div>
         <div id="main" class="main">
 
 
@@ -30,39 +30,27 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * 캘린더 유틸성 함수들
- *
- * @author NHN ENTERTAINMENT FE 개발팀(e0242@nhnent.com)
- * @author FE개발팀 이제인
- * @author FE개발팀 이민규 (minkyu.yi@nhnent.com) - 2015, 6, 3
+ * @fileoverview Utils for calendar component
+ * @author NHN Net. FE dev team. &lt;dl_javascript@nhnent.com>
  * @dependency ne-code-snippet ~1.0.2
  */
 
 'use strict';
 
-ne.util.defineNamespace('ne.component.Calendar');
-
 /**
- * Calendar Util 함수들을 모아둔 Object
- * @static
- * @module
+ * Utils of calendar
+ * @namespace utils
  */
-ne.component.Calendar.Util = {
+var utils = {
     /**
-     * 날짜 해시(년, 월, 일) 값을 만들어 리턴한다
-     *  매개변수가 3개인 경우
-     *      각 매개변수를 year, month, date 값으로 판단한다.
-     *  매개변수가 1개인 경우
-     *      year 값을 넘긴것이 아니라,
-     *      Date 객체를 넘긴것으로 판단한다.
-     *  매개변수가 0개인 경우
-     *      오늘 날짜를 리턴한다.
-     *
+     * Return date hash by parameter.
+     *  if there are 3 parameter, the parameter is corgnized Date object
+     *  if there are no parameter, return today's hash date
      * @function getDateHashTable
-     * @param {Date|number} [year] 날짜 객체 또는 년도
-     * @param {number} [month] 월
-     * @param {number} [date] 일
-     * @returns {{year: *, month: *, date: *}} 날짜 해시
+     * @param {Date|number} [year] A date instance or year
+     * @param {number} [month] A month
+     * @param {number} [date] A date
+     * @returns {{year: *, month: *, date: *}} 
      */
     getDateHashTable: function(year, month, date) {
         var nDate;
@@ -83,20 +71,19 @@ ne.component.Calendar.Util = {
     },
 
     /**
-     * 컨퍼넌트에 저장된 현재날짜를 돌려준다
-     * 현재 날짜가 없을 시, 로컬시간 기준으로 새로 생성하여 돌려준다.
+     * Return today that saved on component or create new date.
      * @function getToday
-     * @returns {{year: *, month: *, date: *}} 날짜 해시
+     * @returns {{year: *, month: *, date: *}}
      */
     getToday: function() {
-       return ne.component.Calendar.Util.getDateHashTable();
+       return utils.getDateHashTable();
     },
 
     /**
-     * 해당 연월의 주의 수를 구한다.
+     * Get weeks count by paramenter
      * @function getWeeks
-     * @param {number} year 년
-     * @param {number} month 월
+     * @param {number} year A year
+     * @param {number} month A month
      * @return {number} 주 (4~6)
      **/
     getWeeks: function(year, month) {
@@ -107,61 +94,61 @@ ne.component.Calendar.Util = {
     },
 
     /**
-     * 연월일을 포함한 날짜 해시에서 유닉스타임을 구한다.
+     * Get unix time from date hash
      * @function getTime
-     * @param {Object} date 날짜 정보가 담긴 객체
-     * @param {number} date.year 년
-     * @param {number} date.month 월
-     * @param {number} date.date 일
-     * @return {number} 유닉스타임 정보
+     * @param {Object} date A date hash
+     * @param {number} date.year A year
+     * @param {number} date.month A month
+     * @param {number} date.date A date
+     * @return {number} 
      * @example
-     * ne.component.Calendar.Util.getTime({year:2010, month:5, date:12}); // 1273590000000
+     * utils.getTime({year:2010, month:5, date:12}); // 1273590000000
      **/
     getTime: function(date) {
         return this.getDateObject(date).getTime();
     },
 
     /**
-     * 해당 연월의 첫번째 날짜의 요일을 구한다.
+     * Get which day is first by parameters that include year and month information.
      * @function getFirstDay
-     * @param {number} year 년
-     * @param {number} month 월
-     * @return {number} 요일 (0~6)
+     * @param {number} year A year
+     * @param {number} month A month
+     * @return {number} (0~6)
      **/
     getFirstDay: function(year, month) {
         return new Date(year, month - 1, 1).getDay();
     },
 
     /**
-     * 해당 연월의 마지막 날짜의 요일을 구한다.
+     * Get which day is last by parameters that include year and month information.
      * @function getLastDay
-     * @param {number} year 년
-     * @param {number} month 월
-     * @return {number} 요일 (0~6)
+     * @param {number} year A year
+     * @param {number} month A month
+     * @return {number} (0~6)
      **/
     getLastDay: function(year, month) {
         return new Date(year, month, 0).getDay();
     },
 
     /**
-     * 해당 연월의 마지막 날짜를 구한다.
+     * Get last date by parameters that include year and month information.
      * @function
-     * @param {number} year 년
-     * @param {number} month 월
-     * @return {number} 날짜 (1~31)
+     * @param {number} year A year
+     * @param {number} month A month
+     * @return {number} (1~31)
      **/
     getLastDate: function(year, month) {
         return new Date(year, month, 0).getDate();
     },
 
     /**
-     * Date 객체를 구한다.
+     * Get date instance.
      * @function getDateObject
-     * @param {Object} date 날짜 객체
-     * @return {Date} Date 인스턴스
+     * @param {Object} date A date hash
+     * @return {Date} Date  
      * @example
-     *  ne.component.Calendar.Util.getDateObject({year:2010, month:5, date:12});
-     *  ne.component.Calendar.Util.getDateObject(2010, 5, 12); //연,월,일
+     *  utils.getDateObject({year:2010, month:5, date:12});
+     *  utils.getDateObject(2010, 5, 12); //year,month,date
      **/
     getDateObject: function(date) {
         if (arguments.length === 3) {
@@ -171,16 +158,16 @@ ne.component.Calendar.Util = {
     },
 
     /**
-     * 연월일을 포함한 기준 날짜 해시에서 상대적인 날짜 해시를 구한다.
+     * Get related date hash with parameters that include date information.
      * @function getRelativeDate
-     * @param {number} year 상대적인 연도 (+/-로 정의)
-     * @param {number} month 상대적인 월 (+/-로 정의)
-     * @param {number} date 상대적인 일 (+/-로 정의)
-     * @param {Object} dateObj 기준 날짜 해시
-     * @return {Object} dateObj 결과 날짜 해시
+     * @param {number} year A related value for year(you can use +/-)
+     * @param {number} month A related value for month (you can use +/-)
+     * @param {number} date A related value for day (you can use +/-)
+     * @param {Object} dateObj standard date hash
+     * @return {Object} dateObj 
      * @example
-     *  ne.component.Calendar.Util.getRelativeDate(1, 0, 0, {year:2000, month:1, date:1}); // {year:2001, month:1, date:1}
-     *  ne.component.Calendar.Util.getRelativeDate(0, 0, -1, {year:2010, month:1, date:1}); // {year:2009, month:12, date:31}
+     *  utils.getRelativeDate(1, 0, 0, {year:2000, month:1, date:1}); // {year:2001, month:1, date:1}
+     *  utils.getRelativeDate(0, 0, -1, {year:2010, month:1, date:1}); // {year:2009, month:12, date:31}
      **/
     getRelativeDate: function(year, month, date, dateObj) {
         var nYear = (dateObj.year + year),
@@ -188,9 +175,11 @@ ne.component.Calendar.Util = {
             nDate = (dateObj.date + date),
             nDateObj = new Date(nYear, nMonth, nDate);
 
-        return ne.component.Calendar.Util.getDateHashTable(nDateObj);
+        return utils.getDateHashTable(nDateObj);
     }
 };
+
+module.exports = utils;
 </code></pre>
         </article>
     </section>

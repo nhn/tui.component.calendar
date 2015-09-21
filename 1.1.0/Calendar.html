@@ -21,7 +21,7 @@
     </div>
 
     <div class="body">
-        <div id="navigation" class="navigation"><h3>Samples</h3><ul class="list samples"><li class="item"><a href="tutorial-sample1.html">기본 예제</a></li></ul><h3>Modules</h3><ul class="list modules"><li class="item" id="module:calendarUtil"><span class="icon blue static">static</span><span class="title"><a href="module-calendarUtil.html">calendarUtil</a></span><ul class="sublist methods module:calendarUtil"><span class="subtitle">Methods</span><li><a href="module-calendarUtil.html#~getDateHashTable">getDateHashTable</a></li><li><a href="module-calendarUtil.html#~getDateObject">getDateObject</a></li><li><a href="module-calendarUtil.html#~getFirstDay">getFirstDay</a></li><li><a href="module-calendarUtil.html#~getLastDay">getLastDay</a></li><li><a href="module-calendarUtil.html#~getRelativeDate">getRelativeDate</a></li><li><a href="module-calendarUtil.html#~getTime">getTime</a></li><li><a href="module-calendarUtil.html#~getToday">getToday</a></li><li><a href="module-calendarUtil.html#~getWeeks">getWeeks</a></li></ul></li></ul><h3>Classes</h3><ul class="list classes"><li class="item" id="ne.component.Calendar"><span class="title"><span class="p-item">ne.component.</span><a href="ne.component.Calendar.html">Calendar</a></span><span class="icon blue static">static</span><ul class="sublist methods ne.component.Calendar"><span class="subtitle">Methods</span><li><a href="ne.component.Calendar.html#draw">draw</a></li><li><a href="ne.component.Calendar.html#getDate">getDate</a></li><li><a href="ne.component.Calendar.html#setDate">setDate</a></li></ul></li></ul></div>
+        <div id="navigation" class="navigation"><h3>Samples</h3><ul class="list samples"><li class="item"><a href="tutorial-sample1.html">Default example</a></li></ul><h3>Classes</h3><ul class="list classes"><li class="item" id="Calendar"><span class="title"><a href="Calendar.html">Calendar</a></span><ul class="sublist methods Calendar"><span class="subtitle">Methods</span><li><a href="Calendar.html#draw">draw</a></li><li><a href="Calendar.html#getDate">getDate</a></li><li><a href="Calendar.html#setDate">setDate</a></li></ul></li></ul><h3>Namespaces</h3><ul class="list namespaces"><li class="item" id="utils"><span class="title"><a href="utils.html">utils</a></span><ul class="sublist methods utils"><span class="subtitle">Methods</span><li><a href="utils.html#.getLastDate">getLastDate</a></li></ul></li></ul><h3>Global</h3><ul class="list globals"><li class="item" id="getDateHashTable"><span class="title"><a href="global.html#getDateHashTable">getDateHashTable</a></span></li><li class="item" id="getDateObject"><span class="title"><a href="global.html#getDateObject">getDateObject</a></span></li><li class="item" id="getFirstDay"><span class="title"><a href="global.html#getFirstDay">getFirstDay</a></span></li><li class="item" id="getLastDay"><span class="title"><a href="global.html#getLastDay">getLastDay</a></span></li><li class="item" id="getRelativeDate"><span class="title"><a href="global.html#getRelativeDate">getRelativeDate</a></span></li><li class="item" id="getTime"><span class="title"><a href="global.html#getTime">getTime</a></span></li><li class="item" id="getToday"><span class="title"><a href="global.html#getToday">getToday</a></span></li><li class="item" id="getWeeks"><span class="title"><a href="global.html#getWeeks">getWeeks</a></span></li></ul></div>
         <div id="main" class="main">
 
 
@@ -53,7 +53,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line94">line 94</a></code>
+                    <code><a href="calendar.js.html#line92">line 92</a></code>
                 </div>
             
         </h4>
@@ -67,7 +67,7 @@
 
     
     <div class="description">
-        <p>캘린더 컴포넌트 클래스</p>
+        <p>Calendar component class</p>
     </div>
     
 
@@ -131,7 +131,7 @@
 
             
 
-            <td class="description last"><p>초기화 옵션 설정을 위한 객체.</p>
+            <td class="description last"><p>A options for initialize</p>
                 <h6>Properties:</h6>
                 
 
@@ -189,7 +189,7 @@
                 </td>
             
 
-            <td class="description last"><p>캘린더 엘리먼트</p></td>
+            <td class="description last"><p>A root element</p></td>
         </tr>
 
     
@@ -228,7 +228,7 @@
                 </td>
             
 
-            <td class="description last"><p>초기 HTML/CSS구조에서 필요한 className 앞에 붙는 prefix를 정의</p></td>
+            <td class="description last"><p>A prefix class for markup structure</p></td>
         </tr>
 
     
@@ -262,12 +262,12 @@
             
                 <td class="default">
                 
-                    현재년
+                    this year
                 
                 </td>
             
 
-            <td class="description last"><p>초기에 표시될 달력의 년도</p></td>
+            <td class="description last"><p>A year for initialize</p></td>
         </tr>
 
     
@@ -301,12 +301,12 @@
             
                 <td class="default">
                 
-                    현재월
+                    this month
                 
                 </td>
             
 
-            <td class="description last"><p>초기에 표시될 달력의 달</p></td>
+            <td class="description last"><p>A month for initialize</p></td>
         </tr>
 
     
@@ -345,7 +345,7 @@
                 </td>
             
 
-            <td class="description last"><p>className이 '[prefix]title' 인 엘리먼트를 찾아서 해당 형식대로 날짜를 출력한다. 다음의 형식을 사용할 수 있다.<table><tr><th>표시형식</th><th>설명</th><th>결과</th></tr><tr><td>yyyy</td><td>4자리 연도</td><td>2010</td></tr><tr><td>yy</td><td>2자리 연도</td><td>10</td></tr><tr><td>mm</td><td>2자리 월</td><td>09</td></tr><tr><td>m</td><td>1자리 월</td><td>9</td></tr><tr><td>M</td><td>monthTitles 옵션 값으로 표시</td><td>SEP</td></tr></table></p></td>
+            <td class="description last"><p>A title format. This component find title element by className '[prefix]title'</p></td>
         </tr>
 
     
@@ -379,12 +379,12 @@
             
                 <td class="default">
                 
-                    "yyyy년 mm월 dd일 (D)"
+                    "yyyy Year mm Month dd Day (D)"
                 
                 </td>
             
 
-            <td class="description last"><p>className이 '[prefix]today' 인 엘리먼트를 찾아서 해당 형식대로 날짜를 출력한다.</p></td>
+            <td class="description last"><p>A today format. This component find today element by className '[prefix]today'</p></td>
         </tr>
 
     
@@ -423,7 +423,7 @@
                 </td>
             
 
-            <td class="description last"><p>className이 '[prefix]year' 인 엘리먼트를 찾아서 해당 형식대로 연도를 출력한다. option의 titleFormat에서 사용할 수 있는 형식에서 연도 표시 형식을 사용할 수 있다.</p></td>
+            <td class="description last"><p>A year title formant. This component find year title element by className '[prefix]year'</p></td>
         </tr>
 
     
@@ -462,7 +462,7 @@
                 </td>
             
 
-            <td class="description last"><p>className이 '[prefix]month' 인 엘리먼트를 찾아서 해당 형식대로 월을 출력한다. option의 titleFormat에서 사용할 수 있는 형식에서 월 표시 형식을 사용할 수 있다.</p></td>
+            <td class="description last"><p>A month title format. This component find month title element by className이 '[prefix]month'</p></td>
         </tr>
 
     
@@ -501,7 +501,7 @@
                 </td>
             
 
-            <td class="description last"><p>각 월의 이름을 설정할 수 있다. 1월부터 순서대로 배열로 정의한다. option의 titleFormat 표시형식에서 M을 사용하면 여기서 설정된 이름으로 표시할 수 있다.</p></td>
+            <td class="description last"><p>A label of each month.</p></td>
         </tr>
 
     
@@ -535,12 +535,12 @@
             
                 <td class="default">
                 
-                    ["일","월","화","수","목","금","토"]
+                    ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
                 
                 </td>
             
 
-            <td class="description last"><p><br>각 요일의 이름을 설정할 수 있다. 일요일부터 순서대로 배열로 정의한다. option의 todayFormat 표시형식에서 D을 사용하면 여기서 설정된 이름으로 표시할 수 있다.</p></td>
+            <td class="description last"><p>A label for day. If you set the other option todayFormat 'D', you can use this name.</p></td>
         </tr>
 
     
@@ -611,16 +611,16 @@
         <h5>Example</h5>
         
     <pre class="prettyprint"><code>var calendar = new ne.component.Calendar({
-                   el: document.getElementById('layer'),
+                   element: '#layer',
                    classPrefix: "calendar-",
                    year: 1983,
                    month: 5,
-                   titleFormat: "yyyy-mm", //설정될 title의 형식
-                   todayFormat: "yyyy년 mm월 dd일 (D)" // 설정된 오늘의 날짜 형식
-                   yearTitleFormat: "yyyy", //설정될 연 title의 형식
-                   monthTitleFormat: "m", //설정될 월 title의 형식
-                   monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], //월의 이름을 설정 "title" 세팅시 적용
-                   dayTitles: ['일', '월', '화', '수', '목', '금', '토'] // 요일들
+                   titleFormat: "yyyy-mm", // title
+                   todayFormat: "yyyy / mm / dd (D)" // today
+                   yearTitleFormat: "yyyy", // year title
+                   monthTitleFormat: "m", // month title
+                   monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], 
+                   dayTitles: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] // 요일들
             });</code></pre>
 
     
@@ -655,7 +655,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line293">line 293</a></code>
+                    <code><a href="calendar.js.html#line296">line 296</a></code>
                 </div>
             
         </h4>
@@ -669,7 +669,7 @@
 
     
     <div class="description">
-        <p>바디 엘리먼트들을 등록한다.</p>
+        <p>Register body element</p>
     </div>
     
 
@@ -721,7 +721,7 @@
 
             
 
-            <td class="description last"><p>루트 엘리먼트 jquery 객체</p></td>
+            <td class="description last"><p>The root elment of component</p></td>
         </tr>
 
     
@@ -744,7 +744,7 @@
 
             
 
-            <td class="description last"><p>셀렉터</p></td>
+            <td class="description last"><p>A selector</p></td>
         </tr>
 
     
@@ -767,7 +767,7 @@
 
             
 
-            <td class="description last"><p>클래스 prefix</p></td>
+            <td class="description last"><p>A prefix for class</p></td>
         </tr>
 
     
@@ -840,7 +840,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line319">line 319</a></code>
+                    <code><a href="calendar.js.html#line322">line 322</a></code>
                 </div>
             
         </h4>
@@ -854,7 +854,7 @@
 
     
     <div class="description">
-        <p>푸터 엘리먼트들을 등록한다.</p>
+        <p>Register footer element</p>
     </div>
     
 
@@ -906,7 +906,7 @@
 
             
 
-            <td class="description last"><p>루트 엘리먼트 jquery 객체</p></td>
+            <td class="description last"><p>The root element of component</p></td>
         </tr>
 
     
@@ -929,7 +929,7 @@
 
             
 
-            <td class="description last"><p>셀렉터</p></td>
+            <td class="description last"><p>A selector</p></td>
         </tr>
 
     
@@ -952,7 +952,7 @@
 
             
 
-            <td class="description last"><p>클래스 prefix</p></td>
+            <td class="description last"><p>A prefix for class</p></td>
         </tr>
 
     
@@ -1025,7 +1025,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line258">line 258</a></code>
+                    <code><a href="calendar.js.html#line261">line 261</a></code>
                 </div>
             
         </h4>
@@ -1039,7 +1039,7 @@
 
     
     <div class="description">
-        <p>해더 엘리먼트들을 등록한다.</p>
+        <p>Register header element.</p>
     </div>
     
 
@@ -1091,7 +1091,7 @@
 
             
 
-            <td class="description last"><p>루트 엘리먼트 jquery 객체</p></td>
+            <td class="description last"><p>The root element of component</p></td>
         </tr>
 
     
@@ -1114,7 +1114,7 @@
 
             
 
-            <td class="description last"><p>셀렉터</p></td>
+            <td class="description last"><p>A class selector</p></td>
         </tr>
 
     
@@ -1137,7 +1137,7 @@
 
             
 
-            <td class="description last"><p>클래스 prefix</p></td>
+            <td class="description last"><p>A prefix for class</p></td>
         </tr>
 
     
@@ -1210,7 +1210,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line241">line 241</a></code>
+                    <code><a href="calendar.js.html#line244">line 244</a></code>
                 </div>
             
         </h4>
@@ -1224,7 +1224,7 @@
 
     
     <div class="description">
-        <p>엘리먼트를 필드에 할당한다.</p>
+        <p>Set element to filed</p>
     </div>
     
 
@@ -1300,7 +1300,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line339">line 339</a></code>
+                    <code><a href="calendar.js.html#line342">line 342</a></code>
                 </div>
             
         </h4>
@@ -1314,7 +1314,7 @@
 
     
     <div class="description">
-        <p>달력, 전년 전달 다음달 다음년도로 이동하는 이벤트를 건다.</p>
+        <p>Set navigation event</p>
     </div>
     
 
@@ -1390,7 +1390,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line558">line 558</a></code>
+                    <code><a href="calendar.js.html#line571">line 571</a></code>
                 </div>
             
         </h4>
@@ -1404,7 +1404,7 @@
 
     
     <div class="description">
-        <p>달력을 지운다</p>
+        <p>Clear calendar</p>
     </div>
     
 
@@ -1480,7 +1480,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line397">line 397</a></code>
+                    <code><a href="calendar.js.html#line413">line 413</a></code>
                 </div>
             
         </h4>
@@ -1494,7 +1494,7 @@
 
     
     <div class="description">
-        <p>캘린더의 월을 기준으로 날짜들을 만든다.</p>
+        <p>Draw dates by month.</p>
     </div>
     
 
@@ -1546,7 +1546,7 @@
 
             
 
-            <td class="description last"><p>그릴 년-월</p></td>
+            <td class="description last"><p>A date to draw</p></td>
         </tr>
 
     
@@ -1569,7 +1569,7 @@
 
             
 
-            <td class="description last"><p>클래스 prefix</p></td>
+            <td class="description last"><p>A class prefix</p></td>
         </tr>
 
     
@@ -1642,7 +1642,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line513">line 513</a></code>
+                    <code><a href="calendar.js.html#line527">line 527</a></code>
                 </div>
             
         </h4>
@@ -1656,7 +1656,7 @@
 
     
     <div class="description">
-        <p>그려질 데이터들을 dates 배열에 저장</p>
+        <p>Save draw dates to array</p>
     </div>
     
 
@@ -1708,7 +1708,7 @@
 
             
 
-            <td class="description last"><p>그려질 연도</p></td>
+            <td class="description last"><p>A draw year</p></td>
         </tr>
 
     
@@ -1731,7 +1731,7 @@
 
             
 
-            <td class="description last"><p>그려질 달</p></td>
+            <td class="description last"><p>A draw month</p></td>
         </tr>
 
     
@@ -1754,7 +1754,7 @@
 
             
 
-            <td class="description last"><p>그려질 날짜 데이터</p></td>
+            <td class="description last"><p>A draw date</p></td>
         </tr>
 
     
@@ -1842,7 +1842,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line642">line 642</a></code>
+                    <code><a href="calendar.js.html#line655">line 655</a></code>
                 </div>
             
         </h4>
@@ -1856,7 +1856,7 @@
 
     
     <div class="description">
-        <p>텍스트를 변환하여 돌려준다.</p>
+        <p>Chage text and return.</p>
     </div>
     
 
@@ -1908,7 +1908,7 @@
 
             
 
-            <td class="description last"><p>변환할 텍스트</p></td>
+            <td class="description last"><p>A text to chagne</p></td>
         </tr>
 
     
@@ -1931,7 +1931,7 @@
 
             
 
-            <td class="description last"><p>변환키와 벨류 셋</p></td>
+            <td class="description last"><p>A chagne key, value set</p></td>
         </tr>
 
     
@@ -1954,7 +1954,7 @@
 
             
 
-            <td class="description last"><p>변환할 정규식</p></td>
+            <td class="description last"><p>A regExp to chagne</p></td>
         </tr>
 
     
@@ -1970,9 +1970,10 @@
         <div class="details">
         
                 
-<div class="param-desc">
-    <p>변환된 문자열</p>
-</div>
+    
+<span class="param-type">string</span>
+
+
 
             
         </div>
@@ -2042,7 +2043,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line357">line 357</a></code>
+                    <code><a href="calendar.js.html#line360">line 360</a></code>
                 </div>
             
         </h4>
@@ -2056,7 +2057,7 @@
 
     
     <div class="description">
-        <p>캘린더를 그리기 위한 년/월 날짜 해시를 얻는다</p>
+        <p>Get Hash data to drow calendar</p>
     </div>
     
 
@@ -2118,7 +2119,7 @@
 
             
 
-            <td class="description last"><p>년</p></td>
+            <td class="description last"><p>A year</p></td>
         </tr>
 
     
@@ -2149,7 +2150,7 @@
 
             
 
-            <td class="description last"><p>월</p></td>
+            <td class="description last"><p>A month</p></td>
         </tr>
 
     
@@ -2182,7 +2183,7 @@
 
             
 
-            <td class="description last"><p>상대 값 여부</p></td>
+            <td class="description last"><p>Whether is related other value or not</p></td>
         </tr>
 
     
@@ -2199,7 +2200,7 @@
         
                 
 <div class="param-desc">
-    <p>날짜 해시</p>
+    <p>A date hash</p>
 </div>
 
             
@@ -2270,7 +2271,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line615">line 615</a></code>
+                    <code><a href="calendar.js.html#line628">line 628</a></code>
                 </div>
             
         </h4>
@@ -2284,7 +2285,7 @@
 
     
     <div class="description">
-        <p>폼 변환할 날짜의 맵을 구한다.</p>
+        <p>Get map data for form</p>
     </div>
     
 
@@ -2349,7 +2350,7 @@
 
             
 
-            <td class="description last"><p>연도</p></td>
+            <td class="description last"><p>A year</p></td>
         </tr>
 
     
@@ -2383,7 +2384,7 @@
 
             
 
-            <td class="description last"><p>월</p></td>
+            <td class="description last"><p>A month</p></td>
         </tr>
 
     
@@ -2419,7 +2420,7 @@
 
             
 
-            <td class="description last"><p>일</p></td>
+            <td class="description last"><p>A day</p></td>
         </tr>
 
     
@@ -2502,12 +2503,12 @@
             
 <dt>
     
-        <h4 class="name" id="_isToday">
-            <span class="type-signature"><span class="icon green">private</span> </span>_isToday<span class="signature">(year, month, date)</span><span class="type-signature"> &rarr; {boolean}</span>
+        <h4 class="name" id="_isNecessaryForDrawing">
+            <span class="type-signature"><span class="icon green">private</span> </span>_isNecessaryForDrawing<span class="signature">(year, month)</span><span class="type-signature"> &rarr; {boolean}</span>
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line478">line 478</a></code>
+                    <code><a href="calendar.js.html#line388">line 388</a></code>
                 </div>
             
         </h4>
@@ -2521,7 +2522,7 @@
 
     
     <div class="description">
-        <p>입력 날짜 해시가 오늘인지 판단한다.</p>
+        <p>Judge to redraw calendar</p>
     </div>
     
 
@@ -2573,7 +2574,7 @@
 
             
 
-            <td class="description last"><p>년도</p></td>
+            <td class="description last"><p>A year</p></td>
         </tr>
 
     
@@ -2596,7 +2597,184 @@
 
             
 
-            <td class="description last"><p>달</p></td>
+            <td class="description last"><p>A month</p></td>
+        </tr>
+
+    
+    </tbody>
+</table></div>
+    </div>
+    
+
+    
+    <div class="container-returns">
+        <div class="returns">
+        <h5>Returns:</h5>
+        <div class="details">
+        
+                
+<div class="param-desc">
+    <p>reflow</p>
+</div>
+
+            
+        </div>
+        </div>
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    <!--
+    
+    -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        
+            
+<dt>
+    
+        <h4 class="name" id="_isToday">
+            <span class="type-signature"><span class="icon green">private</span> </span>_isToday<span class="signature">(year, month, date)</span><span class="type-signature"> &rarr; {boolean}</span>
+            
+                <div class="container-source method">
+                    <code><a href="calendar.js.html">calendar.js</a></code>,
+                    <code><a href="calendar.js.html#line492">line 492</a></code>
+                </div>
+            
+        </h4>
+
+
+
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Jedge the input date is today.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <div class="params">
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name first"><code>year</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A year</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name first"><code>month</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A month</p></td>
         </tr>
 
     
@@ -2619,7 +2797,7 @@
 
             
 
-            <td class="description last"><p>일</p></td>
+            <td class="description last"><p>A date</p></td>
         </tr>
 
     
@@ -2635,9 +2813,10 @@
         <div class="details">
         
                 
-<div class="param-desc">
-    <p>오늘 날짜 인지 비교 결과</p>
-</div>
+    
+<span class="param-type">boolean</span>
+
+
 
             
         </div>
@@ -2707,7 +2886,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line687">line 687</a></code>
+                    <code><a href="calendar.js.html#line700">line 700</a></code>
                 </div>
             
         </h4>
@@ -2721,7 +2900,7 @@
 
     
     <div class="description">
-        <p>0~99 숫자를 2자릿수 표현으로 만든 문자열을 반환한다.</p>
+        <p>Chagne number 0~9 to '00~09'</p>
     </div>
     
 
@@ -2773,7 +2952,7 @@
 
             
 
-            <td class="description last"><p>숫자</p></td>
+            <td class="description last"><p>number</p></td>
         </tr>
 
     
@@ -2789,9 +2968,10 @@
         <div class="details">
         
                 
-<div class="param-desc">
-    <p>결과 문자열</p>
-</div>
+    
+<span class="param-type">string</span>
+
+
 
             
         </div>
@@ -2868,7 +3048,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line383">line 383</a></code>
+                    <code><a href="calendar.js.html#line399">line 399</a></code>
                 </div>
             
         </h4>
@@ -2882,7 +3062,7 @@
 
     
     <div class="description">
-        <p>calendar text를 그려준다.</p>
+        <p>Draw calendar text</p>
     </div>
     
 
@@ -2934,7 +3114,7 @@
 
             
 
-            <td class="description last"><p>화면에 나타낼 날짜 해시</p></td>
+            <td class="description last"><p>Tha hash that show up on calendar</p></td>
         </tr>
 
     
@@ -3007,7 +3187,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line569">line 569</a></code>
+                    <code><a href="calendar.js.html#line582">line 582</a></code>
                 </div>
             
         </h4>
@@ -3021,7 +3201,7 @@
 
     
     <div class="description">
-        <p>현재 달력의 타이틀 영역을 옵션의 타이틀 포멧에 맞게 그린다.</p>
+        <p>Draw title with format option.</p>
     </div>
     
 
@@ -3073,7 +3253,7 @@
 
             
 
-            <td class="description last"><p>연도 값 (ex. 2008)</p></td>
+            <td class="description last"><p>A value of year (ex. 2008)</p></td>
         </tr>
 
     
@@ -3099,7 +3279,7 @@
 
             
 
-            <td class="description last"><p>월 값 (1 ~ 12)</p></td>
+            <td class="description last"><p>A month (1 ~ 12)</p></td>
         </tr>
 
     
@@ -3172,7 +3352,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line653">line 653</a></code>
+                    <code><a href="calendar.js.html#line666">line 666</a></code>
                 </div>
             
         </h4>
@@ -3186,7 +3366,7 @@
 
     
     <div class="description">
-        <p>오늘날짜 앨리먼트 여부에 따라 오늘날짜를 그리는 데이터를 만들어 그린다.</p>
+        <p>Set today</p>
     </div>
     
 
@@ -3262,7 +3442,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line596">line 596</a></code>
+                    <code><a href="calendar.js.html#line609">line 609</a></code>
                 </div>
             
         </h4>
@@ -3276,7 +3456,7 @@
 
     
     <div class="description">
-        <p>캘린더의 타이틀을 갱신한다.</p>
+        <p>Update title</p>
     </div>
     
 
@@ -3331,7 +3511,7 @@
 
             
 
-            <td class="description last"><p>갱신될 엘리먼트</p></td>
+            <td class="description last"><p>A update element</p></td>
         </tr>
 
     
@@ -3354,7 +3534,7 @@
 
             
 
-            <td class="description last"><p>변경될 날짜 형식</p></td>
+            <td class="description last"><p>A update form</p></td>
         </tr>
 
     
@@ -3377,7 +3557,7 @@
 
             
 
-            <td class="description last"><p>정규식에 맞춰서 매칭되는 값을 가진 객체</p></td>
+            <td class="description last"><p>A object that has value matched regExp</p></td>
         </tr>
 
     
@@ -3400,7 +3580,7 @@
 
             
 
-            <td class="description last"><p>변경할 폼을 치환할 정규식</p></td>
+            <td class="description last"><p>A regExp to chagne form</p></td>
         </tr>
 
     
@@ -3473,7 +3653,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line208">line 208</a></code>
+                    <code><a href="calendar.js.html#line211">line 211</a></code>
                 </div>
             
         </h4>
@@ -3487,7 +3667,7 @@
 
     
     <div class="description">
-        <p>초기화를 진행한다.</p>
+        <p>Set defulat opitons</p>
     </div>
     
 
@@ -3551,7 +3731,7 @@
 
             
 
-            <td class="description last"><p>옵션 값</p></td>
+            <td class="description last"><p>A options to initialzie component</p></td>
         </tr>
 
     
@@ -3624,7 +3804,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line219">line 219</a></code>
+                    <code><a href="calendar.js.html#line222">line 222</a></code>
                 </div>
             
         </h4>
@@ -3638,7 +3818,7 @@
 
     
     <div class="description">
-        <p>옵션값을 저장한다.</p>
+        <p>Save options</p>
     </div>
     
 
@@ -3702,7 +3882,7 @@
 
             
 
-            <td class="description last"><p>옵션 값</p></td>
+            <td class="description last"><p>A options to initialize component</p></td>
         </tr>
 
     
@@ -3775,7 +3955,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line546">line 546</a></code>
+                    <code><a href="calendar.js.html#line559">line 559</a></code>
                 </div>
             
         </h4>
@@ -3789,7 +3969,7 @@
 
     
     <div class="description">
-        <p>주말설정</p>
+        <p>Set weekend</p>
     </div>
     
 
@@ -3841,7 +4021,7 @@
 
             
 
-            <td class="description last"><p>날짜</p></td>
+            <td class="description last"><p>A date</p></td>
         </tr>
 
     
@@ -3864,7 +4044,7 @@
 
             
 
-            <td class="description last"><p>날짜컨테이너 제이쿼리 엘리먼트 오브젝트</p></td>
+            <td class="description last"><p>A container element for date</p></td>
         </tr>
 
     
@@ -3887,7 +4067,7 @@
 
             
 
-            <td class="description last"><p>클래스 프리픽스</p></td>
+            <td class="description last"><p>A prefix of class</p></td>
         </tr>
 
     
@@ -3960,7 +4140,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line494">line 494</a></code>
+                    <code><a href="calendar.js.html#line508">line 508</a></code>
                 </div>
             
         </h4>
@@ -3974,7 +4154,7 @@
 
     
     <div class="description">
-        <p>한주 템플릿을 만든다.</p>
+        <p>Make one week tempate.</p>
     </div>
     
 
@@ -4026,7 +4206,7 @@
 
             
 
-            <td class="description last"><p>해당 연도</p></td>
+            <td class="description last"><p>A year</p></td>
         </tr>
 
     
@@ -4049,7 +4229,7 @@
 
             
 
-            <td class="description last"><p>해당 월</p></td>
+            <td class="description last"><p>A month</p></td>
         </tr>
 
     
@@ -4122,7 +4302,7 @@
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line709">line 709</a></code>
+                    <code><a href="calendar.js.html#line722">line 722</a></code>
                 </div>
             
         </h4>
@@ -4136,7 +4316,7 @@
 
     
     <div class="description">
-        <p>Calendar를 그린다.</p>
+        <p>Draw calendar</p>
     </div>
     
 
@@ -4200,7 +4380,7 @@
 
             
 
-            <td class="description last"><p>연도 값 (ex. 2008)</p></td>
+            <td class="description last"><p>A year (ex. 2008)</p></td>
         </tr>
 
     
@@ -4233,7 +4413,7 @@
 
             
 
-            <td class="description last"><p>월 값 (1 ~ 12)</p></td>
+            <td class="description last"><p>A month (1 ~ 12)</p></td>
         </tr>
 
     
@@ -4266,7 +4446,7 @@
 
             
 
-            <td class="description last"><p>연도와 월 값이 상대 값인지 여부</p></td>
+            <td class="description last"><p>A year and month is related</p></td>
         </tr>
 
     
@@ -4330,12 +4510,12 @@
     
         <h5>Example</h5>
         
-    <pre class="prettyprint"><code>calendar.draw(); //현재 설정된 날짜의 달력을 그린다.
-calendar.draw(2008, 12); //2008년 12월 달력을 그린다.
-calendar.draw(null, 12); //현재 표시된 달력의 12월을 그린다.
-calendar.draw(2010, null); //2010년 현재 표시된 달력의 월을 그린다.
-calendar.draw(0, 1, true); //현재 표시된 달력의 다음 달을 그린다.
-calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그린다.</code></pre>
+    <pre class="prettyprint"><code>calendar.draw(); // Draw with now date.
+calendar.draw(2008, 12); // Draw 2008/12
+calendar.draw(null, 12); // Draw current year/12
+calendar.draw(2010, null); // Draw 2010/current month
+calendar.draw(0, 1, true); // Draw next month
+calendar.draw(-1, null, true); // Draw prev year</code></pre>
 
     
 </dd>
@@ -4349,7 +4529,7 @@ calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line751">line 751</a></code>
+                    <code><a href="calendar.js.html#line764">line 764</a></code>
                 </div>
             
         </h4>
@@ -4363,7 +4543,7 @@ calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그
 
     
     <div class="description">
-        <p>현재 달력의 년도와 월을 반환한다.</p>
+        <p>Return current year and month(just shown).</p>
     </div>
     
 
@@ -4382,9 +4562,10 @@ calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그
         <div class="details">
         
                 
-<div class="param-desc">
-    <p>날짜 해시</p>
-</div>
+    
+<span class="param-type">Object</span>
+
+
 
             
         </div>
@@ -4454,7 +4635,7 @@ calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그
             
                 <div class="container-source method">
                     <code><a href="calendar.js.html">calendar.js</a></code>,
-                    <code><a href="calendar.js.html#line763">line 763</a></code>
+                    <code><a href="calendar.js.html#line776">line 776</a></code>
                 </div>
             
         </h4>
@@ -4468,7 +4649,7 @@ calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그
 
     
     <div class="description">
-        <p>현재 달력의 년도와 월을 설정한다.</p>
+        <p>Set date</p>
     </div>
     
 
@@ -4532,7 +4713,7 @@ calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그
 
             
 
-            <td class="description last"><p>연도 값 (ex. 2008)</p></td>
+            <td class="description last"><p>A year (ex. 2008)</p></td>
         </tr>
 
     
@@ -4565,7 +4746,7 @@ calendar.draw(-1, null, true); //현재 표시된 달력의 이전 연도를 그
 
             
 
-            <td class="description last"><p>월 값 (1 ~ 12)</p></td>
+            <td class="description last"><p>A month (1 ~ 12)</p></td>
         </tr>
 
     
