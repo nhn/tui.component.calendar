@@ -16,6 +16,7 @@ var utils = {
      *  if there are 3 parameter, the parameter is corgnized Date object
      *  if there are no parameter, return today's hash date
      * @function getDateHashTable
+     * @memberof utils
      * @param {Date|number} [year] A date instance or year
      * @param {number} [month] A month
      * @param {number} [date] A date
@@ -43,6 +44,7 @@ var utils = {
      * Return today that saved on component or create new date.
      * @function getToday
      * @returns {{year: *, month: *, date: *}}
+     * @memberof utils
      */
     getToday: function() {
        return utils.getDateHashTable();
@@ -54,6 +56,7 @@ var utils = {
      * @param {number} year A year
      * @param {number} month A month
      * @return {number} 주 (4~6)
+     * @memberof utils
      **/
     getWeeks: function(year, month) {
         var firstDay = this.getFirstDay(year, month),
@@ -70,6 +73,7 @@ var utils = {
      * @param {number} date.month A month
      * @param {number} date.date A date
      * @return {number} 
+     * @memberof utils
      * @example
      * utils.getTime({year:2010, month:5, date:12}); // 1273590000000
      **/
@@ -83,6 +87,7 @@ var utils = {
      * @param {number} year A year
      * @param {number} month A month
      * @return {number} (0~6)
+     * @memberof utils
      **/
     getFirstDay: function(year, month) {
         return new Date(year, month - 1, 1).getDay();
@@ -94,6 +99,7 @@ var utils = {
      * @param {number} year A year
      * @param {number} month A month
      * @return {number} (0~6)
+     * @memberof utils
      **/
     getLastDay: function(year, month) {
         return new Date(year, month, 0).getDay();
@@ -105,6 +111,7 @@ var utils = {
      * @param {number} year A year
      * @param {number} month A month
      * @return {number} (1~31)
+     * @memberof utils
      **/
     getLastDate: function(year, month) {
         return new Date(year, month, 0).getDate();
@@ -115,6 +122,7 @@ var utils = {
      * @function getDateObject
      * @param {Object} date A date hash
      * @return {Date} Date  
+     * @memberof utils
      * @example
      *  utils.getDateObject({year:2010, month:5, date:12});
      *  utils.getDateObject(2010, 5, 12); //year,month,date
@@ -134,6 +142,7 @@ var utils = {
      * @param {number} date A related value for day (you can use +/-)
      * @param {Object} dateObj standard date hash
      * @return {Object} dateObj 
+     * @memberof utils
      * @example
      *  utils.getRelativeDate(1, 0, 0, {year:2000, month:1, date:1}); // {year:2001, month:1, date:1}
      *  utils.getRelativeDate(0, 0, -1, {year:2010, month:1, date:1}); // {year:2009, month:12, date:31}
