@@ -1,1 +1,1 @@
-ne.util.defineNameSpace('ne.component.Calendar', require('./src/js/calendar'));
+tui.util.defineNamespace('tui.component.Calendar', require('./src/js/calendar'));

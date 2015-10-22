@@ -50,17 +50,17 @@
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/code-snippet.js"></script>
-<script type="text/javascript" src="js/calendar.min.js"></script>
+<script type="text/javascript" src="js/calendar.js"></script>
 <!--<script type="text/javascript" src="../src/js/calendar.js"></script>-->
 <!--<script type="text/javascript" src="../src/js/calendarUtil.js"></script>-->
 <script>
-    var cal1 = new ne.component.Calendar({
+    var cal1 = new tui.component.Calendar({
         element: $("#layer2"),
         classPrefix: 'calendar2-'
     });
     cal1.draw();
 
-    var cal2 = new ne.component.Calendar({
+    var cal2 = new tui.component.Calendar({
         element: $('#layer'),
         year: 1983,     // 달력이 보여줄 날짜-년도
         month: 5,       // 달력이 보여줄 날짜-월

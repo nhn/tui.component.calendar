@@ -7,7 +7,7 @@
 'use strict';
 var utils = require('./utils');
 
-var util = ne.util,
+var util = tui.util,
     CONSTANTS = {
         relativeMonthValueKey: 'relativeMonthValue',
         prevYear: 'prev-year',
