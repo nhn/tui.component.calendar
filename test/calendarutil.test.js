@@ -1,28 +1,29 @@
-describe('Canedlar utils test  ne.component.Calendar.Util.', function() {
+var utils = require('../src/js/utils');
+describe('Canedlar utils test  utils.', function() {
 
     it('create date hash', function() {
         var date = new Date(),
             date19840415 = new Date(1984, 3, 15, 00, 00),
             hashDate;
         // now(local)
-        hashDate = ne.component.Calendar.Util.getDateHashTable(date);
+        hashDate = utils.getDateHashTable(date);
         expect(hashDate.year).toBe(date.getFullYear());
         expect(hashDate.month).toBe(date.getMonth() + 1);
         expect(hashDate.date).toBe(date.getDate());
         // some day (1984-04-15)
-        hashDate = ne.component.Calendar.Util.getDateHashTable(date19840415);
+        hashDate = utils.getDateHashTable(date19840415);
         expect(hashDate.year).toBe(1984);
         expect(hashDate.month).toBe(4);
         expect(hashDate.date).toBe(15);
 
-        hashDate = ne.component.Calendar.Util.getDateHashTable(1984, 4, 15);
+        hashDate = utils.getDateHashTable(1984, 4, 15);
         expect(hashDate.year).toBe(1984);
         expect(hashDate.month).toBe(4);
         expect(hashDate.date).toBe(15);
     });
 
     it('getToday', function() {
-        var today = ne.component.Calendar.Util.getToday();
+        var today = utils.getToday();
         var newDate = new Date();
         expect(today.year).toBe(newDate.getFullYear());
         expect(today.month).toBe(newDate.getMonth() + 1);
@@ -31,20 +32,20 @@ describe('Canedlar utils test  ne.component.Calendar.Util.', function() {
 
     it('getToday return date hash.', function() {
         var dateObj = new Date();
-        var todayHash = ne.component.Calendar.Util.getToday();
+        var todayHash = utils.getToday();
         expect(todayHash.year).toBe(dateObj.getFullYear());
         expect(todayHash.month).toBe(dateObj.getMonth()+1);
         expect(todayHash.date).toBe(dateObj.getDate());
     });
 
     it('getTime, getDataObject', function() {
-        var date = ne.component.Calendar.Util.getDateObject(1984, 4, 15),
-            date2 = ne.component.Calendar.Util.getDateObject({
+        var date = utils.getDateObject(1984, 4, 15),
+            date2 = utils.getDateObject({
                 year: 1984,
                 month: 4,
                 date: 15
             }),
-            time1 = ne.component.Calendar.Util.getTime({
+            time1 = utils.getTime({
                 year: 1984,
                 month: 4,
                 date: 15
@@ -60,7 +61,7 @@ describe('Canedlar utils test  ne.component.Calendar.Util.', function() {
                 month: 7,
                 date: 31
             }],
-            date = ne.component.Calendar.Util.getRelativeDate.apply(ne.component.Calendar.Util, pos);
+            date = utils.getRelativeDate.apply(ne.component.Calendar.Util, pos);
         expect(date.year).toBe(1984);
         expect(date.month).toBe(8);
         expect(date.date).toBe(1);

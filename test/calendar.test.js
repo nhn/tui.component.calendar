@@ -1,5 +1,7 @@
 'use strict';
 
+var Calendar = require('../src/js/calendar');
+
 describe('캘린더를 생성하고 기능을 테스트.', function() {
     var calendar1,
         calendar2,
@@ -9,10 +11,10 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
 
     beforeEach(function() {
         loadFixtures("test/fixture/calendar.html");
-        calendar1 = new tui.component.Calendar({
+        calendar1 = new Calendar({
             element: $('#layer')
         });
-        calendar2 = new tui.component.Calendar({
+        calendar2 = new Calendar({
             element: $('#layer2'),
             year: 1983,
             month: 5,
@@ -25,7 +27,7 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
             dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
         });
 
-        calendar3 = new tui.component.Calendar($('#layer3'));
+        calendar3 = new Calendar($('#layer3'));
     });
     // 생성 확인
     it('캘린더가 생성 되었는지 확인', function() {
