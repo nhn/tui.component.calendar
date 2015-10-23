@@ -10,9 +10,9 @@ This component display date by calendar UI.<br>
 * Support custom event when redraw calendar
 
 ## Documentation
-* **API** : https://nhnent.github.io/fe.component-calendar/latest
-* **Tutorial** : https://github.com/nhnent/fe.component-calendar/wiki/Calendar-Tutorial
-* **Sample** - https://nhnent.github.io/fe.component-calendar/latest/tutorial-sample1.html
+* **API** : https://nhnent.github.io/tui.component-calendar/latest
+* **Tutorial** : https://github.com/nhnent/tui.component-calendar/wiki/Calendar-Tutorial
+* **Sample** - https://nhnent.github.io/tui.component-calendar/latest/tutorial-sample1.html
 
 ## Dependency
 * jquery: ~1.8.3
@@ -28,13 +28,14 @@ This component display date by calendar UI.<br>
 * Bower:
    * latest : `bower install ne-component-calendar"`
    * each version : `bower install ne-component-calendar[#tag]"`
-* Download: https://github.com/nhnent/fe.component-calendar
+* Download: https://github.com/nhnent/tui.component-calendar
 
 ## History
 | Version | Description | Date | Developer |
 | ---- | ---- | ---- | ---- |
-| <a href="https://nhnent.github.io/fe.component-calendar/1.1.0">1.1.0</a> | Template apply | 2015.06 | NHN Ent.FE dev team. Yi minkyu<minkyu.yi@nhnent.com> |
-| <a href="https://nhnent.github.io/fe.component-calendar/1.0.1">1.0.1</a> | Split date picker | 2015.05 | NHN Ent. FE dev team. Yi minkyu <minkyu.yi@nhnent.com> |
+| 1.1.0 | Namespace changed | 2015.10 | NHN Ent. FE dev team<dl_javascript@nhnent.com> |
+| <a href="https://nhnent.github.io/tui.component-calendar/1.1.0">1.1.0</a> | Template apply | 2015.06 | NHN Ent.FE dev team. Yi minkyu<minkyu.yi@nhnent.com> |
+| <a href="https://nhnent.github.io/tui.component-calendar/1.0.1">1.0.1</a> | Split date picker | 2015.05 | NHN Ent. FE dev team. Yi minkyu <minkyu.yi@nhnent.com> |
 | 1.0.0 | Release | 2015.03 | NHN Ent. FE dev team. <dl_javascript@nhnent.com> |
 
 <br>
