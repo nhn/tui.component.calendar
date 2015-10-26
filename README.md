@@ -26,8 +26,8 @@ This component display date by calendar UI.<br>
 
 ## Download/Install
 * Bower:
-   * latest : `bower install ne-component-calendar"`
-   * each version : `bower install ne-component-calendar[#tag]"`
+   * latest : `bower install tui-component-calendar"`
+   * each version : `bower install tui-component-calendar[#tag]"`
 * Download: https://github.com/nhnent/tui.component.calendar
 
 ## History
