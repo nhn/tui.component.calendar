@@ -16,7 +16,7 @@ This component display date by calendar UI.<br>
 
 ## Dependency
 * jquery: ~1.8.3
-* ne-code-snippet: ~1.0.2
+* tui-code-snippet: ~1.0.2
 
 ## Test environment
 * PC
