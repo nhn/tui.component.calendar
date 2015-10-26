@@ -4,6 +4,7 @@
   "authors": [
     "이민규 <minkyu.yi@nhnent.com>"
   ],
+  "main": "calendar.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
