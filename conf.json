@@ -36,9 +36,9 @@
   "opts": {
     "template": "./node_modules/fedoc-template",
     "recurse": true,
-    "private": true,
     "destination": "doc",
     "tutorials": "samples",
-    "encoding": "utf-8"
+    "encoding": "utf-8",
+    "name": "Calendar"
   }
 }

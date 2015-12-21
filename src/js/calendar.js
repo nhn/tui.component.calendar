@@ -463,6 +463,8 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
 
             /**
              * Fire draw event when calendar draw each date.
+             * @api
+             * @event Calendar#draw
              * @param {string} type A name of custom event
              * @param {boolean} isPrevMonth Whether the draw day is last month or not
              * @param {boolean} isNextMonth Wehter the draw day is next month or not
@@ -473,7 +475,7 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
              * @param {number} year A draw year
              * @param {string} html A html string
              * @example
-             * // draw custom even thandle
+             * // draw custom even handler
              * calendar.on('draw', function(drawEvent){ ... });
              **/
             this.fire('draw', eventData);
@@ -708,6 +710,7 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
 
     /**
      * Draw calendar
+     * @api
      * @param {number} [year] A year (ex. 2008)
      * @param {number} [month] A month (1 ~ 12)
      * @param {Boolean} [isRelative]  A year and month is related
@@ -759,7 +762,10 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
 
     /**
      * Return current year and month(just shown).
+     * @api
      * @returns {{year: number, month: number}}
+     * @example
+     *  getDate(); => { year: xxxx, month: xx };
      */
     getDate: function() {
         return {
@@ -770,8 +776,11 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
 
     /**
      * Set date
+     * @api
      * @param {number} [year] A year (ex. 2008)
      * @param {number} [month] A month (1 ~ 12)
+     * @example
+     *  setDate(1984, 04);
      **/
     setDate: function(year, month) {
         var date = this._shownDate;
