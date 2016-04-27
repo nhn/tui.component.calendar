@@ -74,9 +74,9 @@ CONSTANTS.calendarFooter = [
  *     @param {string} [option.yearTitleFormat = "yyyy"] A year title formant. This component find year title element by className '[prefix]year'
  *     @param {string} [option.monthTitleFormat = "m"] A month title format. This component find month title element by className이 '[prefix]month'
  *     @param {Array} [option.monthTitles = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]] A label of each month.
- *     @param {Array} [option.dayTitles = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]] A label for day. If you set the other option todayFormat 'D', you can use this name. 
+ *     @param {Array} [option.dayTitles = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]] A label for day. If you set the other option todayFormat 'D', you can use this name.
  * @example
- * var calendar = new ne.component.Calendar({
+ * var calendar = new tui.component.Calendar({
  *                    element: '#layer',
  *                    classPrefix: "calendar-",
  *                    year: 1983,
@@ -85,7 +85,7 @@ CONSTANTS.calendarFooter = [
  *                    todayFormat: "yyyy / mm / dd (D)" // today
  *                    yearTitleFormat: "yyyy", // year title
  *                    monthTitleFormat: "m", // month title
- *                    monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"], 
+ *                    monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
  *                    dayTitles: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] // 요일들
  *             });
  **/
@@ -162,7 +162,7 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
         this.$weekTemplate = null;
 
         /**
-         * A week parent element 
+         * A week parent element
          * @type {jQuery}
          */
         this.$weekAppendTarget = null;
@@ -289,7 +289,7 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
     /**
      * Register body element
      * @param {jQuery} $element The root elment of component
-     * @param {string} classSelector A selector 
+     * @param {string} classSelector A selector
      * @param {string} classPrefix A prefix for class
      * @private
      */
@@ -382,7 +382,7 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
      * Judge to redraw calendar
      * @param {number} year A year
      * @param {number} month A month
-     * @returns {boolean} reflow 
+     * @returns {boolean} reflow
      * @private
      */
     _isNecessaryForDrawing: function(year, month) {
@@ -393,7 +393,7 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
 
     /**
      * Draw calendar text
-     * @param {{year: number, month: number}} dateForDrawing Tha hash that show up on calendar 
+     * @param {{year: number, month: number}} dateForDrawing Tha hash that show up on calendar
      * @private
      */
     _setCalendarText: function(dateForDrawing) {
@@ -488,7 +488,7 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
      * @param {number} year A year
      * @param {number} month A month
      * @param {number} date A date
-     * @returns {boolean} 
+     * @returns {boolean}
      * @private
      */
     _isToday: function(year, month, date) {
@@ -650,7 +650,7 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
      * Chage text and return.
      * @param {string} str A text to chagne
      * @param {Object} map A chagne key, value set
-     * @param {RegExp} reg A regExp to chagne 
+     * @param {RegExp} reg A regExp to chagne
      * @returns {string}
      * @private
      */

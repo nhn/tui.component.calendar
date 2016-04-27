@@ -24,7 +24,7 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
             yearTitleFormat: 'yyyy',
             monthTitleFormat: 'mm',
             monthTitle: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-            dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+            dayTitles: ['일', '월', '화', '수', '목', '금', '토']
         });
 
         calendar3 = new Calendar($('#layer3'));
@@ -73,7 +73,7 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
         expect(titleFormat).toBe('yyyy-mm');
         expect(yearTitleFormat).toBe('yyyy');
         expect(monthTitleFormat).toBe('m');
-        expect(dayTitles[0]).toBe('일');
+        expect(dayTitles[0]).toBe('Sun');
     });
 
     it('옵션 확인 - calendar2', function() {
@@ -85,7 +85,7 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
         expect(titleFormat).toBe('yyyy\/mm');
         expect(yearTitleFormat).toBe('yyyy');
         expect(monthTitleFormat).toBe('mm');
-        expect(dayTitles[0]).toBe('Sun');
+        expect(dayTitles[0]).toBe('일');
     });
 
     it('_setCalendarTitle 달력 타이틀 포맷', function() {

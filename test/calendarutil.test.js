@@ -61,7 +61,7 @@ describe('Canedlar utils test  utils.', function() {
                 month: 7,
                 date: 31
             }],
-            date = utils.getRelativeDate.apply(ne.component.Calendar.Util, pos);
+            date = utils.getRelativeDate.apply(utils, pos);
         expect(date.year).toBe(1984);
         expect(date.month).toBe(8);
         expect(date.date).toBe(1);
