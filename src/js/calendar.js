@@ -26,11 +26,11 @@ var util = tui.util,
 
 CONSTANTS.calendarHeader = [
     '<div class="calendar-header">',
-    '<a href="#" class="rollover calendar-btn-' + CONSTANTS.prevYear + '">이전해</a>',
-    '<a href="#" class="rollover calendar-btn-' + CONSTANTS.prevMonth + '">이전달</a>',
+    '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.prevYear + '">이전해</a>',
+    '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.prevMonth + '">이전달</a>',
     '<strong class="calendar-title"></strong>',
-    '<a href="#" class="rollover calendar-btn-' + CONSTANTS.nextMonth + '">다음달</a>',
-    '<a href="#" class="rollover calendar-btn-' + CONSTANTS.nextYear + '">다음해</a>',
+    '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.nextMonth + '">다음달</a>',
+    '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.nextYear + '">다음해</a>',
     '</div>'].join('');
 
 CONSTANTS.calendarBody = [
@@ -283,7 +283,7 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
         this.$titleYear = $header.find(classSelector + 'title-year');
         this.$titleMonth = $header.find(classSelector + 'title-month');
         this.$header = $header;
-        this._attachEventToRolloverBtn();
+        this._attachEventToRolloverBtn(classSelector);
     },
 
     /**
@@ -339,13 +339,13 @@ var Calendar = util.defineClass( /** @lends Calendar.prototype */ {
      * Set navigation event
      * @private
      */
-    _attachEventToRolloverBtn: function() {
-        var btns = this.$header.find('.rollover');
+    _attachEventToRolloverBtn: function(classSelector) {
+        var btns = this.$header.find(classSelector + 'rollover');
 
-        btns.on('click', util.bind(function() {
-            var relativeMonthValue = $(event.target).data(CONSTANTS.relativeMonthValueKey);
+        btns.on('click', util.bind(function(ev) {
+            var relativeMonthValue = $(ev.currentTarget).data(CONSTANTS.relativeMonthValueKey);
             this.draw(0, relativeMonthValue, true);
-            event.preventDefault();
+            ev.preventDefault();
         }, this));
     },
 
