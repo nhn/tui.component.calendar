@@ -10,7 +10,7 @@ var karma = require('karma').server;
 var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
 var concat = require('gulp-concat');
-var filename = require('./package.json').name.replace('component-', '');
+var filename = require('./package.json').name.replace('tui-component-', '');
 
 gulp.task('default', function() {
     karma.start({
