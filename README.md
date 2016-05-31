@@ -30,14 +30,5 @@ This component display date by calendar UI.<br>
    * each version : `bower install tui-component-calendar[#tag]"`
 * Download: https://github.com/nhnent/tui.component.calendar
 
-## History
-| Version | Description | Date | Developer |
-| ---- | ---- | ---- | ---- |
-| 1.1.0 | Namespace changed | 2015.10 | NHN Ent. FE dev team<dl_javascript@nhnent.com> |
-| <a href="https://nhnent.github.io/tui.component.calendar/1.1.0">1.1.0</a> | Template apply | 2015.06 | NHN Ent.FE dev team. Yi minkyu<minkyu.yi@nhnent.com> |
-| <a href="https://nhnent.github.io/tui.component.calendar/1.0.1">1.0.1</a> | Split date picker | 2015.05 | NHN Ent. FE dev team. Yi minkyu <minkyu.yi@nhnent.com> |
-| 1.0.0 | Release | 2015.03 | NHN Ent. FE dev team. <dl_javascript@nhnent.com> |
-
-<br>
 ## License
 [MIT LICENSE](LICENSE)
