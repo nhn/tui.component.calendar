@@ -1,6 +1,6 @@
 {
   "name": "component-calendar",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "",
   "devDependencies": {
     "browserify": "latest",
@@ -31,7 +31,8 @@
     "watchify": "^3.7.0"
   },
   "scripts": {
-    "doc": "./node_modules/.bin/jsdoc -c jsdoc-conf.json"
+    "doc": "./node_modules/.bin/jsdoc -c jsdoc-conf.json",
+    "test": "karma start"
   },
   "author": "NHNEnt FE Development Team <dl_javascript@nhnent.com>",
   "license": "MIT",
