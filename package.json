@@ -31,7 +31,7 @@
     "watchify": "^3.7.0"
   },
   "scripts": {
-    "doc": "./node_modules/.bin/jsdoc -c jsdoc-conf.json",
+    "doc": "./node_modules/.bin/jsdoc -c jsdoc-conf.json -t node_modules/fedoc-template",
     "test": "karma start"
   },
   "author": "NHNEnt FE Development Team <dl_javascript@nhnent.com>",
