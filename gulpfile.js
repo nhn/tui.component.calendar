@@ -29,7 +29,7 @@ gulp.task('connect', function() {
 gulp.task('bundle', function() {
     var b = browserify({
         entries: 'index.js',
-        debug: true
+        debug: false
     });
 
     return b.bundle()
