@@ -20,7 +20,7 @@ var utils = {
      * @param {Date|number} [year] A date instance or year
      * @param {number} [month] A month
      * @param {number} [date] A date
-     * @returns {{year: *, month: *, date: *}} 
+     * @returns {{year: *, month: *, date: *}}
      */
     getDateHashTable: function(year, month, date) {
         var nDate;
@@ -47,7 +47,7 @@ var utils = {
      * @memberof utils
      */
     getToday: function() {
-       return utils.getDateHashTable();
+        return utils.getDateHashTable();
     },
 
     /**
@@ -55,7 +55,7 @@ var utils = {
      * @function getWeeks
      * @param {number} year A year
      * @param {number} month A month
-     * @return {number} 주 (4~6)
+     * @returns {number} 주 (4~6)
      * @memberof utils
      **/
     getWeeks: function(year, month) {
@@ -72,7 +72,7 @@ var utils = {
      * @param {number} date.year A year
      * @param {number} date.month A month
      * @param {number} date.date A date
-     * @return {number} 
+     * @returns {number}
      * @memberof utils
      * @example
      * utils.getTime({year:2010, month:5, date:12}); // 1273590000000
@@ -86,7 +86,7 @@ var utils = {
      * @function getFirstDay
      * @param {number} year A year
      * @param {number} month A month
-     * @return {number} (0~6)
+     * @returns {number} (0~6)
      * @memberof utils
      **/
     getFirstDay: function(year, month) {
@@ -98,7 +98,7 @@ var utils = {
      * @function getLastDay
      * @param {number} year A year
      * @param {number} month A month
-     * @return {number} (0~6)
+     * @returns {number} (0~6)
      * @memberof utils
      **/
     getLastDay: function(year, month) {
@@ -110,7 +110,7 @@ var utils = {
      * @function
      * @param {number} year A year
      * @param {number} month A month
-     * @return {number} (1~31)
+     * @returns {number} (1~31)
      * @memberof utils
      **/
     getLastDate: function(year, month) {
@@ -121,7 +121,7 @@ var utils = {
      * Get date instance.
      * @function getDateObject
      * @param {Object} date A date hash
-     * @return {Date} Date  
+     * @returns {Date} Date
      * @memberof utils
      * @example
      *  utils.getDateObject({year:2010, month:5, date:12});
@@ -131,6 +131,7 @@ var utils = {
         if (arguments.length === 3) {
             return new Date(arguments[0], arguments[1] - 1, arguments[2]);
         }
+
         return new Date(date.year, date.month - 1, date.date);
     },
 
@@ -141,7 +142,7 @@ var utils = {
      * @param {number} month A related value for month (you can use +/-)
      * @param {number} date A related value for day (you can use +/-)
      * @param {Object} dateObj standard date hash
-     * @return {Object} dateObj 
+     * @returns {Object} dateObj
      * @memberof utils
      * @example
      *  utils.getRelativeDate(1, 0, 0, {year:2000, month:1, date:1}); // {year:2001, month:1, date:1}
@@ -154,6 +155,42 @@ var utils = {
             nDateObj = new Date(nYear, nMonth, nDate);
 
         return utils.getDateHashTable(nDateObj);
+    },
+
+    /**
+     * Chagne number 0~9 to '00~09'
+     * @param {number} number number
+     * @returns {string}
+     * @private
+     * @example
+     *  utils.prependLeadingZero(0); //  '00'
+     *  utils.prependLeadingZero(9); //  '09'
+     *  utils.prependLeadingZero(12); //  '12'
+     */
+    prependLeadingZero: function(number) {
+        var prefix = '';
+
+        if (number < 10) {
+            prefix = '0';
+        }
+
+        return prefix + number;
+    },
+
+    /**
+     * Chage text and return.
+     * @param {string} str A text to chagne
+     * @param {Object} map A chagne key, value set
+     * @param {RegExp} reg A regExp to chagne
+     * @returns {string}
+     * @private
+     */
+    getConvertedTitle: function(str, map, reg) {
+        str = str.replace(reg, function(matchedString) {
+            return map[matchedString] || '';
+        });
+
+        return str;
     }
 };
 
