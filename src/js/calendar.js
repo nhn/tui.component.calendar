@@ -294,8 +294,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     _assignBody: function($element, classSelector, classPrefix) {
         var $body = $element.find(classSelector + 'body'),
             bodyTemplate,
-            defaultClassPrefixRegExp,
-            isSelectableTitle = this._option.isSelectableTitle;
+            defaultClassPrefixRegExp;
 
         if (!$body.length) {
             bodyTemplate = CONSTANTS.calendarBody + CONSTANTS.calendarExtraBody;
@@ -306,11 +305,8 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         }
 
         this._assignWeek(classSelector);
-
-        if (isSelectableTitle) {
-            this._assignMonthLayer(classSelector);
-            this._assignYearLayer(classSelector);
-        }
+        this._assignMonthLayer(classSelector);
+        this._assignYearLayer(classSelector);
 
         this.$body = $body.hide();
     },
@@ -744,11 +740,8 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     _clear: function() {
         this._weekElements = [];
         this.$weekAppendTarget.empty();
-
-        if (this._option.isSelectableTitle) {
-            this.dataOfMonthLayer.appendedTarget.empty();
-            this.dataOfYearLayer.appendedTarget.empty();
-        }
+        this.dataOfMonthLayer.appendedTarget.empty();
+        this.dataOfYearLayer.appendedTarget.empty();
     },
 
     /**
@@ -949,7 +942,6 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         var year = dateForDrawing.year;
         var month = dateForDrawing.month;
         var classPrefix = this._option.classPrefix;
-        var isSelectableTitle = this._option.isSelectableTitle;
 
         // weeks
         this._setWeeks(year, month);
@@ -959,15 +951,13 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         // dates
         this._drawDates(dateForDrawing, classPrefix);
 
-        if (isSelectableTitle) {
-            // month layer
-            this._drawFrameOnMonthLayer();
-            this._drawButtonsOfMonth(month, classPrefix);
+        // month layer
+        this._drawFrameOnMonthLayer();
+        this._drawButtonsOfMonth(month, classPrefix);
 
-            // year layer
-            this._drawFrameOnYearLayer();
-            this._drawButtonsOfYear(year, classPrefix);
-        }
+        // year layer
+        this._drawFrameOnYearLayer();
+        this._drawButtonsOfYear(year, classPrefix);
 
         // show layer
         this._changeShownLayer(shownLayerIdx);
