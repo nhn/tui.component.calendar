@@ -202,8 +202,8 @@ describe('v1.1.3 (Selectable calendar)', function() {
                     '<td class="calendar-year"></td>' +
                 '</tr>');
 
-            monthsTemplate = getReplacedString(calendar1.dataOfMonthPane.template[0].outerHTML);
-            yearsTemplate = getReplacedString(calendar1.dataOfYearPane.template[0].outerHTML);
+            monthsTemplate = getReplacedString(calendar1.dataOfMonthLayer.template[0].outerHTML);
+            yearsTemplate = getReplacedString(calendar1.dataOfYearLayer.template[0].outerHTML);
 
             expect(monthsTemplate).toBe(defaultMonthsTemplate);
             expect(yearsTemplate).toBe(defaultYearsTemplate);
@@ -324,7 +324,7 @@ describe('v1.1.3 (Selectable calendar)', function() {
             expect($title.parent()[0].nodeName.toLowerCase()).toBe('a');
         });
 
-        it('If "yearTitleFormat" option set, title of year or month pane is replaced by option.', function() {
+        it('If "yearTitleFormat" option set, title of year or month layer is replaced by option.', function() {
             calendar2.draw(2016, 0, false, 'month');
             expect(calendar2.$title.text()).toBe('2016년');
 
@@ -340,7 +340,7 @@ describe('v1.1.3 (Selectable calendar)', function() {
             $calendarBodys = $element1.find(bodySelector);
         });
 
-        it('When "draw" is called, shown calendar view is changed by "shownType" parameter.', function() {
+        it('When "draw" is called, shown calendar layer is changed by string "shownType" parameter.', function() {
             calendar1.draw(2016, 10, false, 'month');
 
             expect(calendar1.$title.text()).toBe('2016');
@@ -348,7 +348,7 @@ describe('v1.1.3 (Selectable calendar)', function() {
             expect($calendarBodys.eq(1).css('display')).not.toBe('none');
             expect($calendarBodys.eq(2).css('display')).toBe('none');
 
-            calendar1.draw(2016, 10, false, 'day');
+            calendar1.draw(2016, 10, false, 'date');
 
             expect(calendar1.$title.text()).toBe('2016-10');
             expect($calendarBodys.eq(0).css('display')).not.toBe('none');
@@ -356,6 +356,36 @@ describe('v1.1.3 (Selectable calendar)', function() {
             expect($calendarBodys.eq(2).css('display')).toBe('none');
 
             calendar1.draw(2016, 10, false, 'year');
+
+            expect(calendar1.$title.text()).toBe('2009 - 2020');
+            expect($calendarBodys.eq(0).css('display')).toBe('none');
+            expect($calendarBodys.eq(1).css('display')).toBe('none');
+            expect($calendarBodys.eq(2).css('display')).not.toBe('none');
+        });
+
+        it('When "draw" is called, shown calendar layer is changed by number "shownType" parameter.', function() {
+            calendar1.draw(2016, 10, false, 1);
+
+            expect(calendar1.$title.text()).toBe('2016');
+            expect($calendarBodys.eq(0).css('display')).toBe('none');
+            expect($calendarBodys.eq(1).css('display')).not.toBe('none');
+            expect($calendarBodys.eq(2).css('display')).toBe('none');
+
+            calendar1.draw(2016, 10, false, 0);
+
+            expect(calendar1.$title.text()).toBe('2016-10');
+            expect($calendarBodys.eq(0).css('display')).not.toBe('none');
+            expect($calendarBodys.eq(1).css('display')).toBe('none');
+            expect($calendarBodys.eq(2).css('display')).toBe('none');
+
+            calendar1.draw(2016, 10, false, 2);
+
+            expect(calendar1.$title.text()).toBe('2009 - 2020');
+            expect($calendarBodys.eq(0).css('display')).toBe('none');
+            expect($calendarBodys.eq(1).css('display')).toBe('none');
+            expect($calendarBodys.eq(2).css('display')).not.toBe('none');
+
+            calendar1.draw(2016, 10);
 
             expect(calendar1.$title.text()).toBe('2009 - 2020');
             expect($calendarBodys.eq(0).css('display')).toBe('none');
