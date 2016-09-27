@@ -468,6 +468,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     /**
      * Event handler - click on rollover buttons
      * @param {MouseEvent} event - Mouse event
+     * @private
      */
     _onClickRolloverButton: function(event) {
         var relativeMonthValue = $(event.currentTarget).data(CONSTANTS.relativeMonthValueKey);
@@ -478,6 +479,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     /**
      * Event handler - click on title
      * @param {MouseEvent} event - Mouse event
+     * @private
      */
     _onClickTitle: function(event) {
         var shownLayerIdx;
@@ -500,6 +502,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     /**
      * Event handler - click on month's layer
      * @param {MouseEvent} event - Mouse event
+     * @private
      */
     _onClickYearLayer: function(event) {
         var relativeMonthValue = $(event.currentTarget).data(CONSTANTS.relativeMonthValueKey);
@@ -510,6 +513,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     /**
      * Event handler - click on year's layer
      * @param {MouseEvent} event - Mouse event
+     * @private
      */
     _onClickMonthLayer: function(event) {
         var relativeMonthValue = $(event.currentTarget).data(CONSTANTS.relativeMonthValueKey);
