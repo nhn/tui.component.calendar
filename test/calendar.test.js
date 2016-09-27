@@ -163,8 +163,7 @@ describe('v1.1.3 (Selectable calendar)', function() {
         $element2 = $('#layer4');
 
         calendar1 = new Calendar({ // no markup & default options
-            element: $element1,
-            isSelectableTitle: true
+            element: $element1
         });
 
         calendar2 = new Calendar({ // has markup & options for customizing
@@ -172,7 +171,6 @@ describe('v1.1.3 (Selectable calendar)', function() {
             year: 2018,
             month: 10,
             rangeOfYear: 15,
-            isSelectableTitle: true,
             yearTitleFormat: 'yyyy년'
         });
     });
@@ -293,8 +291,7 @@ describe('v1.1.3 (Selectable calendar)', function() {
             $calendarBodys = $element2.find(bodySelector);
         });
 
-        it('When "isSelectableTitle" option set value and title is clicked,' +
-            'body view is changed to next "-body" element.', function() {
+        it('When  calendar is created, body view is changed to next "-body" element.', function() {
             var eventMock = {
                 preventDefault: function() {}
             };
@@ -318,7 +315,7 @@ describe('v1.1.3 (Selectable calendar)', function() {
             expect($calendarBodys.eq(2).css('display')).toBe('none');
         });
 
-        it('If "isSelectableTitle" option set, title element is wrapped by "a" element.', function() {
+        it('When calendar is created, title element is wrapped by "a" element.', function() {
             var $title = calendar2.$title;
 
             expect($title.parent()[0].nodeName.toLowerCase()).toBe('a');

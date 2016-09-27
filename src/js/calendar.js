@@ -41,8 +41,7 @@ var util = tui.util;
  *                    monthTitleFormat: "m", // month title
  *                    monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
  *                    dayTitles: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] // days
- *                    rangeOfYear: 12,
- *                    isSelectableTitle: false
+ *                    rangeOfYear: 12
  *             });
  */
 var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
@@ -59,8 +58,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
          *     monthTitleFormat: string,
          *     monthTitles: Array,
          *     dayTitles: Array,
-         *     rangeOfYear: number,
-         *     isSelectableTitle: boolean
+         *     rangeOfYear: number
          * }
          * @private
          */
@@ -222,8 +220,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
             monthTitleFormat: 'm',
             monthTitles: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
             dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            rangeOfYear: CONSTANTS.rangeOfYear,
-            isSelectableTitle: false
+            rangeOfYear: CONSTANTS.rangeOfYear
         };
         util.extend(instanceOption, defaultOption, option);
     },
@@ -254,12 +251,10 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
             headerTemplate,
             defaultClassPrefixRegExp,
             key = CONSTANTS.relativeMonthValueKey,
-            btnClassName = 'btn-',
-            isSelectableTitle = this._option.isSelectableTitle;
+            btnClassName = 'btn-';
 
         if (!$header.length) {
-            headerTemplate = (isSelectableTitle) ?
-                            CONSTANTS.selectableCalendarHeader : CONSTANTS.calendarHeader;
+            headerTemplate = CONSTANTS.selectableCalendarHeader;
             defaultClassPrefixRegExp = CONSTANTS.defaultClassPrefixRegExp;
 
             $header = $(headerTemplate.replace(defaultClassPrefixRegExp, classPrefix));
@@ -277,9 +272,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         this.$titleYear = $header.find(classSelector + 'title-year');
         this.$titleMonth = $header.find(classSelector + 'title-month');
 
-        if (isSelectableTitle) {
-            this.$title.wrap(CONSTANTS.buttonTemplate);
-        }
+        this.$title.wrap(CONSTANTS.buttonTemplate);
 
         this.$header = $header;
     },
@@ -395,15 +388,10 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      */
     _attachEvent: function() {
         var bind = util.bind;
-        var isSelectableTitle = this._option.isSelectableTitle;
 
         this.handlers.clickRolloverBtn = bind(this._onClickRolloverButton, this);
 
         this.attachEventToRolloverBtn();
-
-        if (!isSelectableTitle) {
-            return;
-        }
 
         util.extend(this.handlers, {
             clickTitle: bind(this._onClickTitle, this),
@@ -486,10 +474,6 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         var date;
 
         event.preventDefault();
-
-        if (!this._option.isSelectableTitle) {
-            return;
-        }
 
         shownLayerIdx = this.shownLayerIdx;
         shownLayerIdx = (shownLayerIdx !== 2) ? (shownLayerIdx + 1) : 0;
