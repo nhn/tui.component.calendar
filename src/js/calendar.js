@@ -1098,8 +1098,9 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * calendar.draw(2010, null); // Draw 2010/current month
      * calendar.draw(0, 1, true); // Draw next month
      * calendar.draw(-1, null, true); // Draw prev year
-     * calendar.draw(0, 0, false, 'month'); // Draw date with month's layer
-     * calendar.draw(0, 0, false, 'year'); // Draw date with year's layer
+     * calendar.draw(0, 0, false, 'date'); // Draw today with date's layer
+     * calendar.draw(2010, 10, false, 'month'); // Draw 2010/10 with month's layer
+     * calendar.draw(2016, null, false, 'year'); // Draw 2016/month with year's layer
      **/
     draw: function(year, month, isRelative, shownType) {
         var dateForDrawing = this._getDateForDrawing(year, month, isRelative);
@@ -1116,8 +1117,8 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         /**===============
          * draw
          =================*/
-        shownLayerIdx = util.isNumber(shownType) ? shownType :
-                        this._getIndexOfShownLayer(shownType);
+        shownLayerIdx = util.isNumber(shownType) ?
+                        shownType : this._getIndexOfShownLayer(shownType);
 
         year = dateForDrawing.year;
         month = dateForDrawing.month;
