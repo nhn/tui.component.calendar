@@ -36,7 +36,7 @@ CONSTANTS.calendarHeader = [
 CONSTANTS.selectableCalendarHeader = [
     '<div class="calendar-header">',
         '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.prev + '">이전</a>',
-        '<strong class="calendar-title"></strong>',
+        '<a href="#"><strong class="calendar-title"></strong></a>',
         '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.next + '">다음</a>',
     '</div>'
     ].join('');

@@ -213,8 +213,11 @@ describe('v1.1.3 (Selectable calendar)', function() {
         var $yearsBody1, $yearsBody2;
         var monthSelector = '.calendar-month';
         var yearSelector = '.calendar-year';
+        var $calendarBodys;
 
         beforeEach(function() {
+            $calendarBodys = $element2.find(bodySelector);
+
             $monthsBody1 = $element1.find(bodySelector).eq(1);
             $monthsBody2 = $element2.find(bodySelector).eq(1);
 
@@ -248,8 +251,8 @@ describe('v1.1.3 (Selectable calendar)', function() {
             var $monthEl = $monthsBody2.find(monthSelector).eq(9); // default month is "10"
             var shownDateClassName = 'calendar-selected';
 
-            expect($yearEl.hasClass(shownDateClassName)).toBeTruthy();
-            expect($monthEl.hasClass(shownDateClassName)).toBeTruthy();
+            expect($yearEl.hasClass(shownDateClassName)).toBe(true);
+            expect($monthEl.hasClass(shownDateClassName)).toBe(true);
         });
 
         it('When setting date and redrawing calendar,' +
@@ -262,8 +265,8 @@ describe('v1.1.3 (Selectable calendar)', function() {
             $monthEl = $monthsBody2.find(monthSelector).eq(0); // "1" element
             $yearEl = $yearsBody2.find(yearSelector).eq(7); // "2016" element
 
-            expect($monthEl.hasClass(shownDateClassName)).toBeTruthy();
-            expect($yearEl.hasClass(shownDateClassName)).toBeTruthy();
+            expect($monthEl.hasClass(shownDateClassName)).toBe(true);
+            expect($yearEl.hasClass(shownDateClassName)).toBe(true);
         });
 
         it('If rendering date infos are same as today,' +
@@ -279,16 +282,8 @@ describe('v1.1.3 (Selectable calendar)', function() {
             $yearEl = $yearsBody1.find(yearSelector).eq(yearIdx);
             $monthEl = $monthsBody1.find(monthSelector).eq(monthIdx);
 
-            expect($yearEl.hasClass(todayClassName)).toBeTruthy();
-            expect($monthEl.hasClass(todayClassName)).toBeTruthy();
-        });
-    });
-
-    describe('Options -', function() {
-        var $calendarBodys;
-
-        beforeEach(function() {
-            $calendarBodys = $element2.find(bodySelector);
+            expect($yearEl.hasClass(todayClassName)).toBe(true);
+            expect($monthEl.hasClass(todayClassName)).toBe(true);
         });
 
         it('When  calendar is created, body view is changed to next "-body" element.', function() {
@@ -320,7 +315,9 @@ describe('v1.1.3 (Selectable calendar)', function() {
 
             expect($title.parent()[0].nodeName.toLowerCase()).toBe('a');
         });
+    });
 
+    describe('Options -', function() {
         it('If "yearTitleFormat" option set, title of year or month layer is replaced by option.', function() {
             calendar2.draw(2016, 0, false, 'month');
             expect(calendar2.$title.text()).toBe('2016년');

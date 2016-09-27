@@ -8,6 +8,8 @@ var utils = require('./utils');
 var CONSTANTS = require('./constants');
 
 var util = tui.util;
+var bind = util.bind;
+var extend = util.extend;
 
 /**
  * Calendar component class
@@ -222,7 +224,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
             dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
             rangeOfYear: CONSTANTS.rangeOfYear
         };
-        util.extend(instanceOption, defaultOption, option);
+        extend(instanceOption, defaultOption, option);
     },
 
     /**
@@ -271,8 +273,6 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         this.$title = $header.find(classSelector + 'title');
         this.$titleYear = $header.find(classSelector + 'title-year');
         this.$titleMonth = $header.find(classSelector + 'title-month');
-
-        this.$title.wrap(CONSTANTS.buttonTemplate);
 
         this.$header = $header;
     },
@@ -387,13 +387,11 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * @private
      */
     _attachEvent: function() {
-        var bind = util.bind;
-
         this.handlers.clickRolloverBtn = bind(this._onClickRolloverButton, this);
 
         this.attachEventToRolloverBtn();
 
-        util.extend(this.handlers, {
+        extend(this.handlers, {
             clickTitle: bind(this._onClickTitle, this),
             clickYearLayer: bind(this._onClickYearLayer, this),
             clickMonthLayer: bind(this._onClickMonthLayer, this)
@@ -961,7 +959,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         var dataOfMonthLayer = this.dataOfMonthLayer;
         var $monthGroupEl;
 
-        for (i; i < rows; i += 1) {
+        for (; i < rows; i += 1) {
             $monthGroupEl = dataOfMonthLayer.template.clone(true);
             $monthGroupEl.appendTo(dataOfMonthLayer.appendedTarget);
         }
@@ -969,29 +967,29 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
 
     /**
      * Draw selectable buttons on month's layer
-     * @param {number} month - Month
+     * @param {number} selectedMonth - Month
      * @param {string} classPrefix - A class prefix
      * @private
      */
-    _drawButtonsOfMonth: function(month, classPrefix) {
+    _drawButtonsOfMonth: function(selectedMonth, classPrefix) {
         var key = CONSTANTS.relativeMonthValueKey;
         var monthTitles = this._option.monthTitles;
         var $monthEls = this.dataOfMonthLayer.appendedTarget.find('.' + classPrefix + 'month');
-        var $buttonEl, $tempButtonEl, tempMonth, relativeMonth;
+        var $buttonEl, $tempButtonEl, month, relativeMonth;
 
         util.forEach(monthTitles, function(title, idx) {
             $buttonEl = $monthEls.eq(idx);
-            tempMonth = (idx + 1);
+            month = idx + 1;
 
-            if (tempMonth === month) {
+            if (month === selectedMonth) {
                 $buttonEl.addClass(classPrefix + CONSTANTS.selected);
             }
 
-            if (this._isToday(this._shownDate.year, tempMonth)) {
+            if (this._isToday(this._shownDate.year, month)) {
                 $buttonEl.addClass(classPrefix + CONSTANTS.today);
             }
 
-            relativeMonth = (tempMonth - month);
+            relativeMonth = month - selectedMonth;
 
             $tempButtonEl = $(CONSTANTS.buttonTemplate);
             $tempButtonEl.data(key, relativeMonth).html(title);
@@ -1031,7 +1029,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         var $yearEls = this.dataOfYearLayer.appendedTarget.find('.' + classPrefix + 'year');
         var $buttonEl, $tempButtonEl, relativeMonth;
 
-        for (startYear; startYear <= endYear; startYear += 1) {
+        for (; startYear <= endYear; startYear += 1) {
             $buttonEl = $yearEls.eq(cnt);
 
             if (startYear === year) {
