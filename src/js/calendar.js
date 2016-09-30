@@ -43,7 +43,7 @@ var extend = util.extend;
  *                    monthTitleFormat: "m", // month title
  *                    monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
  *                    dayTitles: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] // days
- *                    rangeOfYear: 12
+ *                    itemCountOfYear: 12
  *             });
  */
 var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
@@ -60,7 +60,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
          *     monthTitleFormat: string,
          *     monthTitles: Array,
          *     dayTitles: Array,
-         *     rangeOfYear: number
+         *     itemCountOfYear: number
          * }
          * @private
          */
@@ -164,12 +164,6 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         this.shownLayerIdx = 0;
 
         /**
-         * List of layer's key
-         * @type {Array}
-         */
-        this.keysOfLayer = ['date', 'month', 'year'];
-
-        /**
          * Data of month's layer
          * @type {Object}
          */
@@ -222,7 +216,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
             monthTitleFormat: 'm',
             monthTitles: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
             dayTitles: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            rangeOfYear: CONSTANTS.rangeOfYear
+            itemCountOfYear: CONSTANTS.itemCountOfYear
         };
         extend(instanceOption, defaultOption, option);
     },
@@ -256,7 +250,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
             btnClassName = 'btn-';
 
         if (!$header.length) {
-            headerTemplate = CONSTANTS.selectableCalendarHeader;
+            headerTemplate = CONSTANTS.calendarHeader;
             defaultClassPrefixRegExp = CONSTANTS.defaultClassPrefixRegExp;
 
             $header = $(headerTemplate.replace(defaultClassPrefixRegExp, classPrefix));
@@ -290,7 +284,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
             defaultClassPrefixRegExp;
 
         if (!$body.length) {
-            bodyTemplate = CONSTANTS.calendarBody + CONSTANTS.calendarExtraBody;
+            bodyTemplate = CONSTANTS.calendarBody;
             defaultClassPrefixRegExp = CONSTANTS.defaultClassPrefixRegExp;
 
             $body = $(bodyTemplate.replace(defaultClassPrefixRegExp, classPrefix));
@@ -347,7 +341,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         var $body = this.$element.find(classSelector + 'body');
         var $yearsTemplate = $body.find(classSelector + 'year-group');
         var cols = $yearsTemplate.find(classSelector + 'year').length;
-        var rows = Math.ceil(this._option.rangeOfYear / cols);
+        var rows = Math.ceil(this._option.itemCountOfYear / cols);
 
         this.dataOfYearLayer = {
             template: $yearsTemplate.clone(true),
@@ -439,16 +433,24 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * Attach event on title in "body" element (month & year layer)
      */
     attachEventToBody: function() {
-        this.dataOfYearLayer.appendedTarget.on('click', 'a', this.handlers.clickYearLayer);
-        this.dataOfMonthLayer.appendedTarget.on('click', 'a', this.handlers.clickMonthLayer);
+        var classPrefix = '.' + this._option.classPrefix;
+        var yearLayer = this.dataOfYearLayer.appendedTarget;
+        var monthLayer = this.dataOfMonthLayer.appendedTarget;
+
+        yearLayer.on('click', classPrefix + 'year', this.handlers.clickYearLayer);
+        monthLayer.on('click', classPrefix + 'month', this.handlers.clickMonthLayer);
     },
 
     /**
      * Detach event on title in "body" element (month & year layer)
      */
     detachEventToBody: function() {
-        this.dataOfYearLayer.appendedTarget.off('click', 'a', this.handlers.clickYearLayer);
-        this.dataOfMonthLayer.appendedTarget.off('click', 'a', this.handlers.clickMonthLayer);
+        var classPrefix = '.' + this._option.classPrefix;
+        var yearLayer = this.dataOfYearLayer.appendedTarget;
+        var monthLayer = this.dataOfMonthLayer.appendedTarget;
+
+        yearLayer.off('click', classPrefix + 'year', this.handlers.clickYearLayer);
+        monthLayer.off('click', classPrefix + 'month', this.handlers.clickMonthLayer);
     },
 
     /**
@@ -468,17 +470,19 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * @private
      */
     _onClickTitle: function(event) {
-        var shownLayerIdx;
+        var shownLayerIdx = this.shownLayerIdx;
         var date;
 
         event.preventDefault();
 
-        shownLayerIdx = this.shownLayerIdx;
-        shownLayerIdx = (shownLayerIdx !== 2) ? (shownLayerIdx + 1) : 0;
+        if (shownLayerIdx === 2) {
+            return;
+        }
 
+        shownLayerIdx = (shownLayerIdx !== 2) ? (shownLayerIdx + 1) : 0;
         date = this.getDate();
 
-        this.draw(date.year, date.month, false, this.keysOfLayer[shownLayerIdx]);
+        this.draw(date.year, date.month, false, shownLayerIdx);
     },
 
     /**
@@ -489,7 +493,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     _onClickYearLayer: function(event) {
         var relativeMonthValue = $(event.currentTarget).data(CONSTANTS.relativeMonthValueKey);
         event.preventDefault();
-        this.draw(0, relativeMonthValue, true, this.keysOfLayer[1]);
+        this.draw(0, relativeMonthValue, true, 1);
     },
 
     /**
@@ -500,7 +504,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     _onClickMonthLayer: function(event) {
         var relativeMonthValue = $(event.currentTarget).data(CONSTANTS.relativeMonthValueKey);
         event.preventDefault();
-        this.draw(0, relativeMonthValue, true, this.keysOfLayer[0]);
+        this.draw(0, relativeMonthValue, true, 0);
     },
 
     /**
@@ -834,12 +838,26 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * @param {number} year - Year
      */
     _setTitleOnYearLayer: function(year) {
-        var rangeOfYear = this._getInfoOfYearRange(year);
-        var startYearText = this._getConvertedYearTitle(rangeOfYear.startYear);
-        var endYearText = this._getConvertedYearTitle(rangeOfYear.endYear);
+        var itemCountOfYear = this._getInfoOfYearRange(year);
+        var startYearText = this._getConvertedYearTitle(itemCountOfYear.startYear);
+        var endYearText = this._getConvertedYearTitle(itemCountOfYear.endYear);
         var title = startYearText + ' - ' + endYearText;
 
         this.$title.text(title);
+    },
+
+    /**
+     * Set class name on title
+     * @param {number} shownLayerIdx - Year
+     */
+    _setClassNameOnTitle: function(shownLayerIdx) {
+        var className = CONSTANTS.clickable;
+
+        if (shownLayerIdx !== 2) {
+            this.$title.addClass(className);
+        } else {
+            this.$title.removeClass(className);
+        }
     },
 
     /**
@@ -858,7 +876,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     },
 
     /**
-     * Get years info by "rangeOfYear" option
+     * Get years info by "itemCountOfYear" option
      * @param {number} year - Year
      * @returns {Object} Info of year's range
      */
@@ -882,7 +900,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * @returns {number} Index of shown layer
      */
     _getIndexOfShownLayer: function(type) {
-        return (type ? util.inArray(type, this.keysOfLayer) : this.shownLayerIdx);
+        return (type ? util.inArray(type, CONSTANTS.layerKeys) : this.shownLayerIdx);
     },
 
     /**
@@ -892,13 +910,14 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * @private
      */
     _drawHeader: function(dateForDrawing, shownLayerIdx) {
-        var btnClassName = 'btn-';
-        var classSelector = '.' + this._option.classPrefix;
-        var prevBtn = this.$header.find(classSelector + btnClassName + CONSTANTS.prev);
-        var nextBtn = this.$header.find(classSelector + btnClassName + CONSTANTS.next);
+        var classSelector = '.' + this._option.classPrefix + 'btn-';
+        var prevBtn = this.$header.find(classSelector + CONSTANTS.prev);
+        var nextBtn = this.$header.find(classSelector + CONSTANTS.next);
         var key = CONSTANTS.relativeMonthValueKey;
-        var rangeOfYear = this._option.rangeOfYear;
+        var itemCountOfYear = this._option.itemCountOfYear;
         var prevValue, nextValue;
+
+        this._setClassNameOnTitle(shownLayerIdx);
 
         if (shownLayerIdx === 0) {
             this._setCalendarText(dateForDrawing);
@@ -910,8 +929,8 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
             nextValue = 12;
         } else if (shownLayerIdx === 2) {
             this._setTitleOnYearLayer(dateForDrawing.year);
-            prevValue = -12 * rangeOfYear;
-            nextValue = 12 * rangeOfYear;
+            prevValue = -12 * itemCountOfYear;
+            nextValue = 12 * itemCountOfYear;
         }
 
         prevBtn.data(key, prevValue);
@@ -939,11 +958,11 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
 
         // month layer
         this._drawFrameOnMonthLayer();
-        this._drawButtonsOfMonth(month, classPrefix);
+        this._drawButtonsOfMonth(dateForDrawing, classPrefix);
 
         // year layer
         this._drawFrameOnYearLayer();
-        this._drawButtonsOfYear(year, classPrefix);
+        this._drawButtonsOfYear(dateForDrawing, classPrefix);
 
         // show layer
         this._changeShownLayer(shownLayerIdx);
@@ -967,15 +986,17 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
 
     /**
      * Draw selectable buttons on month's layer
-     * @param {number} selectedMonth - Month
+     * @param {{year: number, month: number}} dateForDrawing - The hash that show up on calendar
      * @param {string} classPrefix - A class prefix
      * @private
      */
-    _drawButtonsOfMonth: function(selectedMonth, classPrefix) {
+    _drawButtonsOfMonth: function(dateForDrawing, classPrefix) {
         var key = CONSTANTS.relativeMonthValueKey;
+        var selectedMonth = dateForDrawing.month;
         var monthTitles = this._option.monthTitles;
         var $monthEls = this.dataOfMonthLayer.appendedTarget.find('.' + classPrefix + 'month');
-        var $buttonEl, $tempButtonEl, month, relativeMonth;
+        var $buttonEl, month, relativeMonth;
+        var eventData;
 
         util.forEach(monthTitles, function(title, idx) {
             $buttonEl = $monthEls.eq(idx);
@@ -991,10 +1012,17 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
 
             relativeMonth = month - selectedMonth;
 
-            $tempButtonEl = $(CONSTANTS.buttonTemplate);
-            $tempButtonEl.data(key, relativeMonth).html(title);
+            $buttonEl.data(key, relativeMonth).html(title);
 
-            $buttonEl.html($tempButtonEl);
+            eventData = {
+                $date: $buttonEl,
+                $dateContainer: $buttonEl,
+                year: dateForDrawing.year,
+                month: month,
+                date: 0
+            };
+
+            this.fire('draw', eventData);
         }, this);
     },
 
@@ -1008,7 +1036,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         var dataOfYearLayer = this.dataOfYearLayer;
         var $yearGroupEl;
 
-        for (i; i < rows; i += 1) {
+        for (; i < rows; i += 1) {
             $yearGroupEl = dataOfYearLayer.template.clone(true);
             $yearGroupEl.appendTo(dataOfYearLayer.appendedTarget);
         }
@@ -1016,18 +1044,20 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
 
     /**
      * Draw selectable buttons on year's layer
-     * @param {number} year - Year
+     * @param {{year: number, month: number}} dateForDrawing - The hash that show up on calendar
      * @param {string} classPrefix - A class prefix
      * @private
      */
-    _drawButtonsOfYear: function(year, classPrefix) {
+    _drawButtonsOfYear: function(dateForDrawing, classPrefix) {
         var key = CONSTANTS.relativeMonthValueKey;
-        var rangeOfYear = this._getInfoOfYearRange(year);
-        var startYear = rangeOfYear.startYear;
-        var endYear = rangeOfYear.endYear;
+        var year = dateForDrawing.year;
+        var itemCountOfYear = this._getInfoOfYearRange(year);
+        var startYear = itemCountOfYear.startYear;
+        var endYear = itemCountOfYear.endYear;
         var cnt = 0;
         var $yearEls = this.dataOfYearLayer.appendedTarget.find('.' + classPrefix + 'year');
-        var $buttonEl, $tempButtonEl, relativeMonth;
+        var $buttonEl, relativeMonth;
+        var eventData;
 
         for (; startYear <= endYear; startYear += 1) {
             $buttonEl = $yearEls.eq(cnt);
@@ -1042,12 +1072,19 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
 
             relativeMonth = (startYear - year) * 12;
 
-            $tempButtonEl = $(CONSTANTS.buttonTemplate);
-            $tempButtonEl.data(key, relativeMonth).html(startYear);
-
-            $buttonEl.html($tempButtonEl);
+            $buttonEl.data(key, relativeMonth).html(startYear);
 
             cnt += 1;
+
+            eventData = {
+                $date: $buttonEl,
+                $dateContainer: $buttonEl,
+                year: startYear,
+                month: 0,
+                date: 0
+            };
+
+            this.fire('draw', eventData);
         }
     },
 
@@ -1072,7 +1109,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * @param {number} [year] A year (ex. 2008)
      * @param {number} [month] A month (1 ~ 12)
      * @param {Boolean} [isRelative] A year and month is related
-     * @param {string|number} [shownType] Shown type of layer (ex. [day, month, year] | [0] ~ 2])
+     * @param {string} [shownType] Shown type of layer (ex. [day, month, year] | [0] ~ 2])
      * @example
      * calendar.draw(); // Draw with now date.
      * calendar.draw(2008, 12); // Draw 2008/12

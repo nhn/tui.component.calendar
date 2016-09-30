@@ -1,10 +1,4 @@
 module.exports = function(config) {
-    var webdriverConfig = {
-        hostname: 'fe.nhnent.com',
-        port: 4444,
-        remoteHost: true
-    };
-
     config.set({
         basePath: './',
 
@@ -20,8 +14,7 @@ module.exports = function(config) {
             'lib/jquery/jquery.min.js',
             'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
             'lib/tui-code-snippet/code-snippet.js',
-            'src/js/calendar.js',
-            'src/js/utils.js',
+            'src/js/*.js',
             'test/*.js',
             {
                 pattern: 'test/fixture/**/*.html',
@@ -36,12 +29,12 @@ module.exports = function(config) {
         exclude: [],
 
         preprocessors: {
-            'test/**/*.test.js': ['browserify'],
-            'src/**/*.js': ['browserify', 'coverage']
+            'src/**/*.js': ['browserify', 'coverage'],
+            'test/**/*.js': ['browserify']
         },
 
         coverageReporter: {
-            dir : 'report/coverage/',
+            dir: 'report/coverage/',
             reporters: [
                 {
                     type: 'html',
@@ -61,7 +54,12 @@ module.exports = function(config) {
 
         junitReporter: {
             outputDir: 'report',
+            outputFile: 'report/junit-result.xml',
             suite: ''
+        },
+
+        browserify: {
+            debug: true
         },
 
         port: 9876,
@@ -73,63 +71,9 @@ module.exports = function(config) {
         autoWatch: true,
 
         browsers: [
-            // 'IE7',
-            'IE8',
-            'IE9',
-            'IE10',
-            'IE11',
-            'Chrome-WebDriver',
-            'Firefox-WebDriver'
+            'Chrome'
         ],
 
-        customLaunchers: {
-            'IE7': {
-                base: 'WebDriver',
-                config: webdriverConfig,
-                browserName: 'internet explorer',
-                version: 7
-            },
-            'IE8': {
-                base: 'WebDriver',
-                config: webdriverConfig,
-                browserName: 'internet explorer',
-                version: 8
-            },
-            'IE9': {
-                base: 'WebDriver',
-                config: webdriverConfig,
-                browserName: 'internet explorer',
-                version: 9
-            },
-            'IE10': {
-                base: 'WebDriver',
-                config: webdriverConfig,
-                browserName: 'internet explorer',
-                version: 10
-            },
-            'IE11': {
-                base: 'WebDriver',
-                config: webdriverConfig,
-                browserName: 'internet explorer',
-                version: 11
-            },
-            'Edge': {
-                base: 'WebDriver',
-                config: webdriverConfig,
-                browserName: 'MicrosoftEdge'
-            },
-            'Chrome-WebDriver': {
-                base: 'WebDriver',
-                config: webdriverConfig,
-                browserName: 'chrome'
-            },
-            'Firefox-WebDriver': {
-                base: 'WebDriver',
-                config: webdriverConfig,
-                browserName: 'firefox'
-            }
-        },
-
-        singleRun: true
+        singleRun: false
     });
 };

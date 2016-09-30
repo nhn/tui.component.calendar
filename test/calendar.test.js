@@ -3,8 +3,6 @@
 var Calendar = require('../src/js/calendar');
 var utils = require('../src/js/utils');
 
-jasmine.getFixtures().fixturesPath = 'base';
-
 function getReplacedString(str) {
     return str.replace(/(\")|(\s*)/g, '').toLowerCase();
 }
@@ -14,13 +12,15 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
         calendar2,
         calendar3;
 
+    jasmine.getFixtures().fixturesPath = 'base';
+
     beforeEach(function() {
         loadFixtures('test/fixture/calendar.html');
         calendar1 = new Calendar({
-            element: $('#layer')
+            element: $('#layer')[0]
         });
         calendar2 = new Calendar({
-            element: $('#layer2'),
+            element: $('#layer2')[0],
             year: 1983,
             month: 5,
             date: 12,
@@ -32,7 +32,7 @@ describe('캘린더를 생성하고 기능을 테스트.', function() {
             dayTitles: ['일', '월', '화', '수', '목', '금', '토']
         });
 
-        calendar3 = new Calendar($('#layer3'));
+        calendar3 = new Calendar($('#layer3')[0]);
     });
     // 생성 확인
     it('캘린더가 생성 되었는지 확인', function() {
@@ -291,29 +291,23 @@ describe('v1.1.3 (Selectable calendar)', function() {
                 preventDefault: function() {}
             };
 
-            calendar2._onClickTitle(eventMock);
+            calendar2._onClickTitle(eventMock); // show month layer
 
             expect($calendarBodys.eq(0).css('display')).toBe('none');
             expect($calendarBodys.eq(1).css('display')).not.toBe('none');
             expect($calendarBodys.eq(2).css('display')).toBe('none');
 
-            calendar2._onClickTitle(eventMock);
+            calendar2._onClickTitle(eventMock); // show year layer
 
             expect($calendarBodys.eq(0).css('display')).toBe('none');
             expect($calendarBodys.eq(1).css('display')).toBe('none');
             expect($calendarBodys.eq(2).css('display')).not.toBe('none');
 
-            calendar2._onClickTitle(eventMock);
+            calendar2._onClickTitle(eventMock); // show year layer (title isn't clickable)
 
-            expect($calendarBodys.eq(0).css('display')).not.toBe('none');
+            expect($calendarBodys.eq(0).css('display')).toBe('none');
             expect($calendarBodys.eq(1).css('display')).toBe('none');
-            expect($calendarBodys.eq(2).css('display')).toBe('none');
-        });
-
-        it('When calendar is created, title element is wrapped by "a" element.', function() {
-            var $title = calendar2.$title;
-
-            expect($title.parent()[0].nodeName.toLowerCase()).toBe('a');
+            expect($calendarBodys.eq(2).css('display')).not.toBe('none');
         });
     });
 
