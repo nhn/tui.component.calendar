@@ -10,6 +10,7 @@ var CONSTANTS = {
     nextMonth: 'next-month',
     selected: 'selected',
     today: 'today',
+    clickable: 'clickable',
     calendarHeader: null,
     calendarBody: null,
     calendarFooter: null,
@@ -18,28 +19,17 @@ var CONSTANTS = {
     titleYearRegExp: /yyyy|yy/g,
     titleMonthRegExp: /mm|m|M/g,
     todayRegExp: /yyyy|yy|mm|m|M|dd|d|D/g,
-    rangeOfYear: 12
+    itemCountOfYear: 12,
+    layerKeys: ['date', 'month', 'year']
 };
-
-CONSTANTS.buttonTemplate = '<a href="#"></a>';
 
 /* eslint-disable */
 CONSTANTS.calendarHeader = [
     '<div class="calendar-header">',
-        '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.prevYear + '">이전해</a>',
-        '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.prevMonth + '">이전달</a>',
+        '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.prev + '">Prev</a>',
         '<strong class="calendar-title"></strong>',
-        '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.nextMonth + '">다음달</a>',
-        '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.nextYear + '">다음해</a>',
+        '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.next + '">Next</a>',
     '</div>'].join('');
-
-CONSTANTS.selectableCalendarHeader = [
-    '<div class="calendar-header">',
-        '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.prev + '">이전</a>',
-        '<a href="#"><strong class="calendar-title"></strong></a>',
-        '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.next + '">다음</a>',
-    '</div>'
-    ].join('');
 
 CONSTANTS.calendarBody = [
     '<div class="calendar-body">',
@@ -61,9 +51,7 @@ CONSTANTS.calendarBody = [
                 '</tr>',
             '</tbody>',
         '</table>',
-    '</div>'].join('');
-
-CONSTANTS.calendarExtraBody = [
+    '</div>',
     '<div class="calendar-body">',
         '<table>',
             '<tbody>',

@@ -8,11 +8,12 @@ This component display date by calendar UI.<br>
 * Support buttons to navigate to move last year or month, next year or month
 * Select some date that are shown
 * Support custom event when redraw calendar
+* Support year & month layer for selecting date
 
 ## Documentation
 * **API** : https://nhnent.github.io/tui.component.calendar/latest
 * **Tutorial** : https://github.com/nhnent/tui.component.calendar/wiki/Calendar-Tutorial
-* **Sample** - https://nhnent.github.io/tui.component.calendar/latest/tutorial.html
+* **Sample** - https://nhnent.github.io/tui.component.calendar/latest
 
 ## Dependency
 * jquery: ~1.8.3
@@ -20,7 +21,7 @@ This component display date by calendar UI.<br>
 
 ## Test environment
 * PC
-    * IE7~11
+    * IE8~11
     * Chrome
     * Firefox
 
@@ -32,3 +33,7 @@ This component display date by calendar UI.<br>
 
 ## License
 [MIT LICENSE](LICENSE)
+
+## Sponsor
+* <img src="https://cloud.githubusercontent.com/assets/12269563/12287774/8cf4d2c0-ba12-11e5-9fa8-0a9c452cca05.png" height="30"><br>
+ [BrowserStack](https://www.browserstack.com/) is a cloud based cross browser testing tool
