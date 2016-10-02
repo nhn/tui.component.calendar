@@ -80,7 +80,7 @@ module.exports = function(config) {
         browserStack: {
             username: process.env.BROWSER_STACK_USERNAME,
             accessKey: process.env.BROWSER_STACK_ACCESS_KEY,
-            project: 'tui-component-image-editor'
+            project: 'tui-component-calendar'
         },
 
         // define browsers
