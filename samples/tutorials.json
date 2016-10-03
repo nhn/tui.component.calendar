@@ -1,11 +1,11 @@
 {
   "sample1": {
-    "title": "Default calendar, No markup"
+    "title": "Default calendar sample (no markup & options)"
   },
   "sample2": {
-    "title": "Custom calendar, No markup"
+    "title": "Customized calendar sample with API"
   },
   "sample3": {
-    "title": "Custom calendar, Has markup"
+    "title": "Customized calendar sample with markup & options"
   }
 }

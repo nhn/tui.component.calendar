@@ -1019,7 +1019,8 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
                 $dateContainer: $buttonEl,
                 year: dateForDrawing.year,
                 month: month,
-                date: 0
+                date: 0,
+                html: title
             };
 
             this.fire('draw', eventData);
@@ -1081,7 +1082,8 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
                 $dateContainer: $buttonEl,
                 year: startYear,
                 month: 0,
-                date: 0
+                date: 0,
+                html: startYear
             };
 
             this.fire('draw', eventData);

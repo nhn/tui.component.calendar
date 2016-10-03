@@ -2,7 +2,7 @@
 <html>
     <head lang="en">
         <meta charset="UTF-8">
-        <title>기본달력</title>
+        <title>Customized calendar sample with markup & options</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Expires" content="-1">
         <link type="text/css" rel="stylesheet" href="../styles/prettify-jsdoc.css" />
@@ -13,33 +13,58 @@
 
     <body>
         <div class="wrap" style="width:500px;">
-            <div id="layer" class="layer"> <!-- 기준 엘리먼트 -->
+            <div id="layer" class="layer">
                 <div class="calendar-header">
-                    <!--<a href="#" class="rollover calendar-btn-prev-year"><<</a> <!-- 이전년 버튼 (생략가능) -->
-                    <a href="#" class="calendar-rollover calendar-btn-prev-month"><</a> <!-- 이전달 버튼 (생략가능) -->
-                    <strong class="calendar-title"></strong> <!-- 달력의 타이틀 (생략가능) -->
-                    <!--<strong class="calendar-title-year"></strong> <!-- 달력의 타이틀 (생략가능) -->
-                    <!--<strong class="calendar-title-month"></strong> <!-- 달력의 타이틀 (생략가능) -->
-                    <a href="#" class="calendar-rollover calendar-btn-next-month">></a> <!-- 다음달 버튼 (생략가능) -->
-                    <!--<a href="#" class="rollover calendar-btn-next-year">>></a> <!-- 다음년 버튼 (생략가능) -->
+                    <a href="#" class="calendar-rollover calendar-btn-prev"><</a>
+                    <strong class="calendar-title"></strong>
+                    <a href="#" class="calendar-rollover calendar-btn-next">></a>
                 </div>
                 <div class="calendar-body">
                     <table cellspacing="0" cellpadding="0">
                         <thead>
-                        <tr>
-                            <th class="sun">일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th class="sat">토</th>
-                        </tr>
+                            <tr>
+                                <th class="sun">일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th class="sat">토</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr class="calendar-week"> <!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-                            <td class="calendar-date"></td> <!-- 날짜가 표시될 엘리먼트 -->
-                            <td class="calendar-date"></td>
-                            <td class="calendar-date"></td>
-                            <td class="calendar-date"></td>
-                            <td class="calendar-date"></td>
-                            <td class="calendar-date"></td>
-                            <td class="calendar-date"></td>
-                        </tr>
+                            <!-- A row template of mapping week on "day" layer -->
+                            <tr class="calendar-week">
+                                <td class="calendar-date"></td>
+                                <td class="calendar-date"></td>
+                                <td class="calendar-date"></td>
+                                <td class="calendar-date"></td>
+                                <td class="calendar-date"></td>
+                                <td class="calendar-date"></td>
+                                <td class="calendar-date"></td>
+                            </tr>
+                            <!--// A row template of mapping week on "day" layer -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="calendar-body">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <!-- A row template of mapping month group on "month" layer -->
+                            <tr class="calendar-month-group">
+                                <td class="calendar-month"></td>
+                                <td class="calendar-month"></td>
+                            </tr>
+                            <!--// A row template of mapping month group on "month" layer -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="calendar-body">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <!-- A row template of mapping year group on "year" layer -->
+                            <tr class="calendar-year-group">
+                                <td class="calendar-year"></td>
+                                <td class="calendar-year"></td>
+                                <td class="calendar-year"></td>
+                                <td class="calendar-year"></td>
+                                <td class="calendar-year"></td>
+                            </tr>
+                            <!--// A row template of mapping year group on "year" layer -->
                         </tbody>
                     </table>
                 </div>
@@ -60,34 +85,15 @@
         <script type="text/javascript" class="serviceCode">
 
             var cal = new tui.component.Calendar({
-                element: '#layer',
-                year: 2016, // 달력이 보여줄 날짜-년도
-                month: 6, // 달력이 보여줄 날짜-월
-                titleFormat: 'yyyy. mm' // 설정될 title의 형식 (header 영역)
+                element: '#layer', // mapping markup
+                year: 2016,
+                month: 11,
+                titleFormat: 'yyyy년 m월',
+                yearTitleFormat: 'yyyy년',
+                monthTitles: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                itemCountOfYear: 15
             });
 
-            cal.on('draw', function(drawData) {
-                var today = new Date();
-                var isToday = true;
-
-                if(drawData.year !== today.getFullYear()) {
-                    isToday = false;
-                }
-
-                if(drawData.month !== (today.getMonth() + 1)) {
-                    isToday = false;
-                }
-
-                if(drawData.date !== (today.getDate())) {
-                    isToday = false;
-                }
-
-                if(isToday) { // 오늘 날짜 표시
-                    drawData.$date.html('<span class="today">' + drawData.html + '</span>');
-                }
-            });
-
-            cal.draw();
         </script>
     </body>
 </html>
