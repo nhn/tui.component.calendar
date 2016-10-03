@@ -2,7 +2,7 @@
 <html>
     <head lang="en">
         <meta charset="UTF-8">
-        <title>기본달력</title>
+        <title>Customized calendar sample with API</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Expires" content="-1">
         <link type="text/css" rel="stylesheet" href="../styles/prettify-jsdoc.css" />
@@ -30,35 +30,40 @@
 
             var cal = new tui.component.Calendar({
                 element: '#layer',
-                classPrefix: 'calendar2-', // 스타일 변경용 class prefix
-                year: 2016, // 달력이 보여줄 날짜-년도
-                month: 6, // 달력이 보여줄 날짜-월
-                titleFormat: 'yyyy / mm', // 설정될 title의 형식 (header 영역)
-                todayFormat: 'yyyy / mm / dd' // 설정된 오늘의 날짜 형식 (footer 영역)
+                classPrefix: 'calendar2-', // class prefix for customizing
+                year: 2016,
+                month: 10,
+                titleFormat: 'yyyy / mm',
+                todayFormat: 'yyyy / mm / dd'
             });
 
             cal.on('draw', function(drawData) {
                 var today = new Date();
                 var isToday = true;
+                var isTodayMonth = true;
+                var isTodayYear = true;
 
-                if(drawData.year !== today.getFullYear()) {
+                if (drawData.year !== today.getFullYear()) {
+                    isToday = false;
+                    isTodayYear = false;
+                }
+
+                if (drawData.month !== (today.getMonth() + 1)) {
+                    isToday = false;
+                    isTodayMonth = false;
+                }
+
+                if (drawData.date !== (today.getDate())) {
                     isToday = false;
                 }
 
-                if(drawData.month !== (today.getMonth() + 1)) {
-                    isToday = false;
-                }
-
-                if(drawData.date !== (today.getDate())) {
-                    isToday = false;
-                }
-
-                if(isToday) { // 오늘 날짜 표시
+                if (isToday || isTodayMonth || isTodayYear) {
                     drawData.$date.html('<span class="today">' + drawData.html + '</span>');
                 }
             });
 
             cal.draw();
+
         </script>
     </body>
 </html>
