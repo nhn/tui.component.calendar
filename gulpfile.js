@@ -22,7 +22,7 @@ var filename = require('./package.json').name.replace('tui-component-', '');
  */
 var SOURCE_DIR = './src/**/*',
     ENTRY = 'index.js',
-    DIST = './',
+    DIST = './dist',
     SAMPLE_DIST = './samples/js';
 
 /**
