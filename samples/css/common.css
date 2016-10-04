@@ -12,7 +12,7 @@ body {font-size:12px; font-family:malgun gothic, verdana, consolas;min-width:700
 .layer div .calendar-btn-prev-year{position:absolute;top:10px;left:5px;height:18px; white-space:nowrap; letter-spacing:-1px;}
 .layer div .calendar-btn-prev-month{position:absolute;top:10px;left:38px;height:18px; white-space:nowrap; letter-spacing:-1px;}
 .layer div .calendar-title{float:none !important;font-family:verdana;font-size:15px;color:#383838;font-weight: normal;}
-.layer div .calendar-title.clickable{text-decoration:underline !important;cursor:pointer;}
+.layer div .calendar-clickable-title{text-decoration:underline !important;cursor:pointer;}
 .layer div .calendar-btn-next-month{position:absolute;top:10px;right:38px;height:18px; white-space:nowrap; letter-spacing:-1px;}
 .layer div .calendar-btn-next-year{position:absolute;top:10px;right:5px;height:18px; white-space:nowrap; letter-spacing:-1px;}
 .layer div .calendar-btn-next{position:absolute;top:10px;right:5px;height:18px; white-space:nowrap; letter-spacing:-1px;}

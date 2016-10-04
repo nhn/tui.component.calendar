@@ -10,7 +10,7 @@ var CONSTANTS = {
     nextMonth: 'next-month',
     selected: 'selected',
     today: 'today',
-    clickable: 'clickable',
+    clickable: 'clickable-title',
     calendarHeader: null,
     calendarBody: null,
     calendarFooter: null,
@@ -27,7 +27,7 @@ var CONSTANTS = {
 CONSTANTS.calendarHeader = [
     '<div class="calendar-header">',
         '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.prev + '">Prev</a>',
-        '<strong class="calendar-title"></strong>',
+        '<strong class="calendar-title calendar-clickable-title"></strong>',
         '<a href="#" class="calendar-rollover calendar-btn-' + CONSTANTS.next + '">Next</a>',
     '</div>'].join('');
 
