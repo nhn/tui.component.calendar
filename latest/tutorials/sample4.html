@@ -2,7 +2,7 @@
 <html>
     <head lang="en">
         <meta charset="UTF-8">
-        <title>Customized calendar sample with markup & options</title>
+        <title>Selectable calendar</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Expires" content="-1">
         <link type="text/css" rel="stylesheet" href="../styles/prettify-jsdoc.css" />
@@ -13,10 +13,20 @@
 
     <body>
         <div class="wrap" style="width:500px;">
-            <div id="layer" class="layer">
+
+            <h2>Using default options</h2>
+            <!-- Selectable title calendar 1 : no markup -->
+            <div id="layer1" class="layer"></div>
+            <!--// Selectable title calendar 1 : no markup-->
+
+            <br>
+
+            <h2>Using custom options</h2>
+            <!-- Selectable title calendar 2 : using custom markup -->
+            <div id="layer2" class="layer">
                 <div class="calendar-header">
                     <a href="#" class="calendar-rollover calendar-btn-prev"><</a>
-                    <strong class="calendar-title calendar-clickable-title"></strong>
+                    <strong class="calendar-title"></strong>
                     <a href="#" class="calendar-rollover calendar-btn-next">></a>
                 </div>
                 <div class="calendar-body">
@@ -27,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- A row template of mapping week on "day" layer -->
+                            <!-- A row template of mapping week on "day" panel -->
                             <tr class="calendar-week">
                                 <td class="calendar-date"></td>
                                 <td class="calendar-date"></td>
@@ -37,26 +47,26 @@
                                 <td class="calendar-date"></td>
                                 <td class="calendar-date"></td>
                             </tr>
-                            <!--// A row template of mapping week on "day" layer -->
+                            <!--// A row template of mapping week on "day" panel -->
                         </tbody>
                     </table>
                 </div>
                 <div class="calendar-body">
                     <table cellspacing="0" cellpadding="0">
                         <tbody>
-                            <!-- A row template of mapping month group on "month" layer -->
+                            <!-- A row template of mapping month group on "month" panel -->
                             <tr class="calendar-month-group">
                                 <td class="calendar-month"></td>
                                 <td class="calendar-month"></td>
                             </tr>
-                            <!--// A row template of mapping month group on "month" layer -->
+                            <!--// A row template of mapping month group on "month" panel -->
                         </tbody>
                     </table>
                 </div>
                 <div class="calendar-body">
                     <table cellspacing="0" cellpadding="0">
                         <tbody>
-                            <!-- A row template of mapping year group on "year" layer -->
+                            <!-- A row template of mapping year group on "year" panel -->
                             <tr class="calendar-year-group">
                                 <td class="calendar-year"></td>
                                 <td class="calendar-year"></td>
@@ -64,12 +74,14 @@
                                 <td class="calendar-year"></td>
                                 <td class="calendar-year"></td>
                             </tr>
-                            <!--// A row template of mapping year group on "year" layer -->
+                            <!--// A row template of mapping year group on "year" panel -->
                         </tbody>
                     </table>
                 </div>
                 <div class="calendar-footer"></div>
             </div>
+            <!--// Selectable title calendar 2 : using custom markup -->
+
         </div>
 
         <div class="codeArea"></div>
@@ -84,14 +96,18 @@
 
         <script type="text/javascript" class="serviceCode">
 
-            var cal = new tui.component.Calendar({
-                element: '#layer', // mapping markup
-                year: 2016,
-                month: 11,
+            var calendar1 = new tui.component.Calendar({
+                element: '#layer1' // no markup
+            });
+
+            var calendar2 = new tui.component.Calendar({
+                element: '#layer2', // using custom markup
+                itemCountOfYear: 15,
+                year: 2015,
+                month: 10,
                 titleFormat: 'yyyy년 m월',
                 yearTitleFormat: 'yyyy년',
-                monthTitles: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                itemCountOfYear: 15
+                monthTitles: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
             });
 
         </script>
