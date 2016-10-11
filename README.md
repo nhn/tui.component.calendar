@@ -13,7 +13,7 @@ This component display date by calendar UI.
 ## Documentation
 * **API** : https://nhnent.github.io/tui.component.calendar/latest
 * **Tutorial** : https://github.com/nhnent/tui.component.calendar/wiki/Calendar-Tutorial
-* **Sample** : https://nhnent.github.io/tui.component.calendar/latest
+* **Sample** : http://nhnent.github.io/tui.component.calendar/latest/tutorial.html
 
 ## Dependency
 * jquery: ~1.8.3
