@@ -11,9 +11,9 @@ This component display date by calendar UI.
 * Support year & month layer for selecting date
 
 ## Documentation
-* **API** : https://nhnent.github.io/tui.component.calendar/latest
-* **Tutorial** : https://github.com/nhnent/tui.component.calendar/wiki/Calendar-Tutorial
-* **Sample** : http://nhnent.github.io/tui.component.calendar/latest/tutorial.html
+* API: [https://nhnent.github.io/tui.component.calendar/latest](https://nhnent.github.io/tui.component.calendar/latest)
+* Tutorial: [https://github.com/nhnent/tui.component.calendar/wiki/Calendar-Tutorial](https://github.com/nhnent/tui.component.calendar/wiki/Calendar-Tutorial)
+* Sample: [http://nhnent.github.io/tui.component.calendar/latest/tutorial.html](http://nhnent.github.io/tui.component.calendar/latest/tutorial.html)
 
 ## Dependency
 * jquery: ~1.8.3
@@ -27,9 +27,9 @@ This component display date by calendar UI.
 
 ## Download/Install
 * Bower:
-   * latest : `bower install tui-component-calendar`
-   * each version : `bower install tui-component-calendar[#tag]`
-* Download: https://github.com/nhnent/tui.component.calendar
+   * Latest: `bower install tui-component-calendar`
+   * Each version: `bower install tui-component-calendar[#tag]`
+* Download: [https://github.com/nhnent/tui.component.calendar](https://github.com/nhnent/tui.component.calendar)
 
 ## License
 [MIT LICENSE](LICENSE)
