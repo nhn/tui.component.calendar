@@ -15,7 +15,7 @@ module.exports = function(config) {
             'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
             'lib/tui-code-snippet/code-snippet.js',
             'src/js/*.js',
-            'test/*.js',
+            'test/*.spec.js',
             {
                 pattern: 'test/fixture/**/*.html',
                 included: false

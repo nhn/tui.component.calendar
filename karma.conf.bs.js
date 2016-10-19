@@ -13,7 +13,7 @@ module.exports = function(config) {
             'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
             'lib/tui-code-snippet/code-snippet.js',
             'src/js/*.js',
-            'test/*.js',
+            'test/*.spec.js',
             {
                 pattern: 'test/fixture/**/*.html',
                 included: false
@@ -28,8 +28,8 @@ module.exports = function(config) {
         ],
 
         preprocessors: {
-            'src/**/*.js': ['browserify'],
-            'test/**/*.spec.js': ['browserify']
+            'src/**/*.js': ['browserify', 'coverage'],
+            'test/**/*.js': ['browserify']
         },
 
         browserify: {
