@@ -1,6 +1,6 @@
 /**
  * @fileoverview Calendar component(from Pug component)
- * @author NHN Ent. FE dev team. <dl_javascript@nhnent.com>
+ * @author NHN Ent. FE dev Lab <dl_javascript@nhnent.com>
  */
 'use strict';
 
@@ -31,6 +31,9 @@ var extend = util.extend;
  *                    A label of each month.
  *     @param {Array} [option.dayTitles = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]] A label for day.
  *                    If you set the other option todayFormat 'D', you can use this name.
+ * @tutorial sample1
+ * @tutorial sample2
+ * @tutorial sample3
  * @example
  * var calendar = new tui.component.Calendar({
  *                    element: '#layer',
@@ -69,6 +72,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         /**
          * A day that is shown
          * @type {{year: number, month: number}}
+         * @private
          */
         this._shownDate = {year: 0, month: 1, date: 1};
 
@@ -86,50 +90,51 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         /**
          * =========Header=========
          * @type {jQuery}
+         * @private
          */
         this.$header = null;
 
         /**
          * A tilte
          * @type {jQuery}
+         * @private
          */
         this.$title = null;
 
         /**
          * A year title
          * @type {jQuery}
+         * @private
          */
         this.$titleYear = null;
 
         /**
          * A month title
          * @type {jQuery}
+         * @private
          */
         this.$titleMonth = null;
 
         /**
          * =========Body=========
          * @type {jQuery}
+         * @private
          */
         this.$body = null;
 
         /**
          * A template of week
          * @type {jQuery}
+         * @private
          */
         this.$weekTemplate = null;
 
         /**
          * A week parent element
          * @type {jQuery}
+         * @private
          */
         this.$weekAppendTarget = null;
-
-        /**-------- footer --------*/
-        this.$footer = null;
-
-        /** Today */
-        this.$today = null;
 
         /**
          * A date element
@@ -148,42 +153,49 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         /**
          * =========Footer=========
          * @type {jQuery}
+         * @private
          */
         this.$footer = null;
 
         /**
          * Today element
          * @type {jQuery}
+         * @private
          */
         this.$today = null;
 
         /**
          * Index of shown layer
          * @type {number}
+         * @private
          */
         this.shownLayerIdx = 0;
 
         /**
          * Data of month's layer
          * @type {Object}
+         * @private
          */
         this.dataOfMonthLayer = {};
 
         /**
          * Data of year's layer
          * @type {Object}
+         * @private
          */
         this.dataOfYearLayer = {};
 
         /**
          * Whether title is clicable or not
          * @type {Boolean}
+         * @private
          */
         this.isClickableTitle = false;
 
         /**
          * Handlers binding context
          * @type {Object}
+         * @private
          */
         this.handlers = {};
 
@@ -848,6 +860,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     /**
      * Set title on year's layer
      * @param {number} year - Year
+     * @private
      */
     _setTitleOnYearLayer: function(year) {
         var itemCountOfYear = this._getInfoOfYearRange(year);
@@ -861,6 +874,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     /**
      * Set class name on title
      * @param {number} shownLayerIdx - Year
+     * @private
      */
     _setClassNameOnTitle: function(shownLayerIdx) {
         var className = this._option.classPrefix + CONSTANTS.clickable;
@@ -880,6 +894,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * Get converted year text on year and month layer
      * @param {number} year - Year
      * @returns {string} Converted year text
+     * @private
      */
     _getConvertedYearTitle: function(year) {
         var option = this._option;
@@ -895,6 +910,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * Get years info by "itemCountOfYear" option
      * @param {number} year - Year
      * @returns {Object} Info of year's range
+     * @private
      */
     _getInfoOfYearRange: function(year) {
         var frameInfo = this.dataOfYearLayer.frame;
@@ -914,6 +930,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * Get index of current shown layer by layer's type
      * @param {string|number} type - Type of layer
      * @returns {number} Index of shown layer
+     * @private
      */
     _getIndexOfShownLayer: function(type) {
         return (type ? util.inArray(type, CONSTANTS.layerKeys) : this.shownLayerIdx);
@@ -1109,6 +1126,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     /**
      * Change current shown layer on calendar
      * @param {number} shownLayerIdx - Index of shown layer
+     * @private
      */
     _changeShownLayer: function(shownLayerIdx) {
         var classPrefix = this._option.classPrefix;

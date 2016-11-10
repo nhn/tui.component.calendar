@@ -1,7 +1,7 @@
 /**
  * @fileoverview Utils for calendar component
- * @author NHN Net. FE dev team. <dl_javascript@nhnent.com>
- * @dependency ne-code-snippet ~1.0.2
+ * @author NHN Net. FE dev Lab <dl_javascript@nhnent.com>
+ * @dependency tui-code-snippet ~1.0.2
  */
 
 'use strict';
@@ -9,6 +9,7 @@
 /**
  * Utils of calendar
  * @namespace utils
+ * @ignore
  */
 var utils = {
     /**

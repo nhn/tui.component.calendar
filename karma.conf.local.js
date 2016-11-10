@@ -11,9 +11,9 @@ module.exports = function(config) {
         ],
 
         files: [
-            'lib/jquery/jquery.min.js',
+            'bower_components/jquery/jquery.min.js',
             'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
-            'lib/tui-code-snippet/code-snippet.js',
+            'bower_components/tui-code-snippet/code-snippet.js',
             'src/js/*.js',
             'test/*.spec.js',
             {
