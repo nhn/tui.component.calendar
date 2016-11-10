@@ -1,0 +1,2164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Calendar</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="width: 150px">
+        <img src="https://cloud.githubusercontent.com/assets/12269563/20029815/01133928-a39a-11e6-80f3-12500a91c755.png" width="100%" height="100%">
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Calendar</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    <ol class="lnb-tab">
+        <li id="api-tab">
+            <a href="#"><h4>API</h4></a>
+        </li>
+        <li id="examples-tab">
+            <a href="#"><h4>Examples</h4></a>
+        </li>
+    </ol>
+    <div class="lnb-examples hidden"><h3>Examples</h3><ul><li><a href="tutorial-sample1.html">Default calendar sample (no markup & options)</a><div class="hidden" id="sample1_sub"></div></li><li><a href="tutorial-sample2.html">Customized calendar sample with API</a><div class="hidden" id="sample2_sub"></div></li><li><a href="tutorial-sample3.html">Customized calendar sample with markup & options</a><div class="hidden" id="sample3_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="Calendar.html">Calendar</a><div class="hidden" id="Calendar_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Calendar.html#attachEventToBody">attachEventToBody</a></li><li><a href="Calendar.html#attachEventToRolloverBtn">attachEventToRolloverBtn</a></li><li><a href="Calendar.html#attachEventToTitle">attachEventToTitle</a></li><li><a href="Calendar.html#detachEventToBody">detachEventToBody</a></li><li><a href="Calendar.html#detachEventToRolloverBtn">detachEventToRolloverBtn</a></li><li><a href="Calendar.html#detachEventToTitle">detachEventToTitle</a></li><li><a href="Calendar.html#draw">draw</a></li><li><a href="Calendar.html#getDate">getDate</a></li><li><a href="Calendar.html#setDate">setDate</a></li></ul><div class="member-type">Events</div><ul class="inner"><li><a href="Calendar.html#event:draw">draw</a></li></ul></div></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>Calendar</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+<dt>
+
+    
+        
+
+        <h4 class="name" id="Calendar">
+            <span class="type-signature"></span>new Calendar<span class="signature">(option<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+            
+            <div class="container-source members">
+                <code><a href="calendar.js.html">calendar.js</a></code>,
+                <code><a href="calendar.js.html#line52">line 52</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Calendar component class</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>option</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A options for initialize</p>
+                <h6>Properties</h6>
+                
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>element</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">HTMLElement</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>A root element</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>classPrefix</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "calendar-"
+                
+                </td>
+            
+
+            <td class="description last"><p>A prefix class for markup structure</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>year</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    this year
+                
+                </td>
+            
+
+            <td class="description last"><p>A year for initialize</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>month</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    this month
+                
+                </td>
+            
+
+            <td class="description last"><p>A month for initialize</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>titleFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "yyyy-mm"
+                
+                </td>
+            
+
+            <td class="description last"><p>A title format.
+                    This component find title element by className '[prefix]title'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>todayFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "yyyy Year mm Month dd Day (D)"
+                
+                </td>
+            
+
+            <td class="description last"><p>A today format.
+                    This component find today element by className '[prefix]today'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>yearTitleFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "yyyy"
+                
+                </td>
+            
+
+            <td class="description last"><p>A year title formant.
+                     This component find year title element by className '[prefix]year'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>monthTitleFormat</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    "m"
+                
+                </td>
+            
+
+            <td class="description last"><p>A month title format.
+                    This component find month title element by className이 '[prefix]month'</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>monthTitles</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]
+                
+                </td>
+            
+
+            <td class="description last"><p>A label of each month.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dayTitles</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+                
+                </td>
+            
+
+            <td class="description last"><p>A label for day.
+                   If you set the other option todayFormat 'D', you can use this name.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-tutorial">Tutorials:</dt>
+    <dd class="tag-tutorial">
+        <ul>
+            <li><a href="tutorial-sample1.html">Default calendar sample (no markup & options)</a></li>
+        
+            <li><a href="tutorial-sample2.html">Customized calendar sample with API</a></li>
+        
+            <li><a href="tutorial-sample3.html">Customized calendar sample with markup & options</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>var calendar = new tui.component.Calendar({
+                   element: '#layer',
+                   classPrefix: "calendar-",
+                   year: 1983,
+                   month: 5,
+                   titleFormat: "yyyy-mm", // title
+                   todayFormat: "yyyy / mm / dd (D)" // today
+                   yearTitleFormat: "yyyy", // year title
+                   monthTitleFormat: "m", // month title
+                   monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+                   dayTitles: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] // days
+                   itemCountOfYear: 12
+            });</code></pre>
+
+    
+
+</dd>
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+                
+
+<dt>
+
+    
+        
+
+        <h4 class="name" id="attachEventToBody">
+            <span class="type-signature"></span>attachEventToBody<span class="signature">()</span><span class="type-signature"></span>
+            
+            <div class="container-source members">
+                <code><a href="calendar.js.html">calendar.js</a></code>,
+                <code><a href="calendar.js.html#line459">line 459</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Attach event on title in &quot;body&quot; element (month &amp; year layer)</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+
+    
+        
+
+        <h4 class="name" id="attachEventToRolloverBtn">
+            <span class="type-signature"></span>attachEventToRolloverBtn<span class="signature">()</span><span class="type-signature"></span>
+            
+            <div class="container-source members">
+                <code><a href="calendar.js.html">calendar.js</a></code>,
+                <code><a href="calendar.js.html#line425">line 425</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Attach event on rollover buttons in &quot;header&quot; element</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+
+    
+        
+
+        <h4 class="name" id="attachEventToTitle">
+            <span class="type-signature"></span>attachEventToTitle<span class="signature">()</span><span class="type-signature"></span>
+            
+            <div class="container-source members">
+                <code><a href="calendar.js.html">calendar.js</a></code>,
+                <code><a href="calendar.js.html#line445">line 445</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Attach event on title in &quot;header&quot; element</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+
+    
+        
+
+        <h4 class="name" id="detachEventToBody">
+            <span class="type-signature"></span>detachEventToBody<span class="signature">()</span><span class="type-signature"></span>
+            
+            <div class="container-source members">
+                <code><a href="calendar.js.html">calendar.js</a></code>,
+                <code><a href="calendar.js.html#line471">line 471</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Detach event on title in &quot;body&quot; element (month &amp; year layer)</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+
+    
+        
+
+        <h4 class="name" id="detachEventToRolloverBtn">
+            <span class="type-signature"></span>detachEventToRolloverBtn<span class="signature">()</span><span class="type-signature"></span>
+            
+            <div class="container-source members">
+                <code><a href="calendar.js.html">calendar.js</a></code>,
+                <code><a href="calendar.js.html#line435">line 435</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Detach event on rollover buttons in &quot;header&quot; element</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+
+    
+        
+
+        <h4 class="name" id="detachEventToTitle">
+            <span class="type-signature"></span>detachEventToTitle<span class="signature">()</span><span class="type-signature"></span>
+            
+            <div class="container-source members">
+                <code><a href="calendar.js.html">calendar.js</a></code>,
+                <code><a href="calendar.js.html#line452">line 452</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Detach event on title in &quot;header&quot; element</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+
+    
+        
+
+        <h4 class="name" id="draw">
+            <span class="type-signature"></span>draw<span class="signature">(year<span class="signature-attributes">opt</span>, month<span class="signature-attributes">opt</span>, isRelative<span class="signature-attributes">opt</span>, shownType<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+            
+            <div class="container-source members">
+                <code><a href="calendar.js.html">calendar.js</a></code>,
+                <code><a href="calendar.js.html#line1160">line 1160</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Draw calendar</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>year</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A year (ex. 2008)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>month</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A month (1 ~ 12)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isRelative</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A year and month is related</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>shownType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>Shown type of layer (ex. [day, month, year] | [0] ~ 2])</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>calendar.draw(); // Draw with now date.
+calendar.draw(2008, 12); // Draw 2008/12
+calendar.draw(null, 12); // Draw current year/12
+calendar.draw(2010, null); // Draw 2010/current month
+calendar.draw(0, 1, true); // Draw next month
+calendar.draw(-1, null, true); // Draw prev year
+calendar.draw(0, 0, false, 'date'); // Draw today with date's layer
+calendar.draw(2010, 10, false, 'month'); // Draw 2010/10 with month's layer
+calendar.draw(2016, null, false, 'year'); // Draw 2016/month with year's layer</code></pre>
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+
+    
+        
+
+        <h4 class="name" id="getDate">
+            <span class="type-signature"></span>getDate<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span>
+            
+            <div class="container-source members">
+                <code><a href="calendar.js.html">calendar.js</a></code>,
+                <code><a href="calendar.js.html#line1200">line 1200</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Return current year and month(just shown).</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">Object</span>
+
+
+
+
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>getDate(); => { year: xxxx, month: xx };</code></pre>
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+
+    
+        
+
+        <h4 class="name" id="setDate">
+            <span class="type-signature"></span>setDate<span class="signature">(year<span class="signature-attributes">opt</span>, month<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span>
+            
+            <div class="container-source members">
+                <code><a href="calendar.js.html">calendar.js</a></code>,
+                <code><a href="calendar.js.html#line1215">line 1215</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Set date</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>year</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A year (ex. 2008)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>month</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>A month (1 ~ 12)</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>setDate(1984, 04);</code></pre>
+
+    
+
+</dd>
+
+            </dl>
+    
+
+    
+
+    
+        <h3 class="subsection-title">Events</h3>
+
+        <dl>
+            
+
+<dt>
+
+    
+        
+
+        <h4 class="name" id="event:draw">
+            draw
+            
+            <div class="container-source members">
+                <code><a href="calendar.js.html">calendar.js</a></code>,
+                <code><a href="calendar.js.html#line646">line 646</a></code>
+            </div>
+            
+        </h4>
+
+        
+    
+
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Fire draw event when calendar draw each date.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A name of custom event</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isPrevMonth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Whether the draw day is last month or not</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isNextMonth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Wehter the draw day is next month or not</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>$date</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">jQuery</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The element have date html</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>$dateContainer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">jQuery</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Child element that has className [prefix]week.
+                               It is possible this element equel elDate.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>date</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A draw date</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>month</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A draw month</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>year</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A draw year</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>html</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A html string</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// draw custom even handlers
+calendar.on('draw', function(drawEvent){ ... });</code></pre>
+
+    
+
+</dd>
+
+        </dl>
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="https://cloud.githubusercontent.com/assets/12269563/20029815/01133928-a39a-11e6-80f3-12500a91c755.png" style="width: 150px">
+    <div class="footer-text">NHN Entertainment. Frontend Development Lab</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = 'Calendar_sub'.replace(/"/g, '_');
+        var element = document.getElementById(id); // do not use jquery selector
+
+        $(element).removeClass('hidden');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Calendar</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="width: 150px">
+        <img src="https://cloud.githubusercontent.com/assets/12269563/20029815/01133928-a39a-11e6-80f3-12500a91c755.png" width="100%" height="100%">
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Calendar</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    <ol class="lnb-tab">
+        <li id="api-tab">
+            <a href="#"><h4>API</h4></a>
+        </li>
+        <li id="examples-tab">
+            <a href="#"><h4>Examples</h4></a>
+        </li>
+    </ol>
+    <div class="lnb-examples hidden"><h3>Examples</h3><ul><li><a href="tutorial-sample1.html">Default calendar sample (no markup & options)</a><div class="hidden" id="sample1_sub"></div></li><li><a href="tutorial-sample2.html">Customized calendar sample with API</a><div class="hidden" id="sample2_sub"></div></li><li><a href="tutorial-sample3.html">Customized calendar sample with markup & options</a><div class="hidden" id="sample3_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="Calendar.html">Calendar</a><div class="hidden" id="Calendar_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Calendar.html#attachEventToBody">attachEventToBody</a></li><li><a href="Calendar.html#attachEventToRolloverBtn">attachEventToRolloverBtn</a></li><li><a href="Calendar.html#attachEventToTitle">attachEventToTitle</a></li><li><a href="Calendar.html#detachEventToBody">detachEventToBody</a></li><li><a href="Calendar.html#detachEventToRolloverBtn">detachEventToRolloverBtn</a></li><li><a href="Calendar.html#detachEventToTitle">detachEventToTitle</a></li><li><a href="Calendar.html#draw">draw</a></li><li><a href="Calendar.html#getDate">getDate</a></li><li><a href="Calendar.html#setDate">setDate</a></li></ul><div class="member-type">Events</div><ul class="inner"><li><a href="Calendar.html#event:draw">draw</a></li></ul></div></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileoverview Utils for calendar component
+ * @author NHN Net. FE dev Lab &lt;dl_javascript@nhnent.com>
+ * @dependency tui-code-snippet ~1.0.2
+ */
+
+'use strict';
+
+/**
+ * Utils of calendar
+ * @namespace utils
+ * @ignore
+ */
+var utils = {
+    /**
+     * Return date hash by parameter.
+     *  if there are 3 parameter, the parameter is corgnized Date object
+     *  if there are no parameter, return today's hash date
+     * @function getDateHashTable
+     * @memberof utils
+     * @param {Date|number} [year] A date instance or year
+     * @param {number} [month] A month
+     * @param {number} [date] A date
+     * @returns {{year: *, month: *, date: *}}
+     */
+    getDateHashTable: function(year, month, date) {
+        var nDate;
+
+        if (arguments.length &lt; 3) {
+            nDate = arguments[0] || new Date();
+
+            year = nDate.getFullYear();
+            month = nDate.getMonth() + 1;
+            date = nDate.getDate();
+        }
+
+        return {
+            year: year,
+            month: month,
+            date: date
+        };
+    },
+
+    /**
+     * Return today that saved on component or create new date.
+     * @function getToday
+     * @returns {{year: *, month: *, date: *}}
+     * @memberof utils
+     */
+    getToday: function() {
+        return utils.getDateHashTable();
+    },
+
+    /**
+     * Get weeks count by paramenter
+     * @function getWeeks
+     * @param {number} year A year
+     * @param {number} month A month
+     * @returns {number} 주 (4~6)
+     * @memberof utils
+     **/
+    getWeeks: function(year, month) {
+        var firstDay = this.getFirstDay(year, month),
+            lastDate = this.getLastDate(year, month);
+
+        return Math.ceil((firstDay + lastDate) / 7);
+    },
+
+    /**
+     * Get unix time from date hash
+     * @function getTime
+     * @param {Object} date A date hash
+     * @param {number} date.year A year
+     * @param {number} date.month A month
+     * @param {number} date.date A date
+     * @returns {number}
+     * @memberof utils
+     * @example
+     * utils.getTime({year:2010, month:5, date:12}); // 1273590000000
+     **/
+    getTime: function(date) {
+        return this.getDateObject(date).getTime();
+    },
+
+    /**
+     * Get which day is first by parameters that include year and month information.
+     * @function getFirstDay
+     * @param {number} year A year
+     * @param {number} month A month
+     * @returns {number} (0~6)
+     * @memberof utils
+     **/
+    getFirstDay: function(year, month) {
+        return new Date(year, month - 1, 1).getDay();
+    },
+
+    /**
+     * Get which day is last by parameters that include year and month information.
+     * @function getLastDay
+     * @param {number} year A year
+     * @param {number} month A month
+     * @returns {number} (0~6)
+     * @memberof utils
+     **/
+    getLastDay: function(year, month) {
+        return new Date(year, month, 0).getDay();
+    },
+
+    /**
+     * Get last date by parameters that include year and month information.
+     * @function
+     * @param {number} year A year
+     * @param {number} month A month
+     * @returns {number} (1~31)
+     * @memberof utils
+     **/
+    getLastDate: function(year, month) {
+        return new Date(year, month, 0).getDate();
+    },
+
+    /**
+     * Get date instance.
+     * @function getDateObject
+     * @param {Object} date A date hash
+     * @returns {Date} Date
+     * @memberof utils
+     * @example
+     *  utils.getDateObject({year:2010, month:5, date:12});
+     *  utils.getDateObject(2010, 5, 12); //year,month,date
+     **/
+    getDateObject: function(date) {
+        if (arguments.length === 3) {
+            return new Date(arguments[0], arguments[1] - 1, arguments[2]);
+        }
+
+        return new Date(date.year, date.month - 1, date.date);
+    },
+
+    /**
+     * Get related date hash with parameters that include date information.
+     * @function getRelativeDate
+     * @param {number} year A related value for year(you can use +/-)
+     * @param {number} month A related value for month (you can use +/-)
+     * @param {number} date A related value for day (you can use +/-)
+     * @param {Object} dateObj standard date hash
+     * @returns {Object} dateObj
+     * @memberof utils
+     * @example
+     *  utils.getRelativeDate(1, 0, 0, {year:2000, month:1, date:1}); // {year:2001, month:1, date:1}
+     *  utils.getRelativeDate(0, 0, -1, {year:2010, month:1, date:1}); // {year:2009, month:12, date:31}
+     **/
+    getRelativeDate: function(year, month, date, dateObj) {
+        var nYear = (dateObj.year + year),
+            nMonth = (dateObj.month + month - 1),
+            nDate = (dateObj.date + date),
+            nDateObj = new Date(nYear, nMonth, nDate);
+
+        return utils.getDateHashTable(nDateObj);
+    },
+
+    /**
+     * Chagne number 0~9 to '00~09'
+     * @param {number} number number
+     * @returns {string}
+     * @private
+     * @example
+     *  utils.prependLeadingZero(0); //  '00'
+     *  utils.prependLeadingZero(9); //  '09'
+     *  utils.prependLeadingZero(12); //  '12'
+     */
+    prependLeadingZero: function(number) {
+        var prefix = '';
+
+        if (number &lt; 10) {
+            prefix = '0';
+        }
+
+        return prefix + number;
+    },
+
+    /**
+     * Chage text and return.
+     * @param {string} str A text to chagne
+     * @param {Object} map A chagne key, value set
+     * @param {RegExp} reg A regExp to chagne
+     * @returns {string}
+     * @private
+     */
+    getConvertedTitle: function(str, map, reg) {
+        str = str.replace(reg, function(matchedString) {
+            return map[matchedString] || '';
+        });
+
+        return str;
+    }
+};
+
+module.exports = utils;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="https://cloud.githubusercontent.com/assets/12269563/20029815/01133928-a39a-11e6-80f3-12500a91c755.png" style="width: 150px">
+    <div class="footer-text">NHN Entertainment. Frontend Development Lab</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var element = document.getElementById(id); // do not use jquery selector
+
+        $(element).removeClass('hidden');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

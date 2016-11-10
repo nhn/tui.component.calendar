@@ -5,65 +5,52 @@
         <title>Customized calendar sample with API</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Expires" content="-1">
-        <link type="text/css" rel="stylesheet" href="../styles/prettify-jsdoc.css" />
-        <link type="text/css" rel="stylesheet" href="../styles/prettify-tomorrow.css">
-        <link type="text/css" rel="stylesheet" href="../styles/tui.css">
         <link href="css/common.css" rel="stylesheet" />
     </head>
 
     <body>
-        <div class="wrap" style="width:500px;">
-            <div id="layer" class="layer"></div>
-        </div>
+    <div class="code-html">
+        <div id="layer" class="layer"></div>
+    </div>
 
-        <div class="codeArea"></div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/nhnent/tui.code-snippet/1.2.1/code-snippet.js"></script>
+    <script type="text/javascript" src="../dist/tui-component-calendar.js"></script>
+    <script type="text/javascript" class="code-js">
+        var cal = new tui.component.Calendar({
+            element: '#layer',
+            classPrefix: 'calendar2-', // class prefix for customizing
+            year: 2016,
+            month: 10,
+            titleFormat: 'yyyy / mm',
+            todayFormat: 'yyyy / mm / dd'
+        });
 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdn.rawgit.com/nhnent/tui.code-snippet/1.2.1/code-snippet.js"></script>
-        <script type="text/javascript" src="js/calendar.js"></script>
+        cal.on('draw', function(drawData) {
+            var today = new Date();
+            var isToday = true;
+            var isTodayMonth = true;
+            var isTodayYear = true;
 
-        <script src="../scripts/prettify/prettify.js"></script>
-        <script src="../scripts/prettify/lang-css.js"></script>
-        <script src="../scripts/samplecode.js"></script>
+            if (drawData.year !== today.getFullYear()) {
+                isToday = false;
+                isTodayYear = false;
+            }
 
-        <script type="text/javascript" class="serviceCode">
+            if (drawData.month !== (today.getMonth() + 1)) {
+                isToday = false;
+                isTodayMonth = false;
+            }
 
-            var cal = new tui.component.Calendar({
-                element: '#layer',
-                classPrefix: 'calendar2-', // class prefix for customizing
-                year: 2016,
-                month: 10,
-                titleFormat: 'yyyy / mm',
-                todayFormat: 'yyyy / mm / dd'
-            });
+            if (drawData.date !== (today.getDate())) {
+                isToday = false;
+            }
 
-            cal.on('draw', function(drawData) {
-                var today = new Date();
-                var isToday = true;
-                var isTodayMonth = true;
-                var isTodayYear = true;
-
-                if (drawData.year !== today.getFullYear()) {
-                    isToday = false;
-                    isTodayYear = false;
-                }
-
-                if (drawData.month !== (today.getMonth() + 1)) {
-                    isToday = false;
-                    isTodayMonth = false;
-                }
-
-                if (drawData.date !== (today.getDate())) {
-                    isToday = false;
-                }
-
-                if (isToday || isTodayMonth || isTodayYear) {
-                    drawData.$date.html('<span class="today">' + drawData.html + '</span>');
-                }
-            });
-
-            cal.draw();
-
-        </script>
+            if (isToday || isTodayMonth || isTodayYear) {
+                drawData.$date.html('<span class="today">' + drawData.html + '</span>');
+            }
+        });
+        cal.draw();
+    </script>
     </body>
 </html>
