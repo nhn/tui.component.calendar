@@ -1,10 +1,10 @@
 'use strict';
 
-var Calendar = require('../src/js/calendar');
-var utils = require('../src/js/utils');
+var Calendar = require('../src/calendar');
+var utils = require('../src/utils');
 
 function getReplacedString(str) {
-    return str.replace(/(\")|(\s*)/g, '').toLowerCase();
+    return str.replace(/(")|(\s*)/g, '').toLowerCase();
 }
 
 describe('캘린더를 생성하고 기능을 테스트.', function() {
