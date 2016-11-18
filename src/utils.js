@@ -8,7 +8,7 @@
 
 /**
  * Utils of calendar
- * @namespace utils
+ * @namespace calendarUtils
  * @ignore
  */
 var utils = {
@@ -17,7 +17,7 @@ var utils = {
      *  if there are 3 parameter, the parameter is corgnized Date object
      *  if there are no parameter, return today's hash date
      * @function getDateHashTable
-     * @memberof utils
+     * @memberof calendarUtils
      * @param {Date|number} [year] A date instance or year
      * @param {number} [month] A month
      * @param {number} [date] A date
@@ -45,7 +45,7 @@ var utils = {
      * Return today that saved on component or create new date.
      * @function getToday
      * @returns {{year: *, month: *, date: *}}
-     * @memberof utils
+     * @memberof calendarUtils
      */
     getToday: function() {
         return utils.getDateHashTable();
@@ -57,7 +57,7 @@ var utils = {
      * @param {number} year A year
      * @param {number} month A month
      * @returns {number} 주 (4~6)
-     * @memberof utils
+     * @memberof calendarUtils
      **/
     getWeeks: function(year, month) {
         var firstDay = this.getFirstDay(year, month),
@@ -88,7 +88,7 @@ var utils = {
      * @param {number} year A year
      * @param {number} month A month
      * @returns {number} (0~6)
-     * @memberof utils
+     * @memberof calendarUtils
      **/
     getFirstDay: function(year, month) {
         return new Date(year, month - 1, 1).getDay();
@@ -100,7 +100,7 @@ var utils = {
      * @param {number} year A year
      * @param {number} month A month
      * @returns {number} (0~6)
-     * @memberof utils
+     * @memberof calendarUtils
      **/
     getLastDay: function(year, month) {
         return new Date(year, month, 0).getDay();
@@ -112,7 +112,7 @@ var utils = {
      * @param {number} year A year
      * @param {number} month A month
      * @returns {number} (1~31)
-     * @memberof utils
+     * @memberof calendarUtils
      **/
     getLastDate: function(year, month) {
         return new Date(year, month, 0).getDate();
@@ -123,10 +123,10 @@ var utils = {
      * @function getDateObject
      * @param {Object} date A date hash
      * @returns {Date} Date
-     * @memberof utils
+     * @memberof calendarUtils
      * @example
-     *  utils.getDateObject({year:2010, month:5, date:12});
-     *  utils.getDateObject(2010, 5, 12); //year,month,date
+     *  calendarUtils.getDateObject({year:2010, month:5, date:12});
+     *  calendarUtils.getDateObject(2010, 5, 12); //year,month,date
      **/
     getDateObject: function(date) {
         if (arguments.length === 3) {
@@ -144,10 +144,10 @@ var utils = {
      * @param {number} date A related value for day (you can use +/-)
      * @param {Object} dateObj standard date hash
      * @returns {Object} dateObj
-     * @memberof utils
+     * @memberof calendarUtils
      * @example
-     *  utils.getRelativeDate(1, 0, 0, {year:2000, month:1, date:1}); // {year:2001, month:1, date:1}
-     *  utils.getRelativeDate(0, 0, -1, {year:2010, month:1, date:1}); // {year:2009, month:12, date:31}
+     *  calendarUtils.getRelativeDate(1, 0, 0, {year:2000, month:1, date:1}); // {year:2001, month:1, date:1}
+     *  calendarUtils.getRelativeDate(0, 0, -1, {year:2010, month:1, date:1}); // {year:2009, month:12, date:31}
      **/
     getRelativeDate: function(year, month, date, dateObj) {
         var nYear = (dateObj.year + year),
@@ -164,9 +164,9 @@ var utils = {
      * @returns {string}
      * @private
      * @example
-     *  utils.prependLeadingZero(0); //  '00'
-     *  utils.prependLeadingZero(9); //  '09'
-     *  utils.prependLeadingZero(12); //  '12'
+     *  calendarUtils.prependLeadingZero(0); //  '00'
+     *  calendarUtils.prependLeadingZero(9); //  '09'
+     *  calendarUtils.prependLeadingZero(12); //  '12'
      */
     prependLeadingZero: function(number) {
         var prefix = '';

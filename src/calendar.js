@@ -4,7 +4,7 @@
  */
 'use strict';
 
-var utils = require('./utils');
+var calendarUtils = require('./utils');
 var CONSTANTS = require('./constants');
 
 var util = tui.util;
@@ -36,18 +36,18 @@ var extend = util.extend;
  * @tutorial sample3
  * @example
  * var calendar = new tui.component.Calendar({
- *                    element: '#layer',
- *                    classPrefix: "calendar-",
- *                    year: 1983,
- *                    month: 5,
- *                    titleFormat: "yyyy-mm", // title
- *                    todayFormat: "yyyy / mm / dd (D)" // today
- *                    yearTitleFormat: "yyyy", // year title
- *                    monthTitleFormat: "m", // month title
- *                    monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
- *                    dayTitles: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] // days
- *                    itemCountOfYear: 12
- *             });
+ *     element: '#layer',
+ *     classPrefix: "calendar-",
+ *     year: 1983,
+ *     month: 5,
+ *     titleFormat: "yyyy-mm", // title
+ *     todayFormat: "yyyy / mm / dd (D)" // today
+ *     yearTitleFormat: "yyyy", // year title
+ *     monthTitleFormat: "m", // month title
+ *     monthTitles: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+ *     dayTitles: ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'] // days
+ *     itemCountOfYear: 12
+ * });
  */
 var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
     init: function(option) {
@@ -74,11 +74,16 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
          * @type {{year: number, month: number}}
          * @private
          */
-        this._shownDate = {year: 0, month: 1, date: 1};
+        this._shownDate = {
+            year: 0,
+            month: 1,
+            date: 1
+        };
 
-        /**======================================
+        /* ======================================
          * jQuery - HTMLElement
-         *======================================*/
+         * ======================================*/
+
         /**
          * =========Root Element=========
          * If options do not include element, this component jedge initialize element without options
@@ -186,7 +191,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         this.dataOfYearLayer = {};
 
         /**
-         * Whether title is clicable or not
+         * Whether title is clickable or not
          * @type {Boolean}
          * @private
          */
@@ -222,7 +227,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      */
     _setOption: function(option) {
         var instanceOption = this._option,
-            today = utils.getDateHashTable();
+            today = calendarUtils.getDateHashTable();
 
         var defaultOption = {
             classPrefix: 'calendar-',
@@ -549,7 +554,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         }
 
         if (isRelative) {
-            relativeDate = utils.getRelativeDate(year, month, 0, nDate);
+            relativeDate = calendarUtils.getRelativeDate(year, month, 0, nDate);
             nDate.year = relativeDate.year;
             nDate.month = relativeDate.month;
         } else {
@@ -596,10 +601,10 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         var year = dateForDrawing.year,
             month = dateForDrawing.month,
             dayInWeek = 0,
-            datePrevMonth = utils.getRelativeDate(0, -1, 0, dateForDrawing),
-            dateNextMonth = utils.getRelativeDate(0, 1, 0, dateForDrawing),
+            datePrevMonth = calendarUtils.getRelativeDate(0, -1, 0, dateForDrawing),
+            dateNextMonth = calendarUtils.getRelativeDate(0, 1, 0, dateForDrawing),
             dates = [],
-            firstDay = utils.getFirstDay(year, month),
+            firstDay = calendarUtils.getFirstDay(year, month),
             indexOfLastDate = this._fillDates(year, month, dates);
 
         util.forEach(dates, function(date, i) {
@@ -674,7 +679,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * @private
      */
     _isToday: function(year, month, date) {
-        var today = utils.getDateHashTable();
+        var today = calendarUtils.getDateHashTable();
         var isYear = year ? (today.year === year) : true;
         var isMonth = month ? (today.month === month) : true;
         var isDate = date ? (today.date === date) : true;
@@ -690,7 +695,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      */
     _setWeeks: function(year, month) {
         var $elWeek,
-            weeks = utils.getWeeks(year, month),
+            weeks = calendarUtils.getWeeks(year, month),
             i;
         for (i = 0; i < weeks; i += 1) {
             $elWeek = this.$weekTemplate.clone(true);
@@ -708,11 +713,15 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * @private
      */
     _fillDates: function(year, month, dates) {
-        var firstDay = utils.getFirstDay(year, month),
-            lastDay = utils.getLastDay(year, month),
-            lastDate = utils.getLastDate(year, month),
-            datePrevMonth = utils.getRelativeDate(0, -1, 0, {year: year, month: month, date: 1}),
-            prevMonthLastDate = utils.getLastDate(datePrevMonth.year, datePrevMonth.month),
+        var firstDay = calendarUtils.getFirstDay(year, month),
+            lastDay = calendarUtils.getLastDay(year, month),
+            lastDate = calendarUtils.getLastDate(year, month),
+            datePrevMonth = calendarUtils.getRelativeDate(0, -1, 0, {
+                year: year,
+                month: month,
+                date: 1
+            }),
+            prevMonthLastDate = calendarUtils.getLastDate(datePrevMonth.year, datePrevMonth.month),
             indexOfLastDate,
             i;
 
@@ -770,7 +779,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
             replaceMap,
             reg;
 
-        month = utils.prependLeadingZero(month);
+        month = calendarUtils.prependLeadingZero(month);
         replaceMap = this._getReplaceMap(year, month);
 
         reg = CONSTANTS.titleRegExp;
@@ -798,7 +807,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         if (!$el.length) {
             return;
         }
-        title = utils.getConvertedTitle(form, map, reg);
+        title = calendarUtils.getConvertedTitle(form, map, reg);
         $el.text(title);
     },
 
@@ -847,10 +856,10 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
             return;
         }
 
-        today = utils.getDateHashTable();
+        today = calendarUtils.getDateHashTable();
         year = today.year;
-        month = utils.prependLeadingZero(today.month);
-        date = utils.prependLeadingZero(today.date);
+        month = calendarUtils.prependLeadingZero(today.month);
+        date = calendarUtils.prependLeadingZero(today.date);
         todayFormat = this._option.todayFormat;
         replaceMap = this._getReplaceMap(year, month, date);
         reg = CONSTANTS.todayRegExp;
@@ -903,7 +912,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         replaceMap = this._getReplaceMap(year);
         reg = CONSTANTS.titleYearRegExp;
 
-        return utils.getConvertedTitle(option.yearTitleFormat, replaceMap, reg);
+        return calendarUtils.getConvertedTitle(option.yearTitleFormat, replaceMap, reg);
     },
 
     /**
@@ -952,18 +961,24 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
 
         this._setClassNameOnTitle(shownLayerIdx);
 
-        if (shownLayerIdx === 0) {
-            this._setCalendarText(dateForDrawing);
-            prevValue = -1;
-            nextValue = 1;
-        } else if (shownLayerIdx === 1) {
-            this.$title.text(this._getConvertedYearTitle(dateForDrawing.year));
-            prevValue = -12;
-            nextValue = 12;
-        } else if (shownLayerIdx === 2) {
-            this._setTitleOnYearLayer(dateForDrawing.year);
-            prevValue = -12 * itemCountOfYear;
-            nextValue = 12 * itemCountOfYear;
+        switch (shownLayerIdx) {
+            case 0:
+                this._setCalendarText(dateForDrawing);
+                prevValue = -1;
+                nextValue = 1;
+                break;
+            case 1:
+                this.$title.text(this._getConvertedYearTitle(dateForDrawing.year));
+                prevValue = -12;
+                nextValue = 12;
+                break;
+            case 2:
+                this._setTitleOnYearLayer(dateForDrawing.year);
+                prevValue = -12 * itemCountOfYear;
+                nextValue = 12 * itemCountOfYear;
+                break;
+            default: // @todo Why does not use 'return' but 'break'?
+                break;
         }
 
         prevBtn.data(key, prevValue);
@@ -1162,18 +1177,17 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         var isReadyForDrawing = this.invoke('beforeDraw', dateForDrawing);
         var shownLayerIdx;
 
-        /**===============
+        /* ===============
          * beforeDraw
-         =================*/
+         * =================*/
         if (!isReadyForDrawing) {
             return;
         }
 
-        /**===============
+        /* ===============
          * draw
-         =================*/
-        shownLayerIdx = util.isNumber(shownType) ?
-                        shownType : this._getIndexOfShownLayer(shownType);
+         * =================*/
+        shownLayerIdx = util.isNumber(shownType) ? shownType : this._getIndexOfShownLayer(shownType);
 
         year = dateForDrawing.year;
         month = dateForDrawing.month;
@@ -1184,9 +1198,9 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
         this._drawHeader(dateForDrawing, shownLayerIdx);
         this._drawBody(dateForDrawing, shownLayerIdx);
 
-        /**===============
+        /* ===============
          * afterDraw
-         ================*/
+         * ================*/
         this.fire('afterDraw', dateForDrawing);
     },
 

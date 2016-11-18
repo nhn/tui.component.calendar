@@ -1,5 +1,5 @@
-var utils = require('../src/js/utils');
-describe('Canedlar utils test  utils.', function() {
+var utils = require('../src/utils');
+describe('Canedlar calendarUtils test  calendarUtils.', function() {
 
     it('create date hash', function() {
         var date = new Date(),
