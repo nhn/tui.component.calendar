@@ -227,7 +227,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      */
     _setOption: function(option) {
         var instanceOption = this._option,
-            today = calendarUtils.getDateHashTable();
+            today = calendarUtils.getDateHash();
 
         var defaultOption = {
             classPrefix: 'calendar-',
@@ -679,7 +679,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      * @private
      */
     _isToday: function(year, month, date) {
-        var today = calendarUtils.getDateHashTable();
+        var today = calendarUtils.getDateHash();
         var isYear = year ? (today.year === year) : true;
         var isMonth = month ? (today.month === month) : true;
         var isDate = date ? (today.date === date) : true;
@@ -856,7 +856,7 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
             return;
         }
 
-        today = calendarUtils.getDateHashTable();
+        today = calendarUtils.getDateHash();
         year = today.year;
         month = calendarUtils.prependLeadingZero(today.month);
         date = calendarUtils.prependLeadingZero(today.date);
@@ -1174,13 +1174,12 @@ var Calendar = util.defineClass(/** @lends Calendar.prototype */ {
      **/
     draw: function(year, month, isRelative, shownType) {
         var dateForDrawing = this._getDateForDrawing(year, month, isRelative);
-        var isReadyForDrawing = this.invoke('beforeDraw', dateForDrawing);
         var shownLayerIdx;
 
         /* ===============
          * beforeDraw
          * =================*/
-        if (!isReadyForDrawing) {
+        if (!this.invoke('beforeDraw', dateForDrawing)) {
             return;
         }
 

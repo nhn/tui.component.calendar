@@ -21,7 +21,7 @@ var utils = {
      * @param {number} [date] A date
      * @returns {{year: *, month: *, date: *}}
      */
-    getDateHashTable: function(year, month, date) {
+    getDateHash: function(year, month, date) {
         var nDate;
 
         if (arguments.length < 3) {
@@ -45,7 +45,7 @@ var utils = {
      * @returns {{year: *, month: *, date: *}}
      */
     getToday: function() {
-        return utils.getDateHashTable();
+        return utils.getDateHash();
     },
 
     /**
@@ -138,7 +138,7 @@ var utils = {
             nDate = (dateObj.date + date),
             nDateObj = new Date(nYear, nMonth, nDate);
 
-        return utils.getDateHashTable(nDateObj);
+        return utils.getDateHash(nDateObj);
     },
 
     /**

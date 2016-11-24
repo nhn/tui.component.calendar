@@ -6,17 +6,17 @@ describe('Canedlar calendarUtils test  calendarUtils.', function() {
             date19840415 = new Date(1984, 3, 15, 00, 00),
             hashDate;
         // now(local)
-        hashDate = utils.getDateHashTable(date);
+        hashDate = utils.getDateHash(date);
         expect(hashDate.year).toBe(date.getFullYear());
         expect(hashDate.month).toBe(date.getMonth() + 1);
         expect(hashDate.date).toBe(date.getDate());
         // some day (1984-04-15)
-        hashDate = utils.getDateHashTable(date19840415);
+        hashDate = utils.getDateHash(date19840415);
         expect(hashDate.year).toBe(1984);
         expect(hashDate.month).toBe(4);
         expect(hashDate.date).toBe(15);
 
-        hashDate = utils.getDateHashTable(1984, 4, 15);
+        hashDate = utils.getDateHash(1984, 4, 15);
         expect(hashDate.year).toBe(1984);
         expect(hashDate.month).toBe(4);
         expect(hashDate.date).toBe(15);

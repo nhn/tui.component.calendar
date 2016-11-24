@@ -292,7 +292,7 @@
 	     */
 	    _setOption: function(option) {
 	        var instanceOption = this._option,
-	            today = calendarUtils.getDateHashTable();
+	            today = calendarUtils.getDateHash();
 	
 	        var defaultOption = {
 	            classPrefix: 'calendar-',
@@ -744,7 +744,7 @@
 	     * @private
 	     */
 	    _isToday: function(year, month, date) {
-	        var today = calendarUtils.getDateHashTable();
+	        var today = calendarUtils.getDateHash();
 	        var isYear = year ? (today.year === year) : true;
 	        var isMonth = month ? (today.month === month) : true;
 	        var isDate = date ? (today.date === date) : true;
@@ -921,7 +921,7 @@
 	            return;
 	        }
 	
-	        today = calendarUtils.getDateHashTable();
+	        today = calendarUtils.getDateHash();
 	        year = today.year;
 	        month = calendarUtils.prependLeadingZero(today.month);
 	        date = calendarUtils.prependLeadingZero(today.date);
@@ -1324,14 +1324,14 @@
 	     * Return date hash by parameter.
 	     *  if there are 3 parameter, the parameter is corgnized Date object
 	     *  if there are no parameter, return today's hash date
-	     * @function getDateHashTable
+	     * @function getDateHash
 	     * @memberof calendarUtils
 	     * @param {Date|number} [year] A date instance or year
 	     * @param {number} [month] A month
 	     * @param {number} [date] A date
 	     * @returns {{year: *, month: *, date: *}}
 	     */
-	    getDateHashTable: function(year, month, date) {
+	    getDateHash: function(year, month, date) {
 	        var nDate;
 	
 	        if (arguments.length < 3) {
@@ -1356,7 +1356,7 @@
 	     * @memberof calendarUtils
 	     */
 	    getToday: function() {
-	        return utils.getDateHashTable();
+	        return utils.getDateHash();
 	    },
 	
 	    /**
@@ -1463,7 +1463,7 @@
 	            nDate = (dateObj.date + date),
 	            nDateObj = new Date(nYear, nMonth, nDate);
 	
-	        return utils.getDateHashTable(nDateObj);
+	        return utils.getDateHash(nDateObj);
 	    },
 	
 	    /**
