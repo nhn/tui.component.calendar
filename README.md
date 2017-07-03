@@ -1,3 +1,6 @@
+### _This component is deprecated. Use tui-component-datepicker instead._
+
+
 Calendar
 ===============
 Calendar Component<br>
